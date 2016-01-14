@@ -1,0 +1,19 @@
+{
+    "update-general-and": "and",
+
+    "update-comment-button": "Comment",
+    "update-comment-postbutton": "Post",
+    "update-comment-placeholder": "Write a comment",
+    "update-comment-viewall-button": "View all %s comments",
+
+    "update-budget-type-hours": "%s hours",
+    "update-budget-type-money": "%s euro",
+    "update-budget-type-money-EUR": "%s euros",
+    "update-budget-type-money-USD": "%s us dollars",
+    "update-budget-type-money-GBP": "%s pounds",
+    "update-budget-type-none": "no budget",
+
+    "update-editmessage-title": "Edit message",
+    "update-editmessage-edit": "Edit",
+    "update-editmessage-remove": "Remove"
+}

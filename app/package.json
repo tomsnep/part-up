@@ -1,0 +1,11 @@
+{
+  "name": "Part-up",
+  "author": "Partup",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:part-up/part-up.git"
+  },
+  "engines": {
+    "node" : "0.10.36"
+  }
+}

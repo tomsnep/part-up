@@ -1,0 +1,52 @@
+{
+    "update-type-partups_created-title": "__name__ maakte de part-up aan",
+
+    "update-type-partups_supporters_added-title": "__name__ is nu een supporter",
+    "update-type-partups_uppers_added-title": "__name__ is nu partner in deze part-up",
+
+    "update-type-partups_tags_added-title": "__name__ voegde een label toe",
+    "update-type-partups_tags_removed-title": "__name__ verwijderde een label",
+    "update-type-partups_tags_changed-title": "__name__ veranderde een label",
+
+    "update-type-network_public-title": "__name__ maakte deze part-up zichtbaar voor iedereen",
+    "update-type-network_private-title": "__name__ maakte deze Part-up alleen zichtbaar voor uigenodigde uppers",
+
+    "update-type-partups_end_date_changed-title": "__name__ wijzigde de part-up einddatum",
+
+    "update-type-partups_name_changed-title": "__name__ wijzigde de part-up titel",
+    "update-type-partups_description_changed-title": "__name__ wijzigde de part-up omschrijving",
+    "update-type-partups_image_changed-title": "__name__ wijzigde de part-up foto",
+
+    "update-type-partups_activities_removed-title": "__name__ verwijderde een activiteit",
+    "update-type-partups_activities_added-title": "__name__ voegde een activiteit toe",
+    "update-type-partups_activities_changed-title": "__name__ wijzigde een activiteit",
+    "update-type-partups_activities_archived-title": "__name__ archiveerde een activiteit",
+    "update-type-partups_activities_unarchived-title": "__name__ heractiveerde een activiteit",
+
+    "update-type-changed_region-title": "__name__ wijzigde de part-up locatie",
+
+    "update-type-rated-title": "__name__ waardeerde de bijdrage van __contributor__",
+
+    "update-type-partups_message_added-title": "__name__ voegde een bericht toe",
+
+    "update-type-partups_budget_changed-title": "__name__ wijzigde het budget",
+
+    "update-type-partups_location_changed-title": "__name__ wijzigde de locatie",
+
+    "update-type-partups_invited-title": "__name__ nodigde __invitee_names__ uit voor deze part-up",
+
+    "update-type-partups_contributions_proposed-title": "__name__ stelde voor bij te dragen aan '__activity__'",
+    "update-type-partups_contributions_added-title": "__name__ gaat aan de slag met '__activity__'",
+    "update-type-partups_contributions_changed-title": "__name__ wijzigde een bijdrage aan '__activity__'",
+    "update-type-partups_contributions_accepted-title": "__name__ accepteerde een bijdrage aan '__activity__'",
+    "update-type-partups_contributions_removed-title": "__name__ verwijderde een bijdrage aan '__activity__'",
+
+    "update-type-partups_ratings_inserted-title": "__name__ waardeerde de bijdrage van __contributor__ aan '__activity__'",
+    "update-type-partups_ratings_changed-title": "__name__ wijzigde de waardering van __contributor__ op '__activity__'",
+
+    "update-type-partups_comments_added-title": "__name__ reageerde",
+    "update-type-partups_activities_comments_added-title": "__name__ reageerde op een activiteit",
+    "update-type-partups_contributions_comments_added-title": "__name__ reageerde op een bijdrage",
+
+    "update-type-partups_message_added-system-welcome_message-content": "Welkom op je part-up! Je eerste uitdaging is een paar partners te vinden om mee aan de slag te gaan. Heb je je part-up daarom al op je social media gedeeld?\n\nJe kunt uppers uitnodigen via de knop \"Uitnodigen\" of via een @mention in een bericht of reactie. Of nodig een upper gericht uit voor een activiteit. Kies daarvoor de tab activiteiten, selecteer een activiteit en klik op \"Ik nodig iemand uit\"."
+}

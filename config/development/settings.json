@@ -1,0 +1,19 @@
+{
+    "public": {
+        "aws": {
+            "bucket": "",
+            "region": ""
+        },
+        "facebookAppId": "",
+        "analyticsSettings": {
+            "Google Analytics": {
+                "trackingId": ""
+            }
+        },
+        "intercom": {
+            "id": "",
+            "allowAnonymous": true
+        }
+
+    }
+}

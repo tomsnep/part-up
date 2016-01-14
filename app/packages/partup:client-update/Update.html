@@ -1,0 +1,223 @@
+<template name="Update">
+    <section class="pu-update">
+        <aside>
+
+            <!-- User -->
+            {{# if metadata.is_system }}
+                <figure class="pu-avatar pu-avatar-update pu-avatar-system">
+                    <span class="pu-sub-image"></span>
+                </figure>
+            {{ else }}
+                <figure class="pu-avatar pu-avatar-update">
+                    <a href="{{ pathFor route='profile' _id=metadata.updateUpper._id }}" rel="author" data-hovercontainer="HoverContainer_upper" data-hovercontainer-context="{{ metadata.updateUpper._id }}" class="pu-sub-image" style="{{#with metadata.updateUpper.profile.image }}background-image: url('{{ partupImageUrl id=. store='80x80' }}');{{/with}}"></a>
+                </figure>
+            {{/ if }}
+
+            <!-- Time -->
+            <p class="pu-sub-time">
+                <time datetime="{{ metadata.updated_at.toISOString }}" title="{{ partupDateFull metadata.updated_at }}">{{ partupDatePartupActivity metadata.updated_at }}</time>
+            </p>
+
+        </aside>
+        <section>
+
+            <!-- Title & first comment button -->
+            <header>
+                <h3>
+                    {{#if LINK }}
+                        <a href="{{ metadata.path }}">{{ update.title }}</a>
+                    {{else}}
+                        {{ update.title }}
+                    {{/if }}
+                </h3>
+
+                <!-- Top comment button -->
+
+                {{# if update.mayComment }}
+                    {{# if metadata.is_contribution }}
+
+                        <!-- When the update is a contribution-update, link to the activity -->
+                        <a class="pu-button pu-button-text" href="{{ metadata.path }}">{{_ 'update-comment-button' }}</a>
+
+                    {{ else }}
+
+                        <!-- Only show the comment button when the update is commentable -->
+                        {{# if update.showCommentButton }}
+                                <a class="pu-button pu-button-text" data-expand-comment-field>{{_ 'update-comment-button' }}</a>
+                        {{/ if }}
+
+                    {{/ if }}
+                {{/ if }}
+            </header>
+
+            <!-- - - - - - - - - - - TYPES START - - - - - - - - - - -->
+
+            <!-- partups_message_added -->
+            {{#if partupEqualsExactly update.data.type 'partups_message_added' }}
+                {{# if metadata.is_system }}
+                    {{# with update.data.type_data }}
+                        <section>
+                            <article class="pu-block pu-block-message">
+                                <p class="pu-paragraph">{{{ update.systemMessageContent }}}</p>
+                            </article>
+                        </section>
+                    {{/ with}}
+                {{ else }}
+                    <!-- edit message popup -->
+                    {{#if partupEquals update.data.upper_id currentUserId }}
+                        {{#if partupIsPopupActive editMessagePopupId }}
+                            {{#contentFor "PopupTitle"}}
+                                {{_ 'update-editmessage-title'}}
+                            {{/contentFor}}
+                            {{#contentFor region="PopupContent" data=update.data}}
+                                {{> app_partup_updates_newmessage }}
+                            {{/contentFor}}
+                        {{/if}}
+                    {{/if}}
+
+                    {{# with update.data.type_data }}
+                        <section>
+                            <article class="pu-block pu-block-message">
+                                <p class="pu-paragraph">{{{ partupAutolink update.messageContent }}}</p>
+                                {{# if images }}
+                                    {{> ImageGallery images=images updateId=update.data._id}}
+                                {{/ if}}
+                                {{#if partupEquals update.data.upper_id currentUserId }}
+                                    <footer class="pu-sub-useractions">
+                                        <a href="#" data-edit-message><span>{{_ 'update-editmessage-edit'}}</span></a>{{#if update.hasNoComments}}<a href="#" data-remove-message><span>{{_ 'update-editmessage-remove'}}</span></a>{{/if}}
+                                    </footer>
+                                {{/if}}
+                            </article>
+                        </section>
+                    {{/ with}}
+                {{/ if }}
+            {{/if }}
+
+            <!-- partups_tags_added -->
+            {{#if partupEqualsExactly update.data.type 'partups_tags_added' }}
+                {{#with update.data.type_data }}
+                    <section>
+                        <span class="pu-tag">{{ new_tag }}</span>
+                    </section>
+                {{/with}}
+            {{/if }}
+
+            <!-- partups_tags_removed -->
+            {{#if partupEqualsExactly update.data.type 'partups_tags_removed' }}
+                {{#with update.data.type_data }}
+                    <section>
+                        <span class="pu-tag">{{ old_tag }}</span>
+                    </section>
+                {{/with}}
+            {{/if }}
+
+            <!-- partups_tags_changed -->
+            {{#if partupEqualsExactly update.data.type 'partups_tags_changed' }}
+                {{#with update.data.type_data }}
+                    <section>
+                        <ul class="pu-list pu-list-horizontal pu-list-tags pu-list-arrows">
+                            <li><span class="pu-tag">{{ old_tag }}</span></li>
+                            <li><span class="pu-tag">{{ new_tag }}</span></li>
+                        </ul>
+                    </section>
+                {{/with}}
+            {{/if }}
+
+            <!-- partups_end_date_changed -->
+            {{#if partupEqualsExactly update.data.type 'partups_end_date_changed' }}
+                {{#with update.data.type_data }}
+                    <section>
+                        <ul class="pu-list pu-list-horizontal pu-list-tags pu-list-arrows">
+                            <li><span class="pu-tag pu-tag-angular pu-tag-disableglobalclick">{{ partupDateNormal old_end_date }}</span></li>
+                            <li><span class="pu-tag pu-tag-angular pu-tag-disableglobalclick">{{ partupDateNormal new_end_date }}</span></li>
+                        </ul>
+                    </section>
+                {{/with}}
+            {{/if }}
+
+            <!-- partups_name_changed -->
+            {{#if partupEqualsExactly update.data.type 'partups_name_changed' }}
+                {{#with update.data.type_data }}
+                    <section>
+                        <p class="pu-title pu-title-updateitem">{{ new_name }}</p>
+                    </section>
+                {{/with}}
+            {{/if }}
+
+            <!-- partups_description_changed -->
+            {{#if partupEqualsExactly update.data.type 'partups_description_changed' }}
+                {{#with update.data.type_data }}
+                    <section>
+                        <p class="pu-paragraph pu-paragraph-large">{{{ partupAutolink new_description }}}</p>
+                    </section>
+                {{/with}}
+            {{/if }}
+
+            <!-- partups_image_changed -->
+            {{#if partupEqualsExactly update.data.type 'partups_image_changed' }}
+                {{#with update.data.type_data }}
+                    <section>
+                        <img class="pu-image" src="{{ partupImageUrl id=new_image store='1200x520' }}">
+                    </section>
+                {{/with}}
+            {{/if }}
+
+            <!-- partups_budget_changed -->
+            {{#if partupEqualsExactly update.data.type 'partups_budget_changed' }}
+                {{#with update.data.type_data }}
+                    <section>
+                        <ul class="pu-list pu-list-horizontal pu-list-tags pu-list-arrows">
+                            <li><span class="pu-tag pu-tag-angular">{{ update.oldBudget }}</span></li>
+                            <li><span class="pu-tag pu-tag-angular">{{ update.newBudget }}</span></li>
+                        </ul>
+                    </section>
+                {{/with}}
+            {{/if }}
+
+            <!-- partups_location_changed -->
+            {{#if partupEqualsExactly update.data.type 'partups_location_changed' }}
+                {{#with update.data.type_data }}
+                    <section>
+                        <ul class="pu-list pu-list-horizontal pu-list-tags pu-list-arrows">
+                            <li><span class="pu-tag pu-tag-angular">{{ old_location.city }}</span></li>
+                            <li><span class="pu-tag pu-tag-angular">{{ new_location.city }}</span></li>
+                        </ul>
+                    </section>
+                {{/with}}
+            {{/if }}
+
+            <!-- partups_invited -->
+            {{#if partupEqualsExactly update.data.type 'partups_invited' }}
+                {{#with update.data.type_data }}
+                    <!-- no template, only title -->
+                {{/with}}
+            {{/if }}
+
+            <!-- activity related updates -->
+            {{# if update.data.isActivityUpdate }}
+                {{#with update.data.type_data }}
+                    <section>
+                        {{> Activity activity=update.activityData EXPANDABLE=update.isDetail EXPANDED=update.isDetail UPDATE_LINK=update.isNotDetail READONLY=update.isNotDetail isUpper=update.isUpper }}
+                    </section>
+                {{/with}}
+            {{/if }}
+
+            <!-- contribution related updates -->
+            {{#if update.data.isContributionUpdate }}
+                {{#with update.data.type_data }}
+                    <section>
+                        {{> Activity activity=update.activityData contribution_id=contribution_id COMPACT=true EXPANDED=true READONLY=true }}
+                    </section>
+                {{/with}}
+            {{/if }}
+
+            <!-- - - - - - - - - - - TYPES END - - - - - - - - - - -->
+
+            <!-- Comments -->
+            {{#if update.commentable }}
+                {{> Comments update=update.data showCommentClicked=update.showCommentClicked FULLVIEW=update.isDetail SHOW_COMMENTS=SHOW_COMMENTS LIMIT=COMMENT_LIMIT }}
+            {{/if }}
+        </section>
+    </section>
+
+</template>

@@ -1,0 +1,40 @@
+{
+    "pages-app-network-collapse": "verbergen",
+    "pages-app-network-expand": "lees meer",
+
+    "pages-app-network-uppers-loading": "Uppers in deze tribe",
+    "pages-app-network-uppers-none": "Geen uppers gevonden",
+    "pages-app-network-uppers-count": "1 upper",
+    "pages-app-network-uppers-count_plural": "__count__ uppers",
+    "pages-app-network-uppers-suffix": "in deze tribe",
+
+    "pages-app-network-partups-loading": "Part-ups in deze tribe",
+    "pages-app-network-partups-none": "Geen part-ups gevonden",
+    "pages-app-network-partups-count": "1 part-up",
+    "pages-app-network-partups-count_plural": "__count__ part-ups",
+    "pages-app-network-partups-suffix": "in deze tribe",
+    "pages-app-network-partups-start_button": "Start een part-up in deze tribe",
+
+    "pages-app-network-closed-title": "Dit is een besloten tribe",
+    "pages-app-network-closed-description": "De uppers in deze tribe hebben ervoor gekozen om de community besloten te houden. Vraag om toegang tot de tribe via de oranje knop (rechts). Je krijgt een notificatie zodra de tribe admin je verzoek heeft geaccepteerd.",
+
+    "pages-app-network-actions-button-join": "Aanmelden",
+    "pages-app-network-actions-button-request_access": "Vraag toegang",
+    "pages-app-network-actions-button-leave": "Verlaat tribe",
+    "pages-app-network-actions-button-accept": "Uitnodiging accepteren",
+    "pages-app-network-actions-button-reject": "Uitnodiging weigeren",
+    "pages-app-network-actions-button-pending": "Wachten op goedkeuring",
+    "pages-app-network-actions-button-invite": "Uitnodigen",
+    "pages-app-network-tab-button-partups": "Part-ups",
+    "pages-app-network-tab-button-uppers": "Uppers",
+
+    "pages-app-network-notification-joined": "Je bent nu lid van deze tribe",
+    "pages-app-network-notification-accepted_waitingforapproval": "Bedankt voor je aanmelding, aan het wachten tot de admin je heeft geaccepteerd",
+    "pages-app-network-notification-failed": "Het is niet gelukt om je toe te voegen aan deze tribe",
+    "pages-app-network-notification-left": "Je bent uit de tribe gestapt",
+
+    "pages-app-network-confirmation-title": "Weet je zeker dat je __tribe__ wilt verlaten?",
+    "pages-app-network-confirmation-message": "Deze actie kan niet ongedaan gemaakt worden.",
+    "pages-app-network-confirmation-confirm-button": "Ja, verlaat de tribe",
+    "pages-app-network-confirmation-cancel-button": "Nee! Annuleren"
+}

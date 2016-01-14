@@ -1,0 +1,26 @@
+{
+    "contribution-form-hours-label": "Aantal uren",
+    "contribution-form-hours-placeholder": "Alleen cijfers",
+
+    "contribution-form-rate-label": "Uurtarief",
+    "contribution-form-rate-placeholder": "Alleen cijfers",
+
+    "contribution-form-submit": "Opslaan",
+    "contribution-form-close": "Sluiten",
+    "contribution-form-remove": "Verwijder",
+
+    "contribution-hour": "__count__ uur",
+    "contribution-hour_plural": "__count__ uur",
+    "contribution-hourly-rate-EUR": "Euro per uur",
+    "contribution-hourly-rate-GBP": "Pound Sterling per uur",
+    "contribution-hourly-rate-USD": "U.S. Dollar per uur",
+
+    "contribution-none": "Voeg eventueel uren toe",
+
+    "contribution-accept": "Accepteren",
+    "contribution-reject": "Weigeren",
+
+    "contribution-removed": "Bijdrage verwijderd",
+
+    "contribution-unverified": "voorgestelde bijdrage"
+}

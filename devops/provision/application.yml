@@ -1,0 +1,12 @@
+---
+- hosts: appservers
+  gather_facts: yes
+  remote_user: root
+  sudo: yes
+  roles:
+    - app
+  vars_prompt:
+    - name: 'tag'
+      prompt: Which image tag do you want to deploy?
+      default: 'latest'
+      private: no

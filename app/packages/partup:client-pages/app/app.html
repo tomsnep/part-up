@@ -1,0 +1,16 @@
+<template name="app">
+
+    <div class="pu-app {{# if partupResponsive }}pu-app-responsive{{/ if }}">
+
+        <!-- Header -->
+        {{> Header }}
+
+        <!-- Page -->
+        {{> yield region='app' }}
+
+        <!-- Footer -->
+        {{> Footer }}
+
+    </div>
+
+</template>

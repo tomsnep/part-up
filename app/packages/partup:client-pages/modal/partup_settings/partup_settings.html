@@ -1,0 +1,47 @@
+<template name="modal_partup_settings">
+
+    <nav class="pu-header pu-header-modal">
+        <a class="pu-button pu-button-header pu-button-header-modal" data-closepage="" href="#">
+            <i class="picon-times"></i>
+            {{_ 'pages-modal-partup_settings-discard' }}
+        </a>
+    </nav>
+
+    <article class="pu-page">
+        <div class="pu-sub-pagecontent">
+            <div class="pu-wrap pu-wrap-modal">
+                <div class="pu-composition pu-composition-defaultmodal">
+
+                    <h2 class="pu-title pu-title-modal">{{_ 'pages-modal-partup_settings-title' }}</h2>
+                    <p>{{_ 'pages-modal-partup_settings-explanation' }}</p>
+
+                    {{> Partupsettings FORM_ID='editPartupForm' currentPartup=partup }}
+
+                    {{#contentFor "PartupsettingsFooter"}}
+
+                        <!-- Submit button -->
+                        <footer class="pu-sub-modalfooter pu-sub-modalfooter-alignleft">
+                            <div class="pu-sub-footer-container">
+                                <button type="submit" class="pu-button {{# if submitting }}pu-state-loading pu-state-disabled{{/ if }}">
+                                    <span>{{_ 'pages-modal-partup_settings-save'}}</span>
+                                    {{> Spinner color='inverted' type='small' }}
+                                </button>
+                            </div>
+                        </footer>
+
+                    {{/contentFor}}
+
+                    {{# with partup }}
+                        {{#if isRemovableBy currentUser }}
+                            <div class="pu-sub-footerlink">
+                                <p class="pu-paragraph"><a href="#" data-remove>{{_ 'pages-modal-partup_settings-delete'}}</a></p>
+                            </div>
+                        {{/if}}
+                    {{/ with }}
+
+                </div>
+            </div>
+        </div>
+    </article>
+
+</template>

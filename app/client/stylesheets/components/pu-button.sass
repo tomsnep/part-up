@@ -1,0 +1,807 @@
+@keyframes button_nav_icon_cog
+    from
+        transform: rotate(0deg)
+    to
+        transform: rotate(360deg)
+
+@mixin button_header_desktop
+    font-size: 15px
+    font-weight: 700
+    height: 60px
+    padding: 5px 30px
+
+    &:before
+        content: ''
+        position: absolute
+        left: 0
+        top: 0
+        height: 20px
+        width: 2px
+        background-color: rgba(#fff, .2)
+
+    &.pu-button-header-nostripe
+        &:before
+            display: none
+
+.pu-button
+    // Dimensions
+    position: relative
+    display: inline-block
+    vertical-align: top
+    padding: 12px 15px
+    height: 40px
+
+    // Cosmetics
+    border-radius: 4px
+    outline: none
+    box-shadow: inset 0 0 0 1px transparent
+    background-color: $color-secondary
+    border: none
+
+    // Font
+    font-family: $font-secondary
+    font-size: 15px
+    line-height: 1em
+    text-decoration: none
+    color: $color-text-inverted
+    font-weight: bold
+    white-space: nowrap
+
+    // Other
+    cursor: pointer
+    user-select: none
+    transition: box-shadow $animation-duration, background $animation-duration, color $animation-duration, border $animation-duration, opacity $animation-duration, transform $animation-duration
+
+    // Icon
+    i
+        vertical-align: top
+        font-size: 14px
+        margin-right: 10px - 5px
+        transition: color .2s
+
+        &.picon-times,
+        &.picon-info
+            font-size: 15px
+
+        &.pu-sub-success
+            display: block
+            opacity: 0
+            width: 0
+            float: right
+            margin-left: 0
+            transition: width .2s, opacity .2s, margin .2s
+
+        &.picon-message:before
+            vertical-align: sub
+
+
+    &-smallicon
+        i.picon-times
+            font-size: 12px
+
+    // Loader
+    .pu-spinner
+        opacity: 0
+        margin-top: -3px
+        width: 0
+        vertical-align: middle
+        transition: width .2s, opacity .2s
+
+    // Hover state
+    &:hover
+        background-color: darken($color-secondary, 7%)
+        color: $color-text-inverted
+
+    // Active state
+    &:active
+        transform: translateY(2px)
+        transition-duration: 0
+        background-color: darken($color-secondary, 11%)
+        color: $color-text-inverted
+
+    // Focus state
+    &:focus
+        color: $color-text-inverted
+
+    // State: loading
+    &.pu-state-loading
+        pointer-events: none
+        opacity: 0.65
+
+        .pu-spinner
+            opacity: 1
+            width: 20px
+            margin-left: 7px
+
+    &.pu-state-disabled
+        pointer-events: none
+        opacity: 0.65
+
+    // Type: right sided icon
+    &-iconright
+        i
+            margin-left: 10px - 5px
+            margin-right: 0
+
+    &-close
+        background-color: transparent
+
+        i
+            font-size: 16px
+            color: $color-text-subtle
+            transition: color $animation-duration
+
+        &:hover,
+        &:active
+            background-color: transparent
+
+            i
+                color: darken($color-text-subtle, 10%)
+
+    &-grey
+        background-color: $color-background-secondary
+        color: $color-text-subtle
+        font-weight: 600
+
+        &:focus
+            background-color: $color-background-secondary
+            color: $color-text-subtle
+
+        &:hover,
+        &:active
+            background-color: darken($color-background-secondary, 10%)
+            color: $color-text-subtle
+
+    &-icononly
+        i
+            font-size: 20px
+            margin: -4px -2px
+
+            &.picon-times
+                vertical-align: baseline
+
+        &-plain
+            background-color: transparent
+
+            i
+                color: $color-text-subtle
+            &:hover,
+            &:active
+                background-color: transparent
+                transform: none
+
+                i
+                    color: darken($color-text-subtle, 10%)
+
+    // Type: large button (e.g. for homepage cover)
+    &-large
+        padding: 17px 20px
+        height: 50px
+
+    // Type: header button
+    &-header
+        padding: 0 10px
+        height: 50px
+        line-height: 50px
+        background-color: transparent
+        color: rgba($color-text-inverted, .8)
+        text-decoration: none
+        font-size: 13px
+        font-weight: 600
+        transition: none
+
+        i
+            transition: none
+            vertical-align: middle
+            margin-top: -3px
+
+        &:hover,
+        &:focus
+            background-color: transparent
+            color: $color-text-inverted
+            text-decoration: none
+            color: $color-text-inverted
+
+        &:active
+            color: $color-primary-dark
+            transform: none // prevent movement
+            background-color: transparent
+
+        &-profiledropdown
+            &:after
+                content: ''
+                transition: opacity 0.1s, transform $animation-duration, max-height .2s
+                opacity: 0
+                transform: translateY(5px)
+                position: absolute
+                border: 13px solid $color-header
+                background-color: $color-background
+                border-top-left-radius: 13px + 4px
+                border-top-right-radius: 13px + 4px
+                border-bottom: 0
+                left: 0
+                right: 0
+                bottom: 0
+                top: -8px
+                max-height: 48px
+                z-index: -1
+
+            &-active
+                color: $color-text-secondary
+
+                &:hover,
+                &:focus,
+                &:active
+                    color: $color-text-secondary
+
+                &:after
+                    opacity: 1
+                    transform: translateY(0)
+                    max-height: 55px
+
+        &-desktop
+            @include button_header_desktop
+
+        &-modal
+            background-color: $color-background-tertiery
+            color: $color-text-subtle
+            padding-top: 9px
+            height: 70px
+
+            &:hover
+                background-color: $color-background-tertiery
+                color: darken($color-text-subtle, 7%)
+
+            &:active,
+            &:focus
+                background-color: $color-background-tertiery
+                color: darken($color-text-subtle, 20%)
+
+            i.picon-times
+                font-size: 11px
+                vertical-align: baseline
+
+        &-brand
+            padding: 16px 31px
+
+    &-spinning
+        i
+            transform-origin: 50% 50%
+            animation: button_nav_icon_cog 2s linear infinite
+            animation-play-state: paused
+
+        &:hover i
+            animation-play-state: running
+
+    // Type: navigation button
+    &-nav
+        height: 70px
+        padding: 35px 0 0
+        background-color: $color-background-secondary
+        color: $color-text-secondary
+        border-radius: 0
+        border-bottom: 2px solid transparent
+        font-weight: 600
+        font-size: 16px
+        transition: none
+
+        &:hover
+            color: $color-text-secondary
+            background-color: $color-background-secondary
+            border-color: rgba($color-text-secondary, .2)
+            transform: none
+
+        &:active
+            background-color: $color-background-secondary
+            color: $color-text-secondary
+            border-color: rgba($color-text-secondary, .5)
+            transform: none
+
+        &:focus
+            color: $color-text-secondary
+
+        &.pu-state-active
+            border-color: $color-text-secondary
+            pointer-events: none
+
+        &-secondary
+            background-color: transparent
+
+            &:hover,
+            &:active
+                background-color: transparent
+
+        &-icon
+            padding: 34px 10px 10px
+            margin-right: -10px
+            color: #595959
+
+            i
+                margin-right: 0
+                font-size: 16px
+                margin-right: 1px
+
+            &:hover
+                border-color: transparent
+
+    // Type: secondary button
+    &-secondary
+        background-color: $color-primary
+
+        &:hover
+            background-color: darken($color-primary, 7%)
+
+        &:active
+            background-color: darken($color-primary, 11%)
+
+    // Type: gray button
+    &-gray
+        background-color: $color-button-gray-background
+
+        &:hover
+            background-color: darken($color-button-gray-background, 7%)
+
+        &:active
+            background-color: darken($color-button-gray-background, 11%)
+
+    &-checkmark
+        width: 44px
+        height: 30px
+        margin: 5px 0 0
+        padding: 0
+        font-size: 24px
+        line-height: 30px
+        text-align: center
+
+        i.picon-check,
+        i.picon-times
+            margin-right: 0
+            font-size: 15px
+            line-height: 29px
+
+        &-confirm
+            background-color: #5ab581
+
+            &:hover
+                background-color: darken(#5ab581, 7%)
+
+            &:active
+                background-color: darken(#5ab581, 11%)
+
+        &-deny
+            background-color: #ea7575
+
+            &:hover
+                background-color: darken(#ea7575, 7%)
+
+            &:active
+                background-color: darken(#ea7575, 11%)
+
+    // Type: input lookalike button
+    &-input
+        @include input()
+        padding-top: 14px
+        padding-bottom: 14px
+        @extend %clearfix
+        color: $color-text-subtle
+        font-weight: bold
+        border-color: $color-border-light
+        overflow: hidden
+
+        i
+            position: absolute
+            right: 0
+            top: 0
+            bottom: 0
+            vertical-align: middle
+            line-height: 43px
+            width: 30px
+            background: linear-gradient(to right, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 18%,rgba(255,255,255,1) 100%)
+            margin: auto
+            text-align: center
+            &.picon-times
+                display: none
+
+        &:hover
+            background-color: $color-background
+            border-color: darken($color-border, 20%)
+            color: $color-text-subtle
+
+        &:active
+            transform: none
+            transition-duration: 0
+            background-color: $color-background
+            border-color: darken($color-border, 20%)
+            color: $color-text-subtle
+
+        &:focus
+            color: $color-text-subtle
+
+        &-filter
+            border-color: $color-border
+
+            i
+                &:hover
+                    color: $color-text-secondary
+
+            &:hover,
+            &:active
+                border-color: darken($color-border, 20%)
+
+        &-keepbuttonheight
+            height: 36px
+            padding-top: 11px
+            padding-bottom: 11px
+
+            i
+                line-height: 38px
+                font-size: 60%
+                &:before
+                    vertical-align: top
+
+        &.pu-state-filled
+            padding-right: 30px
+            i.picon-times
+                display: block
+                font-size: 10px
+
+    // Type: facebook
+    &-facebook
+        background-color: $color-facebook
+
+        &:hover
+            background-color: darken($color-facebook, 7%)
+
+        &:active
+            background-color: darken($color-facebook, 11%)
+
+    // Type: linkedin
+    &-linkedin
+        background-color: $color-linkedin
+
+        &:hover
+            background-color: darken($color-linkedin, 7%)
+
+        &:active
+            background-color: darken($color-linkedin, 11%)
+    // Type: twitter
+    &-twitter
+        background-color: $color-twitter
+
+        &:hover
+            background-color: darken($color-twitter, 7%)
+
+        &:active
+            background-color: darken($color-twitter, 11%)
+
+    &-share
+        padding: 15px 20px
+        height: 46px
+
+        i
+            width: 20px
+            font-size: 22px
+            line-height: 15px
+            margin-right: 20px - 4px
+            margin-left: 4px
+
+        .pu-sub-check
+            margin-right: -1px
+            float: right
+            opacity: 0
+            transition: opacity $animation-duration
+
+        &.pu-state-shared
+            background-color: $color-alert-success
+
+            i
+                opacity: 1
+
+            &:hover
+                background-color: darken($color-alert-success, 7%)
+
+            &:active
+                background-color: darken($color-alert-success, 11%)
+
+    // Type: text
+    &-text
+        font-size: 14px
+        padding-left: 0
+        padding-right: 0
+        background-color: transparent
+        color: $color-secondary
+        font-weight: 600
+
+        &:hover
+            background-color: transparent
+            color: darken($color-secondary, 10%)
+
+        &:active,
+        &:focus
+            background-color: transparent
+            transform: none
+            color: $color-text-subtle
+
+        + .pu-button-text
+            &:before
+                display: inline-block
+                margin-right: 12px
+                margin-left: -10px
+                content: '|'
+
+        &-gray
+            color: $color-text-secondary
+
+            &:hover
+                color: darken($color-text-secondary, 10%)
+
+            &:active,
+            &:focus
+                color: $color-text-subtle
+
+        &-subtle
+            color: $color-text-subtle
+
+            &:hover
+                color: darken($color-text-subtle, 10%)
+
+            &:active,
+            &:focus
+                color: $color-text-subtle
+
+
+    // Type: avatar
+    &-avatar
+        figure
+            display: inline-block
+            margin-top: -9px
+            margin-bottom: -9px
+            margin-right: 10px - 4px
+
+        &.pu-button-header
+            figure
+                margin-top: -8px
+                margin-bottom: -10px
+
+    // Type: avatar
+    &-social
+        height: auto
+        background-color: transparent
+        background-size: cover
+        padding: 15px 12px 14px 12px
+        border-radius: 5px
+        line-height: 0
+        border: 1px dashed #bbb
+        white-space: nowrap
+        color: $color-text-subtle
+
+        i
+            color: $color-text-secondary
+            text-align: center
+            transition: color $animation-duration
+            display: inline-block
+            font-size: 12px
+            margin-right: 0
+
+        span
+            display: inline-block
+            margin-left: 9px
+
+        &:hover
+            background-color: transparent
+            color: $color-text
+
+            i
+                color: $color-secondary
+
+        &:active
+            background-color: transparent
+            transform: scale(.95)
+
+        &-twitter
+            i
+                font-size: 14px
+
+            &:hover i
+                color: $color-twitter
+
+        &-facebook
+            &:hover i
+                color: $color-facebook
+
+        &-linkedin
+            &:hover i
+                color: $color-linkedin
+
+    // Type: disabled
+    &-disabled
+        pointer-events: none
+        background-color: $color-background-secondary
+
+        &:hover
+            background-color: $color-background-secondary
+
+        &-orange
+            background-color: $color-secondary
+            opacity: 0.65
+
+            &:hover
+                background-color: $color-secondary
+
+    // Type: inputheight
+    &-inputheight
+        padding-top: 15px
+        padding-bottom: 15px
+        height: 44px
+
+        > span
+            font-weight: 700
+
+        .pu-spinner
+            margin-top: -6px
+
+    &-edit
+        color: $color-text-subtle
+        font-weight: bold
+        padding-right: 0
+        background-color: transparent
+        cursor: pointer
+        &:hover
+            background-color: transparent
+            color: $color-text
+
+        &:active
+            transform: none
+            transition-duration: 0
+            background-color: transparent
+
+    &-no-side-padding
+        padding-left: 0
+        padding-right: 0
+
+    &-arrow
+
+        i
+            margin-left: 5px
+            margin-right: 0
+            transition: transform .2s
+            vertical-align: middle
+
+        &:hover
+            i
+                transform: translateX(2px)
+
+    &-skipbutton
+        i
+            transition: margin .2s
+
+        &:hover
+            i
+                margin-left: 8px
+                margin-right: -3px
+
+    &-bluebar
+        width: 100%
+        text-align: center
+        background-color: rgba($color-primary, .2)
+        color: $color-primary
+
+        &:focus,
+        &:active,
+        &:hover
+            color: $color-primary
+
+        &:hover
+            background-color: rgba($color-primary, .3)
+
+    &-success
+        background-color: white
+        border: 2px solid $color-alert-success
+        pointer-events: none
+        color: $color-alert-success
+        padding-top: 11px
+        padding-bottom: 11px
+
+        i.pu-sub-success // icon
+            width: 14px
+            opacity: 1
+            margin-left: 5px
+
+        &:focus,
+        &:active,
+        &:hover
+            background-color: white
+            color: $color-alert-success
+
+    &-positivestate
+        background-color: white
+        border: 2px solid $color-alert-success
+        pointer-events: none
+        color: $color-alert-success
+        padding-top: 11px
+        padding-bottom: 11px
+
+        &:focus,
+        &:active,
+        &:hover
+            background-color: white
+            color: $color-alert-success
+
+    &-dropdowntab
+        background-color: $color-header
+        border-top-right-radius: 0
+        border-bottom-right-radius: 0
+        font-size: 12px
+        line-height: 18px
+        white-space: nowrap
+
+        &:before
+            content: ''
+            background-color: rgba(0,0,0,0.05)
+            width: 100%
+            height: calc(100% + 4px)
+            display: block
+            position: absolute
+            z-index: -1
+            border-radius: 6px
+            border-top-right-radius: 0
+            border-bottom-right-radius: 0
+            top: -2px
+            bottom: -2px
+            left: -2px
+
+        &-all-partups
+            .pu-sub-logobutton
+                width: 20px
+                height: 20px
+                margin-top: -2px
+                margin-left: -3px
+                background-image: url(/images/button-logo.png)
+                background-position: top
+                background-repeat: no-repeat
+                background-size: 100%
+        &:hover
+            background-color: $color-header
+            color: $color-text-inverted
+
+        &:active
+            background-color: $color-header
+            color: $color-primary-dark
+
+
+        &-active
+            background-color: $color-background
+            color: $color-header
+
+            .pu-sub-logobutton
+                background-position: bottom
+
+            &:hover,
+            &:active,
+            &:focus
+                background-color: $color-background
+                color: $color-header
+
+    &-logo
+        padding: 0
+        height: auto
+        border-radius: 0
+        border: 0
+        background-color: transparent
+
+        &:active,
+        &:focus,
+        &:hover
+            background-color: transparent
+            opacity: 1
+
+        img
+            height: 50px
+
+    @media screen and (min-width: $breakpoint-desktop)
+        &-header
+            @include button_header_desktop
+
+            &-modal
+                padding-top: 9px
+                height: 70px

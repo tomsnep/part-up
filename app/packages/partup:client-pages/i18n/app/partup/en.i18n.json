@@ -1,0 +1,30 @@
+{
+    "pages-app-partup-menu_updates": "Updates",
+    "pages-app-partup-menu_activities": "Activities",
+
+    "pages-app-partup-take_part": "Take part",
+    "pages-app-partup-invite": "Invite",
+    "pages-app-partup-uppers_title": "Partners in this part-up",
+    "pages-app-partup-supporters_title": "Supporters",
+    "pages-app-partup-supporters_placeholder": "Need supporters to give you some advice? Just share your part-up.",
+    "pages-app-partup-supporters_join": "Support this part-up",
+    "pages-app-partup-supporters_leave": "Stop supporting",
+    "pages-app-partup-status_text-with-budget": "This part-up is active until <strong>__date__</strong> in the area of <strong>__city__</strong> and has a budget of <strong>__budget__</strong>.",
+    "pages-app-partup-status_text-without-budget": "This part-up is active until <strong>__date__</strong> in the area of <strong>__city__</strong>.",
+    "pages-app-partup-status_text-public": "This part-up is open to everyone.",
+    "pages-app-partup-status_text-private": "This part-up is only open to invited uppers.",
+    "pages-app-partup-status_text-network-public": "This part-up is part of <a href=\"__path__\"><strong>__network__</strong></a> tribe and is open to everyone.",
+    "pages-app-partup-status_text-network-invite": "This part-up is part of <a href=\"__path__\"><strong>__network__</strong></a> tribe and is only open to invited uppers.",
+    "pages-app-partup-status_text-network-closed": "This part-up is part of <a href=\"__path__\"><strong>__network__</strong></a> tribe and is only open to network members.",
+    "pages-app-partup-visibility_public": "everyone",
+    "pages-app-partup-visibility_private": "invited uppers only",
+    "pages-app-partup-unit-money": "euros",
+    "pages-app-partup-unit-money-EUR": "euros",
+    "pages-app-partup-unit-money-GBP": "pounds",
+    "pages-app-partup-unit-money-USD": "us dollars",
+    "pages-app-partup-unit-hours": "hours",
+
+    "pages-app-partup-share_title": "Share this part-up",
+    "pages-app-partup-share_mail": "Hi,\n\n On part-up.com, I found this cool part-up for you to join: \"__partup_name__\". I believe you could fit the team well. You can check out the part-up using this link __url__ and introduce yourself to the team.\n\n Haven't heard about Part-up? It is the new marketplace for teamwork. Part-up gets you your best team for the job. Just share your dream or talent and Part-up helps you find the right team! You are free to choose what you work on and who you work with. Together you decide on the activities and what each will contribute. You build your profile and show the world what you're good at!\n\nLet's part-up!\n\nCheers, __user_name__",
+    "pages-app-partup-share_mail_anonymous": "Hi,\n\n On part-up.com, I found this cool part-up for you to join: \"__partup_name__\". I believe you could fit the team well. You can check out the part-up using this link __url__ and introduce yourself to the team.\n\n Haven't heard about Part-up? It is the new marketplace for teamwork. Part-up gets you your best team for the job. Just share your dream or talent and Part-up helps you find the right team! You are free to choose what you work on and who you work with. Together you decide on the activities and what each will contribute. You build your profile and show the world what you're good at!\n\nLet's part-up!"
+}
