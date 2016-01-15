@@ -6,6 +6,9 @@ Part-up
 - ensure [imagemagick][im] is installed (OS X: `brew
   install imagemagick`)
 - ensure [meteor](https://www.meteor.com/install) is installed
+- make sure you have all the correct environment variables set, which can be done in two ways:
+    1. generate the development configuration using `cd config/development && ./decrypt` (this requires a password, which can be requested from the Part-up team)
+    2. rename the file `config/development/env.sh.dist` to `config/development/env.sh` and fill in all the required credentials
 - `./start` (in the root folder of the app)
 - App running at: http://localhost:3000/
 
@@ -113,6 +116,10 @@ GOOGLE_API_KEY
 - `cat users.bson-clean.json | sed 's/hashedToken" : "[^"]*"/hashedToken" : ""/g' > users.bson-clean-2.json`
 - `cat users.bson-clean-2.json | sed 's/bcrypt" : "[^"]*"/bcrypt" : ""/g' > users.bson-clean-3.json`
 - `cat users.bson-clean-3.json | sed 's/token" : "[^"]*"/token" : ""/g' > users.bson-clean-4.json`
+
+## editing env.sh-ecrypted
+
+`cd config/development && ansible-vault edit env.sh-encrypted`
 
 # License
 
