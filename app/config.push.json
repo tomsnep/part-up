@@ -1,0 +1,12 @@
+{
+  "apn-dev": {
+    "passphrase": "cordovapushnotificationsareawesome",
+    "key": "apn.pem",
+    "cert": "apn.cer",
+    "gateway": "gateway.sandbox.push.apple.com"
+  },
+  "production": false,
+  "badge": true,
+  "sound": true,
+  "alert": true
+}
