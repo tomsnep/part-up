@@ -1,0 +1,3 @@
+Template.mobile.onCreated(function() {
+
+});

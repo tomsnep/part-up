@@ -235,6 +235,11 @@ Package.onUse(function(api) {
         // Modal:create:promote
         'modal/create/promote/promote.html',
         'modal/create/promote/promote.js',
+
+        'mobile/mobile.html',
+        'mobile/mobile.js',
+        'mobile/notifications/notifications.html',
+        'mobile/notifications/notifications.js'
     ];
 
     var languageFiles = [

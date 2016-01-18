@@ -530,6 +530,15 @@ Router.route('/pricing', {
     }
 });
 
+Router.route('/notifications', {
+    name: 'notifications',
+    where: 'client',
+    yieldRegions: {
+        'mobile': {to:'main'},
+        'mobile_notifications': {to:'container'}
+    }
+});
+
 // Router.route('/faq', {
 //     name: 'faq',
 //     where: 'client',

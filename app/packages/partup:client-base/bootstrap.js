@@ -5,7 +5,7 @@
  * @name client-base
  */
 Meteor.startup(function() {
-
+    if (cordova) Router.go('notifications');
     /*************************************************************/
     /* Connection */
     /*************************************************************/
