@@ -38,7 +38,6 @@ mrt:jquery-mousewheel
 okgrow:analytics
 pauli:accounts-linkedin
 peerlibrary:aws-sdk
-percolate:intercom
 percolate:migrations
 percolate:synced-cron
 reactive-var
