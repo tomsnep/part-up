@@ -1,8 +1,7 @@
 <template name="mobile">
-    <div class="pu-mobile-wrap">
-        jajajajaja
+    <div class="pu-app pu-app-responsive">
+        {{> Header}}
         {{> yield region='container' }}
-
         <a href="{{ pathFor route='login' }}">Go to login</a>
     </div>
 </template>

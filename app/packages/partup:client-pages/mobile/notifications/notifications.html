@@ -1,3 +1,9 @@
 <template name="mobile_notifications">
-    notifications template
+    <ul>
+        {{#each notifications}}
+            <li class="pu-notification {{#unless new}}pu-notification-viewed{{/unless}} {{#if clicked}}pu-notification-clicked{{/if}}" data-notification="{{ _id }}">
+                {{> Notification notification=.}}
+            </li>
+        {{/each}}
+    </ul>
 </template>

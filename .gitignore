@@ -30,3 +30,4 @@ app/public/uploads
 # Temp files
 *.swp
 *.orig
+.DS_Store
