@@ -207,6 +207,7 @@ Meteor.startup(function() {
                     'phonenumber': null,
                     'website': '',
                     'skype': null,
+                    'isPremium': true,
                     'meurs': {
                         'portal': 'nl',
                         'nl_id': 'caba5cd4-f769-4093-878c-4ce3807781c3',

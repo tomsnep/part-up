@@ -116,5 +116,21 @@ Template.Admin.events({
                 });
             }
         });
+    },
+    'click [data-togglepremium-user]': function(event, template) {
+        event.preventDefault();
+        var userId = this._id;
+
+        Partup.client.prompt.confirm({
+            onConfirm: function() {
+                Meteor.call('users.togglepremium', userId, function(error, result) {
+                    if (error) {
+                        Partup.client.notify.error(__(error));
+                        return;
+                    }
+                    Partup.client.notify.success('user premium toggled');
+                });
+            }
+        });
     }
 });

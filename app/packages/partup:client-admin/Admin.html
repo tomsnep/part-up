@@ -63,6 +63,12 @@
                         {{else}}
                             <a href="#" data-reactivate-user>reactivate</a>
                         {{/if}}
+                        -
+                        {{#if profile.isPremium }}
+                            <a href="#" data-togglepremium-user>unsetpremium</a>
+                        {{ else }}
+                            <a href="#" data-togglepremium-user>setpremium</a>
+                        {{ /if }}
                     </td>
                 </tr>
             {{/each }}

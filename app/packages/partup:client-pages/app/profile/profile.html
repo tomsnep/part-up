@@ -8,11 +8,18 @@
                 <div class="pu-wrap pu-wrap-columnlayout">
                     <div class="pu-info {{#unless profile.data.tags}} pu-info-minimal{{/unless}}">
                         <figure class="pu-avatar pu-avatar-extralarge" style="background-image:url('{{ partupImageUrl id=profile.data.image store='360x360'}}');">
-                            <span class="pu-score pu-score-large">{{ profile.roundedScore }}</span>
+                            {{#if profile.data.isPremium}}
+                                <span class="pu-score pu-score-large pu-score-premium">{{ profile.roundedScore }}</span>
+                            {{else}}
+                                <span class="pu-score pu-score-large">{{ profile.roundedScore }}</span>
+                            {{/if}}
                         </figure>
                         <div>
                             <h3>
                                 {{profile.data.name}}
+                                {{#if profile.data.settings.isPremium}}
+                                    <span style="color: orange; font-size: 14px">(premium upper)</span>
+                                {{/if}}
                                 {{#if profile.data.facebook_url}}<a href="{{ profile.data.facebook_url }}" target="_blank"><i class="picon-facebook"></i></a>{{/if}}
                                 {{#if profile.data.linkedin_url}}<a href="{{ profile.data.linkedin_url }}" target="_blank"><i class="picon-linkedin"></i></a>{{/if}}
                                 {{#if profile.data.twitter_url}}<a href="{{ profile.data.twitter_url }}" target="_blank"><i class="picon-twitter"></i></a>{{/if}}

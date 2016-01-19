@@ -7,9 +7,19 @@
                         background-image: url('{{ . }}');
                     {{/ with }}
                 ">
+                {{#if user.profile.isPremium}}
                     {{# with user.participation_scoreReadable }}
-                        <span class="pu-score">{{ . }}</span>
+                        <span class="pu-score pu-score-premium">
+                            {{ . }}
+                        </span>
                     {{/ with }}
+                {{else}}
+                    {{# with user.participation_scoreReadable }}
+                        <span class="pu-score">
+                            {{ . }}
+                        </span>
+                    {{/ with }}
+                {{/if}}
                 </figure>
             </a>
 

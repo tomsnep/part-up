@@ -107,6 +107,42 @@ Meteor.methods({
     },
 
     /**
+     * toggle premium
+     *
+     * @param  {string} userId
+     */
+    'users.togglepremium': function(userId) {
+        check(userId, String);
+
+        var user = Meteor.user();
+        if (!User(user).isAdmin()) {
+            return;
+        }
+
+        var subject = Meteor.users.findOne(userId);
+        if (!subject) throw new Meteor.Error(401, 'unauthorized');
+        
+        try {
+            if (user.profile.isPremium) {
+                Meteor.users.update(subject._id, {$set:{
+                    'profile.isPremium': false
+                }});   
+            } else {
+                Meteor.users.update(subject._id, {$set:{
+                    'profile.isPremium': true
+                }});  
+            }
+
+            return {
+                _id: subject._id
+            };
+        } catch (error) {
+            Log.error(error);
+            throw new Meteor.Error(500, 'user_could_not_be_deactivated');
+        }
+    },
+
+    /**
      * Reactivate user
      *
      * @param  {string} userId

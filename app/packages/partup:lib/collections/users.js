@@ -14,6 +14,7 @@ var publicUserFields = {
     'profile.linkedin_url': 1,
     'profile.location': 1,
     'profile.name': 1,
+    'profile.isPremium': 1,
     'profile.skype': 1,
     'profile.tags': 1,
     'profile.twitter_url': 1,
@@ -183,7 +184,7 @@ Meteor.users.findForAdminList = function(selector, options) {
     var page = options.page;
 
     return Meteor.users.find(selector, {
-        fields:{'_id':1, 'profile.name':1, 'profile.phonenumber':1, 'registered_emails':1, 'createdAt':1, 'deactivatedAt':1},
+        fields:{'_id':1, 'profile.name':1, 'profile.phonenumber':1, 'profile.isPremium':1, 'registered_emails':1, 'createdAt':1, 'deactivatedAt':1},
         sort: {'createdAt': -1},
         limit: limit,
         skip: limit * page
