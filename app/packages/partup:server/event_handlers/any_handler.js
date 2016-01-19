@@ -25,12 +25,12 @@ Event.onAny(function() {
                 rejectUnauthorized: false
             }
         }, function(err, result) {
-            if (process.env.LOG_EVENTS) {
+            if (err && process.env.LOG_EVENTS) {
                 Log.error('Could not push event to store.');
                 Log.error(err);
                 Log.error(result);
             } else {
-                //silently ignore success or failure of posting to eventstore
+                //silently ignore success of posting to eventstore
             }
         });
     } else {
