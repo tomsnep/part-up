@@ -2,6 +2,10 @@
     <div class="pu-app pu-app-responsive">
         {{> Header}}
         {{> yield region='container' }}
-        <a href="{{ pathFor route='login' }}">Go to login</a>
+        {{#unless currentUser}}
+            <a class="pu-button" href="{{ pathFor route='login' }}">Login</a>
+        {{else}}
+            <a class="pu-button" data-logout>Logout</a>
+        {{/unless}}
     </div>
 </template>
