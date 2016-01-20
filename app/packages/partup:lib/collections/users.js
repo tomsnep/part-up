@@ -5,6 +5,13 @@
 
 //N.B.: Meteor.users is already defined by meteor
 
+// Deny updating the profile object from client
+Meteor.users.deny({
+    update: function() {
+        return true;
+    }
+});
+
 //user fields to all users
 var publicUserFields = {
     'profile.description': 1,
