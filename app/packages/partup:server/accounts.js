@@ -59,13 +59,15 @@ Accounts.onCreateUser(function(options, user) {
             }
         }
 
+        var sanitizedName = sanitizeHtml(liData.firstName + ' ' + liData.lastName)
+
         profile = {
-            firstname: liData.firstName,
-            lastname: liData.lastName,
+            firstname: sanitizeHtml(liData.firstName),
+            lastname: sanitizeHtml(liData.lastName),
             location: location,
             linkedin_url: 'https://linkedin.com/profile/view?id=' + liData.id,
-            name: liData.firstName + ' ' + liData.lastName,
-            normalized_name: Partup.helpers.normalize(liData.firstName + ' ' + liData.lastName),
+            name: sanitizedName,
+            normalized_name: Partup.helpers.normalize(sanitizedName),
             settings: {
                 locale: 'en',
                 optionalDetailsCompleted: false,
@@ -94,11 +96,11 @@ Accounts.onCreateUser(function(options, user) {
         d('User used Facebook to register');
 
         profile = {
-            firstname: fbData.first_name,
+            firstname: sanitizeHtml(fbData.first_name),
             gender: fbData.gender,
             lastname: fbData.last_name,
             facebook_url: 'https://facebook.com/' + fbData.id,
-            name: fbData.name,
+            name: sanitizeHtml(fbData.name),
             normalized_name: Partup.helpers.normalize(fbData.name),
             settings: {
                 locale: Partup.helpers.parseLocale(fbData.locale),
