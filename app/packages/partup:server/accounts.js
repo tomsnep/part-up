@@ -56,7 +56,7 @@ Accounts.onCreateUser(function(options, user) {
         name: sanitizedName,
         normalized_name: Partup.helpers.normalize(sanitizedName),
         settings: {
-            locale: options.profile.settings.locale,
+            locale: mout.object.get(options, 'profile.settings.locale') || 'en',
             optionalDetailsCompleted: false,
             email: defaultEmailObject,
             unsubscribe_email_token: Random.secret()
