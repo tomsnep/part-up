@@ -13,7 +13,8 @@ Package.onUse(function(api) {
         'templating',
         'tracker',
         'reactive-var',
-        'reactive-dict'
+        'reactive-dict',
+        'lookback:emoji',       // Emoji
     ], ['client']);
 
     api.addFiles([
@@ -82,6 +83,8 @@ Package.onUse(function(api) {
         'helpers/Autolinkjs.js',
         'helpers/autolink.js',
         'helpers/mobileHelpers.js',
+        'helpers/emoji.js',
+
         'bootstrap.js',
         'analytics.js'
 
