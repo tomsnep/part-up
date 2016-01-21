@@ -281,7 +281,7 @@ Router.route('/verify-email/:token', {
         };
     },
     onBeforeAction: function() {
-        Router.go('profile');
+        Router.go('profile-fallback');
 
         Accounts.verifyEmail(this.data().token, function(error) {
             if (error) {
