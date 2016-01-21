@@ -70,7 +70,7 @@ Meteor.methods({
             }
 
             // Update the new update status for all uppers
-            partup.addNewUpdateToUpperData(update);
+            partup.addNewUpdateToUpperData(update, Meteor.userId());
 
             Event.emit('updates.comments.inserted', upper, partup, update, comment);
             var mentionsWarning = Partup.helpers.mentions.exceedsLimit(fields.content);
