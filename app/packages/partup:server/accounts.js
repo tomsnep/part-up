@@ -34,9 +34,34 @@ Accounts.onLogin(function(data) {
     });
 });
 
+var defaultEmailObject = {
+    dailydigest: true,
+    upper_mentioned_in_partup: true,
+    invite_upper_to_partup_activity: true,
+    invite_upper_to_network: true,
+    partup_created_in_network: true,
+    partups_networks_new_pending_upper: true,
+    partups_networks_accepted: true,
+    invite_upper_to_partup: true,
+    partups_new_comment_in_involved_conversation: true,
+    partups_networks_new_upper: true,
+    partups_networks_upper_left: true
+};
+
 Accounts.onCreateUser(function(options, user) {
     var imageUrl;
-    var profile = options.profile;
+
+    var sanitizedName = sanitizeHtml(options.profile.name);
+    var profile = {
+        name: sanitizedName,
+        normalized_name: Partup.helpers.normalize(sanitizedName),
+        settings: {
+            locale: mout.object.get(options, 'profile.settings.locale') || 'en',
+            optionalDetailsCompleted: false,
+            email: defaultEmailObject,
+            unsubscribe_email_token: Random.secret()
+        }
+    };
 
     var liData = mout.object.get(user, 'services.linkedin');
     var fbData = mout.object.get(user, 'services.facebook');
@@ -59,7 +84,7 @@ Accounts.onCreateUser(function(options, user) {
             }
         }
 
-        var sanitizedName = sanitizeHtml(liData.firstName + ' ' + liData.lastName)
+        var sanitizedName = sanitizeHtml(liData.firstName + ' ' + liData.lastName);
 
         profile = {
             firstname: sanitizeHtml(liData.firstName),
@@ -71,19 +96,7 @@ Accounts.onCreateUser(function(options, user) {
             settings: {
                 locale: 'en',
                 optionalDetailsCompleted: false,
-                email: {
-                    dailydigest: true,
-                    upper_mentioned_in_partup: true,
-                    invite_upper_to_partup_activity: true,
-                    invite_upper_to_network: true,
-                    partup_created_in_network: true,
-                    partups_networks_new_pending_upper: true,
-                    partups_networks_accepted: true,
-                    invite_upper_to_partup: true,
-                    partups_new_comment_in_involved_conversation: true,
-                    partups_networks_new_upper: true,
-                    partups_networks_upper_left: true
-                },
+                email: defaultEmailObject,
                 unsubscribe_email_token: Random.secret()
             }
         };
@@ -105,19 +118,7 @@ Accounts.onCreateUser(function(options, user) {
             settings: {
                 locale: Partup.helpers.parseLocale(fbData.locale),
                 optionalDetailsCompleted: false,
-                email: {
-                    dailydigest: true,
-                    upper_mentioned_in_partup: true,
-                    invite_upper_to_partup_activity: true,
-                    invite_upper_to_network: true,
-                    partup_created_in_network: true,
-                    partups_networks_new_pending_upper: true,
-                    partups_networks_accepted: true,
-                    invite_upper_to_partup: true,
-                    partups_new_comment_in_involved_conversation: true,
-                    partups_networks_new_upper: true,
-                    partups_networks_upper_left: true
-                },
+                email: defaultEmailObject,
                 unsubscribe_email_token: Random.secret()
             }
         };
