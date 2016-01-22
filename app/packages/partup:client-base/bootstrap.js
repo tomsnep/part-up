@@ -137,12 +137,6 @@ Meteor.startup(function() {
         }
     };
 
-    analytics.on('track', function(event, properties, options) {
-        if (Intercom && Intercom.public_api && Intercom.public_api.trackEvent) {
-            Intercom.public_api.trackEvent(event, properties);
-        }
-    });
-
     /*************************************************************/
     /* Intent configuration */
     /*************************************************************/
