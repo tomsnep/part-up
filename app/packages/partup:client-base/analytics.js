@@ -1,43 +1,42 @@
 var SECOND_TRACKER_NAME = 'newPartupAnalyticsTracker';
+var second_tracker_id = get(Meteor, 'settings.public.secondGATracker');
 
 Meteor.startup(function() {
 
-    // Register second tracker
-    analytics.ready(function() {
-        var createOptions = {
-            'name': SECOND_TRACKER_NAME
-        };
+    // Set up second tracker if set
+    if (second_tracker_id) {
+        analytics.ready(function() {
 
-        if (Meteor.settings.public.development) {
-            createOptions.cookieDomain = 'none';
-        }
+            // Create 2nd tracker
+            var createOptions = {'name': SECOND_TRACKER_NAME};
+            if (Meteor.settings.public.development) {
+                createOptions.cookieDomain = 'none';
+            }
+            ga('create', second_tracker_id, createOptions);
 
-        ga('create', Meteor.settings.public.secondGATracker, createOptions);
-
-        // First page second tracker
-        ga(SECOND_TRACKER_NAME + '.send', 'pageview', Router.current().route.path());
-    });
-
-    // Page switch events
-    analytics.on('page', function(event, properties, options) {
-
-        // Second tracker
-        ga(SECOND_TRACKER_NAME + '.send', 'pageview', properties);
-
-    });
-
-    // Custom track events
-    analytics.on('track', function(event, properties, options) {
-
-        // Second tracker
-        ga(SECOND_TRACKER_NAME + '.send', {
-            hitType: 'event',
-            eventCategory: properties.category || 'All',
-            eventAction: event,
-            eventLabel: properties.label || 'All'
+            // Pass initial page event to 2nd tracker
+            ga(SECOND_TRACKER_NAME + '.send', 'pageview', Router.current().route.path());
         });
 
-        // Track intercom event
+        // Pass page events to 2nd tracker
+        analytics.on('page', function(event, properties, options) {
+            ga(SECOND_TRACKER_NAME + '.send', 'pageview', properties);
+        });
+    }
+
+    analytics.on('track', function(event, properties, options) {
+
+        // Pass track events to 2nd tracker
+        if (second_tracker_id) {
+            ga(SECOND_TRACKER_NAME + '.send', {
+                hitType: 'event',
+                eventCategory: properties.category || 'All',
+                eventAction: event,
+                eventLabel: properties.label || 'All'
+            });
+        }
+
+        // Pass track events to Intercom
         if (Intercom && Intercom.public_api && Intercom.public_api.trackEvent) {
             Intercom.public_api.trackEvent(event, properties);
         }
