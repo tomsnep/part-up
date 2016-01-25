@@ -598,6 +598,11 @@
             background-color: transparent
             transform: scale(.95)
 
+        &.pu-type-inverted
+            border-color: #fff
+            i
+                color: $color-text-inverted
+
         &-twitter
             i
                 font-size: 14px
@@ -797,6 +802,14 @@
 
         img
             height: 50px
+
+    &-dark
+        background-color: $color-button-darkblue
+        font-weight: bold
+        &:active,
+        &:hover,
+        &:focus
+            background-color: darken($color-button-darkblue, 5%)
 
     @media screen and (min-width: $breakpoint-desktop)
         &-header

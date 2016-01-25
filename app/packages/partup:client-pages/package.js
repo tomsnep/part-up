@@ -235,6 +235,17 @@ Package.onUse(function(api) {
         // Modal:create:promote
         'modal/create/promote/promote.html',
         'modal/create/promote/promote.js',
+
+        // swarm
+
+        'swarm/swarm.html',
+        'swarm/swarm.js',
+        'swarm/content/content.html',
+        'swarm/content/content.js',
+        'swarm/footer/footer.html',
+        'swarm/footer/footer.js'
+
+
     ];
 
     var languageFiles = [

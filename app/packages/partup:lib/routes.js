@@ -530,14 +530,14 @@ Router.route('/pricing', {
     }
 });
 
-// Router.route('/faq', {
-//     name: 'faq',
-//     where: 'client',
-//     yieldRegions: {
-//         'app':      {to: 'main'},
-//         'app_home': {to: 'app'}
-//     }
-// });
+Router.route('/swarm/:slug', {
+    name: 'swarm',
+    where: 'client',
+    yieldRegions: {
+        'swarm':            {to: 'main'},
+        'swarm_content':    {to: 'content'}
+    }
+});
 
 // Router.route('/contact', {
 //     name: 'contact',
