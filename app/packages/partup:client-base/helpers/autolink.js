@@ -22,5 +22,6 @@ Template.registerHelper('partupAutolink', function(text) {
             return tag;
         }
     });
+
     return jaja;
 });
