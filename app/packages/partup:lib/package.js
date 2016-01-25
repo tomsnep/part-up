@@ -69,6 +69,7 @@ Package.onUse(function(api) {
         'schemas/networkBulkinvite.js',
         'schemas/language.js',
         'schemas/tile.js',
+        'schemas/swarm.js',
         'transformers/activity.js',
         'transformers/partup.js',
         'transformers/user.js',
