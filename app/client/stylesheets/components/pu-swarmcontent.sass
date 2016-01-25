@@ -1,15 +1,21 @@
 .pu-swarmcontent
-    max-width: 1320px + 40px + 40px
+    $pagewidth: 1320px
+    max-width: $pagewidth
     margin: 0 auto
     background-color: #fff
     min-height: 100px
-    border-radius: 4px
     overflow: hidden
     z-index: 1
     position: relative
 
-    section
-        padding: 60px
+    > section
+        padding: 30px
 
         &:nth-child(even)
             background-color: $color-background-tertiery
+
+    @media screen and (min-width: $breakpoint-tablet)
+        border-radius: 4px
+
+        > section
+            padding: 60px
