@@ -82,6 +82,11 @@ Partup.schemas.entities.network = new SimpleSchema([networkBaseSchema, {
         type: String,
         regEx: SimpleSchema.RegEx.Id
     },
+    swarms: {
+        type: [String],
+        optional: true,
+        regEx: SimpleSchema.RegEx.Id
+    },
     tags: {
         type: [String],
         minCount: 1

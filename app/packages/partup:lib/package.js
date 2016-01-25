@@ -52,6 +52,7 @@ Package.onUse(function(api) {
         'collections/places_autocompletes.js',
         'collections/languages.js',
         'collections/tiles.js',
+        'collections/swarms.js',
         'schemas/activity.js',
         'schemas/update.js',
         'schemas/contribution.js',
