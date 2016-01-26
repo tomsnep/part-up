@@ -62,5 +62,35 @@ Meteor.methods({
             Log.error(error);
             throw new Meteor.Error(400, 'swarm_could_not_be_updated');
         }
+    },
+
+    /**
+     * Remove a Swarm
+     *
+     * @param {String} swarmId
+     */
+    'swarms.remove': function(swarmId) {
+        check(swarmId, String);
+
+        var user = Meteor.user();
+        if (!user || !User(user).isAdmin()) {
+            throw new Meteor.Error(401, 'unauthorized');
+        }
+
+        var swarm = Swarms.findOneOrFail(swarmId);
+        if (swarm.networks.length > 1) {
+            throw new Meteor.Error(400, 'swarm_contains_networks');
+        }
+
+        try {
+            Swarms.remove(swarmId);
+
+            return {
+                _id: swarmId
+            };
+        } catch (error) {
+            Log.error(error);
+            throw new Meteor.Error(400, 'swarm_could_not_be_removed');
+        }
     }
 });
