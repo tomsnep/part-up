@@ -148,7 +148,7 @@ Partup.schemas.forms.networkCreate = new SimpleSchema([networkBaseSchema, {
 
 /**
  * network create form schema
- * @name networkCreate
+ * @name networkEdit
  * @memberof Partup.schemas.forms
  */
 Partup.schemas.forms.networkEdit = new SimpleSchema({
