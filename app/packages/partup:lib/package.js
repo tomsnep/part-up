@@ -121,6 +121,7 @@ Package.onUse(function(api) {
     api.export('Uploads');
     api.export('Languages');
     api.export('Tiles');
+    api.export('Swarms');
 
     // Globals
     api.export('get');
