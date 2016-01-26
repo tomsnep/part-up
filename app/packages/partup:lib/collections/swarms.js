@@ -70,3 +70,71 @@ if (Meteor.isServer) {
     Swarms._ensureIndex('slug');
     Swarms._ensureIndex('admin_id');
 }
+
+/**
+ * Modified version of Collection.find that makes
+ * sure the user (or guest) can only retrieve
+ * fields that are publicly available
+ *
+ * @memberOf Swarms
+ * @param {Object} selector
+ * @param {Object} options
+ * @return {Cursor}
+ */
+Swarms.guardedMetaFind = function(selector, options) {
+    selector = selector || {};
+    options = options || {};
+
+    // Make sure that if the callee doesn't pass the fields
+    // key used in the options parameter, we set it with
+    // the _id fields, so we do not publish all fields
+    // by default, which would be a security issue
+    options.fields = {_id: 1};
+
+    // The fields that should be available on each swarm
+    var unguardedFields = ['name', 'title', 'introduction', 'description', 'slug', 'image'];
+
+    unguardedFields.forEach(function(unguardedField) {
+        options.fields[unguardedField] = 1;
+    });
+
+    return this.find(selector, options);
+};
+
+/**
+ * Swarms collection helpers
+ *
+ * @memberOf Swarms
+ * @param {String} userId the user id of the current user
+ * @param {Object} selector the requested selector
+ * @param {Object} options options object to be passed to mongo find (limit etc.)
+ * @return {Mongo.Cursor}
+ */
+Swarms.guardedFind = function(userId, selector, options) {
+    if (Meteor.isClient) return this.find(selector, options);
+
+    selector = selector || {};
+    options = options || {};
+
+    // The fields that should never be exposed
+    var guardedFields = [
+        //
+    ];
+    options.fields = options.fields || {};
+
+    guardedFields.forEach(function(guardedField) {
+        options.fields[guardedField] = 0;
+    });
+
+    var guardedCriterias = [
+        //
+    ];
+
+    // Guarding selector that needs to be fulfilled
+    var guardingSelector = {'$or': guardedCriterias};
+
+    // Merge the selectors, so we still use the initial selector provided by the caller
+    var finalSelector = {'$and': [guardingSelector, selector]};
+
+    return this.find(finalSelector, options);
+};

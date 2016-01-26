@@ -476,3 +476,15 @@ Networks.findForDiscoverFilter = function(loggedInUserId, options) {
 
     return Networks.guardedFind(loggedInUserId, {}, options);
 };
+
+/**
+ * Find the networks in a swarm
+ *
+ * @memberOf Networks
+ * @param {Swarm} swarm
+ * @param {String} userId
+ * @return {Mongo.Cursor}
+ */
+Networks.findForSwarm = function(swarm, userId) {
+    return Networks.guardedFind(userId, {_id: {$in: swarm.networks}}, {});
+};
