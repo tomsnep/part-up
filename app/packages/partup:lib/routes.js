@@ -509,6 +509,17 @@ Router.route('/admin/featured-tribes', {
         'modal_admin_featured_networks':    {to: 'modal_admin'}
     }
 });
+
+Router.route('/admin/swarms', {
+    name: 'admin-createswarm',
+    where: 'client',
+    yieldRegions: {
+        'modal':                 {to: 'main'},
+        'modal_admin':           {to: 'modal'},
+        'modal_create_swarm':    {to: 'modal_admin'}
+    }
+});
+
 /*************************************************************/
 /* Content pages */
 /*************************************************************/
