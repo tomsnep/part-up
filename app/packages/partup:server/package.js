@@ -152,6 +152,7 @@ Package.onUse(function(api) {
         'publications/languages.js',
         'publications/tiles.js',
         'publications/notifications.js',
+        'publications/swarms.js',
         'routes/hooks.js',
         'routes/middleware.js',
         'routes/csv/csv_routes.js',
