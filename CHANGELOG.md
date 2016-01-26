@@ -1,8 +1,7 @@
 # CHANGELOG
 
 ## 1.16.5
-- feat(analytics): add second google analytics tracker, issue #160
-- fix(pu-dropdown): removes displaced scrollbar on chrome, issue #171 
+- feat(analytics): add second google analytics tracker, issue #160 
 - fix(notifications): mentions in partup messages now only generate one notification when partners are mentioned, fixes #150
 - fix(tribe-uppers): only show activate uppers on the tribe uppers overview, fixes #159
 - fix(verify-email): fix empty page when clicking the URL, Fix issue #143
