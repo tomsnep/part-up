@@ -5,6 +5,10 @@
  * @private
  */
 var swarmBaseSchema = new SimpleSchema({
+    admin_id: {
+        type: String,
+        regEx: SimpleSchema.RegEx.Id
+    },
     name: {
         type: String,
         max: 50
@@ -32,10 +36,10 @@ var swarmBaseSchema = new SimpleSchema({
 
 /**
  * Swarm entity schema
- * @name swarm
+ * @name swarmEntity
  * @memberof Partup.schemas.entities
  */
-Partup.schemas.entities.swarm = new SimpleSchema([swarmBaseSchema, {
+Partup.schemas.entities.swarmEntity = new SimpleSchema([swarmBaseSchema, {
     _id: {
         type: String,
         regEx: SimpleSchema.RegEx.Id
@@ -43,10 +47,6 @@ Partup.schemas.entities.swarm = new SimpleSchema([swarmBaseSchema, {
     activity_count: {
         type: Number,
         defaultValue: 0
-    },
-    admin_id: {
-        type: String,
-        regEx: SimpleSchema.RegEx.Id
     },
     created_at: {
         type: Date,
@@ -87,4 +87,13 @@ Partup.schemas.entities.swarm = new SimpleSchema([swarmBaseSchema, {
         type: Number,
         defaultValue: 0
     }
+}]);
+
+/**
+ * Swarm form schema
+ * @name swarmForm
+ * @memberof Partup.schemas.forms
+ */
+Partup.schemas.forms.swarmForm = new SimpleSchema([swarmBaseSchema, {
+    //
 }]);
