@@ -5,7 +5,7 @@ Meteor.methods({
      * @param {mixed[]} fields
      */
     'swarms.insert': function(fields) {
-        check(fields, Partup.schemas.forms.swarmBaseSchema);
+        check(fields, Partup.schemas.forms.swarmForm);
 
         var user = Meteor.user();
         if (!user || !User(user).isAdmin()) {
@@ -33,6 +33,34 @@ Meteor.methods({
         } catch (error) {
             Log.error(error);
             throw new Meteor.Error(400, 'swarm_could_not_be_inserted');
+        }
+    },
+
+    /**
+     * Update privileged swarm fields (superadmin only)
+     *
+     * @param {String} swarmSlug
+     * @param {mixed[]} fields
+     */
+    'swarms.admin_update': function(swarmSlug, fields) {
+        check(swarmSlug, String);
+        check(fields, Partup.schemas.forms.swarmForm);
+
+        var user = Meteor.user();
+        if (!user) throw new Meteor.Error(401, 'unauthorized');
+        if (!User(user).isAdmin()) throw new Meteor.Error(401, 'unauthorized');
+
+        var swarm = Swarms.findOneOrFail({slug: swarmSlug});
+
+        if (fields.admin_id) {
+            var adminUser = Meteor.users.findOneOrFail(fields.admin_id);
+        }
+
+        try {
+            Swarms.update(swarm._id, {$set: {admin_id: adminUser._id}});
+        } catch (error) {
+            Log.error(error);
+            throw new Meteor.Error(400, 'swarm_could_not_be_updated');
         }
     }
 });
