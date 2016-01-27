@@ -188,6 +188,7 @@ Package.onUse(function(api) {
         'cron/send_daily_digest_users.js',
         'cron/update_shared_count.js',
         'cron/calculate_partup_popularity_score_for_partups.js',
+        'cron/update_swarm_shared_count.js',
         'migrations.js',
         'package-tap.i18n'
     ], ['server']);
