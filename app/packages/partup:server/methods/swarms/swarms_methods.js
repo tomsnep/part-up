@@ -5,7 +5,7 @@ Meteor.methods({
      * @param {mixed[]} fields
      */
     'swarms.insert': function(fields) {
-        check(fields, Partup.schemas.forms.swarmForm);
+        check(fields, Partup.schemas.forms.swarmCreate);
 
         var user = Meteor.user();
         if (!user || !User(user).isAdmin()) {
@@ -44,7 +44,7 @@ Meteor.methods({
      */
     'swarms.admin_update': function(swarmSlug, fields) {
         check(swarmSlug, String);
-        check(fields, Partup.schemas.forms.swarmForm);
+        check(fields, Partup.schemas.forms.swarmEditAdmin);
 
         var user = Meteor.user();
         if (!user) throw new Meteor.Error(401, 'unauthorized');

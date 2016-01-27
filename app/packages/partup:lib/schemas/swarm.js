@@ -5,14 +5,6 @@
  * @private
  */
 var swarmBaseSchema = new SimpleSchema({
-    admin_id: {
-        type: String,
-        regEx: SimpleSchema.RegEx.Id
-    },
-    name: {
-        type: String,
-        max: 50
-    },
     title: {
         type: String,
         max: 50,
@@ -39,7 +31,7 @@ var swarmBaseSchema = new SimpleSchema({
  * @name swarmEntity
  * @memberof Partup.schemas.entities
  */
-Partup.schemas.entities.swarmEntity = new SimpleSchema([swarmBaseSchema, {
+Partup.schemas.entities.swarm = new SimpleSchema([swarmBaseSchema, {
     _id: {
         type: String,
         regEx: SimpleSchema.RegEx.Id
@@ -48,9 +40,17 @@ Partup.schemas.entities.swarmEntity = new SimpleSchema([swarmBaseSchema, {
         type: Number,
         defaultValue: 0
     },
+    admin_id: {
+        type: String,
+        regEx: SimpleSchema.RegEx.Id
+    },
     created_at: {
         type: Date,
         defaultValue: new Date()
+    },
+    name: {
+        type: String,
+        max: 50
     },
     networks: {
         type: [String],
@@ -90,10 +90,24 @@ Partup.schemas.entities.swarmEntity = new SimpleSchema([swarmBaseSchema, {
 }]);
 
 /**
- * Swarm form schema
- * @name swarmForm
+ * Swarm create form schema
+ * @name swarmCreate
  * @memberof Partup.schemas.forms
  */
-Partup.schemas.forms.swarmForm = new SimpleSchema([swarmBaseSchema, {
-    //
-}]);
+Partup.schemas.forms.swarmCreate = new SimpleSchema({
+    name: {
+        type: String,
+        max: 50
+    }
+});
+
+/**
+ * Swarm edit form schema
+ * @name swarmEditAdmin
+ * @memberof Partup.schemas.forms
+ */
+Partup.schemas.forms.swarmEditAdmin = new SimpleSchema({
+    admin_id: {
+        type: String
+    }
+});

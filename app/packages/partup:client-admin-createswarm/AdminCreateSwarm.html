@@ -1,7 +1,7 @@
 <template name="AdminCreateSwarm">
 
     <h2>Create Swarm</h2>
-    {{#autoForm schema=Partup.schemas.forms.swarmForm id="createSwarmForm" class="pu-form" validation="submitThenBlur" }}
+    {{#autoForm schema=Partup.schemas.forms.swarmCreate id="createSwarmForm" class="pu-form" validation="submitThenBlur" }}
         <!-- Name -->
         <label class="pu-formfield">
             <span class="pu-label">
@@ -9,7 +9,7 @@
             </span>
 
             <div class="pu-sub-validations {{#if afFieldIsInvalid name='name' }}pu-state-invalid{{/if}}">
-                <span class="pu-sub-input">{{> afFieldInput name='name' placeholder=placeholders.name class="pu-input" data-max="Partup.schemas.entities.swarmEntity._schema.name.max" data-characters-left-var="nameCharactersLeft" }}</span>
+                <span class="pu-sub-input">{{> afFieldInput name='name' placeholder=placeholders.name class="pu-input" data-max="Partup.schemas.entities.swarm._schema.name.max" data-characters-left-var="nameCharactersLeft" }}</span>
                 <span class="pu-sub-error">{{ afFieldMessage name='name' }}</span>
             </div>
         </label>

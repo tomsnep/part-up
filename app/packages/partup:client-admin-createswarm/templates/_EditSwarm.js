@@ -6,7 +6,7 @@ Template._EditSwarm.onCreated(function() {
 });
 
 Template._EditSwarm.helpers({
-    formSchema: Partup.schemas.forms.swarmForm,
+    formSchema: Partup.schemas.forms.swarmEditAdmin,
     submitting: function() {
         return Template.instance().submitting.get();
     },
