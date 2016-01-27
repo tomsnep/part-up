@@ -331,6 +331,16 @@ User = function(user) {
         },
 
         /**
+         * Check if user is admin of a swarm
+         *
+         * @return {Boolean}
+         */
+        isSwarmAdmin: function(swarmId) {
+            if (!user) return false;
+            return !!Swarms.findOne({_id: swarmId, admin_id: user._id});
+        },
+
+        /**
          * Get the user score
          *
          * @return {Number} participation score rounded
