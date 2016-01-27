@@ -72,6 +72,34 @@ Meteor.methods({
     },
 
     /**
+     * Add a network to the swarm
+     *
+     * @param {String} swarmId
+     * @param {String} networkId
+     */
+    'swarms.add_network': function(swarmId, networkId) {
+        check(swarmId, String);
+        check(networkId, String);
+
+        var user = Meteor.user();
+        if (!User(user).isSwarmAdmin(swarmId) || !User(user).isAdmin()) {
+            throw new Meteor.Error(401, 'unauthorized');
+        }
+
+        try {
+            // Make sure the swarm and network exist
+            var swarm = Swarms.findOneOrFail({_id: swarmId});
+            var network = Networks.findOneOrFail({_id: networkId});
+
+            // They do, so let's add
+            swarm.addNetwork(network._id);
+        } catch (error) {
+            Log.error(error);
+            throw new Meteor.Error(400, 'network_could_not_be_added_to_swarm');
+        }
+    },
+
+    /**
      * Remove a Swarm
      *
      * @param {String} swarmId

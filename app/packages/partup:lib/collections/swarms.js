@@ -37,7 +37,7 @@ Swarm.prototype.isAdmin = function(userId) {
  * Add network to swarm
  *
  * @memberOf Swarms
- * @param {String} networkId the id of the tribe to be added
+ * @param {String} networkId the id of the network to be added to the swarm
  */
 Swarm.prototype.addNetwork = function(networkId) {
     Swarms.update(this._id, {$addToSet: {networks: networkId}});
