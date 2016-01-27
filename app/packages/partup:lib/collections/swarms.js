@@ -48,7 +48,7 @@ Swarm.prototype.addNetwork = function(networkId) {
  * Remove network from swarm
  *
  * @memberOf Swarms
- * @param {String} networkId the user id of the user that is leaving the swarm
+ * @param {String} networkId the id of the network that is being removed from the swarm
  */
 Swarm.prototype.removeNetwork = function(networkId) {
     Swarms.update(this._id, {$pull: {networks: networkId}});
