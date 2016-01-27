@@ -56,6 +56,15 @@ Swarm.prototype.removeNetwork = function(networkId) {
 };
 
 /**
+ * Increase email share count
+ *
+ * @memberOf Swarms
+ */
+Swarm.prototype.increaseEmailShareCount = function() {
+    Swarms.update({_id: this._id}, {$inc: {'shared_count.email': 1}});
+};
+
+/**
  Swarms are entities that group networks (also known as tribes)
  @namespace Swarms
  */

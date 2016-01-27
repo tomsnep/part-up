@@ -22,8 +22,15 @@ Meteor.methods({
             swarm.partup_count = 0;
             swarm.upper_count = 0;
             swarm.quotes = [];
+            swarm.shared_count = {
+                facebook: 0,
+                twitter: 0,
+                linkedin: 0,
+                email: 0
+            };
             swarm.created_at = new Date();
             swarm.updated_at = new Date();
+            swarm.refreshed_at = new Date(); // For the shared_count cron job
 
             swarm._id = Swarms.insert(swarm);
 
@@ -91,6 +98,23 @@ Meteor.methods({
         } catch (error) {
             Log.error(error);
             throw new Meteor.Error(400, 'swarm_could_not_be_removed');
+        }
+    },
+
+    /**
+     * Increase email share count
+     *
+     * @param {String} swarmId
+     */
+    'swarms.increase_email_share_count': function(swarmId) {
+        check(swarmId, String);
+
+        try {
+            var swarm = Swarms.findOneOrFail(swarmId);
+            swarm.increaseEmailShareCount();
+        } catch (error) {
+            Log.error(error);
+            throw new Meteor.Error(400, 'swarm_email_share_count_could_not_be_updated');
         }
     }
 });

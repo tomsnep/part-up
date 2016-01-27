@@ -76,6 +76,29 @@ Partup.schemas.entities.swarm = new SimpleSchema([swarmBaseSchema, {
         type: String,
         max: 500
     },
+    refreshed_at: {
+        type: Date,
+        defaultValue: new Date()
+    },
+    shared_count: {
+        type: Object
+    },
+    'shared_count.facebook': {
+        type: Number,
+        min: 0
+    },
+    'shared_count.twitter': {
+        type: Number,
+        min: 0
+    },
+    'shared_count.linkedin': {
+        type: Number,
+        min: 0
+    },
+    'shared_count.email': {
+        type: Number,
+        min: 0
+    },
     slug: {
         type: String
     },
