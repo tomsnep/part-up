@@ -18,10 +18,14 @@ Meteor.methods({
             swarm.slug = Partup.server.services.slugify.slugify(fields.name);
             swarm.networks = [];
             swarm.admin_id = user._id;
-            swarm.activity_count = 0;
-            swarm.partup_count = 0;
-            swarm.upper_count = 0;
             swarm.quotes = [];
+            swarm.stats = {
+                activity_count: 0,
+                network_count: 0,
+                partup_count: 0,
+                supporter_count: 0,
+                upper_count: 0
+            };
             swarm.shared_count = {
                 facebook: 0,
                 twitter: 0,
