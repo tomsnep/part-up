@@ -11,3 +11,4 @@ Partup.constants.CRON_RESET_CLICKS = process.env.PARTUP_CRON_RESET_CLICKS || 'ev
 Partup.constants.CRON_SHARED_COUNTS = process.env.PARTUP_CRON_SHARED_COUNTS || 'every 13 minutes';
 Partup.constants.CRON_POPULARITY = process.env.PARTUP_CRON_POPULARITY || 'every 1 hour on the 20th minute';
 Partup.constants.CRON_SWARM_SHARED_COUNTS = process.env.PARTUP_CRON_SWARM_SHARED_COUNTS || 'every 10 hours on the 38th minute';
+Partup.constants.CRON_SWARM_UPDATE_STATS = process.env.PARTUP_CRON_SWARM_UPDATE_STATS || 'at 04:00am every weekday';
