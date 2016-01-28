@@ -136,6 +136,15 @@ Partup.schemas.forms.swarmCreate = new SimpleSchema({
 });
 
 /**
+ * Swarm update form schema
+ * @name swarmUpdate
+ * @memberof Partup.schemas.forms
+ */
+Partup.schemas.forms.swarmUpdate = new SimpleSchema([swarmBaseSchema, {
+    //
+}]);
+
+/**
  * Swarm edit form schema
  * @name swarmEditAdmin
  * @memberof Partup.schemas.forms

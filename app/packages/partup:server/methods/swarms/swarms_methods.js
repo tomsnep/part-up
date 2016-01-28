@@ -48,6 +48,37 @@ Meteor.methods({
     },
 
     /**
+     * Update a Swarm
+     *
+     * @param {String} swarmId
+     * @param {mixed[]} fields
+     */
+    'swarms.update': function(swarmId, fields) {
+        check(swarmId, String);
+        check(fields, Partup.schemas.forms.swarmUpdate);
+
+        var user = Meteor.user();
+        var swarm = Swarms.findOneOrFail(swarmId);
+
+        if (!user || !swarm.isAdmin(user._id)) {
+            throw new Meteor.Error(401, 'unauthorized');
+        }
+
+        try {
+            var newSwarmFields = Partup.transformers.swarm.fromFormSwarm(fields);
+
+            Swarms.update(swarmId, {$set: newSwarmFields});
+
+            return {
+                _id: swarm._id
+            };
+        } catch (error) {
+            Log.error(error);
+            throw new Meteor.Error(400, 'swarm_could_not_be_updated');
+        }
+    },
+
+    /**
      * Update privileged swarm fields (superadmin only)
      *
      * @param {String} swarmSlug
