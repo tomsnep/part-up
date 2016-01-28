@@ -76,6 +76,7 @@ Package.onUse(function(api) {
         'transformers/update.js',
         'transformers/contributions.js',
         'transformers/network.js',
+        'transformers/swarm.js',
         'helpers/parselocale.js',
         'helpers/mentions.js',
         'helpers/normalize.js',
