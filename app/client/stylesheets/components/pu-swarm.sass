@@ -7,11 +7,11 @@
     header
         width: 100%
 
-    footer
+    > footer
         max-width: $pagewidth
         margin: 0 auto
 
-    header
+    > header
         min-height: 100vh
         background: url(/images/swarm/bg.svg)
         background-repeat: no-repeat
@@ -19,6 +19,7 @@
         background-size: 90vw
         margin-bottom: -30px
         z-index: 0
+        position: relative
 
         &:after
             content: ''
@@ -34,6 +35,8 @@
             padding: 40px
             max-width: $pagewidth
             margin: 0 auto
+            z-index: 1
+            position: relative
 
             .pu-brand,
             .pu-button
@@ -42,7 +45,7 @@
             .pu-button
                 float: right
 
-    footer
+    > footer
         padding: 30px 20px
 
         .pu-list
@@ -52,11 +55,11 @@
 
     @media screen and (min-width: $breakpoint-tablet)
         padding: 0px 60px
-        header
+        > header
             margin-bottom: -60px
             &:after
                 height: 60px
             nav
                 padding: 40px 0
-        footer
+        > footer
             padding: 60px

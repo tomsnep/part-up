@@ -241,6 +241,14 @@ Package.onUse(function(api) {
 
         'swarm/swarm.html',
         'swarm/swarm.js',
+
+        'swarm/explorer/explorer.html',
+        'swarm/explorer/explorer.js',
+        'swarm/explorer/bubble/bubble.html',
+        'swarm/explorer/bubble/bubble.js',
+        'swarm/explorer/ring/ring.html',
+        'swarm/explorer/ring/ring.js',
+
         'swarm/content/content.html',
         'swarm/content/content.js',
         'swarm/footer/footer.html',

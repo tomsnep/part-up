@@ -1,0 +1,17 @@
+.pu-ring
+    width: 100%
+    $minus: 100px
+    height: calc(100% - #{$minus})
+    position: relative
+    margin-bottom: -120px
+    z-index: 0
+
+    > section
+        position: absolute
+        transition: left .2s, top .2s
+        width: 0px
+        height: 0px
+        z-index: 0
+
+        &:hover
+            z-index: 1

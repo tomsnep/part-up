@@ -1,0 +1,9 @@
+<template name="Ring">
+    <section class="pu-ring">
+        {{#each rings}}
+            <section style="{{style}}">
+                {{> Bubble iteration=.}}
+            </section>
+        {{/each}}
+    </section>
+</template>
