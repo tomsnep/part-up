@@ -36,10 +36,6 @@ Partup.schemas.entities.swarm = new SimpleSchema([swarmBaseSchema, {
         type: String,
         regEx: SimpleSchema.RegEx.Id
     },
-    activity_count: {
-        type: Number,
-        defaultValue: 0
-    },
     admin_id: {
         type: String,
         regEx: SimpleSchema.RegEx.Id
@@ -55,10 +51,6 @@ Partup.schemas.entities.swarm = new SimpleSchema([swarmBaseSchema, {
     networks: {
         type: [String],
         regEx: SimpleSchema.RegEx.Id
-    },
-    partup_count: {
-        type: Number,
-        defaultValue: 0
     },
     quotes: {
         type: [Object],
@@ -99,16 +91,35 @@ Partup.schemas.entities.swarm = new SimpleSchema([swarmBaseSchema, {
         type: Number,
         min: 0
     },
+    stats: {
+        type: Object
+    },
+    'stats.activity_count': {
+        type: Number,
+        min: 0
+    },
+    'stats.network_count': {
+        type: Number,
+        min: 0
+    },
+    'stats.partup_count': {
+        type: Number,
+        min: 0
+    },
+    'stats.supporter_count': {
+        type: Number,
+        min: 0
+    },
+    'stats.upper_count': {
+        type: Number,
+        min: 0
+    },
     slug: {
         type: String
     },
     updated_at: {
         type: Date,
         defaultValue: new Date()
-    },
-    upper_count: {
-        type: Number,
-        defaultValue: 0
     }
 }]);
 
