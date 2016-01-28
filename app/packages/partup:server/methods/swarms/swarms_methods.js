@@ -93,6 +93,9 @@ Meteor.methods({
 
             // They do, so let's add
             swarm.addNetwork(network._id);
+
+            // All done, now all we need to do is to update the stats
+            Event.emit('partups.swarms.networks.updated', user._id, swarm);
         } catch (error) {
             Log.error(error);
             throw new Meteor.Error(400, 'network_could_not_be_added_to_swarm');
@@ -121,6 +124,9 @@ Meteor.methods({
 
             // They do, so let's remove
             swarm.removeNetwork(network._id);
+
+            // All done, now all we need to do is to update the stats
+            Event.emit('partups.swarms.networks.updated', user._id, swarm);
         } catch (error) {
             Log.error(error);
             throw new Meteor.Error(400, 'network_could_not_be_removed_from_swarm');
