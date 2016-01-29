@@ -547,6 +547,25 @@ Router.route('/swarm/:slug', {
     yieldRegions: {
         'swarm':            {to: 'main'},
         'swarm_content':    {to: 'content'}
+    },
+    data: function() {
+        return {
+            slug: this.params.slug
+        }
+    }
+});
+Router.route('/swarm/:slug/settings', {
+    name: 'swarm-settings',
+    where: 'client',
+    yieldRegions: {
+        'modal':                            {to: 'main'},
+        'modal_swarm_settings':             {to: 'modal'},
+        'modal_swarm_settings_details':  {to: 'modal_swarm_settings'}
+    },
+    data: function() {
+        return {
+            slug: this.params.slug
+        }
     }
 });
 
