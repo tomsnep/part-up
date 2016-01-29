@@ -1,20 +1,15 @@
 Template.HoverContainer_network.onCreated(function() {
-    // var userId = this.data;
-    // this.subscribe('users.one', userId);
+    var networkSlug = this.data;
+    this.subscribe('networks.one', networkSlug);
 });
 
 Template.HoverContainer_network.helpers({
-    user: function() {
-        // var userId = Template.instance().data;
-        // var user = Meteor.users.findOne(userId) || null;
-        // if (!user) return;
-
-        // var image = Images.findOne(user.profile.image);
-        // if (!image) return;
-
-        // Partup.client.embed.user(user, [image]);
-
-        // return user;
-        return {};
+    network: function() {
+        var networkSlug = Template.instance().data;
+        console.log(networkSlug)
+        var network = Networks.guardedMetaFind({slug: networkSlug}, {limit: 1}).fetch().pop() || null;
+        console.log(network)
+        if (!network) return;
+        return network;
     }
 });

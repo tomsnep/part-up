@@ -1,8 +1,18 @@
-// Template.NetworkTile.onCreated(function() {
-//     var network = this.data.network;
+Template.NetworkTile.onCreated(function() {
+    var network = this.data.network;
+    console.log(network);
+});
 
-//     network.participation_scoreReadable = User(network).getReadableScore();
-//     network.supporterOf = network.supporterOf || [];
-//     network.upperOf = network.upperOf || [];
-//     network.profile.imageObject = network.profile.imageObject || Images.findOne({_id: network.profile.image});
-// });
+Template.NetworkTile.helpers({
+    networkLogo: function() {
+        var network = this.network;
+
+        if (network.logoObject) {
+            return Partup.helpers.url.getImageUrl(network.logoObject, '360x360');
+        } else if (network.imageObject) {
+            return Partup.helpers.url.getImageUrl(network.imageObject, '360x360');
+        }
+
+        return '';
+    }
+})

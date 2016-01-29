@@ -1,37 +1,32 @@
 <template name="NetworkTile">
-    <article class="pu-upper">
+    <article class="pu-networkcard">
         <header>
-            <a href="{{ pathFor 'profile' _id=user._id }}" class="pu-sub-figure">
-                <figure class="pu-avatar pu-avatar-large" style="
-                    {{# with partupGetImageUrl user.profile.imageObject '360x360' }}
-                        background-image: url('{{ . }}');
-                    {{/ with }}
-                ">
-                    {{# with user.participation_scoreReadable }}
-                        <span class="pu-score">{{ . }}</span>
-                    {{/ with }}
-                </figure>
-            </a>
+            <figure class="pu-avatar pu-avatar-square pu-sub-figure" style="background-image: url('{{ networkLogo }}');">
+            </figure>
 
             <div class="pu-sub-title">
                 <h4>
-                    <a href="{{ pathFor 'profile' _id=user._id }}">{{ user.profile.name }}</a>
+                    {{ network.name }}
                 </h4>
-                <p>{{ user.profile.location.city }}</p>
+                <p>{{ network.profile.location.city }}</p>
             </div>
         </header>
         <article>
-            <p>{{ user.profile.description }}</p>
+            <p>{{ network.description }}</p>
         </article>
         <footer>
             <ul class="pu-stats">
                 <li>
-                    <span>{{ user.upperOf.length }}</span>
-                    <span>{{_ 'upper-tile-partups' }}</span>
+                    <span>{{ network.partups }}</span>
+                    <span>{{_ 'network-tile-partups' }}</span>
                 </li>
                 <li>
-                    <span>{{ user.supporterOf.length }}</span>
-                    <span>{{_ 'upper-tile-supporter' }}</span>
+                    <span>{{ network.partners }}</span>
+                    <span>{{_ 'network-tile-partners' }}</span>
+                </li>
+                <li>
+                    <span>{{ network.activities }}</span>
+                    <span>{{_ 'network-tile-activities' }}</span>
                 </li>
             </ul>
         </footer>
