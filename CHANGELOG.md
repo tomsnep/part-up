@@ -1,4 +1,7 @@
 # CHANGELOG
+## 1.16.4
+- fix(partup): better input sanitation
+
 ## 1.16.3
 - fix(updates): fix race condition that caused endless scroll on updates to break
 - feat(part-up-details): Scroll and focus on the first invalid field (#156)

@@ -135,9 +135,11 @@ var continueLogin = function() {
         arguments: [user],
         fallback_action: function() {
             if (mout.object.get(user, 'profile.settings.optionalDetailsCompleted')) {
-                this.back();
+                Router.go('discover');
             } else {
-                Intent.go({route: 'register-details'});
+                Intent.go({route: 'register-details'}, function() {
+                    Router.go('discover');
+                });
             }
         }
     });

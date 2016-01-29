@@ -83,15 +83,13 @@ Template.app_discover_page.onRendered(function() {
         query.limit = PAGING_INCREMENT;
         query.skip = page * PAGING_INCREMENT;
         query.userId = Meteor.userId();
+        query.token = Accounts._storedLoginToken();
 
         // Update state(s)
         template.states.loading_infinite_scroll = true;
 
         // Call the API for data
         HTTP.get('/partups/discover' + mout.queryString.encode(query), {
-            headers: {
-                Authorization: 'Bearer ' + Accounts._storedLoginToken()
-            },
             beforeSend: function(_request) {
                 template.partupsXMLHttpRequest = _request;
             }
