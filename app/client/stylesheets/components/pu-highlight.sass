@@ -7,8 +7,17 @@
         text-align: center
 
     h1
-        font-weight: 700
-        font-size: 25px
+        font-weight: 600
+        font-size: 22px
+        margin-bottom: 20px
+
+        + h3
+            font-size: 16px
+            font-weight: normal
+            margin: 0 auto
+            width: 54%
+            font-family: $font-primary
+            line-height: 26px
 
     h2
         font-weight: 700
@@ -16,6 +25,8 @@
         margin-bottom: 9px
 
     p
+        font-size: 14px
+        line-height: 22px
         margin-bottom: -8px
 
     &-well
@@ -25,6 +36,7 @@
         padding-bottom: 40px
 
         h1
+            font-weight: 700
             font-size: 30px
             color: lighten($color-text, 10%)
             margin-bottom: 20px
@@ -38,15 +50,6 @@
         > h2
             font-weight: normal
             margin-bottom: 15px
-
-            &:after
-                content: ''
-                width: 60px
-                height: 2px
-                background-color: $color-primary
-                display: block
-                margin: auto
-                margin-top: 34px
 
         > p
             margin-bottom: 50px
@@ -64,13 +67,14 @@
         padding-right: $grid-column + $grid-gap
 
         h1
-            font-size: 30px
+            font-size: 25px
         h2
             font-size: 22px
 
 
         &-well
             h1
+                font-weight: 700
                 font-size: 32px
             p
                 font-size: 18px
