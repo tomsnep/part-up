@@ -10,9 +10,11 @@
                 <li>327 activities</li>
             </ul>
         </header>
-        {{> Ring inner=rings.inner center=rings.center outer=rings.outer}}
+        {{#if rings}}
+            {{> Ring inner=rings.inner center=rings.center outer=rings.outer}}
+        {{/if}}
         <footer>
-            <a href="#" class="pu-button">Find out more</a>
+            <a href="#" class="pu-button pu-button-text pu-button-belowicon pu-button-text-white" data-findout>Find out more <i class="picon-caret-slim-down"></i></a>
         </footer>
     </section>
 </template>

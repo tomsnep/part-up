@@ -1,10 +1,10 @@
 <template name="Bubble">
-    <div class="pu-bubble pu-bubble-{{random}} {{#if empty}}pu-state-empty{{/if}}" data-bubble>
-        <a href="#" class="pu-sub-container">
-            <figure></figure>
+    <div class="pu-bubble pu-bubble-{{random}} {{#if empty}}pu-state-empty{{/if}}">
+        <a href="{{ pathFor route='network-detail' slug=slug}}" class="pu-sub-container" data-hovercontainer="HoverContainer_network" data-hovercontainer-context="{{ _id }}">
+            <figure style="background-image:url({{ networkLogo }});"></figure>
             <div class="pu-sub-namecontainer">
                 <span class="pu-sub-line"></span>
-                <span class="pu-sub-name">Tribename {{id}}</span>
+                <span class="pu-sub-name">{{ name }}</span>
             </div>
         </a>
     </div>

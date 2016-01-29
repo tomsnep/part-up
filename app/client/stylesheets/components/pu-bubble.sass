@@ -85,11 +85,15 @@
             position: relative
             border-radius: 50%
             z-index: 1
+            background-size: cover
 
         .pu-sub-name
             position: absolute
             color: #fff
             font-weight: 700
+            transition: opacity .2s, text-shadow .2s
+            opacity: .8
+            min-width: 150px
 
         .pu-sub-line
             position: absolute
@@ -150,7 +154,7 @@
                     transform: rotate($deg * $i)
                 @if $i > 12
                     .pu-sub-name
-                        top: -21%
+                        top: -30%
                         right: 50%
                         padding-right: 15px
                         transform: rotate(0deg - $deg * $i)
@@ -158,9 +162,9 @@
                         text-align: right
                 @else
                     .pu-sub-name
-                        top: -21%
+                        top: -30%
                         left: 50%
-                        padding-left: 15px
+                        padding-left: 10px
                         transform: rotate(0deg - $deg * $i)
                         transform-origin: left center
                         text-align: left
@@ -170,9 +174,9 @@
             z-index: 1
             transform: scale(1.05) translateZ(1px)
             .pu-sub-namecontainer
-                opacity: 1
                 .pu-sub-name
-                    transition: text-shadow .2s
+                    opacity: 1
+                    transition: opacity .2s
                     text-shadow: 1px 1px rgba(#000, .2)
             &:after
                 animation-name: pulse

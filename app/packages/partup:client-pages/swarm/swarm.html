@@ -6,10 +6,10 @@
             <nav>
                 <figure class="pu-brand"></figure>
 
-                <button class="pu-button pu-button-dark"><i class="picon-cog"></i>Settings</button>
+                <a class="pu-button pu-button-dark" href="{{pathFor route='swarm-settings' slug=slug}}"><i class="picon-cog"></i>Settings</a>
             </nav>
 
-            {{> swarm_explorer }}
+            {{> swarm_explorer networks=networks }}
 
         </header>
         {{> yield region="content"}}

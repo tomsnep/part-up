@@ -251,6 +251,9 @@ Package.onUse(function(api) {
 
         'swarm/content/content.html',
         'swarm/content/content.js',
+        'swarm/content/video/video.html',
+        'swarm/content/video/video.js',
+
         'swarm/footer/footer.html',
         'swarm/footer/footer.js'
 

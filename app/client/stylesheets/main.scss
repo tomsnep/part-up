@@ -146,7 +146,6 @@
 @import "client/stylesheets/components/pu-textline.sass";
 @import "client/stylesheets/components/pu-thumbnail.sass";
 @import "client/stylesheets/components/pu-tile.sass";
-@import "client/stylesheets/components/pu-titleaccent.sass";
 @import "client/stylesheets/components/pu-toast.sass";
 @import "client/stylesheets/components/pu-tooltip.sass";
 @import "client/stylesheets/components/pu-update.sass";
@@ -165,3 +164,7 @@
 @import "client/stylesheets/components/pu-explorer.sass";
 @import "client/stylesheets/components/pu-bubble.sass";
 @import "client/stylesheets/components/pu-ring.sass";
+@import "client/stylesheets/components/pu-accent.sass";
+
+@import "client/stylesheets/components/pu-video.sass";
+@import "client/stylesheets/mixins/animations.sass";

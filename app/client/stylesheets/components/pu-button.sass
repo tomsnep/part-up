@@ -1,3 +1,13 @@
+@keyframes bouncey
+    0%
+        transform: translateY(0px)
+    10%
+        transform: translateY(5px)
+    20%
+        transform: translateY(0px)
+    100%
+        transform: translateY(0px)
+
 @keyframes button_nav_icon_cog
     from
         transform: rotate(0deg)
@@ -549,6 +559,33 @@
             &:focus
                 color: $color-text-subtle
 
+        &-white
+            color: $color-text-inverted
+
+            &:hover
+                color: darken($color-text-inverted, 10%)
+
+            &:active,
+            &:focus
+                color: $color-text-inverted
+
+    &-belowicon
+        height: auto
+        font-weight: 700
+        color: #fff
+        i
+            width: 100%
+            text-align: center
+            display: block
+            margin-top: 20px
+            animation-name: bouncey
+            animation-timing-function: ease-in-out
+            animation-duration: 3s
+            animation-iteration-count: infinite
+
+        &:hover
+            color: $color-text-inverted
+            transform: translateY(5px)
 
     // Type: avatar
     &-avatar

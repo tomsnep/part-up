@@ -1,6 +1,7 @@
 Template.Ring.onCreated(function() {
     var template = this;
     this.rings = new ReactiveVar([]);
+    template.done = new ReactiveVar(false);
 });
 
 Template.Ring.onRendered(function() {
@@ -79,17 +80,17 @@ Template.Ring.onRendered(function() {
     var inner = createRing(container,{
         items: template.data.inner,
         radius: 20,
-        offset: {top: -20}
+        offset: {top: -15}
     });
     var center = createRing(container,{
         items: template.data.center,
         radius: 45,
-        offset: {top: -20}
+        offset: {top: -15}
     });
     var outer = createRing(container,{
         items: template.data.outer,
         radius: 80,
-        offset: {top: -20},
+        offset: {top: -15},
         startAngle: -120,
         skipAngle: 90
     });
@@ -98,6 +99,7 @@ Template.Ring.onRendered(function() {
     rings = rings.concat(inner,center,outer);
 
     template.rings.set(rings);
+    Meteor.defer(function() { template.done.set(true); });
 });
 
 Template.Ring.helpers({
@@ -110,5 +112,8 @@ Template.Ring.helpers({
         var x = positioning.x;
         var y = positioning.y;
         return 'left:' + x + '%;top:' + y + '%;';
+    },
+    done: function() {
+        return Template.instance().done.get();
     }
 });
