@@ -19,6 +19,7 @@ Package.onUse(function(api) {
     'lib/animations/slide_horizontal.js',
     'lib/animations/slide_over.js',
     'lib/animations/slide_over_close.js',
-    'lib/animations/cross_fade.js'
+    'lib/animations/cross_fade.js',
+    'lib/animations/zoom.js'
   ], 'client');
 });
