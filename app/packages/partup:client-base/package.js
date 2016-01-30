@@ -85,6 +85,7 @@ Package.onUse(function(api) {
         'helpers/autolink.js',
         'helpers/mobileHelpers.js',
         'bootstrap.js',
+        'analytics.js',
 
         'i18n/helpers-dateFormatters.en.i18n.json',
         'i18n/helpers-dateFormatters.nl.i18n.json',

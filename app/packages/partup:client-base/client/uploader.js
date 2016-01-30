@@ -18,10 +18,10 @@ Partup.client.uploader = {
         var self = this;
 
         var IE = this.isIE();
+        var SAFARI = this.isSafari();
 
         var userId = Meteor.userId();
-        // TODO: Error if user is not loggedin
-        // console.log(file);
+
         if (IE) {
             var reader = new mOxie.FileReader();
         } else {
@@ -30,9 +30,8 @@ Partup.client.uploader = {
         reader.onload = function(e) {
             img.src = e.target.result;
         };
-        // console.log(reader)
-        reader.readAsDataURL(file);
 
+        reader.readAsDataURL(file);
 
         img.onload = function() {
             var width = img.naturalWidth;
@@ -65,8 +64,7 @@ Partup.client.uploader = {
 
             var resizedFile = self.dataURLToBlob(dataUrl);
 
-            if (IE) {
-
+            if (IE || SAFARI) {
                 resizedFile.name = file.name;
                 var newFile = new mOxie.File(null, resizedFile);
             } else {
@@ -74,17 +72,16 @@ Partup.client.uploader = {
             }
 
             var token = Accounts._storedLoginToken();
-            if (IE) {
+            if (IE || SAFARI) {
                 var xhr = new mOxie.XMLHttpRequest();
             } else {
                 var xhr = new XMLHttpRequest();
             }
             var location = window.location.origin ? window.location.origin : window.location.protocol + '//' + window.location.hostname + (window.location.port ? ':' + window.location.port : '');
             var url = location + '/images/upload?token=' + token;
-            console.log(url);
             xhr.open('POST', url, true);
 
-            if (IE) {
+            if (IE || SAFARI) {
                 var formData = new mOxie.FormData();
             } else {
                 var formData = new FormData();
@@ -119,7 +116,6 @@ Partup.client.uploader = {
             xhr.addEventListener('load', loadHandler);
             xhr.addEventListener('error', errorHandler);
 
-            console.log('start xhr load');
             xhr.send(formData);
         };
     },
@@ -253,6 +249,21 @@ Partup.client.uploader = {
         }
 
         return false;
+    },
+
+    isSafari: function() {
+        var ua = window.navigator.userAgent;
+
+        var is_chrome = ua.indexOf('Chrome') > -1;
+        var is_safari = ua.indexOf('Safari') > -1;
+
+        // Chrome has both "Chrome" and "Safari" in the string.
+        // Safari only has "Safari".
+        if (is_chrome && is_safari) {
+            is_safari = false;
+        }
+
+        return is_safari;
     }
 
 };

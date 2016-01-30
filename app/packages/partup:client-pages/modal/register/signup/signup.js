@@ -153,31 +153,13 @@ AutoForm.hooks({
             var submittedDoc = insertDoc;
             var locale = Partup.helpers.parseLocale(navigator.language || navigator.userLanguage);
 
-            var normalizedName = Partup.helpers.normalize(insertDoc.name);
             Accounts.createUser({
                 email: submittedDoc.email,
                 password: submittedDoc.password,
                 profile: {
                     name: submittedDoc.name,
-                    normalized_name: normalizedName,
-                    network: submittedDoc.network,
                     settings: {
-                        locale: locale,
-                        optionalDetailsCompleted: false,
-                        email: {
-                            dailydigest: true,
-                            upper_mentioned_in_partup: true,
-                            invite_upper_to_partup_activity: true,
-                            invite_upper_to_network: true,
-                            partup_created_in_network: true,
-                            partups_networks_new_pending_upper: true,
-                            partups_networks_accepted: true,
-                            invite_upper_to_partup: true,
-                            partups_new_comment_in_involved_conversation: true,
-                            partups_networks_new_upper: true,
-                            partups_networks_upper_left: true
-                        },
-                        unsubscribe_email_token: Random.secret()
+                        locale: locale
                     }
                 }
             }, function(error) {

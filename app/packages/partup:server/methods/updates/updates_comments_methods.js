@@ -20,7 +20,7 @@ Meteor.methods({
 
         var comment = {
             _id: Random.id(),
-            content: fields.content,
+            content: sanitizeHtml(fields.content),
             type: fields.type,
             creator: {
                 _id: upper._id,
@@ -70,7 +70,7 @@ Meteor.methods({
             }
 
             // Update the new update status for all uppers
-            partup.addNewUpdateToUpperData(update);
+            partup.addNewUpdateToUpperData(update, Meteor.userId());
 
             Event.emit('updates.comments.inserted', upper, partup, update, comment);
             var mentionsWarning = Partup.helpers.mentions.exceedsLimit(fields.content);
@@ -110,7 +110,7 @@ Meteor.methods({
             if (comment) {
                 Updates.update({_id: updateId, 'comments._id': commentId}, {
                     $set: {
-                        'comments.$.content': fields.content,
+                        'comments.$.content': sanitizeHtml(fields.content),
                         'comments.$.updated_at': new Date()
                     }
                 });

@@ -71,9 +71,9 @@ var show = function(event) {
     }
 
     // Hide the card on mouse leave
-    // $trigger.on('mouseleave', function() {
-    //     hide($trigger);
-    // });
+    $trigger.on('mouseleave', function() {
+        hide($trigger);
+    });
 };
 
 Template.HoverContainer.onRendered(function() {

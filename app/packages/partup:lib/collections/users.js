@@ -5,6 +5,13 @@
 
 //N.B.: Meteor.users is already defined by meteor
 
+// Deny updating the profile object from client
+Meteor.users.deny({
+    update: function() {
+        return true;
+    }
+});
+
 //user fields to all users
 var publicUserFields = {
     'profile.description': 1,
@@ -78,13 +85,16 @@ Meteor.users.findSinglePublicProfile = function(userId) {
 Meteor.users.findMultiplePublicProfiles = function(userIds, options, parameters) {
     var options = options || {};
     var parameters = parameters || {};
+    var selector = {_id: {$in: userIds}};
+
+    if (parameters.onlyActive) selector.deactivatedAt = {$exists: false};
 
     options.fields = publicUserFields;
 
     options.limit = parameters.count ? undefined : parseInt(options.limit) || undefined;
     options.sort = parameters.count ? undefined : options.sort || undefined;
 
-    return Meteor.users.find({_id: {$in: userIds}}, options);
+    return Meteor.users.find(selector, options);
 };
 
 /**
@@ -96,6 +106,10 @@ Meteor.users.findMultiplePublicProfiles = function(userIds, options, parameters)
  */
 Meteor.users.findUppersForNetwork = function(network, options, parameters) {
     var uppers = network.uppers || [];
+
+    var parameters = parameters || {};
+    parameters.onlyActive = true;
+
     return this.findMultiplePublicProfiles(uppers, options, parameters);
 };
 

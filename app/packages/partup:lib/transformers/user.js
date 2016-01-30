@@ -38,7 +38,7 @@ Partup.transformers.profile = {
         var newFields = {
             profile: {
                 'image': fields.image,
-                'description': fields.description,
+                'description': sanitizeHtml(fields.description),
                 'tags': Partup.services.tags.tagInputToArray(fields.tags_input),
                 'facebook_url': fields.facebook_url,
                 'twitter_url': fields.twitter_url,
@@ -47,7 +47,7 @@ Partup.transformers.profile = {
                 'phonenumber': fields.phonenumber,
                 'website': Partup.services.website.cleanUrlToFullUrl(fields.website),
                 'skype': fields.skype,
-                'name': fields.name
+                'name': sanitizeHtml(fields.name)
             }
         };
 
