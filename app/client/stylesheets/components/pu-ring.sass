@@ -24,11 +24,12 @@
         position: absolute
         width: 50vw
         height: 100vh
-        top: 50%
+        top: calc(50% - 60px)
         left: 50%
         z-index: -1
 
-        &:after
+        &:after,
+        &:before
             content: ''
             display: block
             position: absolute
@@ -36,7 +37,17 @@
             height: 100vh
             top: -50vh
             left: -50vw
-            background: url(/images/swarm/bg.svg), url(/images/swarm/swarm.svg)
+
+        &:after
+            background-image: url(/images/swarm/bg.svg)
             background-repeat: no-repeat
             background-position: center center
             background-size: cover
+            z-index: 0
+
+        &:before
+            background-image: url(/images/swarm/layer1.svg), url(/images/swarm/layer2.svg), url(/images/swarm/layer3.svg), url(/images/swarm/layer4.svg), url(/images/swarm/layer5.svg)
+            background-repeat: no-repeat, repeat, repeat, no-repeat, repeat
+            background-position: center, 0%, 0%, center, 0%
+            background-size: 1000px, auto, auto, 900px, auto
+            z-index: 1
