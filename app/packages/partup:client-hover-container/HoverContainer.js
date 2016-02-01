@@ -29,13 +29,14 @@ var show = function(event) {
     var tileTemplate = $trigger.data('hovercontainer') || '';
     var tileData = $trigger.data('hovercontainer-context') || {};
     var delay = parseInt($trigger.data('hovercontainer-delay')) || 500;
+    var orientation = $trigger.data('hovercontainer-orientation') || 'top-bottom';
+    var typeClass = $trigger.data('hovercontainer-class') || '';
 
     // Clear any other hovercontainer timeout
     clearTimeout(showTimeout);
 
     // Show the card
     var delayedShow = function() {
-        var pos = {};
 
         var OFFSET = 5;
         var screenWidth = Partup.client.screen.size.get('width');
@@ -46,16 +47,26 @@ var show = function(event) {
         var elWidth = $trigger.outerWidth();
         var elHeight = $trigger.outerHeight();
 
-        pos.leftSide = (100 / screenWidth * originX) < 50;
-        pos.topHalf = (100 / screenHeight * originY) > 50;
-        pos.coords = {
-            left: elWidth / 2 + originX
+        var pos = {
+            coords:         {},
+            leftSide:       (100 / screenWidth * originX) < 50,
+            topHalf:        (100 / screenHeight * originY) > 50,
+            orientation:    orientation,
+            typeClass:      typeClass
         };
 
-        if (pos.topHalf) {
-            pos.coords.bottom = screenHeight - originY + OFFSET;
-        } else {
-            pos.coords.top = originY + elHeight + OFFSET;
+        if (orientation === 'top-bottom') {
+            pos.coords.left = elWidth / 2 + originX;
+            if (pos.topHalf)    pos.coords.bottom = screenHeight - originY + OFFSET;
+            else                pos.coords.top = originY + elHeight + OFFSET;
+        }
+
+        if (orientation === 'left-right') {
+            if (pos.leftSide)   pos.coords.left = originX + elWidth + OFFSET;
+            else                pos.coords.right = screenWidth - originX + OFFSET;
+
+            if (pos.topHalf)    pos.coords.bottom = screenHeight - (elHeight / 2 + originY);
+            else                pos.coords.top = elHeight / 2 + originY;
         }
 
         position.set(pos);

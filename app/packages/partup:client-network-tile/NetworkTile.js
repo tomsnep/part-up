@@ -1,6 +1,5 @@
 Template.NetworkTile.onCreated(function() {
     var network = this.data.network;
-    console.log(network);
 });
 
 Template.NetworkTile.helpers({
