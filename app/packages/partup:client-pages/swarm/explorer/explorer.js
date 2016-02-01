@@ -1,4 +1,10 @@
+Template.swarm_explorer.onCreated(function() {
+    if (this.data.notfound) this.notfound = true;
+})
 Template.swarm_explorer.helpers({
+    notfound: function() {
+        return Template.instance().notfound;
+    },
     rings: function() {
         var data = Template.currentData();
         if (!data.networks.length) return false;
@@ -40,6 +46,12 @@ Template.swarm_explorer.helpers({
                 });
             }
         };
+    },
+    placeholder: function() {
+        return [{
+            name: 'pu_tribe_notfound',
+            placeholderPath: 'home'
+        }]
     }
 });
 

@@ -5,15 +5,23 @@
         <header>
             <nav>
                 <figure class="pu-brand"></figure>
-
-                <a class="pu-button pu-button-dark" href="{{pathFor route='swarm-settings-details' slug=slug}}" data-settings><i class="picon-cog"></i>Settings</a>
+                {{#if swarm}}
+                    <a class="pu-button pu-button-dark" href="{{pathFor route='swarm-settings-details' slug=slug}}" data-settings><i class="picon-cog"></i>Settings</a>
+                {{/if}}
             </nav>
-            {{> swarm_explorer networks=swarm.networks }}
+            {{#if swarm.data}}
+                {{> swarm_explorer networks=swarm.networks }}
+            {{else}}
+                <!-- {{> swarm_explorer networks=swarm.networks }} -->
+                {{> swarm_explorer notfound=true }}
+            {{/if}}
 
         </header>
-        {{> yield region="content"}}
+        {{#if swarm}}
+            {{> yield region="content"}}
 
-        {{> swarm_footer }}
+            {{> swarm_footer }}
+        {{/if}}
 
     </div>
 

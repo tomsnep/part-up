@@ -1,20 +1,35 @@
 <template name="swarm_explorer">
     <section class="pu-explorer">
         <header>
-            <figure>
-                <img src="/images/lifely-logo.svg" alt="logo">
-            </figure>
-            <ul class="pu-list pu-list-horizontal">
-                <li>431 uppers</li>
-                <li>133 part-ups</li>
-                <li>327 activities</li>
-            </ul>
+            {{#unless notfound}}
+                <figure>
+                    <img src="/images/lifely-logo.svg" alt="logo">
+                </figure>
+                <ul class="pu-list pu-list-horizontal">
+                    <li>431 uppers</li>
+                    <li>133 part-ups</li>
+                    <li>327 activities</li>
+                </ul>
+            {{else}}
+                <h1 class="pu-sub-notfound">
+                    404
+                </h1>
+                <ul class="pu-list pu-list-horizontal">
+                    <li>SWARM</li>
+                    <li>NOT</li>
+                    <li>FOUND</li>
+                </ul>
+            {{/unless}}
         </header>
-        {{#if rings}}
+        {{#unless notfound}}
             {{> Ring inner=rings.inner center=rings.center outer=rings.outer}}
-        {{/if}}
+        {{else}}
+            {{> Ring center=placeholder}}
+        {{/unless}}
         <footer>
-            <a href="#" class="pu-button pu-button-text pu-button-belowicon pu-button-text-white" data-findout>Find out more <i class="picon-caret-slim-down"></i></a>
+            {{#unless notfound}}
+                <a href="#" class="pu-button pu-button-text pu-button-belowicon pu-button-text-white" data-findout>Find out more <i class="picon-caret-slim-down"></i></a>
+            {{/unless}}
         </footer>
     </section>
 </template>

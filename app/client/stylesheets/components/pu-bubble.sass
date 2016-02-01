@@ -5,6 +5,13 @@
     to
         transform: scale(3)
         opacity: 0
+@keyframes flip
+    0%
+        transform: rotate(0deg)
+    10%
+        transform: rotate(-360deg)
+    100%
+        transform: rotate(-360deg)
 
 @keyframes float-1
     0%
@@ -182,6 +189,22 @@
                 animation-name: pulse
                 animation-duration: 2s
                 animation-iteration-count: infinite
+    &-placeholder
+        .pu-sub-container
+            background: none
+            &:after
+                display: none
+            > figure
+                border-radius: 0
+                background-color: transparent
+                background-size: contain
+                background-image: url(/images/swarm/placeholder.png)
+            &:hover
+                > figure
+                    animation-name: flip
+                    animation-duration: 10s
+                    animation-iteration-count: infinite
+                    transform-origin: top left
 
     @media screen and (min-width: $breakpoint-tablet) and (min-height: 500px)
         $border: 6px

@@ -363,7 +363,8 @@ Package.onUse(function(api) {
         clientFiles.misc,
         clientFiles.app,
         clientFiles.modal,
-        clientFiles.swarm), 'client');
+        clientFiles.swarm,
+        languageFiles), 'client');
 
     var serverFiles = [
         'package-tap.i18n'

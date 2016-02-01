@@ -16,22 +16,21 @@ Template.HoverContainer.onRendered(function() {
     var template = this;
 
     var showTimeout;
+    var $trigger;
 
-    var hide;
+    var hide = function() {
+        if ($trigger) $trigger.off('mouseleave', hide);
+
+        // Unset settings and user
+        template.settings.set({});
+        template.tile.set('template', undefined);
+        template.tile.set('data', undefined);
+
+        clearTimeout(showTimeout);
+    };
 
     var show = function(event) {
-        var $trigger = $(this);
-
-        hide = function() {
-            if ($trigger) $trigger.off('mouseleave', hide);
-
-            // Unset settings and user
-            template.settings.set({});
-            template.tile.set('template', undefined);
-            template.tile.set('data', undefined);
-
-            clearTimeout(showTimeout);
-        };
+        $trigger = $(this);
 
         // Gather data for tile
         var tileTemplate = $trigger.data('hovercontainer') || '';

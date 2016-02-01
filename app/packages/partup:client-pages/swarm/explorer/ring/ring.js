@@ -2,6 +2,7 @@ Template.Ring.onCreated(function() {
     var template = this;
     this.rings = new ReactiveVar([]);
     template.done = new ReactiveVar(false);
+    template.placeholder = new ReactiveVar([]);
 });
 
 Template.Ring.onRendered(function() {
@@ -77,23 +78,32 @@ Template.Ring.onRendered(function() {
         return items;
     };
     var container = document.querySelector('.pu-ring');
-    var inner = createRing(container,{
+
+    var inner = createRing(container, {
         items: template.data.inner,
         radius: 20,
         offset: {top: -15}
     });
-    var center = createRing(container,{
+    var center = createRing(container, {
         items: template.data.center,
         radius: 45,
         offset: {top: -15}
     });
-    var outer = createRing(container,{
+    var outer = createRing(container, {
         items: template.data.outer,
         radius: 80,
         offset: {top: -15},
         startAngle: -120,
         skipAngle: 90
     });
+
+    var placeholder = createRing(container, {
+        items: [{name:'notFound'}],
+        radius: 45,
+        offset: {top: -15}
+    });
+    console.log(placeholder, inner)
+    template.placeholder.set(placeholder);
 
     var rings = [];
     rings = rings.concat(inner,center,outer);
@@ -115,5 +125,9 @@ Template.Ring.helpers({
     },
     done: function() {
         return Template.instance().done.get();
+    },
+    placeholder: function() {
+        var placeholder = Template.instance().placeholder.get();
+        return placeholder;
     }
 });

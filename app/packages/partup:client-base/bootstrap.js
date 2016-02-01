@@ -87,7 +87,7 @@ Meteor.startup(function() {
         var done = function() {
             $body.removeClass('bender-animating');
         };
-        console.log(previousLayout, nextLayout)
+
         if (nextLayout === 'modal') {
             Bender.animate('slideOverUp', start, done);
         } else if ((nextLayout === 'app' || nextLayout === 'swarm') && previousLayout === 'modal') {

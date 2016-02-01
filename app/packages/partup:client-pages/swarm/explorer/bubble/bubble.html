@@ -1,11 +1,22 @@
 <template name="Bubble">
-    <div class="pu-bubble pu-bubble-{{random}} {{#if empty}}pu-state-empty{{/if}}">
-        <a href="{{ pathFor route='network-detail' slug=slug}}" class="pu-sub-container" data-hovercontainer="HoverContainer_network" data-hovercontainer-context="{{ slug }}" data-hovercontainer-orientation="left-right" data-hovercontainer-class="pu-type-network" data-hovercontainer-offset="20">
-            <figure style="{{#with image }}background-image:url('{{ partupImageUrl id=. store='360x360'}}');{{/with }}"></figure>
-            <div class="pu-sub-namecontainer">
-                <span class="pu-sub-line"></span>
-                <span class="pu-sub-name">{{ name }}</span>
-            </div>
-        </a>
-    </div>
+    {{#unless partupEquals name "pu_tribe_notfound"}}
+        <div class="pu-bubble pu-bubble-{{random}} {{#if empty}}pu-state-empty{{/if}}">
+            <a href="{{ pathFor route='network-detail' slug=slug}}" class="pu-sub-container" data-hovercontainer="HoverContainer_network" data-hovercontainer-context="{{ slug }}" data-hovercontainer-orientation="left-right" data-hovercontainer-class="pu-type-network" data-hovercontainer-offset="20">
+                <figure style="{{#with image }}background-image:url('{{ partupImageUrl id=. store='360x360'}}');{{/with }}"></figure>
+                <div class="pu-sub-namecontainer">
+                    <span class="pu-sub-line"></span>
+                    <span class="pu-sub-name">{{ name }}</span>
+                </div>
+            </a>
+        </div>
+    {{else}}
+        <div class="pu-bubble pu-bubble-{{random}} pu-bubble-placeholder">
+           <a href="{{ pathFor route=placeholderPath slug=placeholderSlug _id=placeholderId }}" class="pu-sub-container">
+               <figure></figure>
+               <div class="pu-sub-namecontainer">
+                    <span class="pu-sub-name">Terug naar home</span>
+                </div>
+           </a>
+        </div>
+    {{/unless}}
 </template>
