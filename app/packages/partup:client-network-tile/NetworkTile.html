@@ -1,7 +1,7 @@
 <template name="NetworkTile">
     <article class="pu-networkcard">
         <header>
-            <figure class="pu-avatar pu-avatar-square pu-sub-figure" style="background-image: url('{{ networkLogo }}');">
+            <figure class="pu-avatar pu-avatar-square pu-sub-figure" style="{{#with network.image }}background-image:url('{{ partupImageUrl id=. store='360x360'}}');{{/with }}">
             </figure>
 
             <div class="pu-sub-title">

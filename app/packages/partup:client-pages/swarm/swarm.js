@@ -1,36 +1,24 @@
 Template.swarm.onCreated(function() {
     var template = this;
     template.networks = new ReactiveVar([]);
-    template.subscribe('swarms.one', template.data.slug, {
-        onReady: function() {
-            var swarm = Swarms.findOne({slug: template.data.slug});
-            console.log(swarm)
-        }
-    });
-});
-
-Template.swarm.onRendered(function() {
-    var template = this;
-    var currentLanguage = Partup.client.language.current.get();
-    HTTP.get('/networks/featured/' + currentLanguage, {}, function(error, response) {
-        if (error || !response.data.networks || response.data.networks.length === 0) return;
-
-        var result = response.data;
-        var networks = lodash.chain(result.networks)
-            .each(function(network) {
-                Partup.client.embed.network(network, result['cfs.images.filerecord'], result.users);
-            })
-            .shuffle()
-            // .slice(0, 5)
-            .value();
-        console.log(networks)
-        template.networks.set(networks);
-    });
+    template.subscribe('swarms.one', template.data.slug);
+    template.subscribe('swarms.one.networks', template.data.slug);
 });
 
 Template.swarm.helpers({
-    networks: function() {
-        return Template.instance().networks.get();
+    swarm: function() {
+        var template = Template.instance();
+        var swarm = Swarms.findOne({slug: template.data.slug});
+        if (!swarm) return false;
+        var networks = Networks.guardedMetaFind({_id: {$in: swarm.networks}}, {limit: 25}).fetch();
+        return {
+            data: function() {
+                return swarm;
+            },
+            networks: function() {
+                return networks;
+            }
+        }
     }
 });
 

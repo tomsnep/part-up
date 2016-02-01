@@ -8,8 +8,7 @@
 
                 <a class="pu-button pu-button-dark" href="{{pathFor route='swarm-settings-details' slug=slug}}" data-settings><i class="picon-cog"></i>Settings</a>
             </nav>
-
-            {{> swarm_explorer networks=networks }}
+            {{> swarm_explorer networks=swarm.networks }}
 
         </header>
         {{> yield region="content"}}

@@ -1,19 +1,3 @@
-Template.swarm_explorer.onCreated(function() {
-    // var template = this;
-    // this.total = new ReactiveVar(24);
-    // var bubbles = template.data.networks;
-    // console.log(template);
-    // var randomRange = function(minimum, maximum) {
-    //     return Math.floor(Math.random() * (maximum - minimum + 1)) + minimum;
-    // };
-    // for (var i = 0; i < randomRange(5, 25) ; i++) {
-    //     bubbles.push({
-    //         id: _.uniqueId()
-    //     });
-    // };
-    // this.bubbles = new ReactiveVar([]);
-});
-
 Template.swarm_explorer.helpers({
     rings: function() {
         var data = Template.currentData();
