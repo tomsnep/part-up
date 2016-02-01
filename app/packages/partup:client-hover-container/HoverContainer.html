@@ -1,15 +1,15 @@
 <template name="HoverContainer">
     <div class="pu-hovercontainer
-        {{# with position.typeClass }} {{ . }} {{/ with }}
-        {{# with position.orientation }} pu-orientation-{{ . }} {{/ with }}
-        {{# unless position.leftSide }} pu-position-right {{/ unless }}
-        {{# if position.topHalf }} pu-position-top {{ else }} pu-position-bottom {{/ if }}
-        {{# if position.coords }} pu-hovercontainer-active {{/ if }}
+        {{# with settings.typeClass }} {{ . }} {{/ with }}
+        {{# with settings.orientation }} pu-orientation-{{ . }} {{/ with }}
+        {{# unless settings.leftSide }} pu-position-right {{/ unless }}
+        {{# if settings.topHalf }} pu-position-top {{ else }} pu-position-bottom {{/ if }}
+        {{# if settings.coords }} pu-hovercontainer-active {{/ if }}
     " style="
-        {{# with position.coords.top }}    top: {{ . }}px;    {{/ with }}
-        {{# with position.coords.bottom }} bottom: {{ . }}px; {{/ with }}
-        {{# with position.coords.left }}   left: {{ . }}px;   {{/ with }}
-        {{# with position.coords.right }}  right: {{ . }}px;  {{/ with }}
+        {{# with settings.coords.top }}    top: {{ . }}px;    {{/ with }}
+        {{# with settings.coords.bottom }} bottom: {{ . }}px; {{/ with }}
+        {{# with settings.coords.left }}   left: {{ . }}px;   {{/ with }}
+        {{# with settings.coords.right }}  right: {{ . }}px;  {{/ with }}
     ">
         {{# if tileTemplate }}
             {{> Template.dynamic template=tileTemplate data=tileData }}
