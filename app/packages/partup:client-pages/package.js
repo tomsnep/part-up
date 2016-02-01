@@ -237,6 +237,10 @@ Package.onUse(function(api) {
         'modal/create/promote/promote.html',
         'modal/create/promote/promote.js',
 
+        // Modal:swarm
+        'modal/swarm/swarm_settings.html',
+        'modal/swarm/swarm_settings.js',
+
         // swarm
 
         'swarm/swarm.html',

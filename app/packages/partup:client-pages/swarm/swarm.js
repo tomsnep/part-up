@@ -33,3 +33,15 @@ Template.swarm.helpers({
         return Template.instance().networks.get();
     }
 });
+
+Template.swarm.events({
+    'click [data-settings]': function(event, template) {
+        event.preventDefault();
+        Intent.go({
+            route: 'swarm-settings-details',
+            params: {
+                slug: template.data.slug
+            }
+        });
+    }
+});

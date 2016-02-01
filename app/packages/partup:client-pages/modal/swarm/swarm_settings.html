@@ -1,0 +1,34 @@
+<template name="modal_swarm_settings">
+
+    <nav class="pu-header pu-header-modal">
+        <a class="pu-button pu-button-header pu-button-header-modal" data-closepage href="#">
+            <i class="picon-times"></i>
+            fdsa
+        </a>
+    </nav>
+
+    <article class="pu-page">
+        <div class="pu-sub-pagecontent">
+            <div class="pu-sub-fixedmodalsidebar">
+                <div class="pu-wrap pu-wrap-modal">
+                    <ul class="pu-modalsidebar">
+                        <li class="{{# if isActiveRoute name='swarm-settings' }}pu-state-active{{/ if }}">
+                            <a href="{{ pathFor 'swarm-settings-details' slug=slug }}">Swarm</a>
+                        </li>
+                        <li class="{{# if isActiveRoute name='swarm-settings-account' }}pu-state-active{{/ if }}">
+                            <a href="{{ pathFor 'swarm-settings-tribes' slug=slug }}">Tribes</a>
+                        </li>
+                        <li class="{{# if isActiveRoute name='swarm-settings-email' }}pu-state-active{{/ if }}">
+                            <a href="{{ pathFor 'swarm-settings-testimonials' slug=slug }}">Testimonials</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pu-wrap pu-wrap-modal">
+                {{> yield region='modal_swarm_settings' }}
+            </div>
+        </div>
+    </article>
+
+</template>

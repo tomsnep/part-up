@@ -551,11 +551,11 @@ Router.route('/swarm/:slug', {
     data: function() {
         return {
             slug: this.params.slug
-        }
+        };
     }
 });
 Router.route('/swarm/:slug/settings', {
-    name: 'swarm-settings',
+    name: 'swarm-settings-details',
     where: 'client',
     yieldRegions: {
         'modal':                            {to: 'main'},
@@ -565,7 +565,35 @@ Router.route('/swarm/:slug/settings', {
     data: function() {
         return {
             slug: this.params.slug
-        }
+        };
+    }
+});
+Router.route('/swarm/:slug/tribes', {
+    name: 'swarm-settings-tribes',
+    where: 'client',
+    yieldRegions: {
+        'modal':                            {to: 'main'},
+        'modal_swarm_settings':             {to: 'modal'},
+        'modal_swarm_settings_tribes':  {to: 'modal_swarm_settings'}
+    },
+    data: function() {
+        return {
+            slug: this.params.slug
+        };
+    }
+});
+Router.route('/swarm/:slug/testimonials', {
+    name: 'swarm-settings-testimonials',
+    where: 'client',
+    yieldRegions: {
+        'modal':                            {to: 'main'},
+        'modal_swarm_settings':             {to: 'modal'},
+        'modal_swarm_settings_testimonials':  {to: 'modal_swarm_settings'}
+    },
+    data: function() {
+        return {
+            slug: this.params.slug
+        };
     }
 });
 
