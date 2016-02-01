@@ -45,8 +45,20 @@ Meteor.publishComposite('swarms.one', function(swarmSlug) {
  * @param {Object} urlParams
  * @param {Object} parameters
  */
-Meteor.publishComposite('swarms.one.networks', function(urlParams, parameters) {
-    //
+Meteor.publishComposite('swarms.one.networks', function(swarmSlug, parameters) {
+    check(swarmSlug, String);
+
+    if (this.unblock) this.unblock();
+
+    return {
+        find: function() {
+            var swarm = Swarms.guardedMetaFind({slug: swarmSlug}, {limit: 1}).fetch().pop();
+            return Networks.guardedMetaFind({_id: {$in: swarm.networks}}, {limit: 25});
+        },
+        children: [
+            {find: Images.findForNetwork}
+        ]
+    };
 });
 
 /**

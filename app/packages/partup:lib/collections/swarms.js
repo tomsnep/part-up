@@ -101,7 +101,7 @@ Swarms.guardedMetaFind = function(selector, options) {
     options.fields = {_id: 1};
 
     // The fields that should be available on each swarm
-    var unguardedFields = ['name', 'title', 'introduction', 'description', 'slug', 'image'];
+    var unguardedFields = ['name', 'title', 'introduction', 'description', 'slug', 'image', 'networks'];
 
     unguardedFields.forEach(function(unguardedField) {
         options.fields[unguardedField] = 1;
