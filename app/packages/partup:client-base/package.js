@@ -29,6 +29,7 @@ Package.onUse(function(api) {
         'client/console-shim.js',
 
         'namespace.js',
+        'client/sanitize.js',
 
         'constructors/ColumnTilesLayout.js',
 
@@ -66,6 +67,7 @@ Package.onUse(function(api) {
         'client/notifications.js',
         'client/embed.js',
         'client/partuptile.js',
+        'helpers/sanitize.js',
         'helpers/log.js',
         'helpers/partupResponsive.js',
         'helpers/dateFormatters.js',
@@ -85,6 +87,7 @@ Package.onUse(function(api) {
         'helpers/autolink.js',
         'helpers/mobileHelpers.js',
         'bootstrap.js',
+        'analytics.js',
 
         'i18n/helpers-dateFormatters.en.i18n.json',
         'i18n/helpers-dateFormatters.nl.i18n.json',
