@@ -2,14 +2,14 @@ Template.swarm.onCreated(function() {
     var template = this;
     template.networks = new ReactiveVar([]);
     template.subscribe('swarms.one', template.data.slug);
-    template.subscribe('swarms.one.networks', template.data.slug);
+    template.networkSubscription = template.subscribe('swarms.one.networks', template.data.slug);
 });
 
 Template.swarm.helpers({
     swarm: function() {
         var template = Template.instance();
         var swarm = Swarms.findOne({slug: template.data.slug});
-        if (!swarm) return false;
+        if (!swarm || !template.networkSubscription.ready()) return false;
         var networks = Networks.guardedMetaFind({_id: {$in: swarm.networks}}, {limit: 25}).fetch();
         return {
             data: function() {

@@ -102,7 +102,6 @@ Template.Ring.onRendered(function() {
         radius: 45,
         offset: {top: -15}
     });
-    console.log(placeholder, inner)
     template.placeholder.set(placeholder);
 
     var rings = [];

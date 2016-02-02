@@ -51,7 +51,7 @@ Template.swarm_explorer.helpers({
         return [{
             name: 'pu_tribe_notfound',
             placeholderPath: 'home'
-        }]
+        }];
     }
 });
 
