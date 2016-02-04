@@ -14,7 +14,6 @@ Package.onUse(function(api) {
         'tracker',
         'reactive-var',
         'reactive-dict',
-        'lookback:emoji',       // Emoji
     ], ['client']);
 
     api.addFiles([
@@ -45,6 +44,7 @@ Package.onUse(function(api) {
         'client/forms-mentionsInput.js',
         'client/spinner.js',
         'client/elements.js',
+        'client/emoji.js',
         'client/popup.js',
         'client/uploader.js',
         'client/focuslayer.js',

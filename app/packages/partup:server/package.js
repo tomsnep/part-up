@@ -31,7 +31,6 @@ Package.onUse(function(api) {
         'peerlibrary:aws-sdk',
         'simple:rest',
         'simple:json-routes',
-        'lookback:emoji'
     ], ['server']);
 
     api.addFiles([
@@ -155,7 +154,6 @@ Package.onUse(function(api) {
         'publications/networks.js',
         'publications/languages.js',
         'publications/tiles.js',
-        'publications/emoji.js',
         'publications/notifications.js',
         'publications/swarms.js',
         'routes/hooks.js',

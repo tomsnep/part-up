@@ -33,7 +33,7 @@ Partup.client.strings = {
             return stringToEmoji;
         }
 
-        return Emojis.parse(stringToEmoji)
+        return emoji.replace_colons(emoji.replace_emoticons(stringToEmoji))
     },
 
     tagsStringToArray: function(tagString) {
