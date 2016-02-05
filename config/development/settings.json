@@ -1,5 +1,6 @@
 {
     "public": {
+        "development": true,
         "aws": {
             "bucket": "partup-development",
             "region": "eu-west-1"
@@ -7,9 +8,10 @@
         "facebookAppId": "",
         "analyticsSettings": {
             "Google Analytics": {
-                "trackingId": ""
+                "trackingId": "UA-34557675-15"
             }
         },
+        "secondGATracker": "UA-34557675-17",
         "intercom": {
             "id": "",
             "allowAnonymous": true

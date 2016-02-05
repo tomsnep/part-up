@@ -1,4 +1,22 @@
 # CHANGELOG
+
+## 1.16.5
+- feat(analytics): add second google analytics tracker, issue #160 
+- fix(notifications): mentions in partup messages now only generate one notification when partners are mentioned, fixes #150
+- fix(tribe-uppers): only show activate uppers on the tribe uppers overview, fixes #159
+- fix(verify-email): fix empty page when clicking the URL, Fix issue #143
+- fix(message): fix safari file upload, issue #161
+- feat(login): redirect to discover after login as requested in issue #177  
+- fix(discover): fix hidden private partups by fixing route authorization to get personal data, Fix #184
+- fix(signin): small fix in securitypatch for facebook and linkedin signups
+- fix(user): fix security hole where the user can edit his entire profile object from the client
+- fix(plain-register): compose profile server-side instead of pass profile object
+- fix(hovercontainer): uncomment mouseleave event to fix the bug where the hovercontainer never disappears
+
+
+## 1.16.4
+- fix(partup): better input sanitation
+
 ## 1.16.3
 - fix(updates): fix race condition that caused endless scroll on updates to break
 - feat(part-up-details): Scroll and focus on the first invalid field (#156)

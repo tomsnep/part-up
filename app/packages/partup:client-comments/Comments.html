@@ -43,7 +43,7 @@
                             <div>
                                 <p class="pu-sub-systemmessage">
                                     <a href="{{ pathFor 'profile' _id=creator._id }}" class="pu-sub-author" rel="author" data-hovercontainer="HoverContainer_upper" data-hovercontainer-context="{{ creator._id }}">{{ creator.name }}</a>
-                                    {{{ systemMessage content }}}
+                                    {{ systemMessage content }}
                                 </p>
                                 <time title="{{ partupDateFull created_at }}" datetime="{{ created_at.toISOString }}">{{ partupDateComment created_at }}</time>
                             </div>

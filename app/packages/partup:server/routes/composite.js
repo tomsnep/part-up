@@ -5,6 +5,8 @@ Meteor.routeComposite = function(route, callback) {
         var params = this.params;
 
         var userId = request.user ? request.user._id : null;
+        delete params.query.token;
+
         var composition = callback(request, _.extend({}, params));
         var result = compositionToResult(userId, composition.find.bind({userId: userId}), composition.children);
 
