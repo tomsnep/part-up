@@ -2,5 +2,17 @@
     <div class="pu-composition pu-composition-defaultmodal">
         <h2 class="pu-title pu-title-modal">Tribes</h2>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit itaque sequi beatae quo. Repellat voluptates, dicta architecto aliquam dignissimos ducimus expedita facere amet, nisi rerum aperiam aut inventore itaque molestiae nostrum cupiditate ipsa.</p>
+        <article class="pu-block pu-block-highlighted">
+            <label class="pu-formfield">
+                <span class="pu-label">Swarm</span>
+                <input type="text" class="pu-input pu-input-filter" name="textSearch" placeholder="Search for your tribes">
+            </label>
+            <button class="pu-button">Add to swarm</button>
+        </article>
+        <ul class="pu-list">
+            {{#each swarm.networks}}
+                <li>{{name}}</li>
+            {{/each}}
+        </ul>
     </div>
 </template>

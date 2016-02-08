@@ -8,13 +8,6 @@ Template.modal_swarm_settings_details.onCreated(function() {
     var tpl = this;
     var userId = Meteor.userId();
 
-    tpl.subscription = tpl.subscribe('swarms.one', tpl.data.slug, function() {
-        var swarm = Swarms.findOne({slug: tpl.data.slug});
-        console.log(swarm);
-        // if (!swarm) Router.pageNotFound('swarm');
-        // if (swarm.isClosedForUpper(userId)) Router.pageNotFound('swarm');
-    });
-
     tpl.charactersLeft = new ReactiveDict();
     tpl.submitting = new ReactiveVar();
     tpl.current = new ReactiveDict();
