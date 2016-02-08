@@ -12,7 +12,7 @@ var UpperProduct = function(type) {
     this.type = type;
 };
 
-var TribeProduct = function(type) {
+var TribeProduct = function(type, more) {
     this.name = __('pages-app-pricing-tribe-' + type + '-name');
     this.summary = __('pages-app-pricing-tribe-' + type + '-summary');
     this.price = __('pages-app-pricing-tribe-' + type + '-price');
@@ -20,7 +20,8 @@ var TribeProduct = function(type) {
     this.features = [
         {
             name: __('pages-app-pricing-tribe-' + type + '-feature1'),
-            value: __('pages-app-pricing-tribe-' + type + '-feature1-value')
+            value: __('pages-app-pricing-tribe-' + type + '-feature1-value'),
+            more: more ? __('pages-app-pricing-tribe-' + type + '-feature1-more') : false
         }, {
             name: __('pages-app-pricing-tribe-' + type + '-feature2'),
             value: __('pages-app-pricing-tribe-' + type + '-feature2-value')
@@ -42,9 +43,8 @@ Template.app_pricing.helpers({
     tribe_products: function() {
         return [
             new TribeProduct('socialimpact'),
-            new TribeProduct('small'),
-            new TribeProduct('medium'),
-            new TribeProduct('large')
+            new TribeProduct('starterskit', true),
+            new TribeProduct('enterprise')
         ];
     }
 });
