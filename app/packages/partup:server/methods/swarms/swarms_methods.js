@@ -219,6 +219,37 @@ Meteor.methods({
      * Add a quote to a swarm
      *
      * @param {String} swarmId
+     * @param {mixed[]} fields
+     */
+    'swarms.add_quote': function(swarmId, fields) {
+        check(swarmId, String);
+        check(fields, Partup.schemas.forms.swarmQuote);
+
+        try {
+            var upper = Meteor.users.find(fields.user_id);
+            var quote = {
+                _id: Random.id(),
+                content: sanitizeHtml(fields.content),
+                author: {
+                    _id: upper._id,
+                    name: upper.profile.name,
+                    image: upper.profile.image
+                },
+                created_at: new Date(),
+                updated_at: new Date()
+            };
+
+            Swarms.update(swarmId, {$push: {quotes: quote}});
+        } catch (error) {
+            Log.error(error);
+            throw new Meteor.Error(400, 'swarm_quote_could_not_be_added');
+        }
+    },
+
+    /**
+     * Update a quote in a swarm
+     *
+     * @param {String} swarmId
      * @param {String} quoteId
      * @param {mixed[]} fields
      */
