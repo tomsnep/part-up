@@ -213,5 +213,37 @@ Meteor.methods({
             Log.error(error);
             throw new Meteor.Error(400, 'swarm_email_share_count_could_not_be_updated');
         }
+    },
+
+    /**
+     * Add a quote to a swarm
+     *
+     * @param {String} swarmId
+     * @param {String} quoteId
+     * @param {mixed[]} fields
+     */
+    'swarms.update_quote': function(swarmId, quoteId, fields) {
+        check(swarmId, String);
+        check(quoteId, String);
+        check(fields, Partup.schemas.forms.swarmQuote);
+
+        try {
+            var upper = Meteor.users.find(fields.user_id);
+
+            Swarms.update({_id: swarmId, 'quotes._id': quoteId}, {
+                $set: {
+                    'quotes.$.author': {
+                        _id: upper._id,
+                        name: upper.profile.name,
+                        image: upper.profile.image
+                    },
+                    'quotes.$.content': sanitizeHtml(fields.content),
+                    'quotes.$.updated_at': new Date()
+                }
+            });
+        } catch (error) {
+            Log.error(error);
+            throw new Meteor.Error(400, 'swarm_quote_could_not_be_updated');
+        }
     }
 });
