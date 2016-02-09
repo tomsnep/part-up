@@ -582,13 +582,13 @@ Router.route('/swarm/:slug/tribes', {
         };
     }
 });
-Router.route('/swarm/:slug/testimonials', {
-    name: 'swarm-settings-testimonials',
+Router.route('/swarm/:slug/quotes', {
+    name: 'swarm-settings-quotes',
     where: 'client',
     yieldRegions: {
         'modal':                            {to: 'main'},
         'modal_swarm_settings':             {to: 'modal'},
-        'modal_swarm_settings_testimonials':  {to: 'modal_swarm_settings'}
+        'modal_swarm_settings_quotes':      {to: 'modal_swarm_settings'}
     },
     data: function() {
         return {

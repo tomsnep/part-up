@@ -11,8 +11,8 @@ Template.modal_swarm_settings.events({
 
         if (Intent.exists('swarm-settings-tribes')) {
             return_route = 'swarm-settings-tribes';
-        } else if (Intent.exists('swarm-settings-testimonials')) {
-            return_route = 'swarm-settings-testimonials';
+        } else if (Intent.exists('swarm-settings-quotes')) {
+            return_route = 'swarm-settings-quotes';
         }
 
         Intent.return(return_route, {
