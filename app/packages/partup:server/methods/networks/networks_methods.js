@@ -442,7 +442,8 @@ Meteor.methods({
         }
 
         try {
-            return Networks.guardedMetaFind({name: new RegExp('.*' + query + '.*', 'i')}, {limit: 30}).fetch();
+            query = query.replace(/-/g, ' '); // Replace dashes with spaces
+            return Networks.guardedMetaFind({slug: new RegExp('.*' + query + '.*', 'i')}, {limit: 30}).fetch();
         } catch (error) {
             Log.error(error);
             throw new Meteor.Error(400, 'networks_could_not_be_autocompleted');
