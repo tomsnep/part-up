@@ -276,5 +276,23 @@ Meteor.methods({
             Log.error(error);
             throw new Meteor.Error(400, 'swarm_quote_could_not_be_updated');
         }
+    },
+
+    /**
+     * Remove a quote from a swarm
+     *
+     * @param {String} swarmId
+     * @param {String} quoteId
+     */
+    'swarms.remove_quote': function(swarmId, quoteId) {
+        check(swarmId, String);
+        check(quoteId, String);
+
+        try {
+            Swarms.update({_id: swarmId, 'quotes._id': quoteId}, {$pull: {quotes: {_id: quoteId}}});
+        } catch (error) {
+            Log.error(error);
+            throw new Meteor.Error(400, 'swarm_quote_could_not_be_removed');
+        }
     }
 });
