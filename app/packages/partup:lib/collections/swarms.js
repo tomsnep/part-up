@@ -135,15 +135,5 @@ Swarms.guardedFind = function(userId, selector, options) {
         options.fields[guardedField] = 0;
     });
 
-    var guardedCriterias = [
-        //
-    ];
-
-    // Guarding selector that needs to be fulfilled
-    var guardingSelector = {'$or': guardedCriterias};
-
-    // Merge the selectors, so we still use the initial selector provided by the caller
-    var finalSelector = {'$and': [guardingSelector, selector]};
-
-    return this.find(finalSelector, options);
+    return this.find(selector, options);
 };
