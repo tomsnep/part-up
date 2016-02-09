@@ -154,3 +154,20 @@ Partup.schemas.forms.swarmEditAdmin = new SimpleSchema({
         type: String
     }
 });
+
+/**
+ * Swarm add quote schema
+ * @name swarmQuote
+ * @memberof Partup.schemas.forms
+ */
+Partup.schemas.forms.swarmQuote = new SimpleSchema({
+    author_id: {
+        type: String,
+        regEx: SimpleSchema.RegEx.Id
+    },
+    content: {
+        type: String,
+        min: 15,
+        max: 999
+    }
+});
