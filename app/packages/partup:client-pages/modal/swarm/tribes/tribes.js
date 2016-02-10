@@ -1,53 +1,66 @@
 Template.modal_swarm_settings_tribes.onCreated(function() {
+    this.state = new ReactiveDict();
+    this.state.set('submitting', false);
+
     this.networkSelection = new ReactiveVar();
-    this.submitting = new ReactiveVar(false);
 });
 
 Template.modal_swarm_settings_tribes.helpers({
-    submitting: function() {
-        return Template.instance().submitting.get();
-    },
-    networkFieldPlaceholder: function() {
-        return __('pages-modal-admin-featured-networks-form-network-placeholder');
-    },
-    networkLabel: function() {
-        return function(network) {
-            return network.name;
-        };
-    },
-    networkSelectionReactiveVar: function() {
-        return Template.instance().networkSelection;
-    },
-    networkQuery: function() {
-        return function(query, sync, async) {
-            Meteor.call('networks.autocomplete', query, function(error, networks) {
-                lodash.each(networks, function(p) {
-                    p.value = p.name; // what to show in the autocomplete list
-                });
-                async(networks);
-            });
-        };
-    },
-    networkFormvalue: function() {
-        return function(network) {
-            return network._id;
-        };
-    },
-    schema: new SimpleSchema({}),
-    swarm: function() {
+    state: function() {
         var template = Template.instance();
-        var submitting = template.submitting.get();
+        return {
+            submitting: function() {
+                return template.state.get('submitting');
+            }
+        };
+    },
+    translations: function() {
+        return {
+            networkFieldPlaceholder: function() {
+                return __('pages-modal-admin-featured-networks-form-network-placeholder');
+            }
+        };
+    },
+    form: function() {
+        var template = Template.instance();
+        return {
+            schema: new SimpleSchema({}),
+            networkLabel: function() {
+                return function(network) {
+                    return network.name;
+                };
+            },
+            networkSelectionReactiveVar: function() {
+                return template.networkSelection;
+            },
+            networkQuery: function() {
+                return function(query, sync, async) {
+                    Meteor.call('networks.autocomplete', query, function(error, networks) {
+                        lodash.each(networks, function(p) {
+                            p.value = p.name; // what to show in the autocomplete list
+                        });
+                        async(networks);
+                    });
+                };
+            },
+            networkFormvalue: function() {
+                return function(network) {
+                    return network._id;
+                };
+            },
+        };
+    },
+    data: function() {
+        var template = Template.instance();
+        var submitting = template.state.get('submitting');
         var swarm = Swarms.findOne({slug: template.data.slug});
         if (!swarm) return false;
-        console.log(swarm.networks)
-        var networks = Networks.find({_id: {$in: swarm.networks}});
-        console.log(swarm)
         return {
-            data: function() {
+            swarm: function() {
                 return swarm;
             },
             networks: function() {
-                return networks;
+                return Networks.find({_id: {$in: swarm.networks}});;
             }
         };
     }
@@ -69,12 +82,12 @@ AutoForm.addHooks('addNetworkForm', {
         self.event.preventDefault();
 
         var template = self.template.parent();
-        template.submitting.set(true);
+        template.state.set('submitting', true);
         var networkId = template.networkSelection.curValue._id;
         var swarm = Swarms.findOne({slug: template.data.slug});
         Meteor.call('swarms.add_network', swarm._id, networkId, function(error) {
             if (error) return console.error(error);
-            template.submitting.set(false);
+            template.state.set('submitting', false);
             AutoForm.resetForm(self.formId);
 
             self.done();

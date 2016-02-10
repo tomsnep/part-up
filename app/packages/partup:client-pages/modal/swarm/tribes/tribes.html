@@ -2,7 +2,7 @@
     <div class="pu-composition pu-composition-defaultmodal">
         <h2 class="pu-title pu-title-modal">Tribes</h2>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit itaque sequi beatae quo. Repellat voluptates, dicta architecto aliquam dignissimos ducimus expedita facere amet, nisi rerum aperiam aut inventore itaque molestiae nostrum cupiditate ipsa.</p>
-        {{#autoForm schema=schema id="addNetworkForm" validation="submitThenKeyup" class="pu-form pu-block pu-block-highlighted" }}
+        {{#autoForm schema=form.schema id="addNetworkForm" validation="submitThenKeyup" class="pu-form pu-block pu-block-highlighted" }}
 
             <label class="pu-formfield">
                 <span class="pu-label">
@@ -11,11 +11,11 @@
 
                 <span class="pu-sub-input">
                     {{# AutocompleteAdvanced
-                    placeholder=networkFieldPlaceholder
-                    label=networkLabel
-                    selection=networkSelectionReactiveVar
-                    onQuery=networkQuery
-                    formValue=networkFormvalue }}
+                    placeholder=translations.networkFieldPlaceholder
+                    label=form.networkLabel
+                    selection=form.networkSelectionReactiveVar
+                    onQuery=form.networkQuery
+                    formValue=form.networkFormvalue }}
 
                         <input type="text" name="network">
 
@@ -25,7 +25,7 @@
 
             <footer class="pu-row">
                 <div class="cell">
-                    <button class="pu-button {{# if submitting }}pu-state-loading{{/ if }} {{# unless networkSelectionReactiveVar.get }}pu-state-disabled{{/ unless }}">
+                    <button class="pu-button {{# if state.submitting }}pu-state-loading{{/ if }} {{# unless form.networkSelectionReactiveVar.get }}pu-state-disabled{{/ unless }}">
                         {{_ 'pages-modal-admin-featured-networks-form-confirm'}}
                         {{> Spinner type='small' color='inverted' }}
                     </button>
@@ -33,7 +33,7 @@
             </footer>
         {{/autoForm}}
         <ul class="pu-list">
-            {{#each swarm.networks}}
+            {{#each data.networks}}
                 <li data-removenetwork>{{name}}</li>
             {{/each}}
         </ul>
