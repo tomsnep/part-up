@@ -52,11 +52,14 @@ Meteor.publishComposite('swarms.one.networks', function(swarmSlug, parameters) {
 
     return {
         find: function() {
-            var swarm = Swarms.guardedMetaFind({slug: swarmSlug}, {limit: 1}).fetch().pop();
-            return Networks.guardedMetaFind({_id: {$in: swarm.networks}}, {limit: 25});
+            return Swarms.guardedMetaFind({slug: swarmSlug}, {limit: 1});
         },
         children: [
-            {find: Images.findForNetwork}
+            {find: function(swarm) {
+                return Networks.guardedMetaFind({_id: {$in: swarm.networks}}, {limit: 25});
+            }, children: [
+                {find: Images.findForNetwork}
+            ]}
         ]
     };
 });

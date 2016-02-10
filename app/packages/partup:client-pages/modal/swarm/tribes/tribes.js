@@ -61,7 +61,7 @@ Template.modal_swarm_settings_tribes.events({
 
         });
     }
-})
+});
 
 AutoForm.addHooks('addNetworkForm', {
     onSubmit: function(doc) {
