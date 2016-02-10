@@ -7,18 +7,16 @@ Template.modal_swarm_settings_tribes.onCreated(function() {
 });
 
 Template.modal_swarm_settings_tribes.helpers({
-    state: function() {
+    data: function() {
         var template = Template.instance();
+        var swarm = Swarms.findOne({slug: template.data.slug});
+        if (!swarm) return false;
         return {
-            submitting: function() {
-                return template.state.get('submitting');
-            }
-        };
-    },
-    translations: function() {
-        return {
-            networkFieldPlaceholder: function() {
-                return __('pages-modal-admin-featured-networks-form-network-placeholder');
+            swarm: function() {
+                return swarm;
+            },
+            networks: function() {
+                return Networks.find({_id: {$in: swarm.networks}});;
             }
         };
     },
@@ -51,16 +49,18 @@ Template.modal_swarm_settings_tribes.helpers({
             },
         };
     },
-    data: function() {
+    state: function() {
         var template = Template.instance();
-        var swarm = Swarms.findOne({slug: template.data.slug});
-        if (!swarm) return false;
         return {
-            swarm: function() {
-                return swarm;
-            },
-            networks: function() {
-                return Networks.find({_id: {$in: swarm.networks}});;
+            submitting: function() {
+                return template.state.get('submitting');
+            }
+        };
+    },
+    translations: function() {
+        return {
+            networkFieldPlaceholder: function() {
+                return __('modal-swarm-tribes-form-network-placeholder');
             }
         };
     }

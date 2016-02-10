@@ -1,21 +1,21 @@
 <template name="modal_swarm_settings_details">
     <div class="pu-composition pu-composition-defaultmodal">
-        <h2 class="pu-title pu-title-modal">Swarm</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi vel deserunt aperiam necessitatibus consequatur sint!</p>
+        <h2 class="pu-title pu-title-modal">{{_ 'modal-swarm-details-title-page'}}</h2>
+        <p>{{_ 'modal-swarm-details-paragraph-intro'}}</p>
 
-        {{# autoForm id='swarmEditForm' schema=formSchema doc=fieldsForSwarm validation="submitThenKeyup" class="pu-form" }}
+        {{# autoForm id='swarmEditForm' schema=form.schema doc=form.fieldsForSwarm validation="submitThenKeyup" class="pu-form" }}
             <!-- image -->
             <div class="pu-formfield">
-                <span class="pu-label">Logo</span>
+                <span class="pu-label">{{_ 'modal-swarm-details-form-logo-label'}}</span>
                 <div class="pu-upload">
-                    <figure style="background-image:url('{{ imageUrl }}')" class="pu-imagepreview"></figure>
-                    {{# FileInput inputSettings=imageInput }}
-                        <button type="button" class="pu-button pu-button-secondary {{# if imageUploading }}pu-state-loading{{/ if }}" data-image-browse>
-                            <span>Upload a new image</span>
+                    <figure style="background-image:url('{{ data.imageUrl }}')" class="pu-imagepreview"></figure>
+                    {{# FileInput inputSettings=form.imageInput }}
+                        <button type="button" class="pu-button pu-button-secondary {{# if state.imageUploading }}pu-state-loading{{/ if }}" data-image-browse>
+                            <span>{{_ 'modal-swarm-details-form-logo-button'}}</span>
                             {{> Spinner color='inverted' type='small' }}
                         </button>
 
-                        <span class="pu-hint">Maximum width: 400px</span>
+                        <span class="pu-hint">{{_ 'modal-swarm-details-form-logo-button-info'}}</span>
 
                         <input type="file" class="pu-fileinput" data-image-input>
                     {{/FileInput}}
@@ -26,12 +26,12 @@
             <!-- name -->
             <label class="pu-formfield">
                 <span class="pu-label">
-                    Pagetitle
+                    {{_ 'modal-swarm-details-form-title-label'}}
                     <a class="pu-hint">
-                        {{# if partupLowerThan titleCharactersLeft formSchema._schema.title.max }}
-                            {{_ 'swarm-settings-form-characters-left' titleCharactersLeft }}
+                        {{# if partupLowerThan state.titleCharactersLeft form.schema._schema.title.max }}
+                            {{_ 'swarm-settings-form-characters-left' state.titleCharactersLeft }}
                         {{ else }}
-                            {{_ 'swarm-settings-form-characters' formSchema._schema.title.max }}
+                            {{_ 'swarm-settings-form-characters' form.schema._schema.title.max }}
                         {{/ if }}
                     </a>
                 </span>
@@ -40,7 +40,7 @@
                     <span class="pu-sub-input">
                         {{> afFieldInput
                             name='title'
-                            placeholder=placeholders.title
+                            placeholder=translations.title
                             class='pu-input'
                         }}
 
@@ -52,12 +52,12 @@
             <!-- introduction -->
             <label class="pu-formfield">
                 <span class="pu-label">
-                    Introduction
+                    {{_ 'modal-swarm-details-form-shortintro-label'}}
                     <a class="pu-hint">
-                        {{# if partupLowerThan introductionCharactersLeft formSchema._schema.introduction.max }}
-                            {{_ 'swarm-settings-form-characters-left' introductionCharactersLeft }}
+                        {{# if partupLowerThan state.introductionCharactersLeft form.schema._schema.introduction.max }}
+                            {{_ 'swarm-settings-form-characters-left' state.introductionCharactersLeft }}
                         {{ else }}
-                            {{_ 'swarm-settings-form-characters' formSchema._schema.introduction.max }}
+                            {{_ 'swarm-settings-form-characters' form.schema._schema.introduction.max }}
                         {{/ if }}
                     </a>
                 </span>
@@ -66,10 +66,10 @@
                     <span class="pu-sub-input">
                         {{> afFieldInput
                             name='introduction'
-                            placeholder=placeholders.introduction
+                            placeholder=translations.introduction
                             class='pu-textarea'
                             rows=3
-                            maxlength=formSchema._schema.introduction.max
+                            maxlength=form.schema._schema.introduction.max
                         }}
                     </span>
                     <span class="pu-sub-error">{{ afFieldMessage name='introduction' }}</span>
@@ -79,12 +79,12 @@
             <!-- description -->
             <label class="pu-formfield">
                 <span class="pu-label">
-                    Description
+                    {{_ 'modal-swarm-details-form-organization-label'}}
                     <a class="pu-hint">
-                        {{# if partupLowerThan descriptionCharactersLeft formSchema._schema.description.max }}
-                            {{_ 'swarm-settings-form-characters-left' descriptionCharactersLeft }}
+                        {{# if partupLowerThan state.descriptionCharactersLeft form.schema._schema.description.max }}
+                            {{_ 'swarm-settings-form-characters-left' state.descriptionCharactersLeft }}
                         {{ else }}
-                            {{_ 'swarm-settings-form-characters' formSchema._schema.description.max }}
+                            {{_ 'swarm-settings-form-characters' form.schema._schema.description.max }}
                         {{/ if }}
                     </a>
                 </span>
@@ -93,10 +93,10 @@
                     <span class="pu-sub-input">
                         {{> afFieldInput
                             name='description'
-                            placeholder=placeholders.description
+                            placeholder=translations.description
                             class='pu-textarea'
                             rows=3
-                            maxlength=formSchema._schema.description.max
+                            maxlength=form.schema._schema.description.max
                         }}
                     </span>
                     <span class="pu-sub-error">{{ afFieldMessage name='description' }}</span>
@@ -104,8 +104,8 @@
             </label>
 
             <div class="pu-formfield">
-                <button type="submit" class="pu-button {{# if submitting }}pu-state-disabled pu-state-loading{{/ if }}">
-                    <span>{{_ 'swarm-settings-form-submit' }}</span>
+                <button type="submit" class="pu-button {{# if state.submitting }}pu-state-disabled pu-state-loading{{/ if }}">
+                    <span>{{_ 'modal-swarm-details-form-submit'}}</span>
                     {{> Spinner color='inverted' type='small' }}
                 </button>
             </div>

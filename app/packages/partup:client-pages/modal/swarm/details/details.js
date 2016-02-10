@@ -34,82 +34,98 @@ Template.modal_swarm_settings_details.onCreated(function() {
 });
 
 Template.modal_swarm_settings_details.helpers({
-    imageInput: function() {
+    data: function() {
         var template = Template.instance();
+        var swarm = Swarms.findOne({slug: template.data.slug});
+        if (!swarm) return false;
         return {
-            button: 'data-image-browse',
-            input: 'data-image-input',
-            onFileChange: function(event) {
-                Partup.client.uploader.eachFile(event, function(file) {
-                    template.uploading.set('image', true);
+            swarm: function() {
+                return swarm;
+            },
+            imageUrl: function() {
+                var imageId = template.current.get('image');
 
-                    Partup.client.uploader.uploadImage(file, function(error, image) {
-                        template.uploading.set('image', false);
+                if (!imageId) {
+                    if (swarm) imageId = swarm.image;
+                }
 
-                        if (error) {
-                            Partup.client.notify.error(TAPi18n.__(error.reason));
-                            return;
-                        }
+                if (imageId) {
+                    var image = Images.findOne({_id: imageId});
+                    if (image) return Partup.helpers.url.getImageUrl(image, '360x360');
+                }
 
-                        template.find('[name=image]').value = image._id;
-                        template.current.set('image', image._id);
-                    });
-
-                });
-
+                return '/images/smile.png';
             }
         };
     },
-    formSchema: Partup.schemas.forms.swarmUpdate,
-    placeholders: {
-        title: function() {
-            return __('swarm-settings-form-title-placeholder');
-        },
-        description: function() {
-            return __('swarm-settings-form-description-placeholder');
-        },
-        introduction: function() {
-            return __('swarm-settings-form-introduction-placeholder');
-        }
-    },
-    descriptionCharactersLeft: function() {
-        return Template.instance().charactersLeft.get('description');
-    },
-    titleCharactersLeft: function() {
-        return Template.instance().charactersLeft.get('title');
-    },
-    introductionCharactersLeft: function() {
-        return Template.instance().charactersLeft.get('introduction');
-    },
-    swarm: function() {
-        return Swarms.findOne({slug: this.slug});
-    },
-    fieldsForSwarm: function() {
+    form: function() {
         var swarm = Swarms.findOne({slug: this.slug});
-        if (!swarm) return;
+        var template = Template.instance();
+        return {
+            schema: Partup.schemas.forms.swarmUpdate,
+            fieldsForSwarm: function() {
+                if (!swarm) return;
+                return Partup.transformers.swarm.toFormSwarm(swarm);
+            },
+            imageInput: function() {
+                return {
+                    button: 'data-image-browse',
+                    input: 'data-image-input',
+                    onFileChange: function(event) {
+                        Partup.client.uploader.eachFile(event, function(file) {
+                            template.uploading.set('image', true);
 
-        return Partup.transformers.swarm.toFormSwarm(swarm);
+                            Partup.client.uploader.uploadImage(file, function(error, image) {
+                                template.uploading.set('image', false);
+
+                                if (error) {
+                                    Partup.client.notify.error(TAPi18n.__(error.reason));
+                                    return;
+                                }
+
+                                template.find('[name=image]').value = image._id;
+                                template.current.set('image', image._id);
+                            });
+
+                        });
+
+                    }
+                };
+            }
+        };
     },
-    submitting: function() {
-        return Template.instance().submitting.get();
+    state: function() {
+        var template = Template.instance();
+        return {
+            submitting: function() {
+                return template.submitting.get();
+            },
+            descriptionCharactersLeft: function() {
+                return template.charactersLeft.get('description');
+            },
+            titleCharactersLeft: function() {
+                return template.charactersLeft.get('title');
+            },
+            introductionCharactersLeft: function() {
+                return template.charactersLeft.get('introduction');
+            },
+            imageUploading: function() {
+                return !!template.uploading.get('image');
+            },
+        };
     },
-    imageUploading: function() {
-        return !!Template.instance().uploading.get('image');
-    },
-    imageUrl: function() {
-        var imageId = Template.instance().current.get('image');
-
-        if (!imageId) {
-            var swarm = Swarms.findOne({slug: this.slug});
-            if (swarm) imageId = swarm.image;
-        }
-
-        if (imageId) {
-            var image = Images.findOne({_id: imageId});
-            if (image) return Partup.helpers.url.getImageUrl(image, '360x360');
-        }
-
-        return '/images/smile.png';
+    translations: function() {
+        return {
+            title: function() {
+                return __('modal-swarm-details-form-title-placeholder');
+            },
+            description: function() {
+                return __('modal-swarm-details-form-shortintro-placeholder');
+            },
+            introduction: function() {
+                return __('modal-swarm-details-form-organization-placeholder');
+            }
+        };
     }
 });
 

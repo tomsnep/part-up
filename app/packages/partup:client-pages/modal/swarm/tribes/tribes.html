@@ -1,12 +1,12 @@
 <template name="modal_swarm_settings_tribes">
     <div class="pu-composition pu-composition-defaultmodal">
-        <h2 class="pu-title pu-title-modal">Tribes</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit itaque sequi beatae quo. Repellat voluptates, dicta architecto aliquam dignissimos ducimus expedita facere amet, nisi rerum aperiam aut inventore itaque molestiae nostrum cupiditate ipsa.</p>
+        <h2 class="pu-title pu-title-modal">{{_ 'modal-swarm-tribes-title-page' }}</h2>
+        <p>{{_ 'modal-swarm-tribes-paragraph-intro' }}</p>
         {{#autoForm schema=form.schema id="addNetworkForm" validation="submitThenKeyup" class="pu-form pu-block pu-block-highlighted" }}
 
             <label class="pu-formfield">
                 <span class="pu-label">
-                    {{_ 'pages-modal-admin-featured-networks-form-network-label'}}
+                    {{_ 'modal-swarm-tribes-form-add-label'}}
                 </span>
 
                 <span class="pu-sub-input">
@@ -26,7 +26,7 @@
             <footer class="pu-row">
                 <div class="cell">
                     <button class="pu-button {{# if state.submitting }}pu-state-loading{{/ if }} {{# unless form.networkSelectionReactiveVar.get }}pu-state-disabled{{/ unless }}">
-                        {{_ 'pages-modal-admin-featured-networks-form-confirm'}}
+                        {{_ 'modal-swarm-tribes-form-button-submit'}}
                         {{> Spinner type='small' color='inverted' }}
                     </button>
                 </div>
@@ -34,7 +34,7 @@
         {{/autoForm}}
         <!-- <label class="pu-formfield"> -->
                 <span class="pu-label">
-                    {{_ 'pages-modal-admin-featured-networks-form-network-label'}}
+                    {{_ 'modal-swarm-tribes-list-label'}}
                 </span>
             <!-- </label> -->
         <ul class="pu-list">

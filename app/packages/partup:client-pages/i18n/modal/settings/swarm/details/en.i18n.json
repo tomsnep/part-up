@@ -1,0 +1,17 @@
+{
+    "modal-swarm-details-title-page": "Swarm",
+    "modal-swarm-details-paragraph-intro": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit itaque sequi beatae quo. Repellat voluptates, dicta architecto aliquam dignissimos ducimus expedita facere amet, nisi rerum aperiam aut inventore itaque molestiae nostrum cupiditate ipsa.",
+    "modal-swarm-details-form-logo-label": "Logo",
+    "modal-swarm-details-form-logo-description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda, asperiores.",
+    "modal-swarm-details-form-logo-button": "Upload new image",
+    "modal-swarm-details-form-logo-button-info": "Maximum width: 400px",
+    "modal-swarm-details-form-introduction-label": "Introduction",
+    "modal-swarm-details-form-introduction-description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat blanditiis molestiae perferendis.",
+    "modal-swarm-details-form-title-label": "Pagetitle",
+    "modal-swarm-details-form-title-placeholder": "Give your page a title",
+    "modal-swarm-details-form-shortintro-label": "Short introduction",
+    "modal-swarm-details-form-shortintro-placeholder": "Give a short introduction about your page",
+    "modal-swarm-details-form-organization-label": "What does your organization do?",
+    "modal-swarm-details-form-organization-placeholder": "Give an explaination about your organization",
+    "modal-swarm-details-form-submit": "Save changes"
+}
