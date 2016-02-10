@@ -2,16 +2,39 @@
     <div class="pu-composition pu-composition-defaultmodal">
         <h2 class="pu-title pu-title-modal">Tribes</h2>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit itaque sequi beatae quo. Repellat voluptates, dicta architecto aliquam dignissimos ducimus expedita facere amet, nisi rerum aperiam aut inventore itaque molestiae nostrum cupiditate ipsa.</p>
-        <article class="pu-block pu-block-highlighted">
+        {{#autoForm schema=schema id="addNetworkForm" validation="submitThenKeyup" class="pu-form pu-block pu-block-highlighted" }}
+
             <label class="pu-formfield">
-                <span class="pu-label">Swarm</span>
-                <input type="text" class="pu-input pu-input-filter" name="textSearch" placeholder="Search for your tribes">
+                <span class="pu-label">
+                    {{_ 'pages-modal-admin-featured-networks-form-network-label'}}
+                </span>
+
+                <span class="pu-sub-input">
+                    {{# AutocompleteAdvanced
+                    placeholder=networkFieldPlaceholder
+                    label=networkLabel
+                    selection=networkSelectionReactiveVar
+                    onQuery=networkQuery
+                    formValue=networkFormvalue }}
+
+                        <input type="text" name="network">
+
+                    {{/ AutocompleteAdvanced }}
+                </span>
             </label>
-            <button class="pu-button">Add to swarm</button>
-        </article>
+
+            <footer class="pu-row">
+                <div class="cell">
+                    <button class="pu-button {{# if submitting }}pu-state-loading{{/ if }} {{# unless networkSelectionReactiveVar.get }}pu-state-disabled{{/ unless }}">
+                        {{_ 'pages-modal-admin-featured-networks-form-confirm'}}
+                        {{> Spinner type='small' color='inverted' }}
+                    </button>
+                </div>
+            </footer>
+        {{/autoForm}}
         <ul class="pu-list">
             {{#each swarm.networks}}
-                <li>{{name}}</li>
+                <li data-removenetwork>{{name}}</li>
             {{/each}}
         </ul>
     </div>

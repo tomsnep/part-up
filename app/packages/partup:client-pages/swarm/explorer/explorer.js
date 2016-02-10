@@ -1,6 +1,6 @@
 Template.swarm_explorer.onCreated(function() {
     if (this.data.notfound) this.notfound = true;
-})
+});
 Template.swarm_explorer.helpers({
     notfound: function() {
         return Template.instance().notfound;
@@ -32,17 +32,17 @@ Template.swarm_explorer.helpers({
         return {
             inner: function() {
                 return _.filter(bubbles, function(item, index) {
-                    return index <= innerLength;
+                    return index <= 3; //innerLength;
                 });
             },
             center: function() {
                 return _.filter(bubbles, function(item, index) {
-                    return index > innerLength && index <= (centerLength + innerLength);
+                    return index > 3 && index <= 12; //innerLength && index <= (centerLength + innerLength);
                 });
             },
             outer: function() {
                 return _.filter(bubbles, function(item, index) {
-                    return index > (centerLength + innerLength) && index <= (centerLength + innerLength + outerLength);
+                    return index > 12 && index <= 25; // (centerLength + innerLength) && index <= (centerLength + innerLength + outerLength);
                 });
             }
         };
