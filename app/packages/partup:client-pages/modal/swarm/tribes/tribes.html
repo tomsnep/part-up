@@ -32,9 +32,20 @@
                 </div>
             </footer>
         {{/autoForm}}
+        <!-- <label class="pu-formfield"> -->
+                <span class="pu-label">
+                    {{_ 'pages-modal-admin-featured-networks-form-network-label'}}
+                </span>
+            <!-- </label> -->
         <ul class="pu-list">
             {{#each data.networks}}
-                <li data-removenetwork>{{name}}</li>
+                <li class="pu-networkitem">
+                    <figure class="pu-avatar pu-avatar-square pu-avatar-medium pu-avatar-border" style="background-image: url('{{ partupImageUrl id=image }}');"></figure>
+                    <div>
+                        <a href="{{pathFor 'network-detail' slug }}">{{ name }}</a>
+                        <button type="button" class="pu-sub-remove pu-button pu-button-checkmark pu-button-checkmark-deny" data-removenetwork> <i class="picon-times"></i> </button>
+                    </div>
+                </li>
             {{/each}}
         </ul>
     </div>

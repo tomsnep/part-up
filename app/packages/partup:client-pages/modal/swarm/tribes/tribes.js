@@ -1,8 +1,9 @@
 Template.modal_swarm_settings_tribes.onCreated(function() {
-    this.state = new ReactiveDict();
-    this.state.set('submitting', false);
+    var template = this;
+    template.state = new ReactiveDict();
+    template.state.set('submitting', false);
 
-    this.networkSelection = new ReactiveVar();
+    template.networkSelection = new ReactiveVar();
 });
 
 Template.modal_swarm_settings_tribes.helpers({
@@ -52,7 +53,6 @@ Template.modal_swarm_settings_tribes.helpers({
     },
     data: function() {
         var template = Template.instance();
-        var submitting = template.state.get('submitting');
         var swarm = Swarms.findOne({slug: template.data.slug});
         if (!swarm) return false;
         return {
@@ -88,6 +88,7 @@ AutoForm.addHooks('addNetworkForm', {
         Meteor.call('swarms.add_network', swarm._id, networkId, function(error) {
             if (error) return console.error(error);
             template.state.set('submitting', false);
+            template.networkSelection.set(undefined);
             AutoForm.resetForm(self.formId);
 
             self.done();
