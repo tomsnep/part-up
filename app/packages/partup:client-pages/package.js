@@ -365,7 +365,15 @@ Package.onUse(function(api) {
         'i18n/modal/settings/swarm/tribes/en.i18n.json',
         'i18n/modal/settings/swarm/tribes/nl.i18n.json',
         'i18n/modal/settings/swarm/quotes/en.i18n.json',
-        'i18n/modal/settings/swarm/quotes/nl.i18n.json'
+        'i18n/modal/settings/swarm/quotes/nl.i18n.json',
+
+        // swarm
+        'i18n/swarm/en.i18n.json',
+        'i18n/swarm/nl.i18n.json',
+        'i18n/swarm/explorer/en.i18n.json',
+        'i18n/swarm/explorer/nl.i18n.json',
+        'i18n/swarm/explorer/bubble/en.i18n.json',
+        'i18n/swarm/explorer/bubble/nl.i18n.json'
     ];
 
     api.addFiles([].concat(
