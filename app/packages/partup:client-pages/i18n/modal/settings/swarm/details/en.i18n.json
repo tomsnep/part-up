@@ -9,9 +9,15 @@
     "modal-swarm-details-form-introduction-description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat blanditiis molestiae perferendis.",
     "modal-swarm-details-form-title-label": "Pagetitle",
     "modal-swarm-details-form-title-placeholder": "Give your page a title",
+    "modal-swarm-details-form-title-characters-left": "%d characters left",
+    "modal-swarm-details-form-title-characters": "max %d characters",
     "modal-swarm-details-form-shortintro-label": "Short introduction",
     "modal-swarm-details-form-shortintro-placeholder": "Give a short introduction about your page",
+    "modal-swarm-details-form-shortintro-characters-left": "%d characters left",
+    "modal-swarm-details-form-shortintro-characters": "max %d characters",
     "modal-swarm-details-form-organization-label": "What does your organization do?",
     "modal-swarm-details-form-organization-placeholder": "Give an explaination about your organization",
+    "modal-swarm-details-form-organization-characters-left": "%d characters left",
+    "modal-swarm-details-form-organization-characters": "max %d characters",
     "modal-swarm-details-form-submit": "Save changes"
 }

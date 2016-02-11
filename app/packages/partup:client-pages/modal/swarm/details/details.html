@@ -29,9 +29,9 @@
                     {{_ 'modal-swarm-details-form-title-label'}}
                     <a class="pu-hint">
                         {{# if partupLowerThan state.titleCharactersLeft form.schema._schema.title.max }}
-                            {{_ 'swarm-settings-form-characters-left' state.titleCharactersLeft }}
+                            {{_ 'modal-swarm-details-form-title-characters-left' state.titleCharactersLeft }}
                         {{ else }}
-                            {{_ 'swarm-settings-form-characters' form.schema._schema.title.max }}
+                            {{_ 'modal-swarm-details-form-title-characters' form.schema._schema.title.max }}
                         {{/ if }}
                     </a>
                 </span>
@@ -55,9 +55,9 @@
                     {{_ 'modal-swarm-details-form-shortintro-label'}}
                     <a class="pu-hint">
                         {{# if partupLowerThan state.introductionCharactersLeft form.schema._schema.introduction.max }}
-                            {{_ 'swarm-settings-form-characters-left' state.introductionCharactersLeft }}
+                            {{_ 'modal-swarm-details-form-shortintro-characters-left' state.introductionCharactersLeft }}
                         {{ else }}
-                            {{_ 'swarm-settings-form-characters' form.schema._schema.introduction.max }}
+                            {{_ 'modal-swarm-details-form-shortintro-characters' form.schema._schema.introduction.max }}
                         {{/ if }}
                     </a>
                 </span>
@@ -82,9 +82,9 @@
                     {{_ 'modal-swarm-details-form-organization-label'}}
                     <a class="pu-hint">
                         {{# if partupLowerThan state.descriptionCharactersLeft form.schema._schema.description.max }}
-                            {{_ 'swarm-settings-form-characters-left' state.descriptionCharactersLeft }}
+                            {{_ 'modal-swarm-details-form-organization-characters-left' state.descriptionCharactersLeft }}
                         {{ else }}
-                            {{_ 'swarm-settings-form-characters' form.schema._schema.description.max }}
+                            {{_ 'modal-swarm-details-form-organization-characters' form.schema._schema.description.max }}
                         {{/ if }}
                     </a>
                 </span>
