@@ -3,6 +3,7 @@
 ## 1.16.6
 - fix(pricing): updated the new pricing policy fixing #163 
 - fix(motivation): give each comment field form a unique ID to prevent conflicting behaviour on the same update fixes #228
+- fix(comments): fix Comments posted to different message than commented on #236
 - Copy changes as requested in issues #223 and #133 
 
 ## 1.16.5
