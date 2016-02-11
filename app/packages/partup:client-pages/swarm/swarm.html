@@ -4,23 +4,19 @@
 
         <header>
             <nav>
-                <figure class="pu-brand"></figure>
-                {{#if swarm}}
-                    <a class="pu-button pu-button-dark" href="{{pathFor route='swarm-settings-details' slug=slug}}" data-settings><i class="picon-cog"></i>Settings</a>
-                {{/if}}
+                <a class="pu-brand" href="{{ pathFor 'home' }}"></a>
+                {{#if data}}<a class="pu-button pu-button-dark" href="{{pathFor route='swarm-settings-details' slug=slug}}" data-settings><i class="picon-cog"></i>{{_ 'swarm-button-settings'}}</a>{{/if}}
             </nav>
-            {{#if swarm.data}}
-                {{> swarm_explorer networks=swarm.networks }}
-            {{else}}
-                <!-- {{> swarm_explorer networks=swarm.networks }} -->
-                {{> swarm_explorer notfound=true }}
+            {{#if state.explorerReady }}
+                {{> swarm_explorer swarm=data.swarm networks=data.networks }}
             {{/if}}
-
         </header>
-        {{#if swarm}}
-            {{> yield region="content"}}
 
-            {{> swarm_footer }}
+        {{#if data}}
+            <section class="{{#if state.contentReady}}show{{/if}}">
+                {{> swarm_content swarm=data.swarm }}
+            </section>
+            {{> swarm_footer swarm=data.swarm }}
         {{/if}}
 
     </div>

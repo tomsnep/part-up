@@ -1,24 +1,50 @@
 Template.swarm.onCreated(function() {
     var template = this;
-    template.networks = new ReactiveVar([]);
-    template.subscribe('swarms.one', template.data.slug);
-    template.networkSubscription = template.subscribe('swarms.one.networks', template.data.slug);
+
+    template.state = new ReactiveDict();
+    template.state.set('contentReady', false);
+    template.state.set('explorerReady', false);
+
+    template.subscribe('swarms.one', template.data.slug, {
+        onReady: function() {
+            Meteor.setTimeout(function() {
+                template.state.set('contentReady', true);
+            }, 500);
+        }
+    });
+    template.subscribe('swarms.one.networks', template.data.slug, {
+        onReady: function() {
+            Meteor.defer(function() {
+                template.state.set('explorerReady', true);
+            });
+        }
+    });
 });
 
 Template.swarm.helpers({
-    swarm: function() {
+    data: function() {
         var template = Template.instance();
         var swarm = Swarms.findOne({slug: template.data.slug});
-        if (!swarm || !template.networkSubscription.ready()) return false;
-        var networks = Networks.guardedMetaFind({_id: {$in: swarm.networks}}, {limit: 25}).fetch();
+        if (!swarm) return false;
         return {
-            data: function() {
+            swarm: function() {
                 return swarm;
             },
             networks: function() {
-                return networks;
+                return Networks.find({_id: {$in: swarm.networks}});
             }
-        }
+        };
+    },
+    state: function() {
+        var template = Template.instance();
+        return {
+            contentReady: function() {
+                return template.state.get('contentReady');
+            },
+            explorerReady: function() {
+                return template.state.get('explorerReady');
+            }
+        };
     }
 });
 
