@@ -1,31 +1,65 @@
 Template.Ring.onCreated(function() {
     var template = this;
-    this.rings = new ReactiveVar([]);
-    template.done = new ReactiveVar(false);
+    template.rings = new ReactiveVar([]);
     template.placeholder = new ReactiveVar([]);
+
+    // helpers
+    template.randomBoolean = function() {
+        return !(+new Date() % 2); // faux-randomness
+    };
+    template.randomRange = function(minimum, maximum) {
+        return Math.floor(Math.random() * (maximum - minimum + 1)) + minimum;
+    };
+
+    // preset the configuration
+    // to prevent recalculation in autorun
+    template.ringPresets = {
+        inner: {
+            radius: 20,
+            offset: {top: -15},
+            startAngle: template.randomRange(0, 360),
+            reverse: template.randomBoolean()
+        },
+        center: {
+            radius: 45,
+            offset: {top: -15},
+            startAngle: template.randomRange(0, 360),
+            reverse: template.randomBoolean()
+        },
+        outer: {
+            radius: 80,
+            offset: {top: -15},
+            skipAngle: 90,
+            startAngle: -120,
+            reverse: template.randomBoolean()
+        }
+    };
 });
 
 Template.Ring.onRendered(function() {
     var template = this;
-    // differentiate x and y radius to make an oval
+    template.container = document.querySelector('.pu-ring');
+    template.mouseMoveHandler = function(e) {
+        var windowWidth = window.innerWidth;
+        var windowHeight = window.innerHeight;
+        var xPercent = 100 / windowWidth * e.clientX;
+        var yPercent = 100 / windowHeight * e.clientY;
+        $(template.container).css({perspectiveOrigin: xPercent + '% ' + yPercent + '%'});
+    };
+    template.debouncedMouseMoveHandler = _.throttle(template.mouseMoveHandler, 100, true);
+    $(document).on('mousemove', template.debouncedMouseMoveHandler);
 
-    var createRing = function(ringElement, options) {
-        // helpers
-        var randomBoolean = function() {
-            return !(+new Date() % 2); // faux-randomness
-        };
-        var randomRange = function(minimum, maximum) {
-            return Math.floor(Math.random() * (maximum - minimum + 1)) + minimum;
-        };
-
+    template.createRing = function(ringElement, options) {
         // options readout
         var items = options.items || [];
         var radius = options.radius || 100;
-        var startAngle = options.startAngle || randomRange(0, 360);
+        var startAngle = typeof options.startAngle === 'number' ? options.startAngle : template.randomRange(0, 360);
         var skipAngle = options.skipAngle || false;
         var offset = options.offset || {};
         var offsetTop = offset.top || 0;
         var offsetLeft = offset.left || 0;
+        // randomly decide direction of circle (clockwise or counter-clockwise)
+        var reverse = options.reverse || template.randomBoolean();
 
         // calculation constants
         var PI = Math.PI;
@@ -47,9 +81,6 @@ Template.Ring.onRendered(function() {
         // calculate starting angle
         var angle = (TAU / 360) * startAngle;
 
-        // randomly decide direction of circle (clockwise or counter-clockwise)
-        var reverse = randomBoolean();
-
         // calculate item angle offset
         var angleIncrement = TAU / totalItems;
 
@@ -69,7 +100,7 @@ Template.Ring.onRendered(function() {
         items.forEach(function(item, i) {
             var x = ringXDiameterPercentage * (ringXRadiusPercentage * Math.cos(angle) + ringXRadius) + offsetLeft;
             var y = ringYDiameterPercentage * (ringYRadiusPercentage * Math.sin(angle) + ringYRadius) + offsetTop;
-            if (reverse) x = 100 - x;
+            // if (reverse) x = 100 - x;
             var positioning = new ReactiveVar({x: x, y: y});
             item.positioning = positioning;
             angle += angleIncrement;
@@ -77,56 +108,34 @@ Template.Ring.onRendered(function() {
 
         return items;
     };
-    var container = document.querySelector('.pu-ring');
 
-    var inner = createRing(container, {
-        items: template.data.inner,
-        radius: 20,
-        offset: {top: -15}
-    });
-    var center = createRing(container, {
-        items: template.data.center,
-        radius: 45,
-        offset: {top: -15}
-    });
-    var outer = createRing(container, {
-        items: template.data.outer,
-        radius: 80,
-        offset: {top: -15},
-        startAngle: -120,
-        skipAngle: 90
+    template.autorun(function(c) {
+        var data = Template.currentData();
+        var rings = [];
+        _.each(template.ringPresets, function(preset, key) {
+            preset.items = data.rings[key] || [];
+            rings = rings.concat(template.createRing(template.container, preset));
+        });
+        template.rings.set(rings);
     });
 
-    var placeholder = createRing(container, {
-        items: [{name:'notFound'}],
-        radius: 45,
-        offset: {top: -15}
-    });
-    template.placeholder.set(placeholder);
+});
 
-    var rings = [];
-    rings = rings.concat(inner,center,outer);
-
-    template.rings.set(rings);
-    Meteor.defer(function() { template.done.set(true); });
+Template.Ring.onDestroyed(function() {
+    var template = this;
+    $(document).off('mousemove', template.debouncedMouseMoveHandler);
 });
 
 Template.Ring.helpers({
-    rings: function() {
-        return Template.instance().rings.get();
-    },
-    style: function() {
-        if (!this.positioning) return false;
-        var positioning = this.positioning.get();
-        var x = positioning.x;
-        var y = positioning.y;
-        return 'left:' + x + '%;top:' + y + '%;';
-    },
-    done: function() {
-        return Template.instance().done.get();
-    },
-    placeholder: function() {
-        var placeholder = Template.instance().placeholder.get();
-        return placeholder;
+    data: function() {
+        var template = Template.instance();
+        return {
+            rings: function() {
+                return template.rings.get();
+            },
+            placeholder: function() {
+                return template.placeholder.get();
+            }
+        };
     }
 });

@@ -545,8 +545,7 @@ Router.route('/swarm/:slug', {
     name: 'swarm',
     where: 'client',
     yieldRegions: {
-        'swarm':            {to: 'main'},
-        'swarm_content':    {to: 'content'}
+        'swarm':            {to: 'main'}
     },
     data: function() {
         return {

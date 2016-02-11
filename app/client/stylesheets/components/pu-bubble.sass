@@ -12,46 +12,11 @@
         transform: rotate(0deg)
     100%
         transform: rotate(-360deg)
-
-@keyframes float-1
+@keyframes rotate
     0%
-        transform: translate3d(-5px, -5px, 0)
-    // 50%
+        transform: rotate(0deg)
     100%
-        transform: translate3d(5px, 5px, 0)
-        // ransform: translate3d(-5px, -5px, 0)
-
-@keyframes float-2
-    0%
-        transform: translate3d(5px, -5px, 0)
-    // 50%
-    100%
-        transform: translate3d(-5px, 5px, 0)
-        // ransform: translate3d(5px, -5px, 0)
-
-@keyframes float-3
-    0%
-        transform: translate3d(5px, 5px, 0)
-    // 50%
-    100%
-        transform: translate3d(-5px, -5px, 0)
-        // ransform: translate3d(5px, 5px, 0)
-
-@keyframes float-4
-    0%
-        transform: translate3d(-5px, 5px, 0)
-    // 50%
-    100%
-        transform: translate3d(5px, -5px, 0)
-        // ransform: translate3d(-5px, 5px, 0)
-
-@keyframes float-5
-    0%
-        transform: translate3d(5px, -5px, 0)
-    // 50%
-    100%
-        transform: translate3d(-5px, 5px, 0)
-        // ransform: translate3d(5px, -5px, 0)
+        transform: rotate(360deg)
 
 .pu-bubble
     $border: 4px
@@ -59,6 +24,10 @@
     width: 40px
     height: 40px
     margin-left: -20px
+    opacity: 0
+    transition: opacity .2s
+    &.show
+        opacity: 1
     &.pu-state-empty
         display: none
     .pu-sub-container
@@ -88,7 +57,6 @@
             width: $size
             height: $size
             background-color: $color-background-tertiery
-            // background-color: $color-primary
             position: relative
             border-radius: 50%
             z-index: 1
@@ -138,24 +106,6 @@
     $deg: 360deg / 25;
     @for $i from 0 through 24
         &-#{$i}
-            @if ($i >= 0 and $i < 5)
-                animation-name: float-1
-                animation-duration: (2 + random(3)) + s
-            @if ($i >= 5 and $i < 10)
-                animation-name: float-2
-                animation-duration: (2 + random(3)) + s
-            @if ($i >= 10 and $i < 15)
-                animation-name: float-3
-                animation-duration: (2 + random(3)) + s
-            @if ($i >= 15 and $i < 20)
-                animation-name: float-4
-                animation-duration: (2 + random(3)) + s
-            @if ($i >= 20 and $i < 25)
-                animation-name: float-5
-                animation-duration: (2 + random(3)) + s
-            animation-timing-function: ease-in-out
-            animation-iteration-count: infinite
-            animation-direction: alternate
             .pu-sub-container
                 > .pu-sub-namecontainer
                     transform: rotate($deg * $i)
@@ -198,9 +148,17 @@
                 border-radius: 0
                 background-color: transparent
                 background-size: contain
-                background-image: url(/images/swarm/placeholder.png)
+                background-repeat: no-repeat
+                background-position: center
+                &.rotating
+                    animation-name: rotate
+                    animation-duration: 60s
+                    animation-iteration-count: infinite
+                    animation-timing-function: linear
+                    &.reversed
+                        animation-direction: reverse
             &:hover
-                > figure
+                > figure.flip
                     animation-name: flip
                     animation-duration: 25s
                     animation-iteration-count: infinite

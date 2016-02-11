@@ -1,8 +1,8 @@
 <template name="Bubble">
-    {{#unless partupEquals name "pu_tribe_notfound"}}
-        <div class="pu-bubble pu-bubble-{{random}} {{#if empty}}pu-state-empty{{/if}}">
+    {{#if name }}
+        <div class="pu-bubble pu-bubble-{{data.randomInt}} {{#if empty}}pu-state-empty{{/if}} {{#if state.show}}show{{/if}}">
             <a href="{{ pathFor route='network-detail' slug=slug}}" class="pu-sub-container" data-hovercontainer="HoverContainer_network" data-hovercontainer-context="{{ slug }}" data-hovercontainer-orientation="left-right" data-hovercontainer-class="pu-type-network" data-hovercontainer-offset="20">
-                <figure style="{{#with image }}background-image:url('{{ partupImageUrl id=. store='360x360'}}');{{/with }}"></figure>
+                <figure style="{{#with data.image }}background-image:url('{{ partupImageUrl id=. store='360x360'}}');{{/with }}"></figure>
                 <div class="pu-sub-namecontainer">
                     <span class="pu-sub-line"></span>
                     <span class="pu-sub-name">{{ name }}</span>
@@ -10,13 +10,40 @@
             </a>
         </div>
     {{else}}
-        <div class="pu-bubble pu-bubble-{{random}} pu-bubble-placeholder">
+        <div class="pu-bubble pu-bubble-24 pu-bubble-placeholder {{#if state.show}}show{{/if}}">
            <a href="{{ pathFor route=placeholderPath slug=placeholderSlug _id=placeholderId }}" class="pu-sub-container">
-               <figure></figure>
-               <div class="pu-sub-namecontainer">
-                    <span class="pu-sub-name">Terug naar home</span>
-                </div>
+               {{> Template.dynamic template=type }}
            </a>
         </div>
-    {{/unless}}
+    {{/if}}
+</template>
+<template name="spaceship_flying">
+    <figure style="background-image: url(/images/swarm/spaceship_flying.png);" class="flip"></figure>
+    <div class="pu-sub-namecontainer">
+        <span class="pu-sub-name">{{_ 'swarm-explorer-bubble-placeholder-backtohome' }}</span>
+    </div>
+</template>
+<template name="spaceship">
+    <figure style="background-image: url(/images/swarm/spaceship.png);" class="rotating"></figure>
+    <div class="pu-sub-namecontainer">
+        <span class="pu-sub-name"></span>
+    </div>
+</template>
+<template name="astronaut">
+    <figure style="background-image: url(/images/swarm/astronaut.png);" class="rotating reversed"></figure>
+    <div class="pu-sub-namecontainer">
+        <span class="pu-sub-name">{{_ 'swarm-explorer-bubble-placeholder-swarmempty' }}</span>
+    </div>
+</template>
+<template name="freakin_dog">
+   <figure style="background-image: url(/images/swarm/freakin_dog.png); background-size: 50%;" class="rotating"></figure>
+   <div class="pu-sub-namecontainer">
+        <span class="pu-sub-name"></span>
+    </div>
+</template>
+<template name="picture">
+   <figure style="background-image: url(/images/swarm/picture.png); background-size: 40%;" class="rotating reversed"></figure>
+   <div class="pu-sub-namecontainer">
+        <span class="pu-sub-name"></span>
+    </div>
 </template>
