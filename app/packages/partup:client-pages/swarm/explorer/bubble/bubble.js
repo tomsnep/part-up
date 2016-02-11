@@ -1,5 +1,5 @@
 Template.Bubble.onCreated(function() {
-    this.randomInt = Math.floor(Math.random() * (24 - 0 + 1) + 0);
+    this.randomInt = lodash.random(0, 24);
     this.show = new ReactiveVar(false);
 });
 Template.Bubble.onRendered(function() {

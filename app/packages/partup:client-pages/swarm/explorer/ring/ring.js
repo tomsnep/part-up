@@ -7,9 +7,6 @@ Template.Ring.onCreated(function() {
     template.randomBoolean = function() {
         return !(+new Date() % 2); // faux-randomness
     };
-    template.randomRange = function(minimum, maximum) {
-        return Math.floor(Math.random() * (maximum - minimum + 1)) + minimum;
-    };
 
     // preset the configuration
     // to prevent recalculation in autorun
@@ -17,13 +14,13 @@ Template.Ring.onCreated(function() {
         inner: {
             radius: 20,
             offset: {top: -15},
-            startAngle: template.randomRange(0, 360),
+            startAngle: lodash.random(0, 360),
             reverse: template.randomBoolean()
         },
         center: {
             radius: 45,
             offset: {top: -15},
-            startAngle: template.randomRange(0, 360),
+            startAngle: lodash.random(0, 360),
             reverse: template.randomBoolean()
         },
         outer: {
@@ -38,7 +35,7 @@ Template.Ring.onCreated(function() {
 
 Template.Ring.onRendered(function() {
     var template = this;
-    template.container = document.querySelector('.pu-ring');
+    template.container = template.find('.pu-ring');
     template.mouseMoveHandler = function(e) {
         var windowWidth = window.innerWidth;
         var windowHeight = window.innerHeight;
@@ -53,7 +50,7 @@ Template.Ring.onRendered(function() {
         // options readout
         var items = options.items || [];
         var radius = options.radius || 100;
-        var startAngle = typeof options.startAngle === 'number' ? options.startAngle : template.randomRange(0, 360);
+        var startAngle = typeof options.startAngle === 'number' ? options.startAngle : lodash.random(0, 360);
         var skipAngle = options.skipAngle || false;
         var offset = options.offset || {};
         var offsetTop = offset.top || 0;

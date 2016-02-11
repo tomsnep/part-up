@@ -20,39 +20,36 @@ Template.swarm_explorer.helpers({
                 // check if the networks are a mongo cursor
                 // if so, we know it's an existing swarm
                 var networks = data.networks instanceof Mongo.Collection.Cursor ? data.networks.fetch() : false;
-
+                var innerRingItems = [];
+                var centerRingItems = [];
+                var outerRingItems = [];
                 // determine total number of networks
                 var total = networks.length;
+                var hasItems = total ? true : false;
 
                 // total networks in inner circle
                 // 1/2 of 1/3 of total number of networks
-                var innerLength = (total / 3) / 2.1;
+                var numberOfInnerRingItems = Math.round((total / 3) / 2);
 
                 // total networks in center circle
                 // 1/3 of total number of networks
-                var centerLength = (total / 3);
+                var numberOfCenterRingItems = Math.round((total / 3));
 
-                // total networks in outer circle
-                // total of center circle networks (1/3 of total number of networks)
-                // plus total of inner circle networks (1/2 of 1/3 of total number of networks)
-                var outerLength = (centerLength + innerLength);
+                if (hasItems) {
+                    _.times(numberOfInnerRingItems, function() {
+                        innerRingItems.push(networks.pop());
+                    });
+                    _.times(numberOfCenterRingItems, function() {
+                        centerRingItems.push(networks.pop());
+                    });
+                    outerRingItems = networks;
+                }
 
-                // all values add up to total number of networks or total plus one
-                // it does not matter that there is a possibility if +1
                 return networks ? {
-                    hasContent: total ? true : false,
-                    inner: _.filter(networks, function(item, index) {
-                        // return index <= 2;
-                        return index <= innerLength;
-                    }),
-                    center: _.filter(networks, function(item, index) {
-                        // return index > 2 && index <= 12;
-                        return index > innerLength && index <= (centerLength + innerLength);
-                    }),
-                    outer: _.filter(networks, function(item, index) {
-                        // return index > 12 && index <= 25;
-                        return index > (centerLength + innerLength) && index <= (centerLength + innerLength + outerLength);
-                    })
+                    hasItems: hasItems,
+                    inner: innerRingItems,
+                    center: centerRingItems,
+                    outer: outerRingItems
                 } : false;
             },
         };

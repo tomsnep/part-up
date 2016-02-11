@@ -11,7 +11,7 @@
                     <li>{{_ 'swarm-explorer-count-activities' count=swarm.stats.activity_count }}</li>
                 </ul>
             </header>
-            {{#if data.rings.hasContent}}
+            {{#if data.rings.hasItems}}
                 {{> Ring rings=data.rings }}
             {{else}}
                 {{> Ring rings=static.placeholder.swarmEmpty }}
