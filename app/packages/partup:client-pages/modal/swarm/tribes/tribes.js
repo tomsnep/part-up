@@ -16,7 +16,7 @@ Template.modal_swarm_settings_tribes.helpers({
                 return swarm;
             },
             networks: function() {
-                return Networks.find({_id: {$in: swarm.networks}});;
+                return Networks.find({_id: {$in: swarm.networks}});
             }
         };
     },

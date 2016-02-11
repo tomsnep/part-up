@@ -1,9 +1,3 @@
-/**
- * Render a form to edit a single swarm's settings
- *
- * @module client-swarm-settings
- * @param {Number} slug    the slug of the swarm whose settings are rendered
- */
 Template.modal_swarm_settings_details.onCreated(function() {
     var tpl = this;
     var userId = Meteor.userId();
@@ -18,8 +12,6 @@ Template.modal_swarm_settings_details.onCreated(function() {
     tpl.autorun(function() {
         var swarm = Swarms.findOne({slug: tpl.data.slug});
         if (!swarm) return;
-
-        // if (swarm.location && swarm.location.place_id) tpl.locationSelection.set(swarm.location);
 
         swarm = Partup.transformers.swarm.toFormSwarm(swarm);
 
