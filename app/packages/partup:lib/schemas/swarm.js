@@ -7,17 +7,17 @@
 var swarmBaseSchema = new SimpleSchema({
     title: {
         type: String,
-        max: 50,
+        max: 75,
         optional: true
     },
     introduction: {
         type: String,
-        max: 350,
+        max: 500,
         optional: true
     },
     description: {
         type: String,
-        max: 500,
+        max: 1500,
         optional: true
     },
     image: {
