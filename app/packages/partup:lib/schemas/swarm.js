@@ -36,6 +36,9 @@ Partup.schemas.entities.swarm = new SimpleSchema([swarmBaseSchema, {
         type: String,
         regEx: SimpleSchema.RegEx.Id
     },
+    activity_count: {
+        type: Number
+    },
     admin_id: {
         type: String,
         regEx: SimpleSchema.RegEx.Id
@@ -51,6 +54,9 @@ Partup.schemas.entities.swarm = new SimpleSchema([swarmBaseSchema, {
     networks: {
         type: [String],
         regEx: SimpleSchema.RegEx.Id
+    },
+    partup_count: {
+        type: Number
     },
     quotes: {
         type: [Object],
@@ -120,6 +126,9 @@ Partup.schemas.entities.swarm = new SimpleSchema([swarmBaseSchema, {
     updated_at: {
         type: Date,
         defaultValue: new Date()
+    },
+    upper_count: {
+        type: Number
     }
 }]);
 
