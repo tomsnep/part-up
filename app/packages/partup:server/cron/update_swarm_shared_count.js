@@ -2,7 +2,7 @@ if(process.env.PARTUP_CRON_ENABLED) {
     SyncedCron.add({
         name: 'Update the shared counts of a swarm from different socials',
         schedule: function(parser) {
-            return parser.text(Swarm.constants.CRON_SWARM_SHARED_COUNTS);
+            return parser.text(Partup.constants.CRON_SWARM_SHARED_COUNTS);
         },
         job: function() {
             if (!process.env.NODE_ENV.match(/development/)) {
