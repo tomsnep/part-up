@@ -88,7 +88,6 @@ Template.afFieldInput.onRendered(function() {
 
 Template.Comments.onDestroyed(function() {
     var template = this;
-
     // destroy all evil memory leaks
     if (template.mentionsInput) template.mentionsInput.destroy();
     if (template.mentionsEditInput) template.mentionsEditInput.destroy();
