@@ -167,13 +167,13 @@ Partup.schemas.forms.featureNetwork = new SimpleSchema({
         type: Boolean
     },
     comment: {
-        type: String,
+        type: String
     },
     author_id: {
-        type: String,
+        type: String
     },
     job_title: {
-        type: String,
+        type: String
     },
     language: {
         type: String,
