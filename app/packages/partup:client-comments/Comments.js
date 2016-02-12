@@ -31,8 +31,8 @@ Template.Comments.onCreated(function() {
     template.currentEditCommentId = new ReactiveVar();
 
     template.currentComment = new ReactiveVar();
-
-    template.formId = new ReactiveVar('commentForm-' + template.data.update._id);
+    template.uniqueId = _.uniqueId();
+    template.formId = template.uniqueId + 'commentForm-' + template.data.update._id;
 
     template.resetEditCommentForm = function() {
         if (template.mentionsEditInput) template.mentionsEditInput.destroy();
@@ -88,7 +88,6 @@ Template.afFieldInput.onRendered(function() {
 
 Template.Comments.onDestroyed(function() {
     var template = this;
-
     // destroy all evil memory leaks
     if (template.mentionsInput) template.mentionsInput.destroy();
     if (template.mentionsEditInput) template.mentionsEditInput.destroy();
@@ -100,12 +99,13 @@ Template.Comments.helpers({
     state: function() {
         var self = this;
         var template = Template.instance();
+        var data = Template.currentData();
         return {
             submitButtonActive: function() {
                 return template.submitButtonActive.get();
             },
             commentFormId: function() {
-                return template.formId.get();
+                return template.uniqueId + 'commentForm-' + data.update._id;
             },
             showComments: function() {
                 return template.showComments;
@@ -191,7 +191,7 @@ Template.Comments.helpers({
     },
     formSchema: Partup.schemas.forms.updateComment,
     content: function() {
-        return Partup.helpers.mentions.decode(this.content);
+        return Partup.helpers.mentions.decode(Partup.client.sanitize(this.content));
     },
     systemMessage: function(content) {
         return __('comment-field-content-' + content);
@@ -275,7 +275,7 @@ Template.Comments.events({
             template.tooManyCharacters.set(false);
         }
         if ([8, 46].indexOf(event.keyCode) > -1) {
-            AutoForm.validateForm('commentForm-' + template.data.update._id);
+            AutoForm.validateForm(template.uniqueId + 'commentForm-' + template.data.update._id);
         }
     },
     'keydown [data-submit=return]': function(event, template) {
@@ -288,7 +288,7 @@ Template.Comments.events({
         var pressedKey = event.which ? event.which : event.keyCode;
 
         // check if it's the 'return' key and if shift is NOT held down
-        if (pressedKey == 13 && !event.shiftKey){
+        if (pressedKey == 13 && !event.shiftKey) {
             event.preventDefault();
 
             if (template.submittingForm.get()) return false;
@@ -333,13 +333,14 @@ AutoForm.addHooks(null, {
     onSubmit: function(insertDoc) {
         var self = this;
         var formNameParts = self.formId.split('-');
+        var template = self.template.parent();
         // abort if it's the wrong form
-        if (formNameParts.length !== 2 || (formNameParts[0] !== 'updateCommentForm' && formNameParts[0] !== 'commentForm')) return false;
+        if (formNameParts.length !== 2 || (formNameParts[0] !== 'updateCommentForm' && formNameParts[0] !== (template.uniqueId + 'commentForm'))) return false;
         self.event.preventDefault();
 
         // the parent of the autoform
         var template = self.template.parent();
-        var formId = template.formId.get();
+        var formId = template.formId;
 
         // change form state
         template.submittingForm.set(true);
