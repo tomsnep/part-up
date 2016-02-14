@@ -18,7 +18,15 @@
         <footer>
             <ul class="pu-list">
                 {{# each product.features }}
-                    <li>{{ name }}: <span>{{ value }}</span></li>
+                    <li>
+                        {{ name }}: <span>{{ value }}</span>
+                        {{#with more}}
+                            <a class="pu-hint pu-tooltip" href="#">
+                                <span>Need more?</span>
+                                <span class="pu-tooltip-wrapper"><p class="pu-paragraph">{{.}}</p></span>
+                            </a>
+                        {{/with}}
+                    </li>
                 {{/ each }}
             </ul>
         </footer>
