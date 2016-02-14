@@ -112,7 +112,12 @@ describe('i18nFolder', function() {
                     sourcePath: '/Users/theuylimpanont/Development/part-up/crowdin/mock-folders/app/packages/partup:client-pages/i18n/app/discover/partials/nl.i18n.json'
                 }];
 
-            expect(files).to.eql(expectedFiles);
+            expectedFiles.forEach(function(file, index) {
+               expect(file.destinationPath).to.equal(files[index].destinationPath);
+               expect(
+                   file.sourcePath.replace(/^.*\/crowdin\/mock-folders\//, '')
+               ).to.equal(files[index].destinationPath);
+            });
             done();
         });
     });
