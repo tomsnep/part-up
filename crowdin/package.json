@@ -1,0 +1,33 @@
+{
+  "name": "crowdin",
+  "version": "1.0.0",
+  "description": "",
+  "main": "Gulpfile.js",
+  "devDependencies": {
+    "bluebird": "^3.3.0",
+    "bluebird-retry": "^0.5.3",
+    "chai": "^3.5.0",
+    "chai-as-promised": "^5.2.0",
+    "chalk": "^1.1.1",
+    "express": "^4.13.4",
+    "glob": "^7.0.0",
+    "gulp": "^3.9.1",
+    "gulp-each": "^0.1.1",
+    "gulp-mocha": "^2.2.0",
+    "gulp-util": "^3.0.7",
+    "jstoxml": "^0.2.3",
+    "lodash": "^4.3.0",
+    "mocha": "^2.4.5",
+    "promise-retry": "^1.0.2",
+    "superagent": "^1.7.2",
+    "supertest": "^1.2.0",
+    "xml": "^1.0.1",
+    "xmljson": "^0.2.0"
+  },
+  "scripts": {
+    "test": "./node_modules/.bin/mocha --require ./test/test-globals.js --timeout 20000"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {}
+}

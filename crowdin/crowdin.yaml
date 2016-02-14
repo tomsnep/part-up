@@ -1,0 +1,17 @@
+#.gitignore this file when we accept this solution as permanent
+
+project_identifier: part-up-web-app
+api_key: b50e9ec565b8e83a8c15e84b59268a4a                          #can be found in your project settings page
+base_path: ./app
+preserve_hierarchy: true
+
+files:
+  -
+    source: '/i18n/notification.en.i18n.json'
+    translation: '/i18n/notification.%two_letters_code%.i18n.json'
+  -
+    source: '/i18n/emails.en.i18n.json'
+    translation: '/i18n/emails.%two_letters_code%.i18n.json'
+  -
+    source: '/i18n/errors.en.i18n.json'
+    translation: '/i18n/errors.%two_letters_code%.i18n.json'

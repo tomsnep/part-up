@@ -30,3 +30,6 @@ app/public/uploads
 # Temp files
 *.swp
 *.orig
+
+node_modules
+bower_components
