@@ -11,7 +11,8 @@ var CrowdinApi = function(options) {
     this.options = _.extend({
         apiKey: '',
         projectId: '',
-        maxFilesPerTransfer: 20
+        maxFilesPerTransfer: 20,
+        sourceLanguage: 'en'
     }, options);
 };
 
@@ -30,13 +31,17 @@ CrowdinApi.prototype.addDirectory = function(directoryPath) {
   }.bind(this));
 };
 
-CrowdinApi.prototype.addFiles = function(files) {
+CrowdinApi.prototype.addSourceFiles = function(files) {
+
+    var curlParams = [],
+        promises = [];
+
+    files = files.filter(function(file) {
+       return file.sourcePath.indexOf(this.options.sourceLanguage+'.i18n.json') !== -1;
+    }.bind(this));
 
     var chunkFiles = _.chunk(files, Math.ceil(files.length / this.options.maxFilesPerTransfer));
 
-    var curlParams = [];
-
-    var promises = [];
 
     chunkFiles.forEach(function(files) {
         var fileParams = '';
@@ -48,7 +53,7 @@ CrowdinApi.prototype.addFiles = function(files) {
 
     curlParams.forEach(function(fileParams) {
         promises.push(new Promise(function(resolve, reject) {
-            exec('curl ' + fileParams + this.getMethodUrl('add-file'), function(err, stdout, stderr) {
+            exec('curl ' + fileParams + this.getMethodUrl('add-file'), function(err, stdout) {
                 if(err) { reject(err); }
                 var addFileMessage = chalk.yellow('\n\n ========= ' + fileParams + ' ========\n\n' + stdout);
                 console.log(addFileMessage);

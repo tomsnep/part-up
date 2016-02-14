@@ -25,13 +25,13 @@ describe('crowdin real api', function() {
         });
     });
 
-    after(function(done) {
+   /* after(function(done) {
         crowdinApi.deleteDirectory('app').then(function() {
             done();
         }).catch(function() {
             done();
         });
-    });
+    });*/
 
 
     it('should add directory', function(done) {
@@ -66,7 +66,7 @@ describe('crowdin real api', function() {
 
     it('should add files in to the server directories', function(done) {
         i18nFolders.getAllFilePaths().then(function(filePaths) {
-            expect(crowdinApi.addFiles(filePaths)).to.be.fulfilled.and.notify(done);
+            expect(crowdinApi.addSourceFiles(filePaths)).to.be.fulfilled.and.notify(done);
         });
     });
 });

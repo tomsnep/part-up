@@ -6,8 +6,7 @@ var path = require('path');
 var i18nFolders = function(options) {
     this.options = _.extend({
         glob: '',
-        splitFolder: '',
-        sourceLanguage: 'en'
+        splitFolder: ''
     }, options);
 };
 

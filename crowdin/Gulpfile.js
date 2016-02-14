@@ -37,8 +37,8 @@ gulp.task('crowdin:upload-directories', function() {
 });
 
 
-gulp.task('crowdin:add-files', function() {
+gulp.task('crowdin:add-source-files', function() {
     i18nFolders.getAllFilePaths().then(function(filePaths) {
-        crowdinApi.addFiles(filePaths);
+        crowdinApi.addSourceFiles(filePaths);
     });
 });
