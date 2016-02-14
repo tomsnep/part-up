@@ -57,6 +57,63 @@ describe('i18nFolder', function() {
                 'app/packages/partup:client-pages/i18n/app/discover/partials'
             ]
         );
+    });
 
+    it('should get all filepaths', function(done) {
+
+        i18nFolders.getAllFilePaths().then(function (files) {
+            var expectedFiles = [
+                {
+                    destinationPath: 'app/i18n/emails.en.i18n.json',
+                    sourcePath: '/Users/theuylimpanont/Development/part-up/crowdin/mock-folders/app/i18n/emails.en.i18n.json'
+                },
+                {
+                    destinationPath: 'app/i18n/emails.nl.i18n.json',
+                    sourcePath: '/Users/theuylimpanont/Development/part-up/crowdin/mock-folders/app/i18n/emails.nl.i18n.json'
+                },
+                {
+                    destinationPath: 'app/i18n/errors.en.i18n.json',
+                    sourcePath: '/Users/theuylimpanont/Development/part-up/crowdin/mock-folders/app/i18n/errors.en.i18n.json'
+                },
+                {
+                    destinationPath: 'app/i18n/errors.nl.i18n.json',
+                    sourcePath: '/Users/theuylimpanont/Development/part-up/crowdin/mock-folders/app/i18n/errors.nl.i18n.json'
+                },
+                {
+                    destinationPath: 'app/i18n/notification.en.i18n.json',
+                    sourcePath: '/Users/theuylimpanont/Development/part-up/crowdin/mock-folders/app/i18n/notification.en.i18n.json'
+                },
+                {
+                    destinationPath: 'app/i18n/notification.nl.i18n.json',
+                    sourcePath: '/Users/theuylimpanont/Development/part-up/crowdin/mock-folders/app/i18n/notification.nl.i18n.json'
+                },
+                {
+                    destinationPath: 'app/packages/partup:client-footer/i18n/footer.en.i18n.json',
+                    sourcePath: '/Users/theuylimpanont/Development/part-up/crowdin/mock-folders/app/packages/partup:client-footer/i18n/footer.en.i18n.json'
+                },
+                {
+                    destinationPath: 'app/packages/partup:client-footer/i18n/footer.nl.i18n.json',
+                    sourcePath: '/Users/theuylimpanont/Development/part-up/crowdin/mock-folders/app/packages/partup:client-footer/i18n/footer.nl.i18n.json'
+                },
+                {
+                    destinationPath: 'app/packages/partup:client-pages/i18n/app/discover/en.i18n.json',
+                    sourcePath: '/Users/theuylimpanont/Development/part-up/crowdin/mock-folders/app/packages/partup:client-pages/i18n/app/discover/en.i18n.json'
+                },
+                {
+                    destinationPath: 'app/packages/partup:client-pages/i18n/app/discover/nl.i18n.json',
+                    sourcePath: '/Users/theuylimpanont/Development/part-up/crowdin/mock-folders/app/packages/partup:client-pages/i18n/app/discover/nl.i18n.json'
+                },
+                {
+                    destinationPath: 'app/packages/partup:client-pages/i18n/app/discover/partials/en.i18n.json',
+                    sourcePath: '/Users/theuylimpanont/Development/part-up/crowdin/mock-folders/app/packages/partup:client-pages/i18n/app/discover/partials/en.i18n.json'
+                },
+                {
+                    destinationPath: 'app/packages/partup:client-pages/i18n/app/discover/partials/nl.i18n.json',
+                    sourcePath: '/Users/theuylimpanont/Development/part-up/crowdin/mock-folders/app/packages/partup:client-pages/i18n/app/discover/partials/nl.i18n.json'
+                }];
+
+            expect(files).to.eql(expectedFiles);
+            done();
+        });
     });
 });

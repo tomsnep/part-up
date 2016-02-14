@@ -6,8 +6,29 @@ var path = require('path');
 var i18nFolders = function(options) {
     this.options = _.extend({
         glob: '',
-        splitFolder: ''
+        splitFolder: '',
+        sourceLanguage: 'en'
     }, options);
+};
+
+i18nFolders.prototype.getAllFilePaths = function() {
+    var self = this;
+    return new Promise(function(resolve, reject) {
+        glob(self.options.glob, function (error, filePaths) {
+            if(error) {
+                reject(error);
+            }
+            filePaths = filePaths.map(function(filePath) {
+                var dir = filePath;
+                var splitPath = dir.substring(dir.indexOf(self.options.splitFolder), dir.length);
+                return {
+                    destinationPath: splitPath,
+                    sourcePath: filePath
+                };
+            });
+            resolve(_.uniq(filePaths));
+        });
+    });
 };
 
 i18nFolders.prototype.getDirectoryPaths = function() {

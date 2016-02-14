@@ -3,12 +3,15 @@ var request = require('superagent');
 var Promise = require('bluebird');
 var retry = require('bluebird-retry');
 var chalk = require('chalk');
+var path = require('path');
+var exec = require('child_process').exec;
 
 var CrowdinApi = function(options) {
     this.apiBaseUrl = 'https://api.crowdin.com/api';
     this.options = _.extend({
         apiKey: '',
-        projectId: ''
+        projectId: '',
+        maxFilesPerTransfer: 20
     }, options);
 };
 
@@ -25,6 +28,36 @@ CrowdinApi.prototype.addDirectory = function(directoryPath) {
           resolve(res);
       })
   }.bind(this));
+};
+
+CrowdinApi.prototype.addFiles = function(files) {
+
+    var chunkFiles = _.chunk(files, Math.ceil(files.length / this.options.maxFilesPerTransfer));
+
+    var curlParams = [];
+
+    var promises = [];
+
+    chunkFiles.forEach(function(files) {
+        var fileParams = '';
+        files.forEach(function(file) {
+            fileParams += '-F files['+file.destinationPath.replace(':', '-')+']=@'+file.sourcePath + ' ';
+        });
+        curlParams.push(fileParams);
+    });
+
+    curlParams.forEach(function(fileParams) {
+        promises.push(new Promise(function(resolve, reject) {
+            exec('curl ' + fileParams + this.getMethodUrl('add-file'), function(err, stdout, stderr) {
+                if(err) { reject(err); }
+                var addFileMessage = chalk.yellow('\n\n ========= ' + fileParams + ' ========\n\n' + stdout);
+                console.log(addFileMessage);
+                resolve(addFileMessage);
+            });
+        }.bind(this)));
+    }.bind(this));
+
+    return Promise.all(promises);
 };
 
 CrowdinApi.prototype.deleteDirectory = function(directoryPath) {

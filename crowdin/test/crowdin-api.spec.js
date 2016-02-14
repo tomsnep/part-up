@@ -63,5 +63,11 @@ describe('crowdin real api', function() {
         });
 
     });
+
+    it('should add files in to the server directories', function(done) {
+        i18nFolders.getAllFilePaths().then(function(filePaths) {
+            expect(crowdinApi.addFiles(filePaths)).to.be.fulfilled.and.notify(done);
+        });
+    });
 });
 

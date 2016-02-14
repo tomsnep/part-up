@@ -7,24 +7,23 @@ var argv = require('minimist')(process.argv.slice(2));
 var i18nFolders = require('./modules/i18n-folders');
 var CrowdinApi = require('./modules/crowdin-api');
 
+i18nFolders = new i18nFolders({
+    glob: path.resolve(__dirname, '../app/**/*.i18n.json'),
+    splitFolder: 'app'
+});
+
+var crowdinApi = new CrowdinApi({
+    apiKey: 'b2c6e318159ca7ea007c043dd003a446',
+    projectId: 'partup-test-project'
+});
+
 gulp.task('crowdin:upload-directories', function() {
 
-    var folders = new i18nFolders({
-        glob: path.resolve(__dirname, '../app/**/*.i18n.json'),
-        splitFolder: 'app'
-    });
+    i18nFolders.getDirectoryPaths().then(function(filePaths) {
+        var filePathsMatrix = i18nFolders.getDirectoriesMatrix(filePaths);
+        var addDirectoryPaths =  i18nFolders.getAddDirectoryPaths(filePathsMatrix);
 
-    var crowdin = new CrowdinApi({
-        apiKey: argv.apiKey,
-        projectId: argv.projectId
-    });
-
-
-    folders.getDirectoryPaths().then(function(filePaths) {
-        var filePathsMatrix = folders.getDirectoriesMatrix(filePaths);
-        var addDirectoryPaths =  folders.getAddDirectoryPaths(filePathsMatrix);
-
-        crowdin.addDirectoriesInSequence(addDirectoryPaths)
+        crowdinApi.addDirectoriesInSequence(addDirectoryPaths)
         .done(function(promise) {
            if(promise.error) {
                var errorMessage = JSON.stringify(chalk.red(promise.error.response), null, 4);
@@ -34,5 +33,12 @@ gulp.task('crowdin:upload-directories', function() {
                console.log(successMessage);
            }
         });
+    });
+});
+
+
+gulp.task('crowdin:add-files', function() {
+    i18nFolders.getAllFilePaths().then(function(filePaths) {
+        crowdinApi.addFiles(filePaths);
     });
 });
