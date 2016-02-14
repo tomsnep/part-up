@@ -11,8 +11,8 @@ i18nFolders = new i18nFolders({
 });
 
 var crowdinApi = new CrowdinApi({
-    apiKey: 'b50e9ec565b8e83a8c15e84b59268a4a',
-    projectId: 'part-up-web-app'
+    apiKey: 'b2c6e318159ca7ea007c043dd003a446',
+    projectId: 'partup-test-project'
 });
 
 describe('crowdin real api', function() {
