@@ -5,6 +5,7 @@ var Subs = new SubsManager({
 
 Template.app_partup_update.onCreated(function() {
     var template = this;
+    template.rerenderHack = new ReactiveVar(true);
     template.autorun(function(computation) {
         var data = Template.currentData();
         if (data.updateId && data.partupId) {
@@ -12,6 +13,17 @@ Template.app_partup_update.onCreated(function() {
             Subs.subscribe('partups.one', data.partupId);
             Subs.subscribe('updates.one', data.updateId);
         }
+    });
+    var updateId;
+    template.autorun(function(computation) {
+        var data = Template.currentData();
+        if (updateId !== data.updateId) {
+            template.rerenderHack.set(false);
+            Meteor.defer(function() {
+                template.rerenderHack.set(true);
+            });
+        }
+        updateId = data.updateId;
     });
 
     if (typeof template.data.updateId === 'string') {
@@ -23,6 +35,9 @@ Template.app_partup_update.onCreated(function() {
 Template.app_partup_update.helpers({
     partup: function() {
         return Partups.findOne(Template.instance().data.partupId);
+    },
+    rerenderHack: function() {
+        return Template.instance().rerenderHack.get();
     },
     metaDataForUpdate: function() {
         var update = Updates.findOne(this.updateId);
