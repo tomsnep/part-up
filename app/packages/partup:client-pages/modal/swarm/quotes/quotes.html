@@ -2,5 +2,20 @@
     <div class="pu-composition pu-composition-defaultmodal">
         <h2 class="pu-title pu-title-modal">Quotes</h2>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima molestiae odit ad cum expedita, dolore, tempore praesentium odio illo dolores rerum numquam nostrum. Amet, atque.</p>
+
+        {{#each data.swarm.quotes}}
+            {{> QuoteItem swarmId=data.swarm._id quote=. state='view'}}
+        {{/each}}
+
+        {{#if partupLowerThan data.swarm.quotes.length 4}}
+
+            {{#if state.create}}
+                {{> QuoteItem swarmId=data.swarm._id quote=. state='form'}}
+            {{/if}}
+
+            <div class="pu-block pu-block-action">
+                <a href="" class="pu-button" data-create>Nieuwe quote</a>
+            </div>
+        {{/if}}
     </div>
 </template>

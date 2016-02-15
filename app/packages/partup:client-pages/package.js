@@ -248,7 +248,13 @@ Package.onUse(function(api) {
             'modal/swarm/tribes/tribes.html',
             'modal/swarm/tribes/tribes.js',
             'modal/swarm/quotes/quotes.html',
-            'modal/swarm/quotes/quotes.js'
+            'modal/swarm/quotes/quotes.js',
+            'modal/swarm/quotes/form/form.html',
+            'modal/swarm/quotes/form/form.js',
+            'modal/swarm/quotes/view/view.html',
+            'modal/swarm/quotes/view/view.js',
+            'modal/swarm/quotes/item/item.html',
+            'modal/swarm/quotes/item/item.js'
         ],
         swarm: [
             'swarm/swarm.html',

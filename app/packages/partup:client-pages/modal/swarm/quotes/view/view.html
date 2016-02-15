@@ -1,0 +1,15 @@
+<template name="modal_swarm_settings_quotes_view">
+    <section class="pu-block">
+        <button type="button" class="pu-button pu-button-icon" data-edit><i class="picon-pencil"></i></button>
+        <p>
+            {{quote.content}}
+        </p>
+        <a class="pu-sub-upper" href="{{ pathFor 'profile' _id=_id }}">
+            <figure class="pu-avatar pu-avatar-small"
+                style="{{#with quote.author.image}}background-image: url('{{ partupImageUrl id=. store='80x80' }}'){{/with}}"
+                data-hovercontainer="HoverContainer_upper" data-hovercontainer-context="{{ quote.author._id }}">
+            </figure>
+            {{quote.author.name}}
+        </a>
+    </section>
+</template>

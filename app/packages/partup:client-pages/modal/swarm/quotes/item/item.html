@@ -1,0 +1,7 @@
+<template name="QuoteItem">
+    {{#if state.form }}
+        {{> modal_swarm_settings_quotes_form }}
+    {{else}}
+        {{> modal_swarm_settings_quotes_view }}
+    {{/if}}
+</template>

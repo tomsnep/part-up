@@ -226,7 +226,7 @@ Meteor.methods({
         check(fields, Partup.schemas.forms.swarmQuote);
 
         try {
-            var upper = Meteor.users.find(fields.user_id);
+            var upper = Meteor.users.findOne(fields.author_id);
             var quote = {
                 _id: Random.id(),
                 content: sanitizeHtml(fields.content),
