@@ -367,5 +367,41 @@ Meteor.methods({
             Log.error(error);
             throw new Meteor.Error(400, 'related_uppers_could_not_be_given');
         }
+    },
+
+    /**
+     * Find related uppers for a specific user
+     *
+     * @param {String} swarmSlug
+     */
+    'swarms.get_related_networks': function(swarmSlug) {
+        check(swarmSlug, String);
+
+        try {
+            var swarm = Swarms.findOneOrFail({slug: swarmSlug});
+            var swarm_networks = swarm.networks || [];
+
+            var upper = Meteor.user();
+            if (!upper) return swarm_networks;
+            var upper_tags = upper.tags || [];
+            var related_networks = [];
+
+            // Loop through networks to check common tags
+            swarm_networks.forEach(function(networkId) {
+                var network = Networks.findOne(networkId);
+                var network_tags = network.tags || [];
+                var common_tags_count = lodash.intersection(upper_tags, network_tags).length;
+                related_networks.push({'network_id': network._id, 'common_tags_count': common_tags_count});
+            });
+
+            // Order the array based on tags count
+            related_networks = lodash.sortBy(related_networks, 'common_tags_count');
+
+            // And there we have it
+            return related_networks;
+        } catch (error) {
+            Log.error(error);
+            throw new Meteor.Error(400, 'related_networks_could_not_be_given');
+        }
     }
 });
