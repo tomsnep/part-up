@@ -55,7 +55,7 @@ i18nFolders.prototype.getDirectoriesMatrix = function(directoryPaths) {
     return output;
 };
 
-i18nFolders.prototype.getAddDirectoryPaths = function(directoryMatrix) {
+i18nFolders.prototype.getAddDirectorySequencePaths = function(directoryMatrix) {
     var output = [];
     for(var i = 0; i < directoryMatrix.length; i++) {
         var outputPath = '';

@@ -31,6 +31,43 @@ CrowdinApi.prototype.addDirectory = function(directoryPath) {
   }.bind(this));
 };
 
+CrowdinApi.prototype.uploadTranslations = function(files, languageCode) {
+
+    var curlParams = [],
+        promises = [];
+
+    files = files.filter(function(file) {
+        return file.sourcePath.indexOf(languageCode+'.i18n.json') !== -1;
+    }.bind(this));
+
+    var chunkFiles = _.chunk(files, Math.ceil(files.length / this.options.maxFilesPerTransfer));
+
+
+    chunkFiles.forEach(function(files) {
+        var fileParams = '';
+        files.forEach(function(file) {
+            var fileName = file.destinationPath.replace(':', '-');
+            fileName = fileName.replace(languageCode+'.i18n.json', this.options.sourceLanguage+'.i18n.json');
+            fileParams += '-F files['+fileName+']=@'+file.sourcePath + ' -F auto_approve_imported=1 -F language='+languageCode + ' ';
+        }.bind(this));
+        curlParams.push(fileParams);
+    }.bind(this));
+
+    curlParams.forEach(function(fileParams) {
+        promises.push(new Promise(function(resolve, reject) {
+            exec('curl ' + fileParams + this.getMethodUrl('upload-translation'), function(err, stdout) {
+                if(err) { reject(err); }
+                var addFileMessage = chalk.yellow('\n\n ========= ' + fileParams + ' ========\n\n' + stdout);
+                console.log(addFileMessage);
+                resolve(addFileMessage);
+            });
+        }.bind(this)));
+    }.bind(this));
+
+    return Promise.all(promises);
+};
+
+
 CrowdinApi.prototype.addSourceFiles = function(files) {
 
     var curlParams = [],

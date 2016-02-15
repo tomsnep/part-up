@@ -21,18 +21,8 @@ gulp.task('crowdin:upload-directories', function() {
 
     i18nFolders.getDirectoryPaths().then(function(filePaths) {
         var filePathsMatrix = i18nFolders.getDirectoriesMatrix(filePaths);
-        var addDirectoryPaths =  i18nFolders.getAddDirectoryPaths(filePathsMatrix);
-
-        crowdinApi.addDirectoriesInSequence(addDirectoryPaths)
-        .done(function(promise) {
-           if(promise.error) {
-               var errorMessage = JSON.stringify(chalk.red(promise.error.response), null, 4);
-               console.log(errorMessage);
-           } else {
-               var successMessage = chalk.green(promise.success);
-               console.log(successMessage);
-           }
-        });
+        var addDirectoryPaths =  i18nFolders.getAddDirectorySequencePaths(filePathsMatrix);
+        crowdinApi.addDirectoriesInSequence(addDirectoryPaths);
     });
 });
 
@@ -40,5 +30,20 @@ gulp.task('crowdin:upload-directories', function() {
 gulp.task('crowdin:add-source-files', function() {
     i18nFolders.getAllFilePaths().then(function(filePaths) {
         crowdinApi.addSourceFiles(filePaths);
+    });
+});
+
+gulp.task('crowdin:upload-translation-files', function() {
+    i18nFolders.getAllFilePaths().then(function(filePaths) {
+        var counter = 0;
+        var interval = setInterval(function() {
+            if(counter > 3) {
+                counter = 0;
+                return clearInterval(interval);
+            }
+            crowdinApi.uploadTranslations(filePaths, 'nl');
+            counter++;
+        }, 1000);
+
     });
 });

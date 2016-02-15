@@ -43,7 +43,7 @@ describe('i18nFolder', function() {
 
         var matrix =i18nFolders.getDirectoriesMatrix(filePaths);
 
-        expect(i18nFolders.getAddDirectoryPaths(matrix)).to.eql(
+        expect(i18nFolders.getAddDirectorySequencePaths(matrix)).to.eql(
             [
                 'app',
                 'app/i18n',
