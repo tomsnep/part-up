@@ -76,6 +76,27 @@ Meteor.methods({
     },
 
     /**
+     * Return a list of users based on search query
+     *
+     * @param {string} searchString
+     */
+    'users.upper_autocomplete': function(searchString) {
+        check(searchString, String);
+
+        var user = Meteor.user();
+        if (!user) throw new Meteor.Error(401, 'unauthorized');
+
+        try {
+            // Remove accents that might have been added to the query
+            searchString = mout.string.replaceAccents(searchString.toLowerCase());
+            return Meteor.users.findActiveUsers({'profile.normalized_name': new RegExp('.*' + searchString + '.*', 'i')}, {limit: 30}).fetch();
+        } catch (error) {
+            Log.error(error);
+            throw new Meteor.Error(400, 'users_could_not_be_autocompleted');
+        }
+    },
+
+    /**
      * Deactivate user
      *
      * @param  {string} userId
