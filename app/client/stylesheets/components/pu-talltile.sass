@@ -6,24 +6,44 @@
     border: 2px solid $color-border-light
     border-radius: 4px
     white-space: normal
+    position: relative
+    overflow: hidden
 
     > header, > article, > footer
         overflow: hidden
+        position: relative
+        z-index: 1
 
     > header
         background-color: $color-border-light
-        height: 110px
+        height: 100%
+        margin-bottom: -300px
         padding: 20px
+        padding-right: 10px
         text-align: left
+        z-index: 0
+        &:hover
+            + article
+                transform: translateY(110px)
 
     > article
-        height: 220px
+        height: 100%
+        margin-bottom: -200px
         padding: 20px
+        transition: transform .3s
+        background-color: #fff
 
+        &:hover
+            transform: translateY(-100px)
 
     > footer
         border-top: 2px solid $color-border-light
         padding: 20px
+        background-color: #fff
+        bottom: 0px
+        position: absolute
+        right: 0
+        left: 0
 
         .pu-button
             width: 100%
