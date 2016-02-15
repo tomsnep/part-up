@@ -1,21 +1,23 @@
 <template name="modal_swarm_settings_quotes">
     <div class="pu-composition pu-composition-defaultmodal">
-        <h2 class="pu-title pu-title-modal">Quotes</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima molestiae odit ad cum expedita, dolore, tempore praesentium odio illo dolores rerum numquam nostrum. Amet, atque.</p>
-
+        <h2 class="pu-title pu-title-modal">{{_ 'modal-swarm-quotes-title-page'}}</h2>
+        <p>{{_ 'modal-swarm-quotes-paragraph-intro'}}</p>
+        <p>Overview of added quotes:</p>
         {{#each data.swarm.quotes}}
             {{> QuoteItem swarmId=data.swarm._id quote=. state='view'}}
         {{/each}}
 
-        {{#if partupLowerThan data.swarm.quotes.length 4}}
+        {{#if partupLowerThan data.swarm.quotes.length 3}}
 
             {{#if state.create}}
                 {{> QuoteItem swarmId=data.swarm._id quote=. state='form'}}
             {{/if}}
 
             <div class="pu-block pu-block-action">
-                <a href="" class="pu-button" data-create>Nieuwe quote</a>
+                <a href="" class="pu-button" data-create>{{_ 'modal-swarm-quotes-button-add'}}</a>
             </div>
+
         {{/if}}
+
     </div>
 </template>

@@ -1,6 +1,5 @@
 <template name="modal_swarm_settings_quotes_view">
-    <section class="pu-block">
-        <button type="button" class="pu-button pu-button-icon" data-edit><i class="picon-pencil"></i></button>
+    <section class="pu-block pu-block-quote">
         <p>
             {{quote.content}}
         </p>
@@ -11,5 +10,6 @@
             </figure>
             {{quote.author.name}}
         </a>
+        <button type="button" class="pu-button pu-button-action" data-edit><i class="picon-pencil"></i></button>
     </section>
 </template>

@@ -1,5 +1,6 @@
 Template.modal_swarm_settings_quotes.onCreated(function() {
-    this.create = new ReactiveVar(false)
+    this.create = new ReactiveVar(false);
+    // Meteor.call('swarms.get_related_uppers', )
 });
 
 Template.modal_swarm_settings_quotes.events({
@@ -13,7 +14,6 @@ Template.modal_swarm_settings_quotes.helpers({
     data: function() {
         var template = Template.instance();
         var swarm = Swarms.findOne({slug: template.data.slug});
-        console.log(swarm)
         if (!swarm) return false;
         return {
             swarm: function() {
