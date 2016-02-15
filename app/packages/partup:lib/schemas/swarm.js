@@ -102,6 +102,10 @@ Partup.schemas.entities.swarm = new SimpleSchema([swarmBaseSchema, {
         type: Number,
         min: 0
     },
+    'stats.partner_count': {
+        type: Number,
+        min: 0
+    },
     'stats.partup_count': {
         type: Number,
         min: 0

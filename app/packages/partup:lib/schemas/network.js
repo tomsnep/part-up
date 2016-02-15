@@ -82,6 +82,29 @@ Partup.schemas.entities.network = new SimpleSchema([networkBaseSchema, {
         type: String,
         regEx: SimpleSchema.RegEx.Id
     },
+    stats: {
+        type: Object
+    },
+    'stats.activity_count': {
+        type: Number,
+        min: 0
+    },
+    'stats.partner_count': {
+        type: Number,
+        min: 0
+    },
+    'stats.partup_count': {
+        type: Number,
+        min: 0
+    },
+    'stats.supporter_count': {
+        type: Number,
+        min: 0
+    },
+    'stats.upper_count': {
+        type: Number,
+        min: 0
+    },
     swarms: {
         type: [String],
         optional: true,
