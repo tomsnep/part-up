@@ -33,9 +33,11 @@ Meteor.methods({
     },
 
     /**
-     * Return a list of users based on search query
+     * Return a list of users in a specific partup based on search query
      *
      * @param {string} searchString
+     * @param {string} group
+     * @param {string} partupId
      */
     'users.autocomplete': function(searchString, group, partupId) {
         check(searchString, String);
