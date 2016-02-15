@@ -1,33 +1,39 @@
 <template name="NetworkTile">
     <article class="pu-networkcard">
         <header>
-            <figure class="pu-avatar pu-avatar-square pu-sub-figure" style="{{#with network.image }}background-image:url('{{ partupImageUrl id=. store='360x360'}}');{{/with }}">
+            <figure class="pu-avatar pu-avatar-square pu-sub-figure" style="{{#with data.network.image }}background-image:url('{{ partupImageUrl id=. store='360x360'}}');{{/with }}">
             </figure>
 
             <div class="pu-sub-title">
                 <h4>
-                    {{ network.name }}
+                    {{ data.network.name }}
                 </h4>
-                <p>{{ network.profile.location.city }}</p>
+                <p>{{ data.network.profile.location.city }}</p>
             </div>
         </header>
         <article>
-            <p>{{ network.description }}</p>
+            <p>{{ data.network.description }}</p>
         </article>
         <footer>
             <ul class="pu-stats">
-                <li>
-                    <span>{{ network.partups }}</span>
-                    <span>{{_ 'network-tile-partups' }}</span>
-                </li>
-                <li>
-                    <span>{{ network.partners }}</span>
-                    <span>{{_ 'network-tile-partners' }}</span>
-                </li>
-                <li>
-                    <span>{{ network.activities }}</span>
-                    <span>{{_ 'network-tile-activities' }}</span>
-                </li>
+                {{#with data.network.stats.partup_count}}
+                    <li>
+                        <span>{{ . }}</span>
+                        <span>{{_ 'network-tile-partups' }}</span>
+                    </li>
+                {{/with}}
+                {{#with data.network.stats.upper_count }}
+                    <li>
+                        <span>{{ . }}</span>
+                        <span>{{_ 'network-tile-partners' }}</span>
+                    </li>
+                {{/with}}
+                {{#with data.network.stats.activy_count}}
+                    <li>
+                        <span>{{ . }}</span>
+                        <span>{{_ 'network-tile-activities' }}</span>
+                    </li>
+                {{/with}}
             </ul>
         </footer>
     </article>
