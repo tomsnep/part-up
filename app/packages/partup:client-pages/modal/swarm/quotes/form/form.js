@@ -39,7 +39,7 @@ Template.modal_swarm_settings_quotes_form.helpers({
             },
             authorQuery: function() {
                 return function(query, sync, async) {
-                    Meteor.call('users.autocomplete_swarm', query, '', true, function(error, authors) {
+                    Meteor.call('users.upper_autocomplete', query, '', true, function(error, authors) {
                         lodash.each(authors, function(p) {
                             p.value = p.name; // what to show in the autocomplete list
                         });
@@ -68,9 +68,8 @@ AutoForm.addHooks('quoteForm', {
 
         var template = self.template.parent();
         template.state.set('submitting', true);
-
-        var swarm = Swarms.findOne({slug: template.data.slug});
-        Meteor.call('swarms.add_quote', swarm._id, function(error) {
+        doc.author_id = template.authorSelection.curValue._id;
+        Meteor.call('swarms.add_quote', template.data.swarmId, doc, function(error) {
             if (error) return console.error(error);
             template.state.set('submitting', false);
 

@@ -3,10 +3,10 @@
     <!-- swarm home page -->
     <section class="pu-swarmcontent">
         <section class="pu-highlight">
-            <h1>{{ swarm.title }}</h1>
+            <h1>{{ data.swarm.title }}</h1>
             <!-- about -->
-            <h3 class="pu-accent pu-accent-centered">{{ swarm.introduction }}</h3>
-            <p>{{ swarm.description }}</p>
+            <h3 class="pu-accent pu-accent-centered">{{ data.swarm.introduction }}</h3>
+            <p>{{ data.swarm.description }}</p>
         </section>
         <section class="pu-article pu-article-videos">
             <!-- what is partup -->
@@ -21,31 +21,45 @@
                 <p>Nam dapibus nisl vitae elit fringilla rutrum. Aenean sollicitudin, erat a elementum rutrum, neque sem pretium metus, quis mollis nisl nunc et massa. Vestibulum sed metus in lorem tristique ullamcorper id vitae erat. Nulla mollis sapien sollicitudin lacinia lacinia. Vivamus facilisis dolor et massa placerat, at vestibulum nisl egestas. </p>
             </section>
         </section>
-        <section>
-            <!-- uppers -->
-            <section class="pu-highlight pu-highlight-subtle">
-                <h1>And who am I? You'll be a Part-upper!</h1>
-                <h3>Together with these people and 732198 others.</h3>
-                <ul class="pu-avatar-stack pu-avatar-stack-large">
-                    <li class="pu-avatar"></li>
-                    <li class="pu-avatar"></li>
-                    <li class="pu-avatar"></li>
-                    <li class="pu-avatar"></li>
-                    <li class="pu-avatar"></li>
-                    <li class="pu-avatar"></li>
-                    <li class="pu-avatar"></li>
-                    <li class="pu-avatar"></li>
-                    <li class="pu-avatar"></li>
-                    <li class="pu-avatar"></li>
-                    <li class="pu-avatar"></li>
-                    <li class="pu-avatar"></li>
-                    <li class="pu-avatar"></li>
-                    <li class="pu-avatar"></li>
-                    <li class="pu-avatar"></li>
-                    <li class="pu-avatar"></li>
-                    <li class="pu-avatar"></li>
-                    <li class="pu-avatar"></li>
-                </ul>
+        <!-- uppers -->
+        <section class="pu-highlight pu-highlight-subtle">
+            <h1>And who am I? You'll be a Part-upper!</h1>
+            <h3>Together with these people and 732198 others.</h3>
+            <ul class="pu-avatar-stack pu-avatar-stack-large">
+                <li class="pu-avatar"></li>
+                <li class="pu-avatar"></li>
+                <li class="pu-avatar"></li>
+                <li class="pu-avatar"></li>
+                <li class="pu-avatar"></li>
+                <li class="pu-avatar"></li>
+                <li class="pu-avatar"></li>
+                <li class="pu-avatar"></li>
+                <li class="pu-avatar"></li>
+                <li class="pu-avatar"></li>
+                <li class="pu-avatar"></li>
+                <li class="pu-avatar"></li>
+                <li class="pu-avatar"></li>
+                <li class="pu-avatar"></li>
+                <li class="pu-avatar"></li>
+                <li class="pu-avatar"></li>
+                <li class="pu-avatar"></li>
+                <li class="pu-avatar"></li>
+            </ul>
+            <section class="pu-quotes">
+                {{#each data.swarm.quotes}}
+                    <div class="pu-commentbox">
+                        <p class="pu-sub-box">
+                            {{ content }}
+                        </p>
+                        <a class="pu-sub-upper" href="{{ pathFor 'profile' _id=author._id }}">
+                            <figure class="pu-avatar pu-avatar-tiny"
+                                style="{{#with author.image}}background-image: url('{{ partupImageUrl id=. store='80x80' }}'){{/with}}"
+                                data-hovercontainer="HoverContainer_upper" data-hovercontainer-context="{{ author._id }}">
+                            </figure>
+                            {{ author.name }}
+                        </a>
+                    </div>
+                {{/each}}
             </section>
         </section>
         <section>

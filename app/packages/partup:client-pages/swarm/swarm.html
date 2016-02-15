@@ -14,7 +14,7 @@
 
         {{#if data}}
             <section class="{{#if state.contentReady}}show{{/if}}">
-                {{> swarm_content swarm=data.swarm }}
+                {{> swarm_content data=data }}
             </section>
             {{> swarm_footer swarm=data.swarm }}
         {{/if}}
