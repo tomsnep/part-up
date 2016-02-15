@@ -19,6 +19,10 @@ Template.swarm.onCreated(function() {
             });
         }
     });
+    template.relatedNetworks = new ReactiveVar([]);
+    Meteor.call('swarms.get_related_networks', template.data.slug, function(error, res) {
+        template.relatedNetworks.set(res);
+    });
 });
 
 Template.swarm.helpers({
@@ -32,6 +36,13 @@ Template.swarm.helpers({
             },
             networks: function() {
                 return Networks.find({_id: {$in: swarm.networks}});
+            },
+            relatedNetworks: function() {
+                console.log(Networks.find({_id: {$in: template.relatedNetworks.get()}}))
+                return Networks.find({_id: {$in: template.relatedNetworks.get()}});
+            },
+            userIsSwarmAdmin: function() {
+                return swarm.isSwarmAdmin(Meteor.userId());
             }
         };
     },
