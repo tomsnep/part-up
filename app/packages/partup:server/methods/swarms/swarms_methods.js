@@ -338,7 +338,7 @@ Meteor.methods({
                 upper_partups.forEach(function(partupId) {
                     var partup = Partups.findOne(partupId);
                     var partup_uppers = partup.uppers || [];
-                    upper_partup_uppers.push().apply(partup_uppers);
+                    upper_partup_uppers.push.apply(partup_uppers);
                 });
 
                 // We now have a list of all 'known' uppers and a list of all swarm uppers, so we need to match them
