@@ -294,5 +294,78 @@ Meteor.methods({
             Log.error(error);
             throw new Meteor.Error(400, 'swarm_quote_could_not_be_removed');
         }
+    },
+
+    /**
+     * Find related uppers for a specific user
+     *
+     * @param {String} swarmSlug
+     * @param {Number} amount
+     */
+    'swarms.get_related_uppers': function(swarmSlug, amount) {
+        check(swarmSlug, String);
+
+        amount = amount || 16;
+
+        try {
+            var swarm = Swarms.findOneOrFail({slug: swarmSlug});
+            var swarm_networks = swarm.networks || [];
+            var swarm_uppers = [];
+
+            // Get all the uppers of the swarm in one array
+            swarm_networks.forEach(function(networkId) {
+                var network = Networks.findOne(networkId);
+                var network_uppers = network.uppers || [];
+                swarm_uppers.push.apply(network_uppers);
+            });
+
+            // Initialize response
+            var related_uppers = [];
+
+            // Create empty list for the following actions
+            var upper_list = [];
+
+            // Now do something with the uppers depending if the current user is logged in or not
+            var upper = Meteor.user();
+
+            if (!upper) {
+                // User is not logged in, so return random uppers from swarm
+                upper_list = swarm_uppers;
+            } else {
+                // User is logged in, so get a list of all uppers of the current user's partups
+                var upper_partup_uppers = [];
+                var upper_partups = upper.upperOf || [];
+                upper_partups.forEach(function(partupId) {
+                    var partup = Partups.findOne(partupId);
+                    var partup_uppers = partup.uppers || [];
+                    upper_partup_uppers.push().apply(partup_uppers);
+                });
+
+                // We now have a list of all 'known' uppers and a list of all swarm uppers, so we need to match them
+                upper_list = lodash.intersection(swarm_uppers, upper_partup_uppers);
+
+                // Check if we have enough uppers
+                if (upper_list.length < amount) {
+                    // Append swarm uppers list
+                    upper_list.push().apply(swarm_uppers);
+                }
+            }
+
+            // Randomize the list
+            for (var i = 0; i < amount; i++) {
+                var random_index = Math.floor(Math.random() * upper_list.length);
+                // Store the random upper
+                related_uppers.push(upper_list[random_index]);
+
+                // We don't want duplicate uppers in our list, so remove them from source
+                upper_list.splice(random_index, 1);
+            }
+
+            // And there we have it
+            return related_uppers;
+        } catch (error) {
+            Log.error(error);
+            throw new Meteor.Error(400, 'related_uppers_could_not_be_given');
+        }
     }
 });
