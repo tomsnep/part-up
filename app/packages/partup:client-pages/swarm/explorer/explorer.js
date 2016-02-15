@@ -29,26 +29,26 @@ Template.swarm_explorer.helpers({
 
                 // total networks in inner circle
                 // 1/2 of 1/3 of total number of networks
-                var numberOfInnerRingItems = Math.round((total / 3) / 2);
+                var numberOfInnerRingItems = Math.min(5, total); //Math.ceil((total / 3) / 2.1);
 
                 // total networks in center circle
                 // 1/3 of total number of networks
-                var numberOfCenterRingItems = Math.round((total / 3));
+                var numberOfCenterRingItems = Math.min(9, total - numberOfInnerRingItems); //Math.ceil((total / 3));
 
                 if (hasItems) {
                     _.times(numberOfInnerRingItems, function() {
                         innerRingItems.push(networks.pop());
                     });
-                    _.times(numberOfCenterRingItems, function() {
-                        centerRingItems.push(networks.pop());
-                    });
+                    // _.times(numberOfCenterRingItems, function() {
+                    //     centerRingItems.push(networks.pop());
+                    // });
                     outerRingItems = networks;
                 }
 
                 return networks ? {
                     hasItems: hasItems,
                     inner: innerRingItems,
-                    center: centerRingItems,
+                    // center: centerRingItems,
                     outer: outerRingItems
                 } : false;
             },
@@ -59,18 +59,18 @@ Template.swarm_explorer.helpers({
             placeholder: {
                 swarmEmpty: {
                     inner: [{
-                        type: 'astronaut'
-                    }],
-                    center: [{
                         type: 'spaceship'
                     },{
+                        type: 'astronaut'
+                    }],
+                    outer: [{
                         type: 'freakin_dog'
                     },{
                         type: 'picture'
                     }]
                 },
                 swarmNotFound: {
-                    center: [{
+                    outer: [{
                         type: 'spaceship_flying',
                         placeholderPath: 'home'
                     }]

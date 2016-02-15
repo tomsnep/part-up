@@ -25,7 +25,8 @@
     height: 40px
     margin-left: -20px
     opacity: 0
-    transition: opacity .2s
+    transform: translate3d(0,0,0)
+    transition: opacity .2s linear, transform 5s ease-in-out
     &.show
         opacity: 1
     &.pu-state-empty
@@ -109,12 +110,13 @@
             .pu-sub-container
                 > .pu-sub-namecontainer
                     transform: rotate($deg * $i)
+                .pu-sub-name
+                    transform: rotate(0deg - $deg * $i)
                 @if $i > 12
                     .pu-sub-name
                         top: -30%
                         right: 50%
                         padding-right: 15px
-                        transform: rotate(0deg - $deg * $i)
                         transform-origin: right center
                         text-align: right
                 @else
@@ -122,7 +124,6 @@
                         top: -30%
                         left: 50%
                         padding-left: 10px
-                        transform: rotate(0deg - $deg * $i)
                         transform-origin: left center
                         text-align: left
 
@@ -226,6 +227,3 @@
             > figure
                 width: $size
                 height: $size
-
-
-

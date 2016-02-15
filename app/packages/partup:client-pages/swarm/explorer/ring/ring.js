@@ -12,23 +12,26 @@ Template.Ring.onCreated(function() {
     // to prevent recalculation in autorun
     template.ringPresets = {
         inner: {
-            radius: 20,
-            offset: {top: -15},
+            radius: 30,
+            offset: {top: -10},
             startAngle: lodash.random(0, 360),
-            reverse: template.randomBoolean()
+            // reverse: template.randomBoolean(),
+            animate: true
         },
-        center: {
-            radius: 45,
-            offset: {top: -15},
-            startAngle: lodash.random(0, 360),
-            reverse: template.randomBoolean()
-        },
+        // center: {
+        //     radius: 45,
+        //     offset: {top: -15},
+        //     startAngle: lodash.random(0, 360),
+        //     reverse: template.randomBoolean(),
+        //     animate: true
+        // },
         outer: {
-            radius: 80,
-            offset: {top: -15},
-            skipAngle: 90,
-            startAngle: -120,
-            reverse: template.randomBoolean()
+            radius: 66,
+            offset: {top: -10},
+            // skipAngle: 90,
+            startAngle: lodash.random(0, 360), // -120
+            // reverse: template.randomBoolean(),
+            animate: true
         }
     };
 });
@@ -55,8 +58,9 @@ Template.Ring.onRendered(function() {
         var offset = options.offset || {};
         var offsetTop = offset.top || 0;
         var offsetLeft = offset.left || 0;
+        var animate = options.animate || false;
         // randomly decide direction of circle (clockwise or counter-clockwise)
-        var reverse = options.reverse || template.randomBoolean();
+        var reverse = options.reverse || false;
 
         // calculation constants
         var PI = Math.PI;
@@ -95,11 +99,24 @@ Template.Ring.onRendered(function() {
 
         // loop through each item and calculate the position on ring
         items.forEach(function(item, i) {
-            var x = ringXDiameterPercentage * (ringXRadiusPercentage * Math.cos(angle) + ringXRadius) + offsetLeft;
-            var y = ringYDiameterPercentage * (ringYRadiusPercentage * Math.sin(angle) + ringYRadius) + offsetTop;
-            // if (reverse) x = 100 - x;
-            var positioning = new ReactiveVar({x: x, y: y});
+            var animateX = 0;
+            var animateY = 0;
+            if (animate) animateX = lodash.random(-2,2);
+            if (animate) animateY = lodash.random(-2,2);
+            var x = ringXDiameterPercentage * (ringXRadiusPercentage * Math.cos(angle) + ringXRadius) + (offsetLeft);
+            var y = ringYDiameterPercentage * (ringYRadiusPercentage * Math.sin(angle) + ringYRadius) + (offsetTop);
+            if (reverse) x = 100 - x;
+            var positioning = new ReactiveVar({
+                x: x,
+                y: y
+            });
+            var animation = new ReactiveVar({
+                animateX: animateX,
+                animateY: animateY,
+                time: lodash.random(2, 7)
+            });
             item.positioning = positioning;
+            item.animation = animation;
             angle += angleIncrement;
         });
 
@@ -109,11 +126,13 @@ Template.Ring.onRendered(function() {
     template.autorun(function(c) {
         var data = Template.currentData();
         var rings = [];
-        _.each(template.ringPresets, function(preset, key) {
-            preset.items = data.rings[key] || [];
-            rings = rings.concat(template.createRing(template.container, preset));
+        Tracker.nonreactive(function() {
+            _.each(template.ringPresets, function(preset, key) {
+                preset.items = data.rings[key] || [];
+                rings = rings.concat(template.createRing(template.container, preset));
+            });
+            template.rings.set(rings);
         });
-        template.rings.set(rings);
     });
 
 });

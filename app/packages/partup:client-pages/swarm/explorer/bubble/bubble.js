@@ -4,7 +4,17 @@ Template.Bubble.onCreated(function() {
 });
 Template.Bubble.onRendered(function() {
     var template = this;
-    Meteor.defer(function() { template.show.set(true); });
+    Meteor.setTimeout(function() { template.show.set(true); }, 500);
+});
+
+Template.Bubble.events({
+    'transitionend [data-transition], transitioncancel [data-transition]': function(event, template) {
+        this.animation.set({
+            animateX: lodash.random(-2,2),
+            animateY: lodash.random(-2,2),
+            time: lodash.random(8, 16)
+        });
+    }
 });
 
 Template.Bubble.helpers({

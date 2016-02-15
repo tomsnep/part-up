@@ -1,10 +1,10 @@
 <template name="Ring">
     <section class="pu-ring">
-        {{#each data.rings}}
-            <section style="{{#with positioning.get}}left: {{x}}%; top: {{y}}%;{{/with}}">
+        <section>
+            {{#each data.rings}}
                 {{> Bubble }}
-            </section>
-        {{/each}}
+            {{/each}}
+        </section>
         {{> Ring_background}}
     </section>
 </template>
