@@ -1,6 +1,5 @@
 Template.modal_swarm_settings_quotes.onCreated(function() {
     this.create = new ReactiveVar(false);
-    // Meteor.call('swarms.get_related_uppers', )
 });
 
 Template.modal_swarm_settings_quotes.events({

@@ -1,14 +1,14 @@
 <template name="modal_swarm_settings_quotes_form">
-    {{#autoForm id='quoteForm' schema=form.schema validation="submitThenKeyup"  class="pu-form pu-block pu-block-active"}}
+    {{#autoForm id='quoteForm' schema=form.schema doc=data.quote validation="submitThenKeyup"  class="pu-form pu-block pu-block-active"}}
         <label class="pu-formfield">
             <span class="pu-label">
-                Quote
+                {{_ 'modal-swarm-quotes-form-quote-label'}}
                 <a class="pu-hint">
-                    <!-- {{# if partupLowerThan state.introductionCharactersLeft form.schema._schema.introduction.max }}
-                        {{_ 'modal-swarm-details-form-shortintro-characters-left' state.introductionCharactersLeft }}
+                    {{# if partupLowerThan state.contentCharactersLeft form.schema._schema.content.max }}
+                        {{_ 'modal-swarm-quotes-form-quote-characters-left' state.contentCharactersLeft }}
                     {{ else }}
-                        {{_ 'modal-swarm-details-form-shortintro-characters' form.schema._schema.introduction.max }}
-                    {{/ if }} -->
+                        {{_ 'modal-swarm-quotes-form-quote-characters' form.schema._schema.content.max }}
+                    {{/ if }}
                 </a>
             </span>
 
@@ -16,12 +16,10 @@
                 <span class="pu-sub-input">
                     {{> afFieldInput
                         name='content'
-
                         class='pu-textarea'
+                        placeholder=static.quoteFieldPlaceholder
                         rows=3
-
                     }}
-                    <!-- <textarea class="pu-textarea"></textarea> -->
                 </span>
                 <span class="pu-sub-error">{{ afFieldMessage name='content' }}</span>
             </div>
@@ -29,14 +27,7 @@
 
         <label class="pu-formfield">
             <span class="pu-label">
-                Author
-                <a class="pu-hint">
-                    <!-- {{# if partupLowerThan state.titleCharactersLeft form.schema._schema.title.max }}
-                        {{_ 'modal-swarm-details-form-title-characters-left' state.titleCharactersLeft }}
-                    {{ else }}
-                        {{_ 'modal-swarm-details-form-title-characters' form.schema._schema.title.max }}
-                    {{/ if }} -->
-                </a>
+                {{_ 'modal-swarm-quotes-form-author-label'}}
             </span>
 
             <div class="pu-sub-validations {{# if afFieldIsInvalid name='author_id' }}pu-state-invalid{{/ if }}">
@@ -58,19 +49,17 @@
         </label>
         <footer class="pu-sub-formfooter pu-row pu-row-scalable">
 
-                <div class="cell"><button type="submit" class="pu-button {{# if submitting }}pu-state-loading pu-state-disabled{{/ if }}">
-                    <span>{{_ 'activity-form-save' }}</span>
-                    {{> Spinner color='inverted' type='small' }}
-                </button></div>
-                <div class="cell stretch"><button type="button" class="pu-button pu-button-gray" data-close>{{_ 'activity-form-close' }}</button></div>
-
-
+                <div class="cell">
+                    <button type="submit" class="pu-button {{# if submitting }}pu-state-loading pu-state-disabled{{/ if }}">
+                        <span>{{_ 'modal-swarm-quotes-form-button-save'}}</span>
+                        {{> Spinner color='inverted' type='small' }}
+                    </button>
+                </div>
+                <div class="cell stretch"><button type="button" class="pu-button pu-button-gray" data-close>{{_ 'modal-swarm-quotes-form-button-close'}}</button></div>
 
                 <div class="cell">
-
-                    <a class="pu-button pu-button-text pu-button-text-subtle" data-remove>{{_ 'activity-button-remove'}}</a>
+                    <a class="pu-button pu-button-text pu-button-text-subtle" data-remove>{{_ 'modal-swarm-quotes-form-button-remove'}}</a>
                 </div>
-
 
         </footer>
     {{/autoForm}}

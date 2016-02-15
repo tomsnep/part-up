@@ -2,6 +2,9 @@ Template.modal_swarm_settings_quotes_form.onCreated(function() {
     this.authorSelection = new ReactiveVar();
     this.state = new ReactiveDict();
     this.state.set('submitting', false);
+    this.charactersLeft = new ReactiveDict();
+    this.charactersLeft.set('content', Partup.schemas.forms.swarmQuote._schema.max);
+
 });
 
 Template.modal_swarm_settings_quotes_form.events({
@@ -13,8 +16,16 @@ Template.modal_swarm_settings_quotes_form.events({
 
 Template.modal_swarm_settings_quotes_form.helpers({
     data: function() {
+        var template = Template.instance();
+        var data = this;
         return {
-
+            quote: function() {
+                if (data.quote._id) return Partup.transformers.swarm.toFormQuote(data.quote);
+                return {
+                    author_id: null,
+                    content: null
+                }
+            }
         };
     },
     state: function() {
@@ -22,6 +33,9 @@ Template.modal_swarm_settings_quotes_form.helpers({
         return {
             submitting: function() {
                 return template.state.get('submitting');
+            },
+            contentCharactersLeft: function() {
+                return template.charactersLeft.get('content');
             }
         };
     },
@@ -56,7 +70,8 @@ Template.modal_swarm_settings_quotes_form.helpers({
     },
     static: function() {
         return {
-            authorFieldPlaceholder: __('pages-modal-admin-featured-partups-form-partup-placeholder')
+            authorFieldPlaceholder: __('modal-swarm-quotes-form-author-placeholder'),
+            quoteFieldPlaceholder: __('modal-swarm-quotes-form-quote-placeholder')
         };
     }
 });
@@ -72,7 +87,7 @@ AutoForm.addHooks('quoteForm', {
         Meteor.call('swarms.add_quote', template.data.swarmId, doc, function(error) {
             if (error) return console.error(error);
             template.state.set('submitting', false);
-
+            template.authorSelection.set(false);
             AutoForm.resetForm(self.formId);
 
             self.done();

@@ -32,5 +32,18 @@ Partup.transformers.swarm = {
         fields.description = sanitizeHtml(fields.description);
 
         return fields;
-    }
+    },
+
+    /**
+     * Transform swarm object to swarm form data
+     *
+     * @memberof Partup.transformers.swarm
+     * @param {object} quote
+     */
+    'toFormQuote': function(quote) {
+        return {
+            author_id: quote.author._id,
+            content: quote.content
+        };
+    },
 };

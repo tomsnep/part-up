@@ -1,0 +1,12 @@
+{
+    "modal-swarm-quotes-form-quote-label": "Quote",
+    "modal-swarm-quotes-form-quote-placeholder": "Hier invoeren",
+    "modal-swarm-quotes-form-author-label": "Auteur",
+    "modal-swarm-quotes-form-author-placeholder": "Auteur nnaam",
+    "modal-swarm-quotes-form-button-save": "Opslaan",
+    "modal-swarm-quotes-form-button-remove": "Verwijderen",
+    "modal-swarm-quotes-form-button-close": "Sluiten",
+    "modal-swarm-quotes-form-quote-characters-left": "nog %d karakerts",
+    "modal-swarm-quotes-form-quote-characters": "Max %d karakerts"
+
+}

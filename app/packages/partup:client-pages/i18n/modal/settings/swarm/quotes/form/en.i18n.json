@@ -1,0 +1,12 @@
+{
+    "modal-swarm-quotes-form-quote-label": "Quote",
+    "modal-swarm-quotes-form-quote-placeholder": "Enter the quote here",
+    "modal-swarm-quotes-form-author-label": "Author",
+    "modal-swarm-quotes-form-author-placeholder": "Author name",
+    "modal-swarm-quotes-form-button-save": "Save",
+    "modal-swarm-quotes-form-button-remove": "Remove",
+    "modal-swarm-quotes-form-button-close": "Close",
+    "modal-swarm-quotes-form-quote-characters-left": "%d characters left",
+    "modal-swarm-quotes-form-quote-characters": "Max %d characters"
+
+}
