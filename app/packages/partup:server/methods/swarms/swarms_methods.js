@@ -347,7 +347,7 @@ Meteor.methods({
                 // Check if we have enough uppers
                 if (upper_list.length < amount) {
                     // Append swarm uppers list
-                    upper_list.push().apply(swarm_uppers);
+                    upper_list.push.apply(swarm_uppers);
                 }
             }
 
