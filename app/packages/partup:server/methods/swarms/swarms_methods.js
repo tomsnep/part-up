@@ -308,13 +308,13 @@ Meteor.methods({
         amount = amount || 16;
 
         try {
-            var swarm = Swarms.findOneOrFail({slug: swarmSlug});
+            var swarm = Swarms.findOneOrFail({slug: swarmSlug}, {fields: {networks: 1}});
             var swarm_networks = swarm.networks || [];
             var swarm_uppers = [];
 
             // Get all the uppers of the swarm in one array
             swarm_networks.forEach(function(networkId) {
-                var network = Networks.findOne(networkId);
+                var network = Networks.findOne(networkId, {fields: {uppers: 1}});
                 var network_uppers = network.uppers || [];
                 swarm_uppers.push.apply(network_uppers);
             });
@@ -336,7 +336,7 @@ Meteor.methods({
                 var upper_partup_uppers = [];
                 var upper_partups = upper.upperOf || [];
                 upper_partups.forEach(function(partupId) {
-                    var partup = Partups.findOne(partupId);
+                    var partup = Partups.findOne(partupId, {fields: {uppers: 1}});
                     var partup_uppers = partup.uppers || [];
                     upper_partup_uppers.push.apply(partup_uppers);
                 });
