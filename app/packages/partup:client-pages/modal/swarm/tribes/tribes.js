@@ -2,7 +2,7 @@ Template.modal_swarm_settings_tribes.onCreated(function() {
     var template = this;
     template.state = new ReactiveDict();
     template.state.set('submitting', false);
-
+    template.swarmId = new ReactiveVar('');
     template.networkSelection = new ReactiveVar();
 });
 
@@ -22,6 +22,7 @@ Template.modal_swarm_settings_tribes.helpers({
     },
     form: function() {
         var template = Template.instance();
+        var swarmSlug = template.data.slug;
         return {
             schema: new SimpleSchema({}),
             networkLabel: function() {
@@ -34,7 +35,7 @@ Template.modal_swarm_settings_tribes.helpers({
             },
             networkQuery: function() {
                 return function(query, sync, async) {
-                    Meteor.call('networks.autocomplete', query, function(error, networks) {
+                    Meteor.call('networks.autocomplete_swarm', query, swarmSlug, function(error, networks) {
                         lodash.each(networks, function(p) {
                             p.value = p.name; // what to show in the autocomplete list
                         });

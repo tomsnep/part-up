@@ -451,6 +451,30 @@ Meteor.methods({
     },
 
     /**
+     * Return a list of networks based on search query and swarm
+     *
+     * @param {String} query
+     */
+    'networks.autocomplete_swarm': function(query, swarmSlug) {
+        check(query, String);
+
+        this.unblock();
+
+        var user = Meteor.user();
+        if (!user) {
+            throw new Meteor.Error(401, 'unauthorized');
+        }
+        var swarm = Swarms.guardedMetaFind({slug: swarmSlug}, {limit: 1}).fetch().pop();
+        try {
+            query = query.replace(/-/g, ' '); // Replace dashes with spaces
+            return Networks.guardedMetaFind({slug: new RegExp('.*' + query + '.*', 'i'), swarms: {$nin: [swarm._id]}}, {limit: 30}).fetch();
+        } catch (error) {
+            Log.error(error);
+            throw new Meteor.Error(400, 'networks_could_not_be_autocompleted');
+        }
+    },
+
+    /**
      * Get user suggestions for a given network
      *
      * @param {String} networkId
