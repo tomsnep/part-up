@@ -152,3 +152,36 @@ SeoRouter.route('/:slug', function(params, request, response) {
     response.setHeader('Content-Type', 'text/html');
     response.end(html);
 });
+
+/**
+ * SEO Route for the Swarm page
+ */
+SeoRouter.route('/swarm/:slug', function(params, request, response) {
+    var slug = params.slug;
+    var swarm = Swarms.findOne({slug: slug});
+
+    if (!swarm) {
+        response.statusCode = 404;
+        return response.end();
+    }
+
+    var image = Images.findOne(swarm.image);
+
+    SSR.compileTemplate('seo_swarm', Assets.getText('private/templates/seo/swarm.html'));
+
+    Template.seo_swarm.helpers({
+        getSwarmUrl: function() {
+            return Meteor.absoluteUrl() + 'swarm/' + swarm.slug;
+        },
+        getImageUrl: function() {
+            if (!image) return Meteor.absoluteUrl() + 'images/partup-logo.png';
+
+            return Partup.helpers.url.getImageUrl(image);
+        }
+    });
+
+    var html = SSR.render('seo_swarm', swarm);
+
+    response.setHeader('Content-Type', 'text/html');
+    response.end(html);
+});
