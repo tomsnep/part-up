@@ -32,7 +32,7 @@ Template.Comments.onCreated(function() {
 
     template.currentComment = new ReactiveVar();
     template.uniqueId = _.uniqueId();
-    template.formId = new ReactiveVar(template.uniqueId + 'commentForm-' + template.data.update._id);
+    template.formId = template.uniqueId + 'commentForm-' + template.data.update._id;
 
     template.resetEditCommentForm = function() {
         if (template.mentionsEditInput) template.mentionsEditInput.destroy();
@@ -88,7 +88,6 @@ Template.afFieldInput.onRendered(function() {
 
 Template.Comments.onDestroyed(function() {
     var template = this;
-
     // destroy all evil memory leaks
     if (template.mentionsInput) template.mentionsInput.destroy();
     if (template.mentionsEditInput) template.mentionsEditInput.destroy();
@@ -100,12 +99,13 @@ Template.Comments.helpers({
     state: function() {
         var self = this;
         var template = Template.instance();
+        var data = Template.currentData();
         return {
             submitButtonActive: function() {
                 return template.submitButtonActive.get();
             },
             commentFormId: function() {
-                return template.formId.get();
+                return template.uniqueId + 'commentForm-' + data.update._id;
             },
             showComments: function() {
                 return template.showComments;
@@ -339,7 +339,8 @@ AutoForm.addHooks(null, {
         self.event.preventDefault();
 
         // the parent of the autoform
-        var formId = template.formId.get();
+        var template = self.template.parent();
+        var formId = template.formId;
 
         // change form state
         template.submittingForm.set(true);
