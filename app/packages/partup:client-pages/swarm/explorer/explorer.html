@@ -2,9 +2,10 @@
     <section class="pu-explorer">
         {{#if data.rings}}
             <header>
-                <figure>
-                    <img src="{{#with swarm.image }}{{ partupImageUrl id=. store='360x360'}}'){{/with }}" alt="logo">
-                </figure>
+                    <figure>
+                        <img src="{{#with swarm.image }}{{ partupImageUrl id=. store='360x360'}}{{/with }}" alt="{{swarm.name}}">
+                        <h1>{{swarm.name}}</h1>
+                    </figure>
                 <ul class="pu-list pu-list-horizontal">
                     <li>{{_ 'swarm-explorer-count-uppers' count=swarm.stats.upper_count }}</li>
                     <li>{{_ 'swarm-explorer-count-partups' count=swarm.stats.partup_count }}</li>

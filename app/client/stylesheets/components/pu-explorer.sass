@@ -23,12 +23,23 @@
             color: darken($color-primary-dark, 10%)
             font-weight: 700
 
+
+
         figure
             display: block
             margin: 20px auto
             height: 30px
+            h1
+                font-size: 40px
+                font-family: $font-secondary
+                color: $color-text
+                display: none
             img
                 height: 100%
+                &:not([src])
+                    display:none
+                    + h1
+                        display: block
         li
             font-weight: bold
             font-family: $font-secondary
