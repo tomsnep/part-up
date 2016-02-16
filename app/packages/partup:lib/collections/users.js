@@ -180,6 +180,7 @@ Meteor.users.findForContribution = function(contribution) {
 Meteor.users.findActiveUsers = function(selector, options) {
     selector = selector || {};
     selector.deactivatedAt = {$exists: false};
+    options.fields = publicUserFields;
     return Meteor.users.find(selector, options);
 };
 

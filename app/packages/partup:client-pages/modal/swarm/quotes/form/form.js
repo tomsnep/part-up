@@ -48,14 +48,14 @@ Template.modal_swarm_settings_quotes_form.helpers({
             },
             authorLabel: function() {
                 return function(author) {
-                    return author.name;
+                    return author.profile.name;
                 };
             },
             authorQuery: function() {
                 return function(query, sync, async) {
                     Meteor.call('users.upper_autocomplete', query, '', true, function(error, authors) {
                         lodash.each(authors, function(p) {
-                            p.value = p.name; // what to show in the autocomplete list
+                            p.value = p.profile.name; // what to show in the autocomplete list
                         });
                         async(authors);
                     });
