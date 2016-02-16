@@ -1,11 +1,15 @@
 {
+    "swarm-content-intro-title-placeholder": "Swarm titel",
+    "swarm-content-intro-intro-placeholder": "Korte introductie over het doel van deze swarm.",
+    "swarm-content-intro-description-placeholder": "Beschrijving van de swarm, Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus eius facere eveniet soluta! Natus modi nesciunt fugit quo ab deserunt, explicabo quam blanditiis eligendi distinctio!",
+
     "swarm-content-about-title1": "What is Part-up?",
     "swarm-content-about-paragraph1": "Curabitur lobortis id lorem id bibendum. Ut id consectetur magna. Quisque volutpat augue enim, pulvinar lobortis nibh lacinia at. Vestibulum nec erat utmi sollicitudin porttitor id sit amet risus. Nam tempus vel odio vitae aliquam. In imperdiet eros id lacus vestibulum vestibulum. Suspendisse fermentum sem sagittis ante venenatis egestas quis vel justo. Maecenas semper suscipit nunc, sed aliquam sapien convallis eu. Nulla ut turpis in diam dapibus consequat.",
     "swarm-content-about-title2": "So, a part-up is component of a tribe?",
     "swarm-content-about-paragraph2": "Nam dapibus nisl vitae elit fringilla rutrum. Aenean sollicitudin, erat a elementum rutrum, neque sem pretium metus, quis mollis nisl nunc et massa. Vestibulum sed metus in lorem tristique ullamcorper id vitae erat. Nulla mollis sapien sollicitudin lacinia lacinia. Vivamus facilisis dolor et massa placerat, at vestibulum nisl egestas.",
 
     "swarm-content-uppers-title": "And who am I? You'll be a Part-upper!",
-    "swarm-content-uppers-subtitle": "Together with these people and 732198 others.",
+    "swarm-content-uppers-subtitle": "Samen met deze mensen en meer dan 200 anderen.",
 
     "swarm-content-networks-title": "Find the tribes on subjects you love",
     "swarm-content-networks-subtitle": "Take some time to look around"

@@ -3,10 +3,10 @@
     <!-- swarm home page -->
     <section class="pu-swarmcontent">
         <section class="pu-highlight">
-            <h1>{{ data.swarm.title }}</h1>
+            <h1>{{# if data.swarm.title }}{{ data.swarm.title }}{{ else }}{{_ 'swarm-content-intro-title-placeholder'}}{{/ if }}</h1>
             <!-- about -->
-            <h3 class="pu-accent pu-accent-centered">{{ data.swarm.introduction }}</h3>
-            <p>{{ data.swarm.description }}</p>
+            <h3 class="pu-accent pu-accent-centered">{{# if data.swarm.introduction }}{{ data.swarm.introduction }}{{ else }}{{_ 'swarm-content-intro-intro-placeholder'}}{{/ if }}</h3>
+            <p>{{# if data.swarm.description }}{{ data.swarm.description }}{{ else }}{{_ 'swarm-content-intro-description-placeholder'}}{{/ if }}</p>
         </section>
         <section class="pu-article pu-article-videos">
             <!-- what is partup -->
@@ -50,35 +50,35 @@
             <h3>{{_ 'swarm-content-networks-subtitle' }}</h3>
             <ul class="pu-list pu-list-horizontal pu-list-talltiles pu-list-horizontalscroller">
                 {{#each data.relatedNetworks}}
-                <li>
-                    <article class="pu-talltile">
-                        <header>
-                            <ul class="pu-list pu-list-horizontal pu-list-tags">
-                                {{# each tags }}
-                                    <li>
-                                        <a href="#" class="pu-tag pu-tag-inverted">{{.}}</a>
-                                    </li>
-                                {{/ each }}
-                            </ul>
-                        </header>
-                        <article class="pu-networkcard pu-sub-fulltext">
+                    <li>
+                        <article class="pu-talltile">
                             <header>
-                                <figure class="pu-avatar pu-avatar-square pu-sub-figure" style="{{#with image }}background-image:url('{{ partupImageUrl id=. store='360x360'}}');{{/with }}">
-                                </figure>
-                                <div class="pu-sub-title">
-                                    <h4>{{ name }}</h4>
-                                    <p>{{ location.city }}</p>
-                                </div>
+                                <ul class="pu-list pu-list-horizontal pu-list-tags">
+                                    {{# each tags }}
+                                        <li>
+                                            <a href="#" class="pu-tag pu-tag-inverted">{{.}}</a>
+                                        </li>
+                                    {{/ each }}
+                                </ul>
                             </header>
-                            <article>
-                                <p>{{ description }}</p>
+                            <article class="pu-networkcard pu-sub-fulltext">
+                                <header>
+                                    <figure class="pu-avatar pu-avatar-square pu-sub-figure" style="{{#with image }}background-image:url('{{ partupImageUrl id=. store='360x360'}}');{{/with }}">
+                                    </figure>
+                                    <div class="pu-sub-title">
+                                        <h4>{{ name }}</h4>
+                                        <p>{{ location.city }}</p>
+                                    </div>
+                                </header>
+                                <article>
+                                    <p>{{ description }}</p>
+                                </article>
                             </article>
+                            <footer>
+                                <a href="{{ pathFor route='network-detail' slug=slug }}" class="pu-button">View tribe</a>
+                            </footer>
                         </article>
-                        <footer>
-                            <a href="{{ pathFor route='network-detail' slug=slug }}" class="pu-button">View tribe</a>
-                        </footer>
-                    </article>
-                </li>
+                    </li>
                 {{/each}}
             </ul>
         </section>

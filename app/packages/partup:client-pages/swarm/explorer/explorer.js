@@ -70,7 +70,7 @@ Template.swarm_explorer.helpers({
                     }]
                 },
                 swarmNotFound: {
-                    outer: [{
+                    inner: [{
                         type: 'spaceship_flying',
                         placeholderPath: 'home'
                     }]
