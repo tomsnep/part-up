@@ -316,11 +316,8 @@ Meteor.methods({
             swarm_networks.forEach(function(networkId) {
                 var network = Networks.findOne(networkId, {fields: {uppers: 1}});
                 var network_uppers = network.uppers || [];
-                swarm_uppers.push.apply(network_uppers);
+                swarm_uppers.push.apply(swarm_uppers, network_uppers);
             });
-
-            // Initialize response
-            var related_uppers = [];
 
             // Create empty list for the following actions
             var upper_list = [];
@@ -338,7 +335,7 @@ Meteor.methods({
                 upper_partups.forEach(function(partupId) {
                     var partup = Partups.findOne(partupId, {fields: {uppers: 1}});
                     var partup_uppers = partup.uppers || [];
-                    upper_partup_uppers.push.apply(partup_uppers);
+                    upper_partup_uppers.push.apply(upper_partup_uppers, partup_uppers);
                 });
 
                 // We now have a list of all 'known' uppers and a list of all swarm uppers, so we need to match them
@@ -347,9 +344,15 @@ Meteor.methods({
                 // Check if we have enough uppers
                 if (upper_list.length < amount) {
                     // Append swarm uppers list
-                    upper_list.push.apply(swarm_uppers);
+                    upper_list.push.apply(upper_list, swarm_uppers);
                 }
             }
+
+            // Shorten the list if there are not enough uppers
+            if (upper_list.length < amount) amount = upper_list.length;
+
+            // Initialize response
+            var related_uppers = [];
 
             // Randomize the list
             for (var i = 0; i < amount; i++) {
@@ -361,8 +364,8 @@ Meteor.methods({
                 upper_list.splice(random_index, 1);
             }
 
-            // And there we have it
-            return related_uppers;
+            // And there we have it. Only return unique values
+            return lodash.unique(related_uppers);
         } catch (error) {
             Log.error(error);
             throw new Meteor.Error(400, 'related_uppers_could_not_be_given');
