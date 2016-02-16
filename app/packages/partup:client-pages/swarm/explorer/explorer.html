@@ -12,11 +12,11 @@
                     <li>{{_ 'swarm-explorer-count-activities' count=swarm.stats.activity_count }}</li>
                 </ul>
             </header>
-            {{#if data.rings.hasItems}}
+            {{#unless data.rings.empty}}
                 {{> Ring rings=data.rings }}
             {{else}}
                 {{> Ring rings=static.placeholder.swarmEmpty }}
-            {{/if}}
+            {{/unless}}
             <footer>
                 <a href="#" class="pu-button pu-button-text pu-button-belowicon pu-button-text-white" data-findout>{{_ 'swarm-explorer-button-findout'}}<i class="picon-caret-slim-down"></i></a>
             </footer>

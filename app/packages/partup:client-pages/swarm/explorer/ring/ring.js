@@ -10,27 +10,18 @@ Template.Ring.onCreated(function() {
 
     // preset the configuration
     // to prevent recalculation in autorun
+    var startAngle = lodash.random(0, 360);
     template.ringPresets = {
         inner: {
-            radius: 30,
+            radius: 20,
             offset: {top: -10},
-            startAngle: lodash.random(0, 360),
-            // reverse: template.randomBoolean(),
+            startAngle: startAngle,
             animate: true
         },
-        // center: {
-        //     radius: 45,
-        //     offset: {top: -15},
-        //     startAngle: lodash.random(0, 360),
-        //     reverse: template.randomBoolean(),
-        //     animate: true
-        // },
         outer: {
-            radius: 66,
+            radius: 60,
             offset: {top: -10},
-            // skipAngle: 90,
-            startAngle: lodash.random(0, 360), // -120
-            // reverse: template.randomBoolean(),
+            startAngle: startAngle + 45,
             animate: true
         }
     };
@@ -47,7 +38,7 @@ Template.Ring.onRendered(function() {
         $(template.container).css({perspectiveOrigin: xPercent + '% ' + yPercent + '%'});
     };
     template.debouncedMouseMoveHandler = _.throttle(template.mouseMoveHandler, 100, true);
-    $(document).on('mousemove', template.debouncedMouseMoveHandler);
+    // $(document).on('mousemove', template.debouncedMouseMoveHandler);
 
     template.createRing = function(ringElement, options) {
         // options readout
@@ -93,7 +84,10 @@ Template.Ring.onRendered(function() {
                 angle += angleIncrement;
             };
         };
-
+        var getNumberInsideRange = function(min, max, input) {
+            if (input > max) input = min + (input - max);
+            return input;
+        };
         // skip a chunk if this is specified in options
         if (skipAngle) skipChunk();
 
@@ -117,6 +111,8 @@ Template.Ring.onRendered(function() {
             });
             item.positioning = positioning;
             item.animation = animation;
+            item.classNumber = getNumberInsideRange(0, 36, Math.round((Math.abs(((360 / TAU) * angle))) / 10));
+            console.log(item.classNumber, (((360 / TAU) * angle)))
             angle += angleIncrement;
         });
 

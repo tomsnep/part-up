@@ -21,34 +21,26 @@ Template.swarm_explorer.helpers({
                 // if so, we know it's an existing swarm
                 var networks = data.networks instanceof Mongo.Collection.Cursor ? data.networks.fetch() : false;
                 var innerRingItems = [];
-                var centerRingItems = [];
                 var outerRingItems = [];
+
                 // determine total number of networks
                 var total = networks.length;
-                var hasItems = total ? true : false;
+                var empty = total ? false : true;
 
-                // total networks in inner circle
-                // 1/2 of 1/3 of total number of networks
-                var numberOfInnerRingItems = Math.min(5, total); //Math.ceil((total / 3) / 2.1);
+                // number of inner ring items
+                // 1/3 of total, max 4
+                var numberOfInnerRingItems = Math.min(4, Math.ceil(total / 3));
 
-                // total networks in center circle
-                // 1/3 of total number of networks
-                var numberOfCenterRingItems = Math.min(9, total - numberOfInnerRingItems); //Math.ceil((total / 3));
-
-                if (hasItems) {
+                if (!empty) {
                     _.times(numberOfInnerRingItems, function() {
                         innerRingItems.push(networks.pop());
                     });
-                    // _.times(numberOfCenterRingItems, function() {
-                    //     centerRingItems.push(networks.pop());
-                    // });
                     outerRingItems = networks;
                 }
 
                 return networks ? {
-                    hasItems: hasItems,
+                    empty: empty,
                     inner: innerRingItems,
-                    // center: centerRingItems,
                     outer: outerRingItems
                 } : false;
             },

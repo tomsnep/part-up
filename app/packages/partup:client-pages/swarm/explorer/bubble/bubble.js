@@ -1,5 +1,5 @@
 Template.Bubble.onCreated(function() {
-    this.randomInt = lodash.random(0, 24);
+    this.randomInt = lodash.random(0, 36);
     this.show = new ReactiveVar(false);
 });
 Template.Bubble.onRendered(function() {
@@ -10,8 +10,8 @@ Template.Bubble.onRendered(function() {
 Template.Bubble.events({
     'transitionend [data-transition], transitioncancel [data-transition]': function(event, template) {
         this.animation.set({
-            animateX: lodash.random(-2,2),
-            animateY: lodash.random(-2,2),
+            animateX: lodash.random(-1,1),
+            animateY: lodash.random(-1,1),
             time: lodash.random(8, 16)
         });
     }
@@ -22,7 +22,7 @@ Template.Bubble.helpers({
         var template = Template.instance();
         return {
             randomInt: function() {
-                return template.randomInt;
+                return 36;
             },
             image: function() {
                 return this.image;

@@ -1,6 +1,6 @@
 <template name="Bubble">
     {{#if name }}
-        <div data-transition class="pu-bubble pu-bubble-{{data.randomInt}} {{#if empty}}pu-state-empty{{/if}} {{#if state.show}}show{{/if}}"
+        <div data-transition class="pu-bubble pu-bubble-{{classNumber}} {{#if empty}}pu-state-empty{{/if}} {{#if state.show}}show{{/if}}"
             style="{{#with positioning.get }}
                 left: {{x}}%;
                 top: {{y}}%;
