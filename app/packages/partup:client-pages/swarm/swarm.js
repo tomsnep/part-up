@@ -23,6 +23,10 @@ Template.swarm.onCreated(function() {
     Meteor.call('swarms.get_related_networks', template.data.slug, function(error, res) {
         template.relatedNetworks.set(res);
     });
+    template.relatedUppers = new ReactiveVar([]);
+    Meteor.call('swarms.get_related_uppers', template.data.slug, function(error, res) {
+        template.relatedUppers.set(res);
+    });
 });
 
 Template.swarm.helpers({
@@ -38,8 +42,10 @@ Template.swarm.helpers({
                 return Networks.find({_id: {$in: swarm.networks}});
             },
             relatedNetworks: function() {
-                console.log(Networks.find({_id: {$in: template.relatedNetworks.get()}}))
                 return Networks.find({_id: {$in: template.relatedNetworks.get()}});
+            },
+            relatedUppers: function() {
+                return template.relatedUppers.get();
             },
             userIsSwarmAdmin: function() {
                 return swarm.isSwarmAdmin(Meteor.userId());

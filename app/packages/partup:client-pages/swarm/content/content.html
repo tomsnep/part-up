@@ -26,8 +26,7 @@
             <h1>{{_ 'swarm-content-uppers-title' }}</h1>
             <h3>{{_ 'swarm-content-uppers-subtitle' }}</h3>
             <ul class="pu-avatar-stack pu-avatar-stack-large">
-            <li class="pu-avatar"></li><li class="pu-avatar"></li><li class="pu-avatar"></li><li class="pu-avatar"></li><li class="pu-avatar"></li><li class="pu-avatar"></li><li class="pu-avatar"></li><li class="pu-avatar"></li><li class="pu-avatar"></li><li class="pu-avatar"></li><li class="pu-avatar"></li><li class="pu-avatar"></li><li class="pu-avatar"></li><li class="pu-avatar"></li><li class="pu-avatar"></li><li class="pu-avatar"></li><li class="pu-avatar"></li>
-                {{#each data.suggested_uppers}}<li class="pu-avatar"></li>{{/each}}
+                {{#each data.relatedUppers}}<li class="pu-avatar" style="{{#with image}}background-image: url('{{ partupImageUrl id=. store='80x80' }}'){{/with}}" data-hovercontainer="HoverContainer_upper" data-hovercontainer-context="{{ _id }}"></li>{{/each}}
             </ul>
             <section class="pu-quotes">
                 {{#each data.swarm.quotes}}
