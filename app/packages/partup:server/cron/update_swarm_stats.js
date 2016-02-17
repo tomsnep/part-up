@@ -5,11 +5,9 @@ if (process.env.PARTUP_CRON_ENABLED) {
             return parser.text(Partup.constants.CRON_SWARM_UPDATE_STATS);
         },
         job: function() {
-            if (!process.env.NODE_ENV.match(/development/)) {
-                Swarms.find().forEach(function(swarm) {
-                    Partup.server.services.swarms.updateStats(swarm)
-                });
-            }
+            Swarms.find().forEach(function(swarm) {
+                Partup.server.services.swarms.updateStats(swarm)
+            });
         }
     });
 }
