@@ -3,6 +3,7 @@
 178.62.82.115 name=partup-acceptance-london1-02
 
 [cronservers]
+188.166.158.110 name=partup-cron-acceptance-london1-01
 
 [acceptance:children]
 appservers
