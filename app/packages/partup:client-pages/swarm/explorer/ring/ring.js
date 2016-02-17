@@ -38,7 +38,7 @@ Template.Ring.onRendered(function() {
         $(template.container).css({perspectiveOrigin: xPercent + '% ' + yPercent + '%'});
     };
     template.debouncedMouseMoveHandler = _.throttle(template.mouseMoveHandler, 100, true);
-    // $(document).on('mousemove', template.debouncedMouseMoveHandler);
+    $(document).on('mousemove', template.debouncedMouseMoveHandler);
 
     template.createRing = function(ringElement, options) {
         // options readout
@@ -112,7 +112,6 @@ Template.Ring.onRendered(function() {
             item.positioning = positioning;
             item.animation = animation;
             item.classNumber = getNumberInsideRange(0, 36, Math.round((Math.abs(((360 / TAU) * angle))) / 10));
-            console.log(item.classNumber, (((360 / TAU) * angle)))
             angle += angleIncrement;
         });
 

@@ -7,7 +7,7 @@
             {{/with}}
             {{#with animation.get }}
                 transition: opacity .2s linear, transform {{time}}s ease-in-out;
-                transform: translate3d({{animateX}}vw, {{animateY}}vh, 4vw);
+                transform: translate3d({{animateX}}vw, {{animateY}}vh, 0);
             {{/with}}">
             <a href="{{ pathFor route='network-detail' slug=slug}}" class="pu-sub-container" data-hovercontainer="HoverContainer_network" data-hovercontainer-context="{{ slug }}" data-hovercontainer-orientation="left-right" data-hovercontainer-class="pu-type-network" data-hovercontainer-offset="20">
                 <figure style="{{#with image }}background-image:url('{{ partupImageUrl id=. store='360x360'}}');{{/with }}"></figure>
