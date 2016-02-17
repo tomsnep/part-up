@@ -231,6 +231,11 @@ Meteor.methods({
             throw new Meteor.Error(401, 'unauthorized');
         }
 
+        var swarm = Swarms.findOneOrFail(swarmId, {fields: {quotes: 1}});
+        if (swarm.quotes.length >= 3) {
+            throw new Meteor.Error(400, 'swarm_quote_limit_reached');
+        }
+
         try {
             var upper = Meteor.users.findOne(fields.author_id);
             var quote = {
