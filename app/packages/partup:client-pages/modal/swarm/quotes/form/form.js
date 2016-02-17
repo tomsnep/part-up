@@ -1,16 +1,73 @@
 Template.modal_swarm_settings_quotes_form.onCreated(function() {
-    this.authorSelection = new ReactiveVar();
-    this.state = new ReactiveDict();
-    this.state.set('submitting', false);
-    this.charactersLeft = new ReactiveDict();
-    this.charactersLeft.set('content', Partup.schemas.forms.swarmQuote._schema.max);
+    var template = this;
+    template.authorSelection = new ReactiveVar();
+    template.state = new ReactiveDict();
+    template.state.set('submitting', false);
+    template.charactersLeft = new ReactiveDict();
+    template.charactersLeft.set('content', Partup.schemas.forms.swarmQuote._schema.max);
+    template.formId = lodash.uniqueId() + 'quoteForm';
+    console.log(template, template.data)
+    var editForm = template.data.quote ? true : false;
 
+    AutoForm.addHooks(template.formId, {
+        onSubmit: function(fields) {
+            var self = this;
+            self.event.preventDefault();
+            template.state.set('submitting', true);
+
+            // set author id from selection in autocomplete
+            fields.author_id = template.authorSelection.curValue._id;
+
+            if (editForm) {
+                Meteor.call('swarms.update_quote', template.data.swarmId, template.data.quote._id, fields, function(error) {
+
+                    if (error) return console.error(error);
+                    template.state.set('submitting', false);
+                    template.authorSelection.set(false);
+                    AutoForm.resetForm(self.formId);
+
+                    self.done();
+                    template.data.onAfterUpdate();
+                });
+
+            } else {
+                Meteor.call('swarms.add_quote', template.data.swarmId, fields, function(error) {
+
+                    if (error) return console.error(error);
+                    template.state.set('submitting', false);
+                    template.authorSelection.set(false);
+                    AutoForm.resetForm(self.formId);
+
+                    self.done();
+                    template.data.onAfterSubmit();
+                });
+            }
+
+            return false;
+        }
+    });
+});
+Template.modal_swarm_settings_quotes_form.onRendered(function() {
+    var template = this;
+    if (!template.data.quote) return;
+    template.subscribe('users.one', template.data.quote.author._id, {
+        onReady: function() {
+            var selectedAuthor = Meteor.users.findOne(template.data.quote.author._id);
+            template.authorSelection.set(selectedAuthor);
+        }
+    });
 });
 
 Template.modal_swarm_settings_quotes_form.events({
     'click [data-remove]': function(event, template) {
         console.log(template, this);
-        Meteor.call('swarms.remove_quote', this.swarmId, this.quote._id);
+        Meteor.call('swarms.remove_quote', this.swarmId, this.quote._id, function() {
+            template.data.onAfterRemove();
+        });
+    },
+    'click [data-close]': function(event, template) {
+        event.preventDefault();
+        template.data.resetState();
     }
 });
 
@@ -19,13 +76,7 @@ Template.modal_swarm_settings_quotes_form.helpers({
         var template = Template.instance();
         var data = this;
         return {
-            quote: function() {
-                if (data.quote._id) return Partup.transformers.swarm.toFormQuote(data.quote);
-                return {
-                    author_id: null,
-                    content: null
-                }
-            }
+
         };
     },
     state: function() {
@@ -41,8 +92,18 @@ Template.modal_swarm_settings_quotes_form.helpers({
     },
     form: function() {
         var template = Template.instance();
+        var data = this;
         return {
+            id: function() {
+                return template.formId;
+            },
             schema: Partup.schemas.forms.swarmQuote,
+            doc: function() {
+                return {
+                    author_id: template.data.quote ? template.data.quote.author._id : undefined,
+                    content: template.data.quote ? template.data.quote.content : undefined
+                };
+            },
             authorSelectionReactiveVar: function() {
                 return template.authorSelection;
             },
@@ -73,26 +134,5 @@ Template.modal_swarm_settings_quotes_form.helpers({
             authorFieldPlaceholder: __('modal-swarm-quotes-form-author-placeholder'),
             quoteFieldPlaceholder: __('modal-swarm-quotes-form-quote-placeholder')
         };
-    }
-});
-
-AutoForm.addHooks('quoteForm', {
-    onSubmit: function(doc) {
-        var self = this;
-        self.event.preventDefault();
-
-        var template = self.template.parent();
-        template.state.set('submitting', true);
-        doc.author_id = template.authorSelection.curValue._id;
-        Meteor.call('swarms.add_quote', template.data.swarmId, doc, function(error) {
-            if (error) return console.error(error);
-            template.state.set('submitting', false);
-            template.authorSelection.set(false);
-            AutoForm.resetForm(self.formId);
-
-            self.done();
-        });
-
-        return false;
     }
 });

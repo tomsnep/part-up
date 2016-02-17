@@ -275,7 +275,7 @@ Meteor.methods({
         }
 
         try {
-            var upper = Meteor.users.find(fields.user_id);
+            var upper = Meteor.users.findOne(fields.author_id);
 
             Swarms.update({_id: swarmId, 'quotes._id': quoteId}, {
                 $set: {

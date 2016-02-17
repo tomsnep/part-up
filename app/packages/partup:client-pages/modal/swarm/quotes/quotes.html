@@ -3,21 +3,11 @@
         <h2 class="pu-title pu-title-modal">{{_ 'modal-swarm-quotes-title-page'}}</h2>
         <p>{{_ 'modal-swarm-quotes-paragraph-intro'}}</p>
         <p>Overview of added quotes:</p>
-        {{#each data.swarm.quotes}}
-            {{> QuoteItem swarmId=data.swarm._id quote=. state='view'}}
-        {{/each}}
-
-        {{#if partupLowerThan data.swarm.quotes.length 3}}
-
-            {{#if state.create}}
-                {{> QuoteItem swarmId=data.swarm._id quote=. state='form'}}
-            {{/if}}
-
-            <div class="pu-block pu-block-action">
-                <a href="" class="pu-button" data-create>{{_ 'modal-swarm-quotes-button-add'}}</a>
-            </div>
-
-        {{/if}}
+        {{#unless state.editing }}
+            {{#each data.quotes}}
+                {{> QuoteItem swarmId=data.swarm._id quote=. onEdit=state.onEdit }}
+            {{/each}}
+        {{/unless}}
 
     </div>
 </template>
