@@ -89,8 +89,9 @@ Meteor.methods({
         check(fields, Partup.schemas.forms.swarmEditAdmin);
 
         var user = Meteor.user();
-        if (!user) throw new Meteor.Error(401, 'unauthorized');
-        if (!User(user).isAdmin()) throw new Meteor.Error(401, 'unauthorized');
+        if (!user || !User(user).isAdmin()) {
+            throw new Meteor.Error(401, 'unauthorized');
+        }
 
         var swarm = Swarms.findOneOrFail({slug: swarmSlug});
 
@@ -225,6 +226,11 @@ Meteor.methods({
         check(swarmId, String);
         check(fields, Partup.schemas.forms.swarmQuote);
 
+        var user = Meteor.user();
+        if (!user || !User(user).isAdmin() || !User(user).isSwarmAdmin(swarmId)) {
+            throw new Meteor.Error(401, 'unauthorized');
+        }
+
         try {
             var upper = Meteor.users.findOne(fields.author_id);
             var quote = {
@@ -258,6 +264,11 @@ Meteor.methods({
         check(quoteId, String);
         check(fields, Partup.schemas.forms.swarmQuote);
 
+        var user = Meteor.user();
+        if (!user || !User(user).isAdmin() || !User(user).isSwarmAdmin(swarmId)) {
+            throw new Meteor.Error(401, 'unauthorized');
+        }
+
         try {
             var upper = Meteor.users.find(fields.user_id);
 
@@ -287,6 +298,11 @@ Meteor.methods({
     'swarms.remove_quote': function(swarmId, quoteId) {
         check(swarmId, String);
         check(quoteId, String);
+
+        var user = Meteor.user();
+        if (!user || !User(user).isAdmin() || !User(user).isSwarmAdmin(swarmId)) {
+            throw new Meteor.Error(401, 'unauthorized');
+        }
 
         try {
             Swarms.update({_id: swarmId, 'quotes._id': quoteId}, {$pull: {quotes: {_id: quoteId}}});
