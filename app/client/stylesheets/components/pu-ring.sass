@@ -1,3 +1,16 @@
+@keyframes pointer
+    0%
+        transform: translateX(0px)
+    5%
+        transform: translateX(5px)
+    10%
+        transform: translateX(0px)
+    15%
+        transform: translateX(5px)
+    20%
+        transform: translateX(0px)
+    100%
+        transform: translateX(0px)
 .pu-ring
     width: 100%
     $minus: 100px
@@ -25,6 +38,59 @@
             z-index: 0
             &:hover
                 z-index: 1
+
+        &.pu-sub-page
+            opacity: 0
+            transition: transform .5s ease-in-out, opacity .5s
+            pointer-events: none
+            z-index: 0
+
+            .pu-sub-floatingbutton
+                position: absolute
+                color: #fff
+                font-size: 20px
+                transition: color .2s
+
+                i
+                    animation-name: pointer
+                    animation-iteration-count: infinite
+                    animation-duration: 4s
+
+                    &:after
+                        content: ''
+                        transition: background-color .2s
+                        border: 2px dashed #fff
+                        border-radius: 50%
+                        width: 50px
+                        height: 50px
+                        display: block
+                        left: -19px
+                        position: absolute
+                        top: -18px
+                        z-index: -1
+                &:hover
+                    color: $color-primary
+                    i:after
+                        background-color: #fff
+
+            &.page-0
+                transform: translate3d(-75vw, 0, -15vw)
+                .pu-sub-floatingbutton
+                    left: 95%
+                    top: 40%
+
+            &.page-1
+                transform: translate3d(75vw, 0, -15vw)
+                .pu-sub-floatingbutton
+                    left: 5%
+                    top: 40%
+                    transform: rotate(-180deg)
+
+            &.active
+                pointer-events: all
+                opacity: 1
+                z-index: 1
+                transform: translate3d(0vw, 0, 1vw)
 
     > div.layer
         position: absolute

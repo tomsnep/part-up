@@ -1,7 +1,9 @@
 Template.Ring.onCreated(function() {
     var template = this;
     template.rings = new ReactiveVar([]);
+    template.pages = new ReactiveVar([]);
     template.placeholder = new ReactiveVar([]);
+    template.currentPage = new ReactiveVar(0);
 
     // helpers
     template.randomBoolean = function() {
@@ -110,14 +112,32 @@ Template.Ring.onRendered(function() {
 
     template.autorun(function(c) {
         var data = Template.currentData();
-        var rings = [];
-        Tracker.nonreactive(function() {
-            _.each(template.ringPresets, function(preset, key) {
-                preset.items = data.rings[key] || [];
-                rings = rings.concat(template.createRing(template.container, preset));
+        if (data.rings instanceof Array) {
+            var pages = [];
+            Tracker.nonreactive(function() {
+                _.each(data.rings, function(ring, index) {
+                    var page = [];
+                    _.each(template.ringPresets, function(preset, key) {
+                        preset.items = ring[key] || [];
+                        page = page.concat(template.createRing(template.container, preset));
+                    });
+                    pages.push({
+                        number: index,
+                        rings: page
+                    });
+                });
+                template.pages.set(pages);
             });
-            template.rings.set(rings);
-        });
+        } else {
+            var rings = [];
+            Tracker.nonreactive(function() {
+                _.each(template.ringPresets, function(preset, key) {
+                    preset.items = data.rings[key] || [];
+                    rings = rings.concat(template.createRing(template.container, preset));
+                });
+                template.rings.set(rings);
+            });
+        }
     });
 
 });
@@ -127,12 +147,35 @@ Template.Ring.onDestroyed(function() {
     $(document).off('mousemove', template.debouncedMouseMoveHandler);
 });
 
+Template.Ring.events({
+    'click [data-toggle]': function(event, template) {
+        event.preventDefault();
+        var currentPage = template.currentPage.get();
+        var next = currentPage ? 0 : 1;
+        template.currentPage.set(next);
+    }
+});
+
 Template.Ring.helpers({
+    state: function() {
+        var template = Template.instance();
+        return {
+            currentPage: function() {
+                return template.currentPage.get();
+            },
+            side: function() {
+                return template.currentPage.get() ? 'right' : 'left';
+            }
+        };
+    },
     data: function() {
         var template = Template.instance();
         return {
             rings: function() {
                 return template.rings.get();
+            },
+            pages: function() {
+                return template.pages.get();
             },
             placeholder: function() {
                 return template.placeholder.get();

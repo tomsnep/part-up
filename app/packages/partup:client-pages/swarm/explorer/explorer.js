@@ -16,6 +16,7 @@ Template.swarm_explorer.helpers({
     },
     data: function() {
         var data = Template.currentData();
+        var template = Template.instance();
         return {
             rings: function() {
                 // check if the networks are a mongo cursor
@@ -27,23 +28,42 @@ Template.swarm_explorer.helpers({
                 // determine total number of networks
                 var total = networks.length;
                 var empty = total ? false : true;
+                if (total > template.pageLimit) {
+                    var total = Math.ceil(total / 2);
+                    var numberOfInnerRingItems = Math.min(4, Math.ceil(total / 3));
 
-                // number of inner ring items
-                // 1/3 of total, max 4
-                var numberOfInnerRingItems = Math.min(4, Math.ceil(total / 3));
+                    var pages = [{number: 1, inner: [], outer: []},
+                                 {number: 2, inner: [], outer: []}];
 
-                if (!empty) {
-                    _.times(numberOfInnerRingItems, function() {
-                        innerRingItems.push(networks.pop());
+                    _.each(pages, function(item, index) {
+                        _.times(numberOfInnerRingItems, function() {
+                            item.inner.push(networks.pop());
+                        });
+                        _.times((total - item.inner.length), function() {
+                            if(networks.length) item.outer.push(networks.pop());
+                        });
                     });
-                    outerRingItems = networks;
-                }
+                    return pages;
+                    // outerRingItems = networks;
+                } else {
 
-                return networks ? {
-                    empty: empty,
-                    inner: innerRingItems,
-                    outer: outerRingItems
-                } : false;
+                    // number of inner ring items
+                    // 1/3 of total, max 4
+                    var numberOfInnerRingItems = Math.min(4, Math.ceil(total / 3));
+
+                    if (!empty) {
+                        _.times(numberOfInnerRingItems, function() {
+                            innerRingItems.push(networks.pop());
+                        });
+                        outerRingItems = networks;
+                    }
+
+                    return networks ? {
+                        empty: empty,
+                        inner: innerRingItems,
+                        outer: outerRingItems
+                    } : false;
+                }
             },
         };
     },
