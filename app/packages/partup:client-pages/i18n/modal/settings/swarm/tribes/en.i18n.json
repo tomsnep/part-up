@@ -4,6 +4,8 @@
     "modal-swarm-tribes-form-add-label": "Swarm",
     "modal-swarm-tribes-form-network-placeholder": "Search for your tribes",
     "modal-swarm-tribes-form-button-submit": "Add to swarm",
+    "modal-swarm-tribes-form-success": "Tribe added to swarm",
+    "modal-swarm-tribes-remove-success": "Tribe removed from swarm",
     "modal-swarm-tribes-list-label": "Overview of added tribes:",
     "modal-swarm-tribes-form-tribes-list-left": "%d tribes left",
     "modal-swarm-tribes-form-tribes-list": "max %d tribes"

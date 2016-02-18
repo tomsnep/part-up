@@ -22,5 +22,6 @@
     "modal-swarm-details-form-organization-placeholder": "Give an explaination about your organization",
     "modal-swarm-details-form-organization-characters-left": "%d characters left",
     "modal-swarm-details-form-organization-characters": "max %d characters",
-    "modal-swarm-details-form-submit": "Save changes"
+    "modal-swarm-details-form-submit": "Save changes",
+    "modal-swarm-details-form-saved": "Saved changes"
 }

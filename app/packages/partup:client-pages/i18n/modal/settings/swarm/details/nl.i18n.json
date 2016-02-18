@@ -22,5 +22,6 @@
     "modal-swarm-details-form-organization-placeholder": "Geef een uitleg over jouw organizatie",
     "modal-swarm-details-form-organization-characters-left": "nog %d tekens over",
     "modal-swarm-details-form-organization-characters": "maximaal %d tekens",
-    "modal-swarm-details-form-submit": "Veranderingen opslaan"
+    "modal-swarm-details-form-submit": "Veranderingen opslaan",
+    "modal-swarm-details-form-saved": "Veranderingen opgeslagen"
 }

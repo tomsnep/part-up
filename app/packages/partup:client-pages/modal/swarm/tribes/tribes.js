@@ -87,8 +87,12 @@ Template.modal_swarm_settings_tribes.events({
     'click [data-removenetwork]': function(event, template) {
         var networkId = this._id;
         var swarm = Swarms.findOne({slug: template.data.slug});
-        Meteor.call('swarms.remove_network', swarm._id, networkId, function() {
-
+        Meteor.call('swarms.remove_network', swarm._id, networkId, function(err) {
+            if (err) {
+                Partup.client.notify.error(__('base-errors-' + err.reason));
+                return;
+            }
+            Partup.client.notify.success(__('modal-swarm-tribes-remove-success'));
         });
     }
 });
@@ -102,9 +106,14 @@ AutoForm.addHooks('addNetworkForm', {
         template.state.set('submitting', true);
         var networkId = template.networkSelection.curValue._id;
         var swarm = Swarms.findOne({slug: template.data.slug});
-        Meteor.call('swarms.add_network', swarm._id, networkId, function(error) {
-            if (error) return console.error(error);
+        Meteor.call('swarms.add_network', swarm._id, networkId, function(err) {
             template.state.set('submitting', false);
+            if (err) {
+                Partup.client.notify.error(__('base-errors-' + err.reason));
+                return;
+            }
+            Partup.client.notify.success(__('modal-swarm-tribes-form-success'));
+
             template.networkSelection.set(undefined);
             AutoForm.resetForm(self.formId);
             Meteor.defer(function() { $('[data-focus-input]').focus(); });

@@ -6,7 +6,6 @@ Template.modal_swarm_settings_quotes_form.onCreated(function() {
     template.charactersLeft = new ReactiveDict();
     template.charactersLeft.set('content', Partup.schemas.forms.swarmQuote._schema.max);
     template.formId = lodash.uniqueId() + 'quoteForm';
-    console.log(template, template.data)
     var editForm = template.data.quote ? true : false;
 
     AutoForm.addHooks(template.formId, {
@@ -19,10 +18,14 @@ Template.modal_swarm_settings_quotes_form.onCreated(function() {
             fields.author_id = template.authorSelection.curValue._id;
 
             if (editForm) {
-                Meteor.call('swarms.update_quote', template.data.swarmId, template.data.quote._id, fields, function(error) {
-
-                    if (error) return console.error(error);
+                Meteor.call('swarms.update_quote', template.data.swarmId, template.data.quote._id, fields, function(err) {
                     template.state.set('submitting', false);
+                    if (err && err.message) {
+                        Partup.client.notify.error(__(err.reason));
+                        return;
+                    }
+
+                    Partup.client.notify.success(__('modal-swarm-quotes-form-updated'));
                     template.authorSelection.set(false);
                     AutoForm.resetForm(self.formId);
 
@@ -31,10 +34,13 @@ Template.modal_swarm_settings_quotes_form.onCreated(function() {
                 });
 
             } else {
-                Meteor.call('swarms.add_quote', template.data.swarmId, fields, function(error) {
-
-                    if (error) return console.error(error);
+                Meteor.call('swarms.add_quote', template.data.swarmId, fields, function(err) {
                     template.state.set('submitting', false);
+                    if (err && err.message) {
+                        Partup.client.notify.error(__(err.reason));
+                        return;
+                    }
+                    Partup.client.notify.success(__('modal-swarm-quotes-form-created'));
                     template.authorSelection.set(false);
                     AutoForm.resetForm(self.formId);
 
@@ -61,7 +67,12 @@ Template.modal_swarm_settings_quotes_form.onRendered(function() {
 Template.modal_swarm_settings_quotes_form.events({
     'click [data-remove]': function(event, template) {
         console.log(template, this);
-        Meteor.call('swarms.remove_quote', this.swarmId, this.quote._id, function() {
+        Meteor.call('swarms.remove_quote', this.swarmId, this.quote._id, function(err) {
+            if (err && err.message) {
+                Partup.client.notify.error(__(err.reason));
+                return;
+            }
+            Partup.client.notify.success(__('modal-swarm-quotes-form-removed'));
             template.data.onAfterRemove();
         });
     },

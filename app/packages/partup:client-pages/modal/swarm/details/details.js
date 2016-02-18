@@ -140,11 +140,11 @@ AutoForm.addHooks('swarmEditForm', {
             template.submitting.set(false);
 
             if (err && err.message) {
-                Partup.client.notify.error(err.reason);
+                Partup.client.notify.error(__(err.reason));
                 return;
             }
 
-            Partup.client.notify.success(__('swarm-settings-form-saved'));
+            Partup.client.notify.success(__('modal-swarm-details-form-saved'));
             self.done();
         });
 
