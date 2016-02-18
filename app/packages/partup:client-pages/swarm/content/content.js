@@ -28,5 +28,5 @@ Template.swarm_content.onRendered(function() {
 });
 
 Template.swarm_content.onDestroyed(function() {
-    template.scrollElement.off('mousewheel DOMMouseScroll', template.mouseWheelHandler);
+    this.scrollElement.off('mousewheel DOMMouseScroll', this.mouseWheelHandler);
 });
