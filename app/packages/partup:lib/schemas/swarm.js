@@ -12,12 +12,12 @@ var swarmBaseSchema = new SimpleSchema({
     },
     introduction: {
         type: String,
-        max: 500,
+        max: 260,
         optional: true
     },
     description: {
         type: String,
-        max: 1500,
+        max: 700,
         optional: true
     },
     image: {
