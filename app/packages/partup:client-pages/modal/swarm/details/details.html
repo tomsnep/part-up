@@ -5,8 +5,11 @@
 
         {{# autoForm id='swarmEditForm' schema=form.schema doc=form.fieldsForSwarm validation="submitThenKeyup" class="pu-form" }}
             <!-- image -->
+            <div class="pu-formfield pu-formfield-text">
+                <h3>{{_ 'modal-swarm-details-form-logo-label'}}</h3>
+                <p>{{_ 'modal-swarm-details-form-logo-explaination'}}</p>
+            </div>
             <div class="pu-formfield">
-                <span class="pu-label">{{_ 'modal-swarm-details-form-logo-label'}}</span>
                 <div class="pu-upload">
                     <figure style="background-image:url('{{ data.imageUrl }}')" class="pu-imagepreview pu-imagepreview-logo"></figure>
                     {{# FileInput inputSettings=form.imageInput }}
@@ -22,7 +25,10 @@
                     {{> afFieldInput name="image" type="hidden" }}
                 </div>
             </div>
-
+            <div class="pu-formfield pu-formfield-text">
+                <h3>{{_ 'modal-swarm-details-form-intro-explaination-title'}}</h3>
+                <p>{{_ 'modal-swarm-details-form-intro-explaination'}}</p>
+            </div>
             <!-- name -->
             <label class="pu-formfield">
                 <span class="pu-label">
@@ -95,7 +101,7 @@
                             name='description'
                             placeholder=translations.description
                             class='pu-textarea'
-                            rows=3
+                            rows=8
                             maxlength=form.schema._schema.description.max
                         }}
                     </span>
