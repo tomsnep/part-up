@@ -44,6 +44,14 @@
                         </div>
                     {{/if}}
 
+                    {{#if partupEquals type 'swarm-settings'}}
+                        <div class="pu-errorpage pu-errorpage-swarm-closed">
+                            <h4>{{_ 'pages-app-notfound-swarm_settings-title'  }}</h4>
+                            <p>{{_ 'pages-app-notfound-swarm_settings-description' }}</p>
+                            <p><a href="{{pathFor 'swarm' slug=data}}">{{_ 'pages-app-notfound-swarm_settings-backbutton'}}</a></p>
+                        </div>
+                    {{/if}}
+
                     {{#if partupEquals type 'profile'}}
                         <div class="pu-errorpage pu-errorpage-profile">
                             <h4>{{_ 'pages-app-notfound-profile-title'  }}</h4>

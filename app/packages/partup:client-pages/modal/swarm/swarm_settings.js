@@ -2,6 +2,15 @@ Template.modal_swarm_settings.onCreated(function() {
     var template = this;
     template.subscription = template.subscribe('swarms.one', template.data.slug);
     template.networkSubscription = template.subscribe('swarms.one.networks', template.data.slug);
+
+    template.autorun(function(c) {
+        var swarm = Swarms.findOne({slug: template.data.slug});
+        if (!swarm) return;
+        c.stop();
+        if (!swarm.isSwarmAdmin(Meteor.userId())) {
+            Router.pageNotFound('swarm-settings', template.data.slug);
+        }
+    });
 });
 Template.modal_swarm_settings.events({
     'click [data-closepage]': function(event, template) {

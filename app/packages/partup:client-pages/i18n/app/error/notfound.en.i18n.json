@@ -18,6 +18,10 @@
     "pages-app-notfound-network_settings-description": "You could try asking the tribe admin to change the settings, when he or she is in a good mood.",
     "pages-app-notfound-network_settings-backbutton": "Take me back to the tribe.",
 
+    "pages-app-notfound-swarm_settings-title": "Swarm settings not accessible",
+    "pages-app-notfound-swarm_settings-description": "You could try asking the swarm admin to change the settings, when he or she is in a good mood.",
+    "pages-app-notfound-swarm_settings-backbutton": "Take me back to the swarm.",
+
     "pages-app-notfound-profile-title": "Upper profile not found",
     "pages-app-notfound-profile-description": "Bummer, we could not find the upper you are looking for.",
 
