@@ -1,13 +1,16 @@
 .pu-quotes
     display: block
-    padding: 54px 45px 0px 45px
+    padding: 54px 10px 0px 10px
+    font-size: 0
     .pu-commentbox
+        font-size: 16px
         display: inline-block
         padding-right: 10px
         padding-left: 10px
-        max-width: 33%
+        // max-width: 33%
         margin: 0 auto
         vertical-align: top
+        min-height: 120px
         .pu-sub-upper
             display: block
             margin-top: 25px
@@ -21,3 +24,12 @@
                 vertical-align: middle
                 margin-right: 10px
 
+    @media screen and (min-width: $breakpoint-tablet)
+        padding: 54px 45px 0px 45px
+
+        .pu-commentbox
+            width: 100%
+
+    @media screen and (min-width: $breakpoint-desktop)
+        .pu-commentbox
+            max-width: 33%
