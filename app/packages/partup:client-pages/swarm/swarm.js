@@ -25,7 +25,15 @@ Template.swarm.onCreated(function() {
     });
     template.relatedUppers = new ReactiveVar([]);
     Meteor.call('swarms.get_related_uppers', template.data.slug, function(error, res) {
-        template.relatedUppers.set(res);
+        var userIds = mout.array.map(res, function(user) {
+            return user._id;
+        });
+
+        template.subscribe('users.by_ids', userIds, {
+            onReady: function() {
+                template.relatedUppers.set(res);
+            }
+        });
     });
 });
 
