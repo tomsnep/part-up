@@ -385,8 +385,20 @@ Meteor.methods({
                 upper_list.splice(random_index, 1);
             }
 
-            // And there we have it. Only return unique values
-            return lodash.unique(related_uppers);
+            // Remove duplicates
+            related_uppers = lodash.unique(related_uppers);
+
+            // Create response
+            var response = [];
+            Meteor.users.find({_id: {$in: related_uppers}}).fetch().forEach(function(upper) {
+                response.push({
+                    _id: upper._id,
+                    image: upper.profile.image
+                });
+            });
+
+            // And there we have it
+            return response;
         } catch (error) {
             Log.error(error);
             throw new Meteor.Error(400, 'related_uppers_could_not_be_given');
