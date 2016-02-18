@@ -1,5 +1,6 @@
 Template.swarm_explorer.onCreated(function() {
     this.rendered = new ReactiveVar(false);
+    this.pageLimit = 13;
 });
 Template.swarm_explorer.onRendered(function() {
     this.rendered.set(true);

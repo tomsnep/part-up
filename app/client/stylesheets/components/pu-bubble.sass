@@ -5,6 +5,7 @@
     to
         transform: scale(3)
         opacity: 0
+
 @keyframes flip
     0%
         transform: rotate(0deg)
@@ -12,6 +13,7 @@
         transform: rotate(0deg)
     100%
         transform: rotate(-360deg)
+
 @keyframes rotate
     0%
         transform: rotate(0deg)
@@ -25,12 +27,21 @@
     height: 40px
     margin-left: -20px
     opacity: 0
-    transform: translate3d(0,0,0)
-    transition: opacity .2s linear, transform 5s ease-in-out
+    transition: opacity .2s linear, transform .2s cubic-bezier(0.3, 0.7, 0.9, 1)
+    transform: translate3d(0, 0, -1px)
+    animation-play-state: paused
+
     &.show
         opacity: 1
+        transform: translate3d(0, 0, 0px)
+        animation-play-state: running
+
+        &:hover
+            animation-play-state: paused
+
     &.pu-state-empty
         display: none
+
     .pu-sub-container
         z-index: 0
         display: block

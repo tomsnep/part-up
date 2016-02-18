@@ -1,14 +1,27 @@
 <template name="Bubble">
+    <style>
+        @keyframes float-{{state.id}} {
+            {{#with state.animation}}
+                0% {
+                    transform: translate3d(0px,0px,0px);
+                }
+                100% {
+                    transform: translate3d({{x}}vw,{{y}}vh, 0px);
+                }
+            {{/with}}
+        }
+    </style>
     {{#if name }}
         <div data-transition class="pu-bubble pu-bubble-{{classNumber}} {{#if empty}}pu-state-empty{{/if}} {{#if state.show}}show{{/if}}"
             style="{{#with positioning.get }}
-                left: {{x}}%;
-                top: {{y}}%;
+                left: {{x}}%; top: {{y}}%;
             {{/with}}
-            {{#with animation.get }}
-                transition: opacity .2s linear, transform {{time}}s ease-in-out;
-                transform: translate3d({{animateX}}vw, {{animateY}}vh, 0);
-            {{/with}}">
+            {{#if state.active }}animation-name: float-{{state.id}};{{/if}}
+            animation-timing-function: ease-in-out;
+            animation-duration: {{state.time}}s;
+            animation-iteration-count: infinite;
+            animation-direction: alternate;
+            ">
             <a href="{{ pathFor route='network-detail' slug=slug}}" class="pu-sub-container" data-hovercontainer="HoverContainer_network" data-hovercontainer-context="{{ slug }}" data-hovercontainer-orientation="left-right" data-hovercontainer-class="pu-type-network" data-hovercontainer-offset="20">
                 <figure style="{{#with image }}background-image:url('{{ partupImageUrl id=. store='360x360'}}');{{/with }}"></figure>
                 <div class="pu-sub-namecontainer">
@@ -19,17 +32,18 @@
         </div>
     {{else}}
         <div data-transition class="pu-bubble pu-bubble-24 pu-bubble-placeholder {{#if state.show}}show{{/if}}"
-                    style="{{#with positioning.get }}
-                        left: {{x}}%;
-                        top: {{y}}%;
-                    {{/with}}
-                    {{#with animation.get }}
-                        transition: opacity .2s linear, transform 10s ease-in-out;
-                        transform: translate3d({{animateX}}vw, {{animateY}}vh, 0);
-                    {{/with}}">
-           <a href="{{ pathFor route=placeholderPath slug=placeholderSlug _id=placeholderId }}" class="pu-sub-container">
+            style="{{#with positioning.get }}
+                left: {{x}}%; top: {{y}}%;
+            {{/with}}
+            {{#if state.active }}animation-name: float-{{state.id}};{{/if}}
+            animation-timing-function: ease-in-out;
+            animation-duration: {{state.time}}s;
+            animation-iteration-count: infinite;
+            animation-direction: alternate;
+            ">
+            <a href="{{ pathFor route=placeholderPath slug=placeholderSlug _id=placeholderId }}" class="pu-sub-container">
                {{> Template.dynamic template=type }}
-           </a>
+            </a>
         </div>
     {{/if}}
 </template>

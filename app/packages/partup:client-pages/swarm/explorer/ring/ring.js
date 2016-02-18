@@ -93,10 +93,6 @@ Template.Ring.onRendered(function() {
 
         // loop through each item and calculate the position on ring
         items.forEach(function(item, i) {
-            var animateX = 0;
-            var animateY = 0;
-            if (animate) animateX = lodash.random(-2,2);
-            if (animate) animateY = lodash.random(-2,2);
             var x = ringXDiameterPercentage * (ringXRadiusPercentage * Math.cos(angle) + ringXRadius) + (offsetLeft);
             var y = ringYDiameterPercentage * (ringYRadiusPercentage * Math.sin(angle) + ringYRadius) + (offsetTop);
             if (reverse) x = 100 - x;
@@ -104,13 +100,7 @@ Template.Ring.onRendered(function() {
                 x: x,
                 y: y
             });
-            var animation = new ReactiveVar({
-                animateX: animateX,
-                animateY: animateY,
-                time: lodash.random(2, 7)
-            });
             item.positioning = positioning;
-            item.animation = animation;
             item.classNumber = getNumberInsideRange(0, 36, Math.round((Math.abs(((360 / TAU) * angle))) / 10));
             angle += angleIncrement;
         });

@@ -1,29 +1,35 @@
 Template.Bubble.onCreated(function() {
-    this.randomInt = lodash.random(0, 36);
-    this.show = new ReactiveVar(false);
-});
-Template.Bubble.onRendered(function() {
     var template = this;
-    Meteor.setTimeout(function() { template.show.set(true); }, 500);
+    template.show = new ReactiveVar(false);
+    template.animation = new ReactiveVar({});
+    template.randomCoordinates = function(min, max) {
+        return {
+            x: lodash.random(min, max),
+            y: lodash.random(min, max)
+        };
+    };
+    template.animation.set(template.randomCoordinates(-2, 2));
+
+    template.id = lodash.uniqueId();
+    template.time = lodash.random(4, 8);
+    template.active = new ReactiveVar(false);
 });
 
-Template.Bubble.events({
-    'transitionend [data-transition], transitioncancel [data-transition]': function(event, template) {
-        this.animation.set({
-            animateX: lodash.random(-1,1),
-            animateY: lodash.random(-1,1),
-            time: lodash.random(8, 16)
-        });
-    }
+Template.Bubble.onRendered(function() {
+    var template = this;
+    var delay = lodash.random(100, 700);
+    Meteor.setTimeout(function() {
+        template.show.set(true);
+        Meteor.setTimeout(function() {
+            template.active.set(true);
+        }, 250);
+    }, delay);
 });
 
 Template.Bubble.helpers({
     data: function() {
         var template = Template.instance();
         return {
-            randomInt: function() {
-                return 36;
-            },
             image: function() {
                 return this.image;
             }
@@ -37,6 +43,18 @@ Template.Bubble.helpers({
             },
             type: function() {
                 return template.data.type;
+            },
+            animation: function() {
+                return template.animation.get();
+            },
+            id: function() {
+                return template.id;
+            },
+            time: function() {
+                return template.time;
+            },
+            active: function() {
+                return template.active.get();
             }
         };
     }
