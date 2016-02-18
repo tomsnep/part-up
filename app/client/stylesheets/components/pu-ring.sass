@@ -52,9 +52,11 @@
                 transition: color .2s
 
                 i
-                    animation-name: pointer
-                    animation-iteration-count: infinite
-                    animation-duration: 4s
+                    &:before
+                        display: block
+                        animation-name: pointer
+                        animation-iteration-count: infinite
+                        animation-duration: 4s
 
                     &:after
                         content: ''
