@@ -20,7 +20,6 @@ Template.modal_swarm_settings_tribes.helpers({
                 return Networks.find({_id: {$in: swarm.networks}});
             },
             networksLeft: function() {
-                console.log(template.networksMax - swarm.networks.length)
                 return template.networksMax - swarm.networks.length;
             }
         };

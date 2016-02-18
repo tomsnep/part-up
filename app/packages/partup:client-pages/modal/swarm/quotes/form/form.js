@@ -66,7 +66,6 @@ Template.modal_swarm_settings_quotes_form.onRendered(function() {
 
 Template.modal_swarm_settings_quotes_form.events({
     'click [data-remove]': function(event, template) {
-        console.log(template, this);
         Meteor.call('swarms.remove_quote', this.swarmId, this.quote._id, function(err) {
             if (err && err.message) {
                 Partup.client.notify.error(__(err.reason));

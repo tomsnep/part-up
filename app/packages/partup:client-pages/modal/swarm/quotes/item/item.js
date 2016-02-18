@@ -11,7 +11,6 @@ Template.QuoteItem.onCreated(function() {
         if (state !== 'empty') this.state.set('empty', false);
         this.state.set(state, true);
     };
-    console.log(this.data);
 });
 
 Template.QuoteItem.helpers({
