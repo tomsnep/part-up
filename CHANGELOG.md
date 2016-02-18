@@ -1,4 +1,6 @@
 # CHANGELOG
+## 1.16.7
+- fix(autocomplete): security patch
 
 ## 1.16.6
 - fix(pricing): updated the new pricing policy fixing #163 
