@@ -172,6 +172,6 @@ Partup.schemas.forms.swarmQuote = new SimpleSchema({
     content: {
         type: String,
         min: 15,
-        max: 999
+        max: 180
     }
 });
