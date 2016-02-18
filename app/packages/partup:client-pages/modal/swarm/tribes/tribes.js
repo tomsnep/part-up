@@ -4,6 +4,7 @@ Template.modal_swarm_settings_tribes.onCreated(function() {
     template.state.set('submitting', false);
     template.swarmId = new ReactiveVar('');
     template.networkSelection = new ReactiveVar();
+    template.networksMax = 25;
 });
 
 Template.modal_swarm_settings_tribes.helpers({
@@ -17,6 +18,10 @@ Template.modal_swarm_settings_tribes.helpers({
             },
             networks: function() {
                 return Networks.find({_id: {$in: swarm.networks}});
+            },
+            networksLeft: function() {
+                console.log(template.networksMax - swarm.networks.length)
+                return template.networksMax - swarm.networks.length;
             }
         };
     },
@@ -52,6 +57,12 @@ Template.modal_swarm_settings_tribes.helpers({
                 return function(res) {
                     $(template.find('[data-submitbutton]')).focus();
                 };
+            },
+            networksLeft: function(number) {
+                return template.networksMax - number;//template.networksLeft.get();
+            },
+            networksMax: function() {
+                return template.networksMax;
             }
         };
     },

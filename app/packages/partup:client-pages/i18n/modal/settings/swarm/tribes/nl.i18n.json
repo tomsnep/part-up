@@ -4,5 +4,7 @@
     "modal-swarm-tribes-form-add-label": "Swarm",
     "modal-swarm-tribes-form-network-placeholder": "Zoek naar jouw tribes",
     "modal-swarm-tribes-form-button-submit": "Toevoegen aan swarm",
-    "modal-swarm-tribes-list-label": "Overzicht van toegevoegde tribes:"
+    "modal-swarm-tribes-list-label": "Overzicht van toegevoegde tribes:",
+    "modal-swarm-tribes-form-tribes-list-left": "%d tribes over",
+    "modal-swarm-tribes-form-tribes-list": "max %d tribes"
 }

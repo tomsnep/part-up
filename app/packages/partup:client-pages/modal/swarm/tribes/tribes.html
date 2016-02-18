@@ -34,21 +34,29 @@
                 </div>
             </footer>
         {{/autoForm}}
-        <!-- <label class="pu-formfield"> -->
-                <span class="pu-label">
-                    {{_ 'modal-swarm-tribes-list-label'}}
-                </span>
-            <!-- </label> -->
-        <ul class="pu-list">
-            {{#each data.networks}}
-                <li class="pu-networkitem">
-                    <figure class="pu-avatar pu-avatar-square pu-avatar-medium pu-avatar-border" style="background-image: url('{{ partupImageUrl id=image }}');"></figure>
-                    <div>
-                        <a href="{{pathFor 'network-detail' slug }}">{{ name }}</a>
-                        <button type="button" class="pu-sub-remove pu-button pu-button-checkmark pu-button-checkmark-deny" data-removenetwork> <i class="picon-times"></i> </button>
-                    </div>
-                </li>
-            {{/each}}
-        </ul>
+        <label class="pu-formfield">
+            <span class="pu-label">
+                {{_ 'modal-swarm-tribes-list-label'}}
+                <a class="pu-hint">
+                    {{# if partupLowerThan data.networksLeft form.networksMax }}
+                        {{_ 'modal-swarm-tribes-form-tribes-list-left' data.networksLeft }}
+                    {{ else }}
+                        {{_ 'modal-swarm-tribes-form-tribes-list' form.networksMax }}
+                    {{/ if }}
+                </a>
+            </span>
+
+            <ul class="pu-list">
+                {{#each data.networks}}
+                    <li class="pu-networkitem">
+                        <figure class="pu-avatar pu-avatar-square pu-avatar-medium pu-avatar-border" style="background-image: url('{{ partupImageUrl id=image }}');"></figure>
+                        <div>
+                            <a href="{{pathFor 'network-detail' slug }}">{{ name }}</a>
+                            <button type="button" class="pu-sub-remove pu-button pu-button-checkmark pu-button-checkmark-deny" data-removenetwork> <i class="picon-times"></i> </button>
+                        </div>
+                    </li>
+                {{/each}}
+            </ul>
+        </label>
     </div>
 </template>
