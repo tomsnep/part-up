@@ -58,6 +58,8 @@
                                         <li>
                                             <a href="#" class="pu-tag pu-tag-inverted">{{.}}</a>
                                         </li>
+                                    {{ else }}
+                                        <li class="pu-sub-placeholder">{{_ 'swarm-content-network-notags'}}</li>
                                     {{/ each }}
                                 </ul>
                             </header>

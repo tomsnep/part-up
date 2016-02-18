@@ -23,10 +23,10 @@ Template.swarm_content.onRendered(function() {
     };
 
     if (!mobile) {
-        template.scrollElement.on('mousewheel DOMMouseScroll', template.mouseWheelHandler);
+        // template.scrollElement.on('mousewheel DOMMouseScroll', template.mouseWheelHandler);
     }
 });
 
 Template.swarm_content.onDestroyed(function() {
-    this.scrollElement.off('mousewheel DOMMouseScroll', this.mouseWheelHandler);
+    // this.scrollElement.off('mousewheel DOMMouseScroll', this.mouseWheelHandler);
 });
