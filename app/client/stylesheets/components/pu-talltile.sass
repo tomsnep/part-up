@@ -16,25 +16,20 @@
 
     > header
         background-color: $color-border-light
-        height: 100%
-        margin-bottom: -300px
         padding: 20px
         padding-right: 10px
         text-align: left
         z-index: 0
-        &:hover
-            + article
-                transform: translateY(110px)
+        height: 108px
+
+        .pu-list
+            height: 80px
+            overflow: hidden
 
     > article
-        height: 100%
-        margin-bottom: -200px
         padding: 20px
         transition: transform .3s
         background-color: #fff
-
-        &:hover
-            transform: translateY(-100px)
 
     > footer
         border-top: 2px solid $color-border-light
