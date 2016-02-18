@@ -29,6 +29,18 @@ Meteor.publishComposite('swarms.one', function(swarmSlug) {
             return Swarms.guardedMetaFind({slug: swarmSlug}, {limit: 1});
         },
         children: [
+            {
+                find: function(swarm) {
+                    if (swarm.quotes.length > 0) {
+                        var userIds = mout.array.map(swarm.quotes, function(quote) {
+                            return quote.author._id;
+                        });
+                        return Meteor.users.findMultiplePublicProfiles(userIds);
+                    }
+                }, children: [
+                    {find: Images.findForUser}
+                ]
+            },
             {find: Images.findForSwarm},
             {
                 find: function() {
