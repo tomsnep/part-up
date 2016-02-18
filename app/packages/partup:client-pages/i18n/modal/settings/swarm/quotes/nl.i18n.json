@@ -4,5 +4,8 @@
     "modal-swarm-quotes-button-add": "Nieuwe quote",
     "modal-swarm-quotes-form-updated": "Quote bijgewerkt",
     "modal-swarm-quotes-form-created": "Nieuwe quote aangemaakt",
-    "modal-swarm-quotes-form-removed": "Quote verwijderd"
+    "modal-swarm-quotes-form-removed": "Quote verwijderd",
+    "modal-swarm-quotes-list-label": "Overzicht van toegevoegde quotes:",
+    "modal-swarm-quotes-form-quotes-list-left": "%d quotes over",
+    "modal-swarm-quotes-form-quotes-list": "max %d quotes"
 }

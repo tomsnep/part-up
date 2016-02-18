@@ -3,6 +3,7 @@ Template.modal_swarm_settings_quotes.onCreated(function() {
 
     template.quotes = new ReactiveVar([]);
     template.editing = new ReactiveVar(false);
+    template.quotesMax = 3;
 });
 
 Template.modal_swarm_settings_quotes.onRendered(function() {
@@ -31,6 +32,17 @@ Template.modal_swarm_settings_quotes.helpers({
             },
             quotes: function() {
                 return template.quotes.get();
+            },
+            quotesLeft: function() {
+                return template.quotesMax - swarm.quotes.length;
+            }
+        };
+    },
+    form: function() {
+        var template = Template.instance();
+        return {
+            quotesMax: function() {
+                return template.quotesMax;
             }
         };
     },
