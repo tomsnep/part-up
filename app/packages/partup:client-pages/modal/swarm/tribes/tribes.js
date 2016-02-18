@@ -48,6 +48,11 @@ Template.modal_swarm_settings_tribes.helpers({
                     return network._id;
                 };
             },
+            onSelect: function() {
+                return function(res) {
+                    $(template.find('[data-submitbutton]')).focus();
+                };
+            }
         };
     },
     state: function() {
@@ -91,7 +96,7 @@ AutoForm.addHooks('addNetworkForm', {
             template.state.set('submitting', false);
             template.networkSelection.set(undefined);
             AutoForm.resetForm(self.formId);
-
+            Meteor.defer(function() { $('[data-focus-input]').focus(); });
             self.done();
         });
 

@@ -45,10 +45,10 @@ Template.modal_swarm_settings_quotes.helpers({
                     template.editing.set(true);
                     Meteor.defer(function() {
                         template.editing.set(false);
-                    })
+                    });
                 };
             }
-        }
+        };
     }
 });
 

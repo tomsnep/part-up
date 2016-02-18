@@ -15,7 +15,9 @@
                     label=form.networkLabel
                     selection=form.networkSelectionReactiveVar
                     onQuery=form.networkQuery
-                    formValue=form.networkFormvalue }}
+                    onSelect=form.onSelect
+                    formValue=form.networkFormvalue
+                    selectorAttribute='data-focus-input' }}
 
                         <input type="text" name="network">
 
@@ -25,7 +27,7 @@
 
             <footer class="pu-row">
                 <div class="cell">
-                    <button class="pu-button {{# if state.submitting }}pu-state-loading{{/ if }} {{# unless form.networkSelectionReactiveVar.get }}pu-state-disabled{{/ unless }}">
+                    <button class="pu-button {{# if state.submitting }}pu-state-loading{{/ if }} {{# unless form.networkSelectionReactiveVar.get }}pu-state-disabled{{/ unless }}" data-submitbutton>
                         {{_ 'modal-swarm-tribes-form-button-submit'}}
                         {{> Spinner type='small' color='inverted' }}
                     </button>
