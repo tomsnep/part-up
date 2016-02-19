@@ -38,8 +38,7 @@
                             <figure class="pu-avatar pu-avatar-tiny"
                                 style="{{#with author.image}}background-image: url('{{ partupImageUrl id=. store='80x80' }}'){{/with}}"
                                 data-hovercontainer="HoverContainer_upper" data-hovercontainer-context="{{ author._id }}">
-                            </figure>
-                            {{ author.name }}
+                            </figure>{{ author.name }}
                         </a>
                     </div>
                 {{/each}}
