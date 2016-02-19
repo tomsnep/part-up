@@ -19,8 +19,9 @@
     margin-bottom: -120px
     z-index: 0
     perspective: 500px
-    perspective-origin: 50% 50%
-    transition: perspective-origin .5s
+    perspective-origin-x: 50%
+    perspective-origin-y: 50%
+    transition: -webkit-perspective-origin-y .5s, -webkit-perspective-origin-x .5s, perspective-origin .5s
 
     > section
         position: absolute
@@ -29,6 +30,8 @@
         z-index: 0
         transform: translateZ(1vw)
         perspective-origin: 50% 50%
+        backface-visibility: hidden
+        transition: -webkit-perspective-origin-y .5s, -webkit-perspective-origin-x .5s, perspective-origin .5s, transform .5s ease-in-out, opacity .5s
         perspective: 10px
 
         > .pu-bubble
@@ -41,7 +44,6 @@
 
         &.pu-sub-page
             opacity: 0
-            transition: transform .5s ease-in-out, opacity .5s
             pointer-events: none
             z-index: 0
 

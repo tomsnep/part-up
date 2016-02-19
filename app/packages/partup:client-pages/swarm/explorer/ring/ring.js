@@ -37,7 +37,11 @@ Template.Ring.onRendered(function() {
         var windowHeight = window.innerHeight;
         var xPercent = 100 / windowWidth * e.clientX;
         var yPercent = 100 / windowHeight * e.clientY;
-        $(template.container).css({perspectiveOrigin: xPercent + '% ' + yPercent + '%'});
+        $(template.container).css({
+            perspectiveOrigin: xPercent + '% ' + yPercent + '%',
+            perspectiveOriginX: xPercent + '%',
+            perspectiveOriginY: yPercent + '%'
+        });
     };
     template.debouncedMouseMoveHandler = _.throttle(template.mouseMoveHandler, 100, true);
     $(document).on('mousemove', template.debouncedMouseMoveHandler);
@@ -113,6 +117,7 @@ Template.Ring.onRendered(function() {
     template.autorun(function(c) {
         var data = Template.currentData();
         if (data.rings instanceof Array) {
+            c.stop();
             var pages = [];
             Tracker.nonreactive(function() {
                 _.each(data.rings, function(ring, index) {
@@ -129,6 +134,7 @@ Template.Ring.onRendered(function() {
                 template.pages.set(pages);
             });
         } else {
+            c.stop();
             var rings = [];
             Tracker.nonreactive(function() {
                 _.each(template.ringPresets, function(preset, key) {
