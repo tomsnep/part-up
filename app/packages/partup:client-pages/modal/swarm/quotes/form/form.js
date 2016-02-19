@@ -3,8 +3,7 @@ Template.modal_swarm_settings_quotes_form.onCreated(function() {
     template.authorSelection = new ReactiveVar();
     template.state = new ReactiveDict();
     template.state.set('submitting', false);
-    template.charactersLeft = new ReactiveDict();
-    template.charactersLeft.set('content', Partup.schemas.forms.swarmQuote._schema.max);
+    template.charactersLeft = new ReactiveVar(180);
     template.formId = lodash.uniqueId() + 'quoteForm';
     var editForm = template.data.quote ? true : false;
 
@@ -78,7 +77,13 @@ Template.modal_swarm_settings_quotes_form.events({
     'click [data-close]': function(event, template) {
         event.preventDefault();
         template.data.resetState();
-    }
+    },
+    'keyup [data-max]': function(event, template) {
+        var $inputElement = $(event.currentTarget);
+        var max = parseInt($inputElement.attr('maxlength'));
+        var charactersLeftVar = $inputElement.data('characters-left-var');
+        template[charactersLeftVar].set(max - $inputElement.val().length);
+    },
 });
 
 Template.modal_swarm_settings_quotes_form.helpers({
@@ -95,8 +100,8 @@ Template.modal_swarm_settings_quotes_form.helpers({
             submitting: function() {
                 return template.state.get('submitting');
             },
-            contentCharactersLeft: function() {
-                return template.charactersLeft.get('content');
+            charactersLeft: function() {
+                return template.charactersLeft.get();
             }
         };
     },

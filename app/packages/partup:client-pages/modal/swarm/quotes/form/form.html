@@ -4,10 +4,10 @@
             <span class="pu-label">
                 {{_ 'modal-swarm-quotes-form-quote-label'}}
                 <a class="pu-hint">
-                    {{# if partupLowerThan state.contentCharactersLeft form.schema._schema.content.max }}
-                        {{_ 'modal-swarm-quotes-form-quote-characters-left' state.contentCharactersLeft }}
+                    {{# if partupLowerThan state.charactersLeft 180 }}
+                        {{_ 'modal-swarm-quotes-form-quote-characters-left' state.charactersLeft }}
                     {{ else }}
-                        {{_ 'modal-swarm-quotes-form-quote-characters' form.schema._schema.content.max }}
+                        {{_ 'modal-swarm-quotes-form-quote-characters' 180 }}
                     {{/ if }}
                 </a>
             </span>
@@ -19,6 +19,8 @@
                         class='pu-textarea'
                         placeholder=static.quoteFieldPlaceholder
                         rows=3
+                        data-max=180
+                        data-characters-left-var="charactersLeft"
                     }}
                 </span>
                 <span class="pu-sub-error">{{ afFieldMessage name='content' }}</span>
