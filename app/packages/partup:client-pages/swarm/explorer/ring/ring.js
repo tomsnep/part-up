@@ -46,8 +46,9 @@ Template.Ring.onRendered(function() {
             perspectiveOriginY: yPercent + '%'
         });
     };
+
     template.debouncedMouseMoveHandler = _.throttle(template.mouseMoveHandler, 100, true);
-    $(document).on('mousemove', template.debouncedMouseMoveHandler);
+    if (!Partup.client.isMobile.isTabletOrMobile()) $(document).on('mousemove', template.debouncedMouseMoveHandler);
 
     template.createRing = function(ringElement, options) {
         // options readout
