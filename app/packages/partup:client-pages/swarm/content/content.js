@@ -1,3 +1,6 @@
+Template.swarm_content.onCreated(function() {
+    this.clicked = new ReactiveVar(false);
+})
 Template.swarm_content.onRendered(function() {
     var template = this;
     var mobile = window.outerWidth < 480;
@@ -25,17 +28,26 @@ Template.swarm_content.onRendered(function() {
     if (!mobile) {
         // template.scrollElement.on('mousewheel DOMMouseScroll', template.mouseWheelHandler);
     }
+
 });
 
 Template.swarm_content.onDestroyed(function() {
     // this.scrollElement.off('mousewheel DOMMouseScroll', this.mouseWheelHandler);
 });
 
+Template.swarm_content.helpers({
+    clickedOnce: function() {
+        return Template.instance().clicked.get();
+    }
+})
+
 Template.swarm_content.events({
     'click [data-right]': function(event, template) {
         var leftPos = $('[data-horizontal-scroll]').scrollLeft();
         var width = $('[data-horizontal-scroll]').width() - 50;
         $('[data-horizontal-scroll]').animate({scrollLeft: leftPos + width}, 250);
+        console.log('clicked')
+        template.clicked.set(true);
     },
     'click [data-left]': function(event, template) {
         var leftPos = $('[data-horizontal-scroll]').scrollLeft();
