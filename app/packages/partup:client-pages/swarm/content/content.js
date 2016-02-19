@@ -46,7 +46,6 @@ Template.swarm_content.events({
         var leftPos = $('[data-horizontal-scroll]').scrollLeft();
         var width = $('[data-horizontal-scroll]').width() - 50;
         $('[data-horizontal-scroll]').animate({scrollLeft: leftPos + width}, 250);
-        console.log('clicked')
         template.clicked.set(true);
     },
     'click [data-left]': function(event, template) {
