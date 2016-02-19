@@ -13,20 +13,22 @@ Template.Ring.onCreated(function() {
 
     // preset the configuration
     // to prevent recalculation in autorun
-    var startAngle = lodash.random(0, 360);
-    template.ringPresets = {
-        inner: {
-            radius: 20,
-            offset: {top: -10},
-            startAngle: startAngle,
-            animate: true
-        },
-        outer: {
-            radius: 60,
-            offset: {top: -10},
-            startAngle: startAngle + 45,
-            animate: true
-        }
+    template.getPresets = function() {
+        // var startAngle = lodash.random(0, 360);
+        return {
+            inner: {
+                radius: 20,
+                offset: {top: -10},
+                startAngle: lodash.random(0, 360),
+                animate: true
+            },
+            outer: {
+                radius: 60,
+                offset: {top: -10},
+                startAngle: lodash.random(0, 360),
+                animate: true
+            }
+        };
     };
 });
 
@@ -124,7 +126,8 @@ Template.Ring.onRendered(function() {
             Tracker.nonreactive(function() {
                 _.each(data.rings, function(ring, index) {
                     var page = [];
-                    _.each(template.ringPresets, function(preset, key) {
+                    var presets = template.getPresets();
+                    _.each(presets, function(preset, key) {
                         preset.items = ring[key] || [];
                         page = page.concat(template.createRing(template.container, preset));
                     });
@@ -139,7 +142,8 @@ Template.Ring.onRendered(function() {
             c.stop();
             var rings = [];
             Tracker.nonreactive(function() {
-                _.each(template.ringPresets, function(preset, key) {
+                var presets = template.getPresets();
+                _.each(presets, function(preset, key) {
                     preset.items = data.rings[key] || [];
                     rings = rings.concat(template.createRing(template.container, preset));
                 });
