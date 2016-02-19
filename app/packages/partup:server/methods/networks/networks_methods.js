@@ -533,6 +533,10 @@ Meteor.methods({
         try {
             Networks.remove(networkId);
             Meteor.users.update(user._id, {$pull: {networks: network._id}});
+            var network_swarms = Swarms.find({networks: {$in: [networkId]}}).fetch();
+            network_swarms.forEach(function(swarm) {
+                Swarms.update(swarm._id, {$pull: {networks: networkId}});
+            });
 
             return {
                 _id: networkId
