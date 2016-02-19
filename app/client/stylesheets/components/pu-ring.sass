@@ -53,6 +53,7 @@
                 font-size: 20px
                 transition: color .2s
                 z-index: 10
+                width: 0px
 
                 i
                     &:before
@@ -78,18 +79,19 @@
                     i:after
                         background-color: #fff
 
-            &.page-0
+            &.left
                 transform: translate3d(-75vw, 0, -15vw)
-                .pu-sub-floatingbutton
-                    left: 95%
+            .pu-sub-floatingbutton
+                &.right
+                    left: 91%
                     top: 40%
-
-            &.page-1
-                transform: translate3d(75vw, 0, -15vw)
-                .pu-sub-floatingbutton
-                    left: 5%
+                &.left
+                    left: 9%
                     top: 40%
                     transform: rotate(-180deg)
+
+            &.right
+                transform: translate3d(75vw, 0, -15vw)
 
             &.active
                 pointer-events: all

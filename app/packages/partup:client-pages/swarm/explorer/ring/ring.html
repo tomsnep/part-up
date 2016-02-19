@@ -9,11 +9,19 @@
         {{/if}}
         {{#if data.pages}}
             {{#each data.pages}}
-                <section class="pu-sub-page {{#if partupEquals number state.currentPage}}active{{/if}} page-{{number}}">
+                <section class="pu-sub-page
+                        {{#if partupEquals index state.currentPage}}active{{/if}}
+                        {{#if partupLowerThan index state.currentPage }}left{{/if}}
+                        {{#if partupHigherThan index state.currentPage }}right{{/if}}">
+                    {{#unless state.firstPage index}}
+                        <a href="#" data-left class="pu-sub-floatingbutton left"><i class="picon-caret-slim-right"></i></a>
+                    {{/unless}}
                     {{#each rings}}
                         {{> Bubble }}
                     {{/each}}
-                    <a href="#" data-toggle class="pu-sub-floatingbutton"><i class="picon-caret-slim-right"></i></a>
+                    {{#unless state.lastPage index}}
+                        <a href="#" data-right class="pu-sub-floatingbutton right"><i class="picon-caret-slim-right"></i></a>
+                    {{/unless}}
                 </section>
             {{/each}}
         {{/if}}

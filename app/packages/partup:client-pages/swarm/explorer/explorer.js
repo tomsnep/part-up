@@ -1,6 +1,6 @@
 Template.swarm_explorer.onCreated(function() {
     this.rendered = new ReactiveVar(false);
-    this.pageLimit = 12;
+    this.pageLimit = 8;
 });
 Template.swarm_explorer.onRendered(function() {
     this.rendered.set(true);
@@ -29,11 +29,14 @@ Template.swarm_explorer.helpers({
                 var total = networks.length;
                 var empty = total ? false : true;
                 if (total > template.pageLimit) {
-                    var total = Math.ceil(total / 2);
-                    var numberOfInnerRingItems = Math.min(4, Math.max(Math.ceil(total / 3), 2));
+                    var totalPages = Math.ceil(total / template.pageLimit);
+                    var total = Math.ceil(total / totalPages);
+                    var numberOfInnerRingItems = Math.min(3, Math.max(Math.ceil(total / 3), 2));
 
-                    var pages = [{number: 1, inner: [], outer: []},
-                                 {number: 2, inner: [], outer: []}];
+                    var pages = [];
+                    _.times(totalPages, function() {
+                        pages.push({inner: [], outer: []});
+                    });
 
                     _.each(pages, function(item, index) {
                         _.times(numberOfInnerRingItems, function() {

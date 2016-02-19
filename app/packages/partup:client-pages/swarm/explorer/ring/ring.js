@@ -4,6 +4,7 @@ Template.Ring.onCreated(function() {
     template.pages = new ReactiveVar([]);
     template.placeholder = new ReactiveVar([]);
     template.currentPage = new ReactiveVar(0);
+    template.totalPages = 0;
 
     // helpers
     template.randomBoolean = function() {
@@ -119,6 +120,7 @@ Template.Ring.onRendered(function() {
         if (data.rings instanceof Array) {
             c.stop();
             var pages = [];
+            template.totalPages = data.rings.length;
             Tracker.nonreactive(function() {
                 _.each(data.rings, function(ring, index) {
                     var page = [];
@@ -127,7 +129,7 @@ Template.Ring.onRendered(function() {
                         page = page.concat(template.createRing(template.container, preset));
                     });
                     pages.push({
-                        number: index,
+                        index: index,
                         rings: page
                     });
                 });
@@ -154,11 +156,19 @@ Template.Ring.onDestroyed(function() {
 });
 
 Template.Ring.events({
-    'click [data-toggle]': function(event, template) {
+    'click [data-right]': function(event, template) {
         event.preventDefault();
         var currentPage = template.currentPage.get();
-        var next = currentPage ? 0 : 1;
-        template.currentPage.set(next);
+        var totalPages = template.totalPages - 1;
+        var nextPage = Math.min((currentPage + 1), totalPages);
+        template.currentPage.set(nextPage);
+    },
+    'click [data-left]': function(event, template) {
+        event.preventDefault();
+        var currentPage = template.currentPage.get();
+        var totalPages = template.totalPages - 1;
+        var nextPage = Math.max((currentPage - 1), 0);
+        template.currentPage.set(nextPage);
     }
 });
 
@@ -168,6 +178,12 @@ Template.Ring.helpers({
         return {
             currentPage: function() {
                 return template.currentPage.get();
+            },
+            firstPage: function(index) {
+                return index === 0;
+            },
+            lastPage: function(index) {
+                return (index + 1) === template.totalPages;
             },
             side: function() {
                 return template.currentPage.get() ? 'right' : 'left';
