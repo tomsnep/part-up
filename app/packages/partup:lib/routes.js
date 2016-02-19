@@ -541,7 +541,7 @@ Router.route('/pricing', {
     }
 });
 
-Router.route('/swarm/:slug', {
+Router.route('/swarms/:slug', {
     name: 'swarm',
     where: 'client',
     yieldRegions: {
@@ -553,7 +553,7 @@ Router.route('/swarm/:slug', {
         };
     }
 });
-Router.route('/swarm/:slug/settings', {
+Router.route('/swarms/:slug/settings', {
     name: 'swarm-settings-details',
     where: 'client',
     yieldRegions: {
@@ -567,7 +567,7 @@ Router.route('/swarm/:slug/settings', {
         };
     }
 });
-Router.route('/swarm/:slug/tribes', {
+Router.route('/swarms/:slug/tribes', {
     name: 'swarm-settings-tribes',
     where: 'client',
     yieldRegions: {
@@ -581,7 +581,7 @@ Router.route('/swarm/:slug/tribes', {
         };
     }
 });
-Router.route('/swarm/:slug/quotes', {
+Router.route('/swarms/:slug/quotes', {
     name: 'swarm-settings-quotes',
     where: 'client',
     yieldRegions: {
