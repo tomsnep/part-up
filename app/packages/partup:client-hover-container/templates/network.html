@@ -1,0 +1,7 @@
+<template name="HoverContainer_network">
+    {{# if networkSlug }}
+        {{> NetworkTile networkSlug=networkSlug }}
+    {{ else }}
+        {{> Spinner }}
+    {{/ if }}
+</template>

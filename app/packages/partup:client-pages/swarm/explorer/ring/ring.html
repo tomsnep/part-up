@@ -1,0 +1,40 @@
+<template name="Ring">
+    <section class="pu-ring">
+        {{#if data.rings}}
+            <section>
+                {{#each data.rings}}
+                    {{> Bubble }}
+                {{/each}}
+            </section>
+        {{/if}}
+        {{#if data.pages}}
+            {{#each data.pages}}
+                <section class="pu-sub-page
+                        {{#if partupEquals index state.currentPage}}active{{/if}}
+                        {{#if partupLowerThan index state.currentPage }}left{{/if}}
+                        {{#if partupHigherThan index state.currentPage }}right{{/if}}">
+                    {{#unless state.firstPage index}}
+                        <a href="#" data-left class="pu-sub-floatingbutton left"><i class="picon-caret-slim-right"></i></a>
+                    {{/unless}}
+                    {{#each rings}}
+                        {{> Bubble }}
+                    {{/each}}
+                    {{#unless state.lastPage index}}
+                        <a href="#" data-right class="pu-sub-floatingbutton right"><i class="picon-caret-slim-right"></i></a>
+                    {{/unless}}
+                </section>
+            {{/each}}
+        {{/if}}
+        {{> Ring_background}}
+    </section>
+</template>
+
+<template name="Ring_background">
+    <div class="layer layer-0"></div>
+    <div class="layer layer-1"></div>
+    <div class="layer layer-2"></div>
+    <div class="layer layer-3"></div>
+    <div class="layer layer-4"></div>
+    <div class="layer layer-5"></div>
+    <div class="layer layer-6"></div>
+</template>

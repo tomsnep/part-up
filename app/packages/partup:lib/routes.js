@@ -509,6 +509,17 @@ Router.route('/admin/featured-tribes', {
         'modal_admin_featured_networks':    {to: 'modal_admin'}
     }
 });
+
+Router.route('/admin/swarms', {
+    name: 'admin-createswarm',
+    where: 'client',
+    yieldRegions: {
+        'modal':                 {to: 'main'},
+        'modal_admin':           {to: 'modal'},
+        'modal_create_swarm':    {to: 'modal_admin'}
+    }
+});
+
 /*************************************************************/
 /* Content pages */
 /*************************************************************/
@@ -530,14 +541,60 @@ Router.route('/pricing', {
     }
 });
 
-// Router.route('/faq', {
-//     name: 'faq',
-//     where: 'client',
-//     yieldRegions: {
-//         'app':      {to: 'main'},
-//         'app_home': {to: 'app'}
-//     }
-// });
+Router.route('/swarms/:slug', {
+    name: 'swarm',
+    where: 'client',
+    yieldRegions: {
+        'swarm':            {to: 'main'}
+    },
+    data: function() {
+        return {
+            slug: this.params.slug
+        };
+    }
+});
+Router.route('/swarms/:slug/settings', {
+    name: 'swarm-settings-details',
+    where: 'client',
+    yieldRegions: {
+        'modal':                            {to: 'main'},
+        'modal_swarm_settings':             {to: 'modal'},
+        'modal_swarm_settings_details':  {to: 'modal_swarm_settings'}
+    },
+    data: function() {
+        return {
+            slug: this.params.slug
+        };
+    }
+});
+Router.route('/swarms/:slug/tribes', {
+    name: 'swarm-settings-tribes',
+    where: 'client',
+    yieldRegions: {
+        'modal':                            {to: 'main'},
+        'modal_swarm_settings':             {to: 'modal'},
+        'modal_swarm_settings_tribes':  {to: 'modal_swarm_settings'}
+    },
+    data: function() {
+        return {
+            slug: this.params.slug
+        };
+    }
+});
+Router.route('/swarms/:slug/quotes', {
+    name: 'swarm-settings-quotes',
+    where: 'client',
+    yieldRegions: {
+        'modal':                            {to: 'main'},
+        'modal_swarm_settings':             {to: 'modal'},
+        'modal_swarm_settings_quotes':      {to: 'modal_swarm_settings'}
+    },
+    data: function() {
+        return {
+            slug: this.params.slug
+        };
+    }
+});
 
 // Router.route('/contact', {
 //     name: 'contact',

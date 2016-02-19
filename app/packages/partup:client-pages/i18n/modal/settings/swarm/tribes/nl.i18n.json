@@ -1,0 +1,12 @@
+{
+    "modal-swarm-tribes-title-page": "Tribes",
+    "modal-swarm-tribes-paragraph-intro": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit itaque sequi beatae quo. Repellat voluptates, dicta architecto aliquam dignissimos ducimus expedita facere amet, nisi rerum aperiam aut inventore itaque molestiae nostrum cupiditate ipsa.",
+    "modal-swarm-tribes-form-add-label": "Tribe",
+    "modal-swarm-tribes-form-network-placeholder": "Zoek naar jouw tribes",
+    "modal-swarm-tribes-form-button-submit": "Toevoegen aan swarm",
+    "modal-swarm-tribes-form-success": "Tribe toegevoegd aan swarm",
+    "modal-swarm-tribes-remove-success": "Tribe verwijderd uit swarm",
+    "modal-swarm-tribes-list-label": "Overzicht van toegevoegde tribes:",
+    "modal-swarm-tribes-form-tribes-list-left": "%d tribes over",
+    "modal-swarm-tribes-form-tribes-list": "max %d tribes"
+}

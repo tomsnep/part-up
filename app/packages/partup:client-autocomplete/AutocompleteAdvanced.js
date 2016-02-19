@@ -28,6 +28,9 @@ Template.AutocompleteAdvanced.helpers({
             tpl.forminput.value = self.formValue(selection);
             if (self.onSelect) self.onSelect(selection);
         };
+    },
+    selectorAttribute: function() {
+        return this.selectorAttribute;
     }
 });
 

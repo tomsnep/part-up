@@ -9,7 +9,6 @@
     color: $color-text
     background-color: $color-background
     padding: 15px 20px
-    margin-left: -27px + -12px
     min-height: 60px
     border-radius: 5px
     border: 2px solid $color-border
@@ -33,49 +32,139 @@
         pointer-events: all
         opacity: 1
 
-    &-position-top
-        margin-bottom: 10px
+    &.pu-orientation-top-bottom
+        margin-left: -27px + -12px
+
+        &.pu-position-top
+            margin-bottom: 10px
+            &:after, &:before
+                bottom: -10px
+            &:after
+                border-color: transparent
+                border-top-color: $color-background
+                border-width: 10px
+                margin-bottom: -10px
+
+            &:before
+                border-color: transparent
+                border-top-color: $color-border
+                border-width: 11px
+                margin-bottom: -14px
+
+        &.pu-position-bottom
+            margin-top: 10px
+            &:after, &:before
+                top: -10px
+
+            &:after
+                border-color: transparent
+                border-bottom-color: $color-background
+                border-width: 10px
+                margin-top: -10px
+
+            &:before
+                border-color: transparent
+                border-bottom-color: $color-border
+                border-width: 11px
+                margin-top: -14px
+
+        &.pu-position-right
+            margin-left: -235px
+
+            &:after
+                left: auto
+                right: 28px
+
+            &:before
+                left: auto
+                right: 27px
+
+    &.pu-orientation-left-right
         &:after, &:before
-            bottom: -10px
+            left: -10px
         &:after
             border-color: transparent
-            border-top-color: $color-background
+            border-right-color: $color-background
             border-width: 10px
-            margin-bottom: -10px
+            margin-left: -10px
+            margin-top: 0px
 
         &:before
             border-color: transparent
-            border-top-color: $color-border
+            border-right-color: $color-border
             border-width: 11px
-            margin-bottom: -14px
+            margin-left: -14px
 
-    &-position-bottom
-        margin-top: 10px
-        &:after, &:before
-            top: -10px
+        &.pu-position-right
+            margin-left: -235px
 
-        &:after
-            border-color: transparent
-            border-bottom-color: $color-background
-            border-width: 10px
-            margin-top: -10px
+            &:after,&:before
+                left: auto
+                right: -10px
 
-        &:before
-            border-color: transparent
-            border-bottom-color: $color-border
-            border-width: 11px
-            margin-top: -14px
+            &:after
+                border-color: transparent
+                border-left-color: $color-background
+                border-width: 10px
+                margin-right: -10px
+                margin-top: 0px
 
-    &-position-right
-        margin-left: -235px
+            &:before
+                border-color: transparent
+                border-left-color: $color-border
+                border-width: 11px
+                margin-right: -14px
 
-        &:after
-            left: auto
-            right: 28px
+        &.pu-position-top
+            margin-bottom: -27px
+            &:after
+                bottom: 14px
+            &:before
+                bottom: 13px
 
-        &:before
-            left: auto
-            right: 27px
+        &.pu-position-bottom
+            margin-top: -27px
+            &:after
+                top: 14px
+            &:before
+                top: 13px
+
+    &.pu-type-network
+        border-color: $color-primary-dark
+        border-width: 4px
+
+        &.pu-orientation-left-right
+            &:after
+                border-color: transparent
+                border-right-color: $color-background
+
+            &:before
+                border-color: transparent
+                border-right-color: $color-primary-dark
+                border-width: 14px
+                margin-left: -20px
+
+            &.pu-position-right
+                &:after
+                    border-color: transparent
+                    border-left-color: $color-background
+
+                &:before
+                    border-color: transparent
+                    border-left-color: $color-primary-dark
+                    margin-right: -20px
+            &.pu-position-top
+                // margin-bottom: -27px
+                &:after
+                    bottom: 14px
+                &:before
+                    bottom: 10px
+
+            &.pu-position-bottom
+                &:after
+                    top: 14px
+                &:before
+                    top: 10px
 
 .pu-no-pointer-events
     .pu-hovertile

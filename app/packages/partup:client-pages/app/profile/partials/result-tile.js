@@ -30,7 +30,6 @@ Template.ResultTile.events({
             id: 'info'
         }, function(result) {
             // template.tiles.refresh();
-            console.log(result);
         });
     },
     'click [data-reset]': function(event, template) {

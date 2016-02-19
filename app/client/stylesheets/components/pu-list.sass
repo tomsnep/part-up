@@ -35,6 +35,11 @@
             .pu-button
                 margin-top: 0
 
+            &.pu-sub-placeholder
+                font-family: $font-secondary
+                color: #ccc
+                font-weight: 700
+
     &-buttons
         margin-bottom: -20px
         margin-right: -20px
@@ -309,3 +314,22 @@
             font-size: 11px
             padding: 0
             margin: 0
+
+    &-talltiles
+        text-align: left
+        li
+            margin-right: 20px
+
+    &-horizontalscroller
+        white-space: nowrap
+        overflow: scroll
+        padding-left: 60px
+        padding-right: 60px
+        position: relative
+
+        li:last-child
+            margin-right: 0
+
+        @media screen and (min-width: $breakpoint-desktop) and (min-height: $breakpoint-tablet + 1px)
+            padding-left: 80px
+            padding-right: 80px
