@@ -100,7 +100,7 @@ Images.findForTile = function(tile) {
 };
 
 Images.findForSwarm = function(swarm) {
-    return Images.find({_id: swarm.image_id}, {limit: 1});
+    return Images.find({_id: swarm.image}, {limit: 1});
 };
 
 Images.allow({
