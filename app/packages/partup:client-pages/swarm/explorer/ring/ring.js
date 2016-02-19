@@ -48,7 +48,7 @@ Template.Ring.onRendered(function() {
     };
 
     template.debouncedMouseMoveHandler = _.throttle(template.mouseMoveHandler, 100, true);
-    if (!Partup.client.isMobile.isTabletOrMobile()) $(document).on('mousemove', template.debouncedMouseMoveHandler);
+    if (!Partup.client.isMobile.isTabletOrMobile()) $('.pu-swarm > header').on('mousemove', template.debouncedMouseMoveHandler);
 
     template.createRing = function(ringElement, options) {
         // options readout
@@ -157,7 +157,7 @@ Template.Ring.onRendered(function() {
 
 Template.Ring.onDestroyed(function() {
     var template = this;
-    $(document).off('mousemove', template.debouncedMouseMoveHandler);
+    $('.pu-swarm > header').off('mousemove', template.debouncedMouseMoveHandler);
 });
 
 Template.Ring.events({

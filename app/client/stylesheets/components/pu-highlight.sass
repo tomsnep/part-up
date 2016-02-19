@@ -115,6 +115,21 @@
         padding-left: 0
         position: relative
 
+        .pu-floatingbutton
+            position: absolute
+            z-index: 11
+            top: 50%
+            i
+                &:after
+                    background-color: rgba(#ccc, .8)
+                    border: 0
+            &.left,
+                left: 50px
+            &.right
+                right: 50px
+
+
+
         &:after, &:before
             content: ''
             display: none

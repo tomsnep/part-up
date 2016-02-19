@@ -30,3 +30,16 @@ Template.swarm_content.onRendered(function() {
 Template.swarm_content.onDestroyed(function() {
     // this.scrollElement.off('mousewheel DOMMouseScroll', this.mouseWheelHandler);
 });
+
+Template.swarm_content.events({
+    'click [data-right]': function(event, template) {
+        var leftPos = $('[data-horizontal-scroll]').scrollLeft();
+        var width = $('[data-horizontal-scroll]').width() - 50;
+        $('[data-horizontal-scroll]').animate({scrollLeft: leftPos + width}, 800);
+    },
+    'click [data-left]': function(event, template) {
+        var leftPos = $('[data-horizontal-scroll]').scrollLeft();
+        var width = $('[data-horizontal-scroll]').width() - 50;
+        $('[data-horizontal-scroll]').animate({scrollLeft: leftPos - width}, 800);
+    }
+})
