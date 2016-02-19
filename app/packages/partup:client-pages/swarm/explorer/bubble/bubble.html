@@ -1,4 +1,5 @@
 <template name="Bubble">
+    {{#unless state.isIE}}
     <style>
         @keyframes float-{{state.id}} {
             {{#with state.animation}}
@@ -11,16 +12,19 @@
             {{/with}}
         }
     </style>
+    {{/unless}}
     {{#if name }}
         <div data-transition class="pu-bubble pu-bubble-{{classNumber}} {{#if empty}}pu-state-empty{{/if}} {{#if state.show}}show{{/if}}"
             style="{{#with positioning.get }}
                 left: {{x}}%; top: {{y}}%;
             {{/with}}
-            {{#if state.active }}animation-name: float-{{state.id}};{{/if}}
-            animation-timing-function: ease-in-out;
-            animation-duration: {{state.time}}s;
-            animation-iteration-count: infinite;
-            animation-direction: alternate;
+            {{#unless state.isIE}}
+                {{#if state.active }}animation-name: float-{{state.id}};{{/if}}
+                animation-timing-function: ease-in-out;
+                animation-duration: {{state.time}}s;
+                animation-iteration-count: infinite;
+                animation-direction: alternate;
+            {{/unless}}
             ">
             <a href="{{ pathFor route='network-detail' slug=slug}}" class="pu-sub-container" data-hovercontainer="HoverContainer_network" data-hovercontainer-context="{{ slug }}" data-hovercontainer-orientation="left-right" data-hovercontainer-class="pu-type-network" data-hovercontainer-offset="20">
                 <figure style="{{#with image }}background-image:url('{{ partupImageUrl id=. store='360x360'}}');{{/with }}"></figure>
