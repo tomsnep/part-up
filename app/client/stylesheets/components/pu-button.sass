@@ -592,7 +592,7 @@
             width: 100%
             text-align: center
             display: block
-            margin-top: 20px
+            margin-top: 10px
             animation-name: bouncey
             animation-timing-function: ease-in-out
             animation-duration: 3s
@@ -602,6 +602,9 @@
             color: $color-text-inverted
             transform: translateY(5px)
 
+        @media screen and (min-width: $breakpoint-tablet)
+            i
+                margin-top: 20px
     // Type: avatar
     &-avatar
         figure

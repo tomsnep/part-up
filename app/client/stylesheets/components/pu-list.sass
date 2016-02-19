@@ -323,9 +323,13 @@
     &-horizontalscroller
         white-space: nowrap
         overflow: scroll
-        padding-left: 80px
-        padding-right: 80px
+        padding-left: 20px
+        padding-right: 20px
         position: relative
 
         li:last-child
             margin-right: 0
+
+        @media screen and (min-width: $breakpoint-tablet)
+            padding-left: 80px
+            padding-right: 80px

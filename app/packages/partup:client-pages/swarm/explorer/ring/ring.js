@@ -17,13 +17,13 @@ Template.Ring.onCreated(function() {
         // var startAngle = lodash.random(0, 360);
         return {
             inner: {
-                radius: 20,
+                radius: 30,
                 offset: {top: -10},
                 startAngle: lodash.random(0, 360),
                 animate: true
             },
             outer: {
-                radius: 60,
+                radius: 70,
                 offset: {top: -10},
                 startAngle: lodash.random(0, 360),
                 animate: true

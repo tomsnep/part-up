@@ -13,24 +13,35 @@
         margin: 0 auto
 
     > header
+        margin-bottom: -10px
         min-height: 100vh
-        margin-bottom: -30px
         z-index: 0
         position: relative
 
         > nav
-            padding: 40px
+            padding: 20px
             max-width: $pagewidth
             margin: 0 auto
             z-index: 1
             position: relative
 
+            .pu-brand
+                background-image: url(/images/smalllogo.png)
+                width: 26px
             .pu-brand,
             .pu-button
                 display: inline-block
 
             .pu-button
                 float: right
+                background: none
+                margin-top: -7px
+                margin-right: -7px
+                i
+                    font-size: 18px
+                    margin-right: 0
+                span
+                    display: none
     > section
         opacity: 0
         transition: .2s
@@ -59,8 +70,21 @@
         padding: 0px 30px
         > header
             margin-bottom: -60px
-            nav
+            > nav
                 padding: 40px 0
+
+                .pu-brand
+                    background-image: url(/images/logo.png)
+                    width: 94px
+
+                .pu-button
+                    background-color: #4CA8B0
+                    margin: 0
+                    i
+                        // font-size: 14px
+                        margin-right: 8px
+                    span
+                        display: inline
         > footer
             padding: 60px
     @media screen and (min-width: 1150px)

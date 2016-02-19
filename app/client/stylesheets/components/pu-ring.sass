@@ -14,9 +14,10 @@
 .pu-ring
     width: 100%
     $minus: 100px
-    height: calc(100% - #{$minus})
+    height: 100%
     position: relative
     margin-bottom: -120px
+    margin: auto
     z-index: 0
     perspective: 500px
     perspective-origin-x: 50%
@@ -83,11 +84,11 @@
                 transform: translate3d(-75vw, 0, -15vw)
             .pu-sub-floatingbutton
                 &.right
-                    left: 91%
-                    top: 40%
+                    right: 50px
+                    bottom: 50px
                 &.left
-                    left: 9%
-                    top: 40%
+                    left: 50px
+                    bottom: 50px
                     transform: rotate(-180deg)
 
             &.right
@@ -162,3 +163,21 @@
                 background: url(/images/swarm/layer3.svg) repeat 0%
                 background-size: auto
                 z-index: 0
+
+    @media screen and (min-width: $breakpoint-tablet)
+        width: 90%
+        height: calc(100% - #{$minus})
+        > section
+            &.pu-sub-page
+
+                .pu-sub-floatingbutton
+                    &.right
+                        right: auto
+                        bottom: auto
+                        left: 100%
+                        top: 40%
+                    &.left
+                        bottom: auto
+                        left: 0%
+                        top: 40%
+                        transform: rotate(-180deg)

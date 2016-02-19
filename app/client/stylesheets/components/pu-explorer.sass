@@ -5,7 +5,7 @@
     right: 0
     bottom: 0
     left: 0
-    padding: 60px 0px 120px 0px
+    padding: 0px 0px 60px 0px
 
     header
         font-size: 25px
@@ -13,9 +13,9 @@
         width: 100%
         margin: 0 auto
         text-align: center
-        margin-top: 60px
         z-index: 1
         position: relative
+        margin-bottom: -20px
 
         .pu-sub-notfound
             font-family: $font-primary
@@ -24,18 +24,18 @@
             font-weight: 700
 
         ul
-            margin-top: 35px
+            margin-top: 15px
 
         figure
             display: block
-            margin: 20px auto
+            margin: 20px auto 10px auto
             height: 30px
 
             h1
                 font-weight: 700
                 font-size: 40px
                 font-family: $font-secondary
-                color: rgba(black, 0.5);
+                color: rgba(black, 0.5)
                 display: none
                 text-transform: uppercase
 
@@ -63,7 +63,24 @@
     footer
         z-index: 1
         text-align: center
-        padding-bottom: 90px
         position: absolute
         bottom: 0
         width: 100%
+        padding-bottom: 10px
+        display: none
+
+    @media screen and (min-width: $breakpoint-tablet)
+        padding: 60px 0px 120px 0px
+
+        header
+            margin-top: 60px
+            margin-bottom: 0
+
+            ul
+                margin-top: 35px
+            figure
+                margin: 20px auto
+
+        footer
+            display: block
+            padding-bottom: 90px
