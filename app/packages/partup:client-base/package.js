@@ -89,17 +89,13 @@ Package.onUse(function(api) {
         'bootstrap.js',
         'analytics.js',
 
-        'i18n/helpers-dateFormatters.en.i18n.json',
-        'i18n/helpers-dateFormatters.nl.i18n.json',
-        'i18n/client-language.en.i18n.json',
-        'i18n/client-language.nl.i18n.json'
+        '../../i18n/phraseapp.en.i18n.json',
+        '../../i18n/phraseapp.nl.i18n.json'
     ], ['client']);
 
     api.addFiles([
         'package-tap.i18n',
-        'i18n/helpers-dateFormatters.en.i18n.json',
-        'i18n/helpers-dateFormatters.nl.i18n.json',
-        'i18n/client-language.en.i18n.json',
-        'i18n/client-language.nl.i18n.json'
+        '../../i18n/phraseapp.en.i18n.json',
+        '../../i18n/phraseapp.nl.i18n.json'
     ], 'server');
 });

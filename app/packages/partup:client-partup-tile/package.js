@@ -27,7 +27,7 @@ Package.onUse(function(api) {
         'PartupTileFeatured.html',
         'PartupTileFeatured.js',
 
-        'i18n/en.i18n.json',
-        'i18n/nl.i18n.json'
+        '../../i18n/phraseapp.en.i18n.json',
+        '../../i18n/phraseapp.nl.i18n.json'
     ], 'client');
 });
