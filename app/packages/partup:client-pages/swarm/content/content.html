@@ -11,16 +11,45 @@
         <section class="pu-article pu-article-videos">
             <!-- what is partup -->
             <section>
-                <h2>{{_ 'swarm-content-about-title1' }}</h2>
-                <p>{{_ 'swarm-content-about-paragraph1' }}</p>
+                <div class="pu-sub-medialayout">
+                    <div class="pu-sub-medialayout-cell">
+                        <div>
+                            <h2>{{_ 'swarm-content-about-title1' }}</h2>
+                            <p>{{_ 'swarm-content-about-paragraph1' }}</p>
+                        </div>
+                    </div>
+                    <div class="pu-sub-medialayout-cell">
+                        {{> Video url='https://www.youtube.com/embed/LNpMI5gpNuQ' poster='/images/closed_network_video.png'}}
+                    </div>
+                </div>
+
+                <div class="pu-sub-medialayout pu-sub-medialayout-mobile">
+                    <div class="pu-sub-medialayout-cell">
+                        <div>
+                            <h2>{{_ 'swarm-content-about-title2' }}</h2>
+                            <p>{{_ 'swarm-content-about-paragraph2' }}</p>
+                        </div>
+                    </div>
+                    <div class="pu-sub-medialayout-cell">
+                        {{> Video url='https://www.youtube.com/embed/LNpMI5gpNuQ' poster='/images/closed_network_video.png'}}
+                    </div>
+                </div>
+
+                <div class="pu-sub-medialayout pu-sub-medialayout-desktop">
+                    <div class="pu-sub-medialayout-cell">
+                        {{> Video url='https://www.youtube.com/embed/LNpMI5gpNuQ' poster='/images/closed_network_video.png'}}
+                    </div>
+                    <div class="pu-sub-medialayout-cell">
+                        <div>
+                            <h2>{{_ 'swarm-content-about-title2' }}</h2>
+                            <p>{{_ 'swarm-content-about-paragraph2' }}</p>
+                        </div>
+                    </div>
+                </div>
             </section>
-            {{> Video url='https://www.youtube.com/embed/LNpMI5gpNuQ' poster='/images/closed_network_video.png'}}
-            <section>
-                <h2>{{_ 'swarm-content-about-title2' }}</h2>
-                <p>{{_ 'swarm-content-about-paragraph2' }}</p>
-            </section>
-            {{> Video url='https://www.youtube.com/embed/LNpMI5gpNuQ' poster='/images/closed_network_video.png'}}
+
         </section>
+
         <!-- uppers -->
         <section class="pu-highlight pu-highlight-subtle">
             <h1>{{_ 'swarm-content-uppers-title' }}</h1>
@@ -64,10 +93,10 @@
                             </header>
                             <article class="pu-networkcard pu-sub-fulltext">
                                 <header>
-                                    <figure class="pu-avatar pu-avatar-square pu-sub-figure" style="{{#with image }}background-image:url('{{ partupImageUrl id=. store='360x360'}}');{{/with }}">
-                                    </figure>
+                                    <a><figure class="pu-avatar pu-avatar-square pu-sub-figure" style="{{#with image }}background-image:url('{{ partupImageUrl id=. store='360x360'}}');{{/with }}">
+                                    </figure></a>
                                     <div class="pu-sub-title">
-                                        <h4>{{ name }}</h4>
+                                        <a><h4>{{ name }}</h4></a>
                                         <p>{{ location.city }}</p>
                                     </div>
                                 </header>
