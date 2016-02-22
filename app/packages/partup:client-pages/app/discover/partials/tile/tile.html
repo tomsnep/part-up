@@ -21,19 +21,19 @@
                 </h2>
             </header>
 
-            <section>
+            <!-- <section> -->
 
                 <!-- Image (circle), uppers, and progress  -->
-                <div class="pu-partupcircle">
+                <!-- <div class="pu-partupcircle">
                     <a href="{{pathFor 'partup' slug=slug }}" class="pu-sub-partuplink">
                         {{# with boundedProgress }}<canvas class="pu-sub-radial" data-percent="{{ . }}"></canvas>{{/ with }}
                         <figure class="pu-sub-inner" style="
                             {{# with partupGetImageUrl imageObject '360x360' }}background-image: url('{{ . }}');{{/ with }}
                         " data-partup-tile-focuspoint></figure>
-                    </a>
+                    </a> -->
 
                     <!-- Uppers -->
-                    {{# if avatars }}
+                   <!--  {{# if avatars }}
                         <ul class="pu-sub-avatar-list">
                             {{# each avatars }}
                                 {{# if data.upper }}
@@ -62,13 +62,13 @@
                             {{/ each }}
                         </ul>
                     {{/ if }}
-                </div>
+                </div> -->
 
                 <!-- Description -->
-                <p>{{ description }}</p>
+                <!-- <p>{{ description }}</p> -->
 
                 <!-- Stats (activities, supporters, days active) -->
-                <ul class="pu-sub-partup-stats">
+                <!-- <ul class="pu-sub-partup-stats">
                     <li>
                         <strong>{{ activityCount }}</strong>
                         <span>{{_ 'partuptile-activities' }}</span>
@@ -81,7 +81,47 @@
                         <strong>{{ dayCount }}</strong>
                         <span>{{_ 'partuptile-days-active' }}</span>
                     </li>
+                </ul> -->
+            <!-- </section> -->
+
+            <section>
+
+<!--                 <ul class="pu-list pu-list-horizontal pu-list-avatars">
+                    {{#each partupSupporters }}
+                        <li>
+                          <a href="{{ pathFor 'profile' _id=_id }}" data-hovercontainer="HoverContainer_upper" data-hovercontainer-context="{{ _id }}">
+                            <figure data-hovercontainer="HoverContainer_upper" data-hovercontainer-context="{{ _id }}" class="pu-avatar" style="{{#with profile.image}}background-image: url('{{ partupImageUrl id=. store='80x80' }}'){{/with}}"></figure>
+                          </a>
+                        </li>
+                    {{/each }}
+                </ul> -->
+
+                <ul class="pu-list pu-list-horizontal pu-list-avatars pu-list-avatars-archive">
+                    <li>
+                      <a href="/profile/XprE3mk3jSsZuCKHo">
+                        <figure class="pu-avatar pu-avatar-archive" style="background-image: url('https://s3-eu-west-1.amazonaws.com/partup-production/80x80/images/57HQuvxcn34niq5yT-57HQuvxcn34niq5yT.jpg')"></figure>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="/profile/oLiJqphJZaxKSaHYw">
+                        <figure class="pu-avatar pu-avatar-archive" style="background-image: url('https://s3-eu-west-1.amazonaws.com/partup-production/80x80/images/rHTLFmGqcnpjd7jHC-9niokgRr5Tbw3cm9w.jpg')"></figure>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="/profile/oLiJqphJZaxKSaHYw">
+                        <figure class="pu-avatar pu-avatar-archive" style="background-image: url('https://s3-eu-west-1.amazonaws.com/partup-production/80x80/images/rHTLFmGqcnpjd7jHC-9niokgRr5Tbw3cm9w.jpg')"></figure>
+                      </a>
+                    </li>
                 </ul>
+
+                <!-- Description -->
+                <p>{{ description }}</p>
+
+                <!-- Archive info -->
+                <div class="pu-archive-info">
+                    <p>This part-up is archived <span>18 Nov 2015</span></p>
+                </div>
+
             </section>
 
         {{/ with }}
