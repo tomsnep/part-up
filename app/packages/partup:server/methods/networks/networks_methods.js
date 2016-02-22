@@ -654,6 +654,11 @@ Meteor.methods({
         }
     },
 
+    /**
+     * Check to see if a network with the networkSlug parameter exists
+     *
+     * @param {String} networkSlug
+     */
     'networks.exists': function(networkSlug) {
         check(networkSlug, String);
 

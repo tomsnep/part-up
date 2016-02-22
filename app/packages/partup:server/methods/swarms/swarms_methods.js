@@ -434,6 +434,11 @@ Meteor.methods({
         }
     },
 
+    /**
+     * Check to see if a swarm with the swarmSlug parameter exists
+     *
+     * @param {String} swarmSlug
+     */
     'swarms.exists': function(swarmSlug) {
         check(swarmSlug, String);
 
