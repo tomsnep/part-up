@@ -680,7 +680,7 @@ Router.route('/:slug', {
             slug: this.params.slug
         };
     },
-    onRun: function() {
+    onBeforeAction: function() {
         var self = this;
         var slug = this.params.slug;
 
