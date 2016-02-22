@@ -13,116 +13,103 @@
         {{/unless}}
 
         {{# with partup }}
-
             <!-- Name of the Part-up -->
             <header>
                 <h2>
                     <a href="{{pathFor 'partup' slug=slug }}">{{ name }}</a>
                 </h2>
             </header>
+            {{#unless archived_at}}
+                <section>
+                    <!-- Image (circle), uppers, and progress  -->
+                    <div class="pu-partupcircle">
+                        <a href="{{pathFor 'partup' slug=slug }}" class="pu-sub-partuplink">
+                            {{# with boundedProgress }}<canvas class="pu-sub-radial" data-percent="{{ . }}"></canvas>{{/ with }}
+                            <figure class="pu-sub-inner" style="
+                                {{# with partupGetImageUrl imageObject '360x360' }}background-image: url('{{ . }}');{{/ with }}
+                            " data-partup-tile-focuspoint></figure>
+                        </a>
 
-            <!-- <section> -->
+                        <!-- Uppers -->
+                        {{# if avatars }}
+                            <ul class="pu-sub-avatar-list">
+                                {{# each avatars }}
+                                    {{# if data.upper }}
+                                         <li style="
+                                            {{# with avatarPosition }}
+                                                -webkit-transform: translate3d({{x}}px, {{y}}px, 0);
+                                                -moz-transform: translate3d({{x}}px, {{y}}px, 0);
+                                                transform: translate3d({{x}}px, {{y}}px, 0);
+                                                transition-delay: {{ delay }}s;
+                                            {{/ with }}
+                                        " data-hovercontainer="HoverContainer_upper" data-hovercontainer-context="{{ data.upper._id }}">
+                                            <a href="{{ pathFor 'profile' _id=data.upper._id }}" class="pu-avatar pu-avatar-partuptile">
+                                                <img src="{{ partupGetImageUrl data.upper.profile.imageObject '80x80' }}" alt="" class="pu-sub-image">
+                                            </a>
+                                        </li>
+                                    {{ else }}
+                                        <li class="pu-avatar pu-avatar-more" style="
+                                            {{# with avatarPosition }}
+                                                -webkit-transform: translate3d({{x}}px, {{y}}px, 0);
+                                                -moz-transform: translate3d({{x}}px, {{y}}px, 0);
+                                                transform: translate3d({{x}}px, {{y}}px, 0);
+                                                transition-delay: {{ delay }}s;
+                                            {{/ with }}
+                                        ">{{ data.remainingUppers }}</li>
+                                    {{/ if }}
+                                {{/ each }}
+                            </ul>
+                        {{/ if }}
+                    </div>
+                    <!-- Description -->
+                    <p>{{ description }}</p>
 
-                <!-- Image (circle), uppers, and progress  -->
-                <!-- <div class="pu-partupcircle">
-                    <a href="{{pathFor 'partup' slug=slug }}" class="pu-sub-partuplink">
-                        {{# with boundedProgress }}<canvas class="pu-sub-radial" data-percent="{{ . }}"></canvas>{{/ with }}
-                        <figure class="pu-sub-inner" style="
-                            {{# with partupGetImageUrl imageObject '360x360' }}background-image: url('{{ . }}');{{/ with }}
-                        " data-partup-tile-focuspoint></figure>
-                    </a> -->
-
-                    <!-- Uppers -->
-                   <!--  {{# if avatars }}
-                        <ul class="pu-sub-avatar-list">
-                            {{# each avatars }}
-                                {{# if data.upper }}
-                                     <li style="
-                                        {{# with avatarPosition }}
-                                            -webkit-transform: translate3d({{x}}px, {{y}}px, 0);
-                                            -moz-transform: translate3d({{x}}px, {{y}}px, 0);
-                                            transform: translate3d({{x}}px, {{y}}px, 0);
-                                            transition-delay: {{ delay }}s;
-                                        {{/ with }}
-                                    " data-hovercontainer="HoverContainer_upper" data-hovercontainer-context="{{ data.upper._id }}">
-                                        <a href="{{ pathFor 'profile' _id=data.upper._id }}" class="pu-avatar pu-avatar-partuptile">
-                                            <img src="{{ partupGetImageUrl data.upper.profile.imageObject '80x80' }}" alt="" class="pu-sub-image">
-                                        </a>
-                                    </li>
-                                {{ else }}
-                                    <li class="pu-avatar pu-avatar-more" style="
-                                        {{# with avatarPosition }}
-                                            -webkit-transform: translate3d({{x}}px, {{y}}px, 0);
-                                            -moz-transform: translate3d({{x}}px, {{y}}px, 0);
-                                            transform: translate3d({{x}}px, {{y}}px, 0);
-                                            transition-delay: {{ delay }}s;
-                                        {{/ with }}
-                                    ">{{ data.remainingUppers }}</li>
-                                {{/ if }}
-                            {{/ each }}
-                        </ul>
-                    {{/ if }}
-                </div> -->
-
-                <!-- Description -->
-                <!-- <p>{{ description }}</p> -->
-
-                <!-- Stats (activities, supporters, days active) -->
-                <!-- <ul class="pu-sub-partup-stats">
-                    <li>
-                        <strong>{{ activityCount }}</strong>
-                        <span>{{_ 'partuptile-activities' }}</span>
-                    </li>
-                    <li>
-                        <strong>{{ supporterCount }}</strong>
-                        <span>{{_ 'partuptile-supporters' }}</span>
-                    </li>
-                    <li>
-                        <strong>{{ dayCount }}</strong>
-                        <span>{{_ 'partuptile-days-active' }}</span>
-                    </li>
-                </ul> -->
-            <!-- </section> -->
-
-            <section>
-
-<!--                 <ul class="pu-list pu-list-horizontal pu-list-avatars">
-                    {{#each partupSupporters }}
+                    <ul class="pu-sub-partup-stats">
                         <li>
-                          <a href="{{ pathFor 'profile' _id=_id }}" data-hovercontainer="HoverContainer_upper" data-hovercontainer-context="{{ _id }}">
-                            <figure data-hovercontainer="HoverContainer_upper" data-hovercontainer-context="{{ _id }}" class="pu-avatar" style="{{#with profile.image}}background-image: url('{{ partupImageUrl id=. store='80x80' }}'){{/with}}"></figure>
+                            <strong>{{ activityCount }}</strong>
+                            <span>{{_ 'partuptile-activities' }}</span>
+                        </li>
+                        <li>
+                            <strong>{{ supporterCount }}</strong>
+                            <span>{{_ 'partuptile-supporters' }}</span>
+                        </li>
+                        <li>
+                            <strong>{{ dayCount }}</strong>
+                            <span>{{_ 'partuptile-days-active' }}</span>
+                        </li>
+                    </ul>
+                </section>
+
+            {{else}}
+                <section>
+                    <ul class="pu-list pu-list-horizontal pu-list-avatars pu-list-avatars-archive">
+                        <li>
+                          <a href="/profile/XprE3mk3jSsZuCKHo">
+                            <figure class="pu-avatar pu-avatar-archive" style="background-image: url('https://s3-eu-west-1.amazonaws.com/partup-production/80x80/images/57HQuvxcn34niq5yT-57HQuvxcn34niq5yT.jpg')"></figure>
                           </a>
                         </li>
-                    {{/each }}
-                </ul> -->
+                        <li>
+                          <a href="/profile/oLiJqphJZaxKSaHYw">
+                            <figure class="pu-avatar pu-avatar-archive" style="background-image: url('https://s3-eu-west-1.amazonaws.com/partup-production/80x80/images/rHTLFmGqcnpjd7jHC-9niokgRr5Tbw3cm9w.jpg')"></figure>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="/profile/oLiJqphJZaxKSaHYw">
+                            <figure class="pu-avatar pu-avatar-archive" style="background-image: url('https://s3-eu-west-1.amazonaws.com/partup-production/80x80/images/rHTLFmGqcnpjd7jHC-9niokgRr5Tbw3cm9w.jpg')"></figure>
+                          </a>
+                        </li>
+                    </ul>
 
-                <ul class="pu-list pu-list-horizontal pu-list-avatars pu-list-avatars-archive">
-                    <li>
-                      <a href="/profile/XprE3mk3jSsZuCKHo">
-                        <figure class="pu-avatar pu-avatar-archive" style="background-image: url('https://s3-eu-west-1.amazonaws.com/partup-production/80x80/images/57HQuvxcn34niq5yT-57HQuvxcn34niq5yT.jpg')"></figure>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="/profile/oLiJqphJZaxKSaHYw">
-                        <figure class="pu-avatar pu-avatar-archive" style="background-image: url('https://s3-eu-west-1.amazonaws.com/partup-production/80x80/images/rHTLFmGqcnpjd7jHC-9niokgRr5Tbw3cm9w.jpg')"></figure>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="/profile/oLiJqphJZaxKSaHYw">
-                        <figure class="pu-avatar pu-avatar-archive" style="background-image: url('https://s3-eu-west-1.amazonaws.com/partup-production/80x80/images/rHTLFmGqcnpjd7jHC-9niokgRr5Tbw3cm9w.jpg')"></figure>
-                      </a>
-                    </li>
-                </ul>
+                    <!-- Description -->
+                    <p>{{ description }}</p>
 
-                <!-- Description -->
-                <p>{{ description }}</p>
+                    <!-- Archive info -->
+                    <div class="pu-archive-info">
+                        <p>This part-up is archived <span>18 Nov 2015</span></p>
+                    </div>
+                </section>
 
-                <!-- Archive info -->
-                <div class="pu-archive-info">
-                    <p>This part-up is archived <span>18 Nov 2015</span></p>
-                </div>
-
-            </section>
+            {{/unless}}
 
         {{/ with }}
 
