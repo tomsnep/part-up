@@ -454,6 +454,7 @@ Meteor.methods({
      * Return a list of networks based on search query and swarm
      *
      * @param {String} query
+     * @param {String} swarmSlug
      */
     'networks.autocomplete_swarm': function(query, swarmSlug) {
         check(query, String);
