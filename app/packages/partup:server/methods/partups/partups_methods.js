@@ -480,5 +480,30 @@ Meteor.methods({
             Log.error(error);
             throw new Meteor.Error(500, 'partup_could_not_be_archived');
         }
+    },
+
+    /**
+     * Unarchive a partup
+     *
+     * @param {String} partupId
+     */
+    'partups.unarchive': function(partupId) {
+        check(partupId, String);
+
+        var upper = Meteor.user();
+        var partup = Partups.findOneOrFail(partupId);
+
+        if (!upper || !partup.hasUpper(upper._id)) {
+            throw new Meteor.Error(401, 'unauthorized');
+        }
+
+        try {
+            Partups.update(partup._id, {$set: {archived: false}});
+
+            Event.emit('partups.unarchived', upper._id, partup);
+        } catch (error) {
+            Log.error(error);
+            throw new Meteor.Error(500, 'partup_could_not_be_unarchived');
+        }
     }
 });
