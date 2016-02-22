@@ -1,5 +1,13 @@
 Template.swarm_content.onCreated(function() {
-    this.clicked = new ReactiveVar(false);
+    var template = this;
+    template.clicked = new ReactiveVar(false);
+    template.userCount = new ReactiveVar();
+    HTTP.get('/users/count', function(error, response) {
+        if (error || !response || !mout.lang.isString(response.content)) { return; }
+
+        var content = JSON.parse(response.content);
+        template.userCount.set(content.count);
+    });
 })
 Template.swarm_content.onRendered(function() {
     var template = this;
@@ -38,6 +46,9 @@ Template.swarm_content.onDestroyed(function() {
 Template.swarm_content.helpers({
     clickedOnce: function() {
         return Template.instance().clicked.get();
+    },
+    totalNumberOfUppers: function() {
+        return Template.instance().userCount.get();
     }
 })
 
