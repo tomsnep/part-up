@@ -683,6 +683,9 @@ Router.route('/:slug', {
     onRun: function() {
         var self = this;
         var slug = this.params.slug;
+
+        // use the custom callEach to do mulitple meteor calls
+        // this checks if the swarm and network exists
         Meteor.callEach([{
                 method: 'swarms.exists',
                 parameter: slug
@@ -690,9 +693,11 @@ Router.route('/:slug', {
                 method: 'networks.exists',
                 parameter: slug
             }], function(results) {
+                // if the swarm exists, render the page
                 if (results['swarms.exists'].response) {
                     self.render();
 
+                // if the swarm does not exist, check if there is a network with the slug
                 } else if (results['networks.exists'].response) {
                     self.redirect('network-detail', {
                         slug: self.params.slug
@@ -700,6 +705,8 @@ Router.route('/:slug', {
                         query: self.params.query
                     });
 
+                // if both the swarm and network do not exist just continue
+                // to render the swarm page as usual, the swarm page will handle a "not found" exception
                 } else {
                     self.render();
 
@@ -707,6 +714,10 @@ Router.route('/:slug', {
 
             }
         );
+
+        // this prevents anything from happening
+        // before the meteor call is completed
+        this.stop();
     }
 });
 
