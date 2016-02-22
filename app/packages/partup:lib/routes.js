@@ -684,10 +684,10 @@ Router.route('/:slug', {
         var self = this;
         var slug = this.params.slug;
         Meteor.callEach([{
-                call: 'swarms.exists',
+                method: 'swarms.exists',
                 parameter: slug
             },{
-                call: 'networks.exists',
+                method: 'networks.exists',
                 parameter: slug
             }], function(results) {
                 if (results['swarms.exists'].response) {

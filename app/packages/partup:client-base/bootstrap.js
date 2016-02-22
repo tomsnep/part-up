@@ -40,19 +40,19 @@ Meteor.startup(function() {
     /*************************************************************/
     /* multiple meteor calls at once */
     /*************************************************************/
-    Meteor.callEach = function(calls, callBack) {
+    Meteor.callEach = function(methods, callBack) {
         var allResponses = {};
-        var callCount = 0;
-        var callMax = calls.length;
-        _.each(calls, function(item, index) {
-            Meteor.call(item.call, item.parameter, function(error, response) {
-                allResponses[item.call] = {
+        var count = 0;
+        var max = methods.length;
+        _.each(methods, function(item, index) {
+            Meteor.call(item.method, item.parameter, function(error, response) {
+                allResponses[item.method] = {
                     response: response,
                     error: error
                 };
 
-                callCount++;
-                if (callCount === callMax) callBack(allResponses);
+                count++;
+                if (count === max) callBack(allResponses);
             });
         });
     };
