@@ -7,7 +7,6 @@ Package.describe({
 
 Package.onUse(function(api) {
     api.use([
-        'tap:i18n',
         'meteorhacks:subs-manager'
     ], ['client', 'server']);
 
@@ -18,13 +17,10 @@ Package.onUse(function(api) {
         'reactive-var',
         'aldeed:autoform',
         'yogiben:autoform-tags',
-        'http',
+        'http'
     ], 'client');
 
     var clientFiles = {
-        misc: [
-            'package-tap.i18n',
-        ],
         app: [
             // App
             'app/app.html',
@@ -277,21 +273,8 @@ Package.onUse(function(api) {
         ]
     };
 
-    var languageFiles = [
-        '../../i18n/phraseapp.en.i18n.json',
-        '../../i18n/phraseapp.nl.i18n.json'
-    ];
-
     api.addFiles([].concat(
-        clientFiles.misc,
         clientFiles.app,
         clientFiles.modal,
-        clientFiles.swarm,
-        languageFiles), 'client');
-
-    var serverFiles = [
-        'package-tap.i18n'
-    ];
-
-    api.addFiles(serverFiles.concat(languageFiles), 'server');
+        clientFiles.swarm), 'client');
 });

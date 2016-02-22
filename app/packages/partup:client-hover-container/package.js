@@ -6,9 +6,7 @@ Package.describe({
 });
 
 Package.onUse(function(api) {
-    api.use([
-        'tap:i18n'
-    ], ['client', 'server']);
+
 
     api.use([
         'templating',
@@ -17,7 +15,6 @@ Package.onUse(function(api) {
     ], 'client');
 
     api.addFiles([
-        'package-tap.i18n',
 
         'HoverContainer.html',
         'HoverContainer.js',
@@ -27,15 +24,8 @@ Package.onUse(function(api) {
         'templates/upperList.html',
         'templates/upperList.js',
         'templates/network.html',
-        'templates/network.js',
+        'templates/network.js'
 
-        '../../i18n/phraseapp.en.i18n.json',
-        '../../i18n/phraseapp.nl.i18n.json'
     ], 'client');
 
-    api.addFiles([
-        'package-tap.i18n',
-        '../../i18n/phraseapp.en.i18n.json',
-        '../../i18n/phraseapp.nl.i18n.json'
-    ], 'server');
 });

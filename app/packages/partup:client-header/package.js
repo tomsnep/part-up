@@ -6,9 +6,6 @@ Package.describe({
 });
 
 Package.onUse(function(api) {
-    api.use([
-        'tap:i18n'
-    ], ['client', 'server']);
 
     api.use([
         'templating',
@@ -17,7 +14,6 @@ Package.onUse(function(api) {
     ], 'client');
 
     api.addFiles([
-        'package-tap.i18n',
 
         'Header.html',
         'Header.js',
@@ -27,15 +23,8 @@ Package.onUse(function(api) {
         'templates/nav.html',
         'templates/nav.js',
         'templates/personal.html',
-        'templates/personal.js',
+        'templates/personal.js'
 
-        '../../i18n/phraseapp.en.i18n.json',
-        '../../i18n/phraseapp.nl.i18n.json'
     ], 'client');
 
-    api.addFiles([
-        'package-tap.i18n',
-        '../../i18n/phraseapp.en.i18n.json',
-        '../../i18n/phraseapp.nl.i18n.json'
-    ], 'server');
 });
