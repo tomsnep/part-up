@@ -40,6 +40,17 @@ Meteor.startup(function() {
     /*************************************************************/
     /* multiple meteor calls at once */
     /*************************************************************/
+    /* example:
+        Meteor.callEach([{
+            method: 'swarms.exists',
+            parameter: swarmSlug
+        },{
+            method: 'networks.exists',
+            parameter: networkSlug
+        }], function(results) {
+            // do something with results
+        })
+    */
     Meteor.callEach = function(methods, callBack) {
         var allResponses = {};
         var count = 0;
