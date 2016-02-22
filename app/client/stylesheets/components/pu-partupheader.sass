@@ -34,3 +34,20 @@
             z-index: 1
             @include linear-gradient(transparent, rgba(black, .3))
 
+    &-archived
+        height: 220px
+
+
+        // > .pu-sub-picture
+        //     filter: grayscale(100%); // geen IE support
+
+        &:after
+            content: ''
+            display: block
+            position: absolute;
+            top: 0
+            left: 0
+            bottom: 0
+            right: 0
+            background-color: rgba(#000, .5)
+            z-index: 1;

@@ -8,10 +8,18 @@
     {{/if}}
 
     <!-- sidebar header image -->
-    <header class="pu-partupheader">
+<!--     <header class="pu-partupheader">
+        <figure class="pu-sub-picture" style="{{#with partup.image }}background-image: url('{{ partupImageUrl id=. store='1200x520' }}');{{/with}}" data-partupcover-focuspoint></figure>
+        <h1>{{ partup.name }}</h1>
+    </header> -->
+
+    <header class="pu-partupheader pu-partupheader-archived">
         <figure class="pu-sub-picture" style="{{#with partup.image }}background-image: url('{{ partupImageUrl id=. store='1200x520' }}');{{/with}}" data-partupcover-focuspoint></figure>
         <h1>{{ partup.name }}</h1>
     </header>
+    <div class="pu-state-message">
+        <h3>This part-up is archived</h3>
+    </div>
 
     <!-- sidebarcontent -->
     <aside class="pu-sidebar">
