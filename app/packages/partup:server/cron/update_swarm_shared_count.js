@@ -8,9 +8,9 @@ if(process.env.PARTUP_CRON_ENABLED) {
             if (!process.env.NODE_ENV.match(/development/)) {
                 Swarms.find({}, {sort: {refreshed_at: 1}, limit: 10}).forEach(function(swarm) {
                     var counts = {
-                        facebook: Partup.server.services.shared_count.facebook(Meteor.absoluteUrl() + 'swarms/' + swarm.slug),
-                        twitter: Partup.server.services.shared_count.twitter(Meteor.absoluteUrl() + 'swarms/' + swarm.slug),
-                        linkedin: Partup.server.services.shared_count.linkedin(Meteor.absoluteUrl() + 'swarms/' + swarm.slug)
+                        facebook: Partup.server.services.shared_count.facebook(Meteor.absoluteUrl() + swarm.slug),
+                        twitter: Partup.server.services.shared_count.twitter(Meteor.absoluteUrl() + swarm.slug),
+                        linkedin: Partup.server.services.shared_count.linkedin(Meteor.absoluteUrl() + swarm.slug)
                     };
 
                     Swarms.update(swarm._id, {
