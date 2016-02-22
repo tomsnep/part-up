@@ -23,16 +23,16 @@ Template.AdminFeaturedNetworks.helpers({
         return Template.instance().networkSelection;
     },
     networkFieldPlaceholder: function() {
-        return __('pages-modal-admin-featured-networks-form-network-placeholder');
+        return TAPi18n.__('pages-modal-admin-featured-networks-form-network-placeholder');
     },
     authorFieldPlaceholder: function() {
-        return __('pages-modal-admin-featured-networks-form-author-placeholder');
+        return TAPi18n.__('pages-modal-admin-featured-networks-form-author-placeholder');
     },
     commentFieldPlaceholder: function() {
-        return __('pages-modal-admin-featured-networks-form-comment-placeholder');
+        return TAPi18n.__('pages-modal-admin-featured-networks-form-comment-placeholder');
     },
     jobTitleFieldPlaceholder: function() {
-        return __('pages-modal-admin-featured-networks-form-job-title-placeholder');
+        return TAPi18n.__('pages-modal-admin-featured-networks-form-job-title-placeholder');
     },
     networkLabel: function() {
         return function(network) {

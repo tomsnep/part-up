@@ -94,19 +94,19 @@ Template.NetworkSettings.helpers({
     formSchema: Partup.schemas.forms.network,
     placeholders: {
         name: function() {
-            return __('network-settings-form-name-placeholder');
+            return TAPi18n.__('network-settings-form-name-placeholder');
         },
         description: function() {
-            return __('network-settings-form-description-placeholder');
+            return TAPi18n.__('network-settings-form-description-placeholder');
         },
         tags_input: function() {
-            return __('network-settings-form-tags_input-placeholder');
+            return TAPi18n.__('network-settings-form-tags_input-placeholder');
         },
         location_input: function() {
-            return __('network-settings-form-location_input-placeholder');
+            return TAPi18n.__('network-settings-form-location_input-placeholder');
         },
         website: function() {
-            return __('network-settings-form-website-placeholder');
+            return TAPi18n.__('network-settings-form-website-placeholder');
         }
     },
     descriptionCharactersLeft: function() {
@@ -219,7 +219,7 @@ AutoForm.addHooks('networkEditForm', {
                 return;
             }
 
-            Partup.client.notify.success(__('network-settings-form-saved'));
+            Partup.client.notify.success(TAPi18n.__('network-settings-form-saved'));
             self.done();
         });
 

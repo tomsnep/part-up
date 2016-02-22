@@ -7,13 +7,13 @@
 // jscs:enable
 var placeholders = {
     'email': function() {
-        return __('resetpassword-form-email-placeholder');
+        return TAPi18n.__('resetpassword-form-email-placeholder');
     },
     'password': function() {
-        return __('resetpassword-form-password-placeholder');
+        return TAPi18n.__('resetpassword-form-password-placeholder');
     },
     'confirmPassword': function() {
-        return __('resetpassword-form-confirmPassword-placeholder');
+        return TAPi18n.__('resetpassword-form-confirmPassword-placeholder');
     }
 };
 

@@ -32,11 +32,11 @@ Template.registerHelper('partupDatePartupActivity', function(date) {
     if (mNow.diff(mDate) < RELATIVE_TIME_THRESHOLD) {
         return Partup.client.moment.localConfig({
             relativeTime: {
-                s:  __('base-helpers-dateFormatters-difference-time-s'),
-                m:  __('base-helpers-dateFormatters-difference-time-m'),
-                mm:  __('base-helpers-dateFormatters-difference-time-mm'),
-                h:  __('base-helpers-dateFormatters-difference-time-h'),
-                hh:  __('base-helpers-dateFormatters-difference-time-hh'),
+                s:  TAPi18n.__('base-helpers-dateFormatters-difference-time-s'),
+                m:  TAPi18n.__('base-helpers-dateFormatters-difference-time-m'),
+                mm:  TAPi18n.__('base-helpers-dateFormatters-difference-time-mm'),
+                h:  TAPi18n.__('base-helpers-dateFormatters-difference-time-h'),
+                hh:  TAPi18n.__('base-helpers-dateFormatters-difference-time-hh'),
             }
         }, {}, function() {
             return mDate.fromNow(true);
@@ -61,11 +61,11 @@ Template.registerHelper('partupDateComment', function(date) {
     if (mNow.diff(mDate) < RELATIVE_TIME_THRESHOLD) {
         return Partup.client.moment.localConfig({
             relativeTime: {
-                s:  __('base-helpers-dateFormatters-difference-time-s'),
-                m:  __('base-helpers-dateFormatters-difference-time-m'),
-                mm:  __('base-helpers-dateFormatters-difference-time-mm'),
-                h:  __('base-helpers-dateFormatters-difference-time-h'),
-                hh:  __('base-helpers-dateFormatters-difference-time-hh'),
+                s:  TAPi18n.__('base-helpers-dateFormatters-difference-time-s'),
+                m:  TAPi18n.__('base-helpers-dateFormatters-difference-time-m'),
+                mm:  TAPi18n.__('base-helpers-dateFormatters-difference-time-mm'),
+                h:  TAPi18n.__('base-helpers-dateFormatters-difference-time-h'),
+                hh:  TAPi18n.__('base-helpers-dateFormatters-difference-time-hh'),
             }
         }, {}, function() {
             return mDate.fromNow(true);
@@ -74,11 +74,11 @@ Template.registerHelper('partupDateComment', function(date) {
 
     // If the time is in the same year
     if (mDate.year() === mNow.year()) {
-        return mDate.format(__('base-helpers-dateFormatters-format-sameyear'));
+        return mDate.format(TAPi18n.__('base-helpers-dateFormatters-format-sameyear'));
     }
 
     // Default
-    return mDate.format(__('base-helpers-dateFormatters-format-anotheryear'));
+    return mDate.format(TAPi18n.__('base-helpers-dateFormatters-format-anotheryear'));
 });
 
 Template.registerHelper('partupDatePartupTimeline', function(date) {
@@ -92,8 +92,8 @@ Template.registerHelper('partupDatePartupTimeline', function(date) {
     if (mNow.diff(mDate) < RELATIVE_TIME_THRESHOLD) {
         return Partup.client.moment.localConfig({
             relativeTime: {
-                d:  __('base-helpers-dateFormatters-difference-days-d'),
-                dd:  __('base-helpers-dateFormatters-difference-days-dd'),
+                d:  TAPi18n.__('base-helpers-dateFormatters-difference-days-d'),
+                dd:  TAPi18n.__('base-helpers-dateFormatters-difference-days-dd'),
             },
         }, {
             remember: function() {
@@ -132,13 +132,13 @@ Template.registerHelper('partupDateNotification', function(date) {
     if (mNow.diff(mDate) < RELATIVE_TIME_THRESHOLD) {
         return Partup.client.moment.localConfig({
             relativeTime: {
-                s:  __('base-helpers-dateFormatters-notification-difference-time-s'),
-                m:  __('base-helpers-dateFormatters-notification-difference-time-m'),
-                mm:  __('base-helpers-dateFormatters-notification-difference-time-mm'),
-                h:  __('base-helpers-dateFormatters-notification-difference-time-h'),
-                hh:  __('base-helpers-dateFormatters-notification-difference-time-hh'),
-                d:  __('base-helpers-dateFormatters-difference-days-d'),
-                dd:  __('base-helpers-dateFormatters-difference-days-dd'),
+                s:  TAPi18n.__('base-helpers-dateFormatters-notification-difference-time-s'),
+                m:  TAPi18n.__('base-helpers-dateFormatters-notification-difference-time-m'),
+                mm:  TAPi18n.__('base-helpers-dateFormatters-notification-difference-time-mm'),
+                h:  TAPi18n.__('base-helpers-dateFormatters-notification-difference-time-h'),
+                hh:  TAPi18n.__('base-helpers-dateFormatters-notification-difference-time-hh'),
+                d:  TAPi18n.__('base-helpers-dateFormatters-difference-days-d'),
+                dd:  TAPi18n.__('base-helpers-dateFormatters-difference-days-dd'),
             }
         }, {}, function() {
             return mDate.fromNow(true);
@@ -147,9 +147,9 @@ Template.registerHelper('partupDateNotification', function(date) {
 
     // If the time is in the same year
     if (mDate.year() === mNow.year()) {
-        return mDate.format(__('base-helpers-dateFormatters-format-sameyear'));
+        return mDate.format(TAPi18n.__('base-helpers-dateFormatters-format-sameyear'));
     }
 
     // Default
-    return mDate.format(__('base-helpers-dateFormatters-format-anotheryear'));
+    return mDate.format(TAPi18n.__('base-helpers-dateFormatters-format-anotheryear'));
 });

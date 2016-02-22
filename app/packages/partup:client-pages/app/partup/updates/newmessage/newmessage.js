@@ -1,6 +1,6 @@
 var placeholders = {
     'text': function() {
-        return __('pages-app-partup-updates-newmessage-placeholder');
+        return TAPi18n.__('pages-app-partup-updates-newmessage-placeholder');
     }
 };
 
@@ -219,7 +219,7 @@ AutoForm.hooks({
                     return;
                 }
                 if (result.warning) {
-                    Partup.client.notify.warning(__('warning-' + result.warning));
+                    Partup.client.notify.warning(TAPi18n.__('warning-' + result.warning));
                 }
 
                 // Success
