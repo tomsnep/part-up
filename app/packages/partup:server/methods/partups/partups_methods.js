@@ -455,5 +455,30 @@ Meteor.methods({
         return users.map(function(user) {
             return user._id;
         });
+    },
+
+    /**
+     * Archive a partup
+     *
+     * @param {String} partupId
+     */
+    'partups.archive': function(partupId) {
+        check(partupId, String);
+
+        var upper = Meteor.user();
+        var partup = Partups.findOneOrFail(partupId);
+
+        if (!upper || !partup.hasUpper(upper._id)) {
+            throw new Meteor.Error(401, 'unauthorized');
+        }
+
+        try {
+            Partups.update(partup._id, {$set: {archived: true, archived_at: new Date()}});
+
+            Event.emit('partups.archived', upper._id, partup);
+        } catch (error) {
+            Log.error(error);
+            throw new Meteor.Error(500, 'partup_could_not_be_archived');
+        }
     }
 });
