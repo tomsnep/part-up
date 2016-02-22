@@ -432,5 +432,19 @@ Meteor.methods({
             Log.error(error);
             throw new Meteor.Error(400, 'related_networks_could_not_be_given');
         }
+    },
+
+    'swarms.exists': function(swarmSlug) {
+        check(swarmSlug, String);
+
+        try {
+            var swarm = Swarms.findOneOrFail({slug: swarmSlug});
+            console.log(swarm)
+            if (swarm) return true;
+            return false;
+        } catch (error) {
+            Log.error(error);
+            throw new Meteor.Error(400, 'swarm_does_not_exist');
+        }
     }
 });

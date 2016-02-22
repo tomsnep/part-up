@@ -38,6 +38,26 @@ Meteor.startup(function() {
     Meteor.subscribe('users.loggedin');
 
     /*************************************************************/
+    /* multiple meteor calls at once */
+    /*************************************************************/
+    Meteor.callEach = function(calls, callBack) {
+        var allResponses = {};
+        var callCount = 0;
+        var callMax = calls.length;
+        _.each(calls, function(item, index) {
+            Meteor.call(item.call, item.parameter, function(error, response) {
+                allResponses[item.call] = {
+                    response: response,
+                    error: error
+                };
+
+                callCount++;
+                if (callCount === callMax) callBack(allResponses);
+            });
+        });
+    };
+
+    /*************************************************************/
     /* Language configuration */
     /*************************************************************/
     // sets the language of the user to user setting

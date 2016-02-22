@@ -541,7 +541,135 @@ Router.route('/pricing', {
     }
 });
 
-Router.route('/swarms/:slug', {
+/*************************************************************/
+/* Networks */
+/*************************************************************/
+Router.route('/tribes/:slug', {
+    name: 'network-detail',
+    where: 'client',
+    yieldRegions: {
+        'app':                      {to: 'main'},
+        'app_network':              {to: 'app'},
+        'app_network_partups':      {to: 'app_network'}
+    },
+    data: function() {
+        return {
+            networkSlug: this.params.slug,
+            accessToken: this.params.query.token
+        };
+    },
+    onBeforeAction: function() {
+        var networkSlug = this.data().networkSlug;
+        var accessToken = this.data().accessToken;
+        if (networkSlug && accessToken) {
+            Session.set('network_access_token', accessToken);
+            Session.set('network_access_token_for_network', networkSlug);
+        }
+        if (Meteor.userId() && networkSlug && accessToken) {
+            Meteor.call('networks.convert_access_token_to_invite', networkSlug, accessToken);
+        }
+
+        this.next();
+    }
+});
+
+Router.route('/tribes/:slug/uppers', {
+    name: 'network-uppers',
+    where: 'client',
+    yieldRegions: {
+        'app':                  {to: 'main'},
+        'app_network':          {to: 'app'},
+        'app_network_uppers':   {to: 'app_network'}
+    },
+    data: function() {
+        return {
+            networkSlug: this.params.slug
+        };
+    }
+});
+
+Router.route('/tribes/:slug/invite', {
+    name: 'network-invite',
+    where: 'client',
+    yieldRegions: {
+        'modal':                   {to: 'main'},
+        'modal_network_invite':    {to: 'modal'}
+    },
+    data: function() {
+        return {
+            networkSlug: this.params.slug
+        };
+    }
+});
+
+/*************************************************************/
+/* Network (admin) */
+/*************************************************************/
+Router.route('/tribes/:slug/settings', {
+    name: 'network-settings',
+    where: 'client',
+    yieldRegions: {
+        'modal':                          {to: 'main'},
+        'modal_network_settings':         {to: 'modal'},
+        'modal_network_settings_details': {to: 'modal_network_settings'}
+    },
+    data: function() {
+        return {
+            networkSlug: this.params.slug
+        };
+    }
+});
+
+Router.route('/tribes/:slug/settings/uppers', {
+    name: 'network-settings-uppers',
+    where: 'client',
+    yieldRegions: {
+        'modal':                         {to: 'main'},
+        'modal_network_settings':        {to: 'modal'},
+        'modal_network_settings_uppers': {to: 'modal_network_settings'}
+    },
+    data: function() {
+        return {
+            networkSlug: this.params.slug
+        };
+    }
+});
+
+Router.route('/tribes/:slug/settings/bulk-invite', {
+    name: 'network-settings-bulkinvite',
+    where: 'client',
+    yieldRegions: {
+        'modal':                         {to: 'main'},
+        'modal_network_settings':        {to: 'modal'},
+        'modal_network_settings_bulkinvite': {to: 'modal_network_settings'}
+    },
+    data: function() {
+        return {
+            networkSlug: this.params.slug
+        };
+    }
+});
+
+Router.route('/tribes/:slug/settings/requests', {
+    name: 'network-settings-requests',
+    where: 'client',
+    yieldRegions: {
+        'modal':                           {to: 'main'},
+        'modal_network_settings':          {to: 'modal'},
+        'modal_network_settings_requests': {to: 'modal_network_settings'}
+    },
+    data: function() {
+        return {
+            networkSlug: this.params.slug
+        };
+    }
+});
+
+/*************************************************************/
+/* Swarm */
+/*************************************************************/
+
+Router.route('/:slug', {
     name: 'swarm',
     where: 'client',
     yieldRegions: {
@@ -551,8 +679,41 @@ Router.route('/swarms/:slug', {
         return {
             slug: this.params.slug
         };
+    },
+    onRun: function() {
+        var self = this;
+        var slug = this.params.slug;
+        Meteor.callEach([{
+                call: 'swarms.exists',
+                parameter: slug
+            },{
+                call: 'networks.exists',
+                parameter: slug
+            }], function(results) {
+                if (results['swarms.exists'].response) {
+                    self.render();
+
+                } else if (results['networks.exists'].response) {
+                    self.redirect('network-detail', {
+                        slug: self.params.slug
+                    }, {
+                        query: self.params.query
+                    });
+
+                } else {
+                    self.render();
+
+                }
+
+            }
+        );
     }
 });
+
+/*************************************************************/
+/* Swarm (admin) */
+/*************************************************************/
+
 Router.route('/swarms/:slug/settings', {
     name: 'swarm-settings-details',
     where: 'client',
@@ -592,139 +753,6 @@ Router.route('/swarms/:slug/quotes', {
     data: function() {
         return {
             slug: this.params.slug
-        };
-    }
-});
-
-// Router.route('/contact', {
-//     name: 'contact',
-//     where: 'client',
-//     yieldRegions: {
-//         'app':      {to: 'main'},
-//         'app_home': {to: 'app'}
-//     }
-// });
-
-/*************************************************************/
-/* Networks */
-/*************************************************************/
-Router.route('/:slug', {
-    name: 'network-detail',
-    where: 'client',
-    yieldRegions: {
-        'app':                      {to: 'main'},
-        'app_network':              {to: 'app'},
-        'app_network_partups':      {to: 'app_network'}
-    },
-    data: function() {
-        return {
-            networkSlug: this.params.slug,
-            accessToken: this.params.query.token
-        };
-    },
-    onBeforeAction: function() {
-        var networkSlug = this.data().networkSlug;
-        var accessToken = this.data().accessToken;
-        if (networkSlug && accessToken) {
-            Session.set('network_access_token', accessToken);
-            Session.set('network_access_token_for_network', networkSlug);
-        }
-        if (Meteor.userId() && networkSlug && accessToken) {
-            Meteor.call('networks.convert_access_token_to_invite', networkSlug, accessToken);
-        }
-
-        this.next();
-    }
-});
-
-Router.route('/:slug/uppers', {
-    name: 'network-uppers',
-    where: 'client',
-    yieldRegions: {
-        'app':                  {to: 'main'},
-        'app_network':          {to: 'app'},
-        'app_network_uppers':   {to: 'app_network'}
-    },
-    data: function() {
-        return {
-            networkSlug: this.params.slug
-        };
-    }
-});
-
-Router.route('/:slug/invite', {
-    name: 'network-invite',
-    where: 'client',
-    yieldRegions: {
-        'modal':                   {to: 'main'},
-        'modal_network_invite':    {to: 'modal'}
-    },
-    data: function() {
-        return {
-            networkSlug: this.params.slug
-        };
-    }
-});
-
-/*************************************************************/
-/* Network (admin) */
-/*************************************************************/
-Router.route('/:slug/settings', {
-    name: 'network-settings',
-    where: 'client',
-    yieldRegions: {
-        'modal':                          {to: 'main'},
-        'modal_network_settings':         {to: 'modal'},
-        'modal_network_settings_details': {to: 'modal_network_settings'}
-    },
-    data: function() {
-        return {
-            networkSlug: this.params.slug
-        };
-    }
-});
-
-Router.route('/:slug/settings/uppers', {
-    name: 'network-settings-uppers',
-    where: 'client',
-    yieldRegions: {
-        'modal':                         {to: 'main'},
-        'modal_network_settings':        {to: 'modal'},
-        'modal_network_settings_uppers': {to: 'modal_network_settings'}
-    },
-    data: function() {
-        return {
-            networkSlug: this.params.slug
-        };
-    }
-});
-
-Router.route('/:slug/settings/bulk-invite', {
-    name: 'network-settings-bulkinvite',
-    where: 'client',
-    yieldRegions: {
-        'modal':                         {to: 'main'},
-        'modal_network_settings':        {to: 'modal'},
-        'modal_network_settings_bulkinvite': {to: 'modal_network_settings'}
-    },
-    data: function() {
-        return {
-            networkSlug: this.params.slug
-        };
-    }
-});
-
-Router.route('/:slug/settings/requests', {
-    name: 'network-settings-requests',
-    where: 'client',
-    yieldRegions: {
-        'modal':                           {to: 'main'},
-        'modal_network_settings':          {to: 'modal'},
-        'modal_network_settings_requests': {to: 'modal_network_settings'}
-    },
-    data: function() {
-        return {
-            networkSlug: this.params.slug
         };
     }
 });
