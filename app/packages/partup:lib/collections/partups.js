@@ -344,6 +344,16 @@ Partup.prototype.increaseEmailShareCount = function() {
 };
 
 /**
+ * Check if partup is archived
+ *
+ * @memberOf Partups
+ * @return {Boolean}
+ */
+Partup.prototype.isArchived = function() {
+    return !!this.archived;
+};
+
+/**
  * Partups describe collaborations between several uppers
  * @namespace Partups
  */
