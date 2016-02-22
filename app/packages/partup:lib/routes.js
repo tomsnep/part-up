@@ -725,7 +725,7 @@ Router.route('/:slug', {
 /* Swarm (admin) */
 /*************************************************************/
 
-Router.route('/swarms/:slug/settings', {
+Router.route('/:slug/settings', {
     name: 'swarm-settings-details',
     where: 'client',
     yieldRegions: {
@@ -739,7 +739,7 @@ Router.route('/swarms/:slug/settings', {
         };
     }
 });
-Router.route('/swarms/:slug/tribes', {
+Router.route('/:slug/tribes', {
     name: 'swarm-settings-tribes',
     where: 'client',
     yieldRegions: {
@@ -753,7 +753,7 @@ Router.route('/swarms/:slug/tribes', {
         };
     }
 });
-Router.route('/swarms/:slug/quotes', {
+Router.route('/:slug/quotes', {
     name: 'swarm-settings-quotes',
     where: 'client',
     yieldRegions: {
