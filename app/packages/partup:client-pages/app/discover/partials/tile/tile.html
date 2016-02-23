@@ -19,7 +19,7 @@
                     <a href="{{pathFor 'partup' slug=slug }}">{{ name }}</a>
                 </h2>
             </header>
-            {{#unless archived_at}}
+            {{#unless true}}
                 <section>
                     <!-- Image (circle), uppers, and progress  -->
                     <div class="pu-partupcircle">
@@ -103,7 +103,7 @@
 
                     <!-- Archive info -->
                     <div class="pu-archive-info">
-                        <p>This part-up is archived <span>18 Nov 2015</span></p>
+                        <p>{{_ 'partuptile-archive-date' }}<span>{{ partupDateOnly archived_at }}</span></p>
                     </div>
                 </section>
 
