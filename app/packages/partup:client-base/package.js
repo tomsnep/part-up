@@ -5,9 +5,6 @@ Package.describe({
 });
 
 Package.onUse(function(api) {
-    api.use([
-        'tap:i18n'
-    ], ['client', 'server']);
 
     api.use([
         'partup:lib',
@@ -20,7 +17,6 @@ Package.onUse(function(api) {
     ], ['client']);
 
     api.addFiles([
-        'package-tap.i18n',
 
         'client/base-64-polyfill.js',
         'client/uint8array.js', // required for fileuploader
@@ -87,19 +83,8 @@ Package.onUse(function(api) {
         'helpers/autolink.js',
         'helpers/mobileHelpers.js',
         'bootstrap.js',
-        'analytics.js',
+        'analytics.js'
 
-        'i18n/helpers-dateFormatters.en.i18n.json',
-        'i18n/helpers-dateFormatters.nl.i18n.json',
-        'i18n/client-language.en.i18n.json',
-        'i18n/client-language.nl.i18n.json'
     ], ['client']);
 
-    api.addFiles([
-        'package-tap.i18n',
-        'i18n/helpers-dateFormatters.en.i18n.json',
-        'i18n/helpers-dateFormatters.nl.i18n.json',
-        'i18n/client-language.en.i18n.json',
-        'i18n/client-language.nl.i18n.json'
-    ], 'server');
 });

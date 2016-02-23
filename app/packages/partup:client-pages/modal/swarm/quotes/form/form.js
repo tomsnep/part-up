@@ -20,11 +20,11 @@ Template.modal_swarm_settings_quotes_form.onCreated(function() {
                 Meteor.call('swarms.update_quote', template.data.swarmId, template.data.quote._id, fields, function(err) {
                     template.state.set('submitting', false);
                     if (err && err.message) {
-                        Partup.client.notify.error(__(err.reason));
+                        Partup.client.notify.error(TAPi18n.__(err.reason));
                         return;
                     }
 
-                    Partup.client.notify.success(__('modal-swarm-quotes-form-updated'));
+                    Partup.client.notify.success(TAPi18n.__('modal-swarm-quotes-form-updated'));
                     template.authorSelection.set(false);
                     AutoForm.resetForm(self.formId);
 
@@ -36,10 +36,10 @@ Template.modal_swarm_settings_quotes_form.onCreated(function() {
                 Meteor.call('swarms.add_quote', template.data.swarmId, fields, function(err) {
                     template.state.set('submitting', false);
                     if (err && err.message) {
-                        Partup.client.notify.error(__(err.reason));
+                        Partup.client.notify.error(TAPi18n.__(err.reason));
                         return;
                     }
-                    Partup.client.notify.success(__('modal-swarm-quotes-form-created'));
+                    Partup.client.notify.success(TAPi18n.__('modal-swarm-quotes-form-created'));
                     template.authorSelection.set(false);
                     AutoForm.resetForm(self.formId);
 
@@ -67,10 +67,10 @@ Template.modal_swarm_settings_quotes_form.events({
     'click [data-remove]': function(event, template) {
         Meteor.call('swarms.remove_quote', this.swarmId, this.quote._id, function(err) {
             if (err && err.message) {
-                Partup.client.notify.error(__(err.reason));
+                Partup.client.notify.error(TAPi18n.__(err.reason));
                 return;
             }
-            Partup.client.notify.success(__('modal-swarm-quotes-form-removed'));
+            Partup.client.notify.success(TAPi18n.__('modal-swarm-quotes-form-removed'));
             template.data.onAfterRemove();
         });
     },
@@ -146,8 +146,8 @@ Template.modal_swarm_settings_quotes_form.helpers({
     },
     static: function() {
         return {
-            authorFieldPlaceholder: __('modal-swarm-quotes-form-author-placeholder'),
-            quoteFieldPlaceholder: __('modal-swarm-quotes-form-quote-placeholder')
+            authorFieldPlaceholder: TAPi18n.__('modal-swarm-quotes-form-author-placeholder'),
+            quoteFieldPlaceholder: TAPi18n.__('modal-swarm-quotes-form-quote-placeholder')
         };
     }
 });

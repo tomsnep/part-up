@@ -1,6 +1,6 @@
 Template.Header_personal.helpers({
     notificationslabel: function() {
-        return __('header-notifications');
+        return TAPi18n.__('header-notifications');
     }
 });
 

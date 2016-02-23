@@ -53,7 +53,7 @@ Template.NetworkSettingsUppers.events({
                 return;
             }
 
-            Partup.client.notify.success(__('network-settings-uppers-upper-removed'));
+            Partup.client.notify.success(TAPi18n.__('network-settings-uppers-upper-removed'));
         });
     }
 });

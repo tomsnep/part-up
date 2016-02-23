@@ -7,8 +7,7 @@ Package.describe({
 
 Package.onUse(function(api) {
     api.use([
-        'meteorhacks:subs-manager',
-        'tap:i18n'
+        'meteorhacks:subs-manager'
     ], ['client', 'server']);
 
     api.use([
@@ -17,7 +16,6 @@ Package.onUse(function(api) {
     ], 'client');
 
     api.addFiles([
-        'package-tap.i18n',
         'BasicSelector.html',
         'BasicSelector.js',
         'NetworkSelector.html',
@@ -25,14 +23,7 @@ Package.onUse(function(api) {
         'LocationSelector.html',
         'LocationSelector.js',
         'LanguageSelector.html',
-        'LanguageSelector.js',
-        'i18n/en.i18n.json',
-        'i18n/nl.i18n.json'
+        'LanguageSelector.js'
     ], 'client');
 
-    api.addFiles([
-        'package-tap.i18n',
-        'i18n/en.i18n.json',
-        'i18n/nl.i18n.json'
-    ], 'server')
 });

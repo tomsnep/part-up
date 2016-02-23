@@ -21,16 +21,16 @@ Template.AdminFeaturedPartups.helpers({
         return Template.instance().partupSelection;
     },
     partupFieldPlaceholder: function() {
-        return __('pages-modal-admin-featured-partups-form-partup-placeholder');
+        return TAPi18n.__('pages-modal-admin-featured-partups-form-partup-placeholder');
     },
     commentFieldPlaceholder: function() {
-        return __('pages-modal-admin-featured-partups-form-comment-placeholder');
+        return TAPi18n.__('pages-modal-admin-featured-partups-form-comment-placeholder');
     },
     authorFieldPlaceholder: function() {
-        return __('pages-modal-admin-featured-partups-form-author-placeholder');
+        return TAPi18n.__('pages-modal-admin-featured-partups-form-author-placeholder');
     },
     jobTitleFieldPlaceholder: function() {
-        return __('pages-modal-admin-featured-partups-form-job-title-placeholder');
+        return TAPi18n.__('pages-modal-admin-featured-partups-form-job-title-placeholder');
     },
     partupLabel: function() {
         return function(partup) {

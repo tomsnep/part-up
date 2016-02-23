@@ -16,7 +16,7 @@ Template.modal_create_activities_copy.helpers({
         return Template.instance().partupSelection;
     },
     partupFieldPlaceholder: function() {
-        return __('pages-modal-create-activities-copy-form-copy-placeholder');
+        return TAPi18n.__('pages-modal-create-activities-copy-form-copy-placeholder');
     },
     partupLabel: function() {
         return function(partup) {
@@ -68,7 +68,7 @@ Template.modal_create_activities_copy.events({
             template.submitting.set(false);
 
             if (error) {
-                return Partup.client.notify.error(__('pages-modal-create-activities-error-method-' + error.error));
+                return Partup.client.notify.error(TAPi18n.__('pages-modal-create-activities-error-method-' + error.error));
             }
 
             form.reset();

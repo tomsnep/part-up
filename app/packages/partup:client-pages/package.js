@@ -7,7 +7,6 @@ Package.describe({
 
 Package.onUse(function(api) {
     api.use([
-        'tap:i18n',
         'meteorhacks:subs-manager'
     ], ['client', 'server']);
 
@@ -18,13 +17,10 @@ Package.onUse(function(api) {
         'reactive-var',
         'aldeed:autoform',
         'yogiben:autoform-tags',
-        'http',
+        'http'
     ], 'client');
 
     var clientFiles = {
-        misc: [
-            'package-tap.i18n',
-        ],
         app: [
             // App
             'app/app.html',
@@ -277,125 +273,8 @@ Package.onUse(function(api) {
         ]
     };
 
-    var languageFiles = [
-        'i18n/app/error/notfound.en.i18n.json',
-        'i18n/app/error/notfound.nl.i18n.json',
-
-        'i18n/app/home/en.i18n.json',
-        'i18n/app/home/nl.i18n.json',
-
-        'i18n/app/about/en.i18n.json',
-        'i18n/app/about/nl.i18n.json',
-
-        'i18n/app/pricing/en.i18n.json',
-        'i18n/app/pricing/nl.i18n.json',
-
-        'i18n/app/discover/en.i18n.json',
-        'i18n/app/discover/nl.i18n.json',
-        'i18n/app/discover/partials/en.i18n.json',
-        'i18n/app/discover/partials/nl.i18n.json',
-
-        'i18n/app/network/en.i18n.json',
-        'i18n/app/network/nl.i18n.json',
-
-        'i18n/app/partup/en.i18n.json',
-        'i18n/app/partup/nl.i18n.json',
-        'i18n/app/partup/takepart/en.i18n.json',
-        'i18n/app/partup/takepart/nl.i18n.json',
-        'i18n/app/partup/updates/en.i18n.json',
-        'i18n/app/partup/updates/nl.i18n.json',
-        'i18n/app/partup/updates/newmessage/en.i18n.json',
-        'i18n/app/partup/updates/newmessage/nl.i18n.json',
-        'i18n/app/partup/updates/update/en.i18n.json',
-        'i18n/app/partup/updates/update/nl.i18n.json',
-
-        'i18n/app/partup/activities/en.i18n.json',
-        'i18n/app/partup/activities/nl.i18n.json',
-        'i18n/app/partup/activities/activity/en.i18n.json',
-        'i18n/app/partup/activities/activity/nl.i18n.json',
-
-        'i18n/app/profile/en.i18n.json',
-        'i18n/app/profile/nl.i18n.json',
-
-        'i18n/modal/login/en.i18n.json',
-        'i18n/modal/login/nl.i18n.json',
-        'i18n/modal/register/signup/en.i18n.json',
-        'i18n/modal/register/signup/nl.i18n.json',
-        'i18n/modal/register/details/en.i18n.json',
-        'i18n/modal/register/details/nl.i18n.json',
-
-        'i18n/modal/forgotpassword/en.i18n.json',
-        'i18n/modal/forgotpassword/nl.i18n.json',
-        'i18n/modal/forgotpassword/form/en.i18n.json',
-        'i18n/modal/forgotpassword/form/nl.i18n.json',
-
-        'i18n/modal/resetpassword/en.i18n.json',
-        'i18n/modal/resetpassword/nl.i18n.json',
-
-        'i18n/modal/invite/activity/en.i18n.json',
-        'i18n/modal/invite/activity/nl.i18n.json',
-        'i18n/modal/invite/partup/en.i18n.json',
-        'i18n/modal/invite/partup/nl.i18n.json',
-        'i18n/modal/invite/network/en.i18n.json',
-        'i18n/modal/invite/network/nl.i18n.json',
-
-        'i18n/modal/settings/partup/edit/en.i18n.json',
-        'i18n/modal/settings/partup/edit/nl.i18n.json',
-
-        'i18n/modal/settings/partup/create/en.i18n.json',
-        'i18n/modal/settings/partup/create/nl.i18n.json',
-
-        'i18n/modal/settings/partup/create/intro/en.i18n.json',
-        'i18n/modal/settings/partup/create/intro/nl.i18n.json',
-
-        'i18n/modal/settings/partup/create/details/en.i18n.json',
-        'i18n/modal/settings/partup/create/details/nl.i18n.json',
-        'i18n/modal/settings/partup/create/activities/en.i18n.json',
-        'i18n/modal/settings/partup/create/activities/nl.i18n.json',
-        'i18n/modal/settings/partup/create/promote/en.i18n.json',
-        'i18n/modal/settings/partup/create/promote/nl.i18n.json',
-
-        'i18n/modal/settings/network/en.i18n.json',
-        'i18n/modal/settings/network/nl.i18n.json',
-
-        'i18n/modal/settings/profile/en.i18n.json',
-        'i18n/modal/settings/profile/nl.i18n.json',
-
-        'i18n/modal/settings/admin/en.i18n.json',
-        'i18n/modal/settings/admin/nl.i18n.json',
-
-        'i18n/modal/settings/swarm/en.i18n.json',
-        'i18n/modal/settings/swarm/nl.i18n.json',
-        'i18n/modal/settings/swarm/details/en.i18n.json',
-        'i18n/modal/settings/swarm/details/nl.i18n.json',
-        'i18n/modal/settings/swarm/tribes/en.i18n.json',
-        'i18n/modal/settings/swarm/tribes/nl.i18n.json',
-        'i18n/modal/settings/swarm/quotes/en.i18n.json',
-        'i18n/modal/settings/swarm/quotes/nl.i18n.json',
-        'i18n/modal/settings/swarm/quotes/form/en.i18n.json',
-        'i18n/modal/settings/swarm/quotes/form/nl.i18n.json',
-
-        // swarm
-        'i18n/swarm/en.i18n.json',
-        'i18n/swarm/nl.i18n.json',
-        'i18n/swarm/content/en.i18n.json',
-        'i18n/swarm/content/nl.i18n.json',
-        'i18n/swarm/explorer/en.i18n.json',
-        'i18n/swarm/explorer/nl.i18n.json',
-        'i18n/swarm/explorer/bubble/en.i18n.json',
-        'i18n/swarm/explorer/bubble/nl.i18n.json'
-    ];
-
     api.addFiles([].concat(
-        clientFiles.misc,
         clientFiles.app,
         clientFiles.modal,
-        clientFiles.swarm,
-        languageFiles), 'client');
-
-    var serverFiles = [
-        'package-tap.i18n'
-    ];
-
-    api.addFiles(serverFiles.concat(languageFiles), 'server');
+        clientFiles.swarm), 'client');
 });

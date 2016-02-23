@@ -20,8 +20,8 @@ Template.app_profile.onCreated(function() {
         var clickedElement = $('[data-expand]');
         if (!clickedElement || !clickedElement[0]) return;
         var parentElement = $(clickedElement[0].parentElement);
-        var collapsedText = __(clickedElement.data('collapsed-key')) || false;
-        var expandedText = __(clickedElement.data('expanded-key')) || false;
+        var collapsedText = TAPi18n.__(clickedElement.data('collapsed-key')) || false;
+        var expandedText = TAPi18n.__(clickedElement.data('expanded-key')) || false;
 
         if (parentElement.hasClass('pu-state-open')) {
             if (collapsedText) clickedElement.html(collapsedText);

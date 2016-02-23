@@ -109,13 +109,13 @@ Template.modal_swarm_settings_details.helpers({
     translations: function() {
         return {
             title: function() {
-                return __('modal-swarm-details-form-title-placeholder');
+                return TAPi18n.__('modal-swarm-details-form-title-placeholder');
             },
             description: function() {
-                return __('modal-swarm-details-form-shortintro-placeholder');
+                return TAPi18n.__('modal-swarm-details-form-shortintro-placeholder');
             },
             introduction: function() {
-                return __('modal-swarm-details-form-organization-placeholder');
+                return TAPi18n.__('modal-swarm-details-form-organization-placeholder');
             }
         };
     }
@@ -140,11 +140,11 @@ AutoForm.addHooks('swarmEditForm', {
             template.submitting.set(false);
 
             if (err && err.message) {
-                Partup.client.notify.error(__(err.reason));
+                Partup.client.notify.error(TAPi18n.__(err.reason));
                 return;
             }
 
-            Partup.client.notify.success(__('modal-swarm-details-form-saved'));
+            Partup.client.notify.success(TAPi18n.__('modal-swarm-details-form-saved'));
             self.done();
         });
 

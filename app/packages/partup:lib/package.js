@@ -15,7 +15,6 @@ Package.onUse(function(api) {
         'aldeed:autoform',
         'chrismbeckett:toastr',
         'momentjs:moment',
-        'tap:i18n',
         'matb33:collection-hooks',
         'partup:client-copy-to-clipboard',
         'lifely:mout',

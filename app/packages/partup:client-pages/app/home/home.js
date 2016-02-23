@@ -154,7 +154,7 @@ Template.app_home.helpers({
         else if (hour < 24) daypart = 'evening';
         else daypart = 'fallback';
 
-        return __('pages-app-home-loggedin-greeting-' + daypart);
+        return TAPi18n.__('pages-app-home-loggedin-greeting-' + daypart);
     },
     firstName: function() {
         return User(Meteor.user()).getFirstname();

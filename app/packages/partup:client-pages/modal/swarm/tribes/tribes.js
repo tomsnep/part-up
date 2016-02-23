@@ -76,7 +76,7 @@ Template.modal_swarm_settings_tribes.helpers({
     translations: function() {
         return {
             networkFieldPlaceholder: function() {
-                return __('modal-swarm-tribes-form-network-placeholder');
+                return TAPi18n.__('modal-swarm-tribes-form-network-placeholder');
             }
         };
     }
@@ -88,10 +88,10 @@ Template.modal_swarm_settings_tribes.events({
         var swarm = Swarms.findOne({slug: template.data.slug});
         Meteor.call('swarms.remove_network', swarm._id, networkId, function(err) {
             if (err) {
-                Partup.client.notify.error(__('base-errors-' + err.reason));
+                Partup.client.notify.error(TAPi18n.__('base-errors-' + err.reason));
                 return;
             }
-            Partup.client.notify.success(__('modal-swarm-tribes-remove-success'));
+            Partup.client.notify.success(TAPi18n.__('modal-swarm-tribes-remove-success'));
         });
     }
 });
@@ -108,10 +108,10 @@ AutoForm.addHooks('addNetworkForm', {
         Meteor.call('swarms.add_network', swarm._id, networkId, function(err) {
             template.state.set('submitting', false);
             if (err) {
-                Partup.client.notify.error(__('base-errors-' + err.reason));
+                Partup.client.notify.error(TAPi18n.__('base-errors-' + err.reason));
                 return;
             }
-            Partup.client.notify.success(__('modal-swarm-tribes-form-success'));
+            Partup.client.notify.success(TAPi18n.__('modal-swarm-tribes-form-success'));
 
             template.networkSelection.set(undefined);
             AutoForm.resetForm(self.formId);
