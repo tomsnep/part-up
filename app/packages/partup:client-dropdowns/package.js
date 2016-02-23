@@ -30,12 +30,18 @@ Package.onUse(function(api) {
         'profile/profile.html',
         'profile/profile.js',
 
-        'partials/updates-actions/updates-actions.html',
-        'partials/updates-actions/updates-actions.js',
-        'partials/activities-actions/activities-actions.html',
-        'partials/activities-actions/activities-actions.js',
-        'partials/network-actions/network-actions.html',
-        'partials/network-actions/network-actions.js',
+        'partials/partup/updates-actions.html',
+        'partials/partup/updates-actions.js',
+        'partials/partup/activities-actions.html',
+        'partials/partup/activities-actions.js',
+
+        'partials/network/network-actions.html',
+        'partials/network/network-actions.js',
+
+        'partials/profile/upper-actions.html',
+        'partials/profile/upper-actions.js',
+        'partials/profile/supporter-actions.html',
+        'partials/profile/supporter-actions.js',
 
         'i18n/en.i18n.json',
         'i18n/nl.i18n.json'
