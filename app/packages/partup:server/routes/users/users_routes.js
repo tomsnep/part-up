@@ -27,6 +27,8 @@ Router.route('/users/:id/upperpartups/count', {where: 'server'}).get(function() 
         skip: request.query.skip
     };
 
+    parameters.archived = (request.query.archived) ? JSON.parse(request.query.archived) : false;
+
     var userId = request.user ? request.user._id : null;
 
     var user = Meteor.users.findOne(params.id);
@@ -55,6 +57,8 @@ Router.route('/users/:id/supporterpartups/count', {where: 'server'}).get(functio
         limit: request.query.limit,
         skip: request.query.skip
     };
+
+    parameters.archived = (request.query.archived) ? JSON.parse(request.query.archived) : false;
 
     var userId = request.user ? request.user._id : null;
 
