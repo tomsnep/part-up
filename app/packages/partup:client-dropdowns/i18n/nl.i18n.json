@@ -28,6 +28,16 @@
     "dropdowns-networksactions-option-archived": "Gearchiveerde part-ups",
     "dropdowns-networksactions-option-all": "Alle part-ups",
 
+    "dropdowns-profile-upperactions-label": "Toon:",
+    "dropdowns-profile-upperactions-option-active": "Actieve part-ups",
+    "dropdowns-profile-upperactions-option-archived": "Gearchiveerde part-ups",
+    "dropdowns-profile-upperactions-option-all": "Alle part-ups",
+
+    "dropdowns-profile-supporteractions-label": "Toon:",
+    "dropdowns-profile-supporteractions-option-active": "Actieve part-ups",
+    "dropdowns-profile-supporteractions-option-archived": "Gearchiveerde part-ups",
+    "dropdowns-profile-supporteractions-option-all": "Alle part-ups",
+
     "dropdowns-activitiesactions-label": "Toon:",
     "dropdowns-activitiesactions-option-default": "Alle activiteiten",
     "dropdowns-activitiesactions-option-my-activities": "Mijn activiteiten",
