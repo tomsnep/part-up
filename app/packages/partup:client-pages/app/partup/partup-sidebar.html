@@ -12,7 +12,7 @@
         <h1>{{ partup.name }}</h1>
     </header>
     {{#if partup.archived_at}}<div class="pu-state-message">
-        <h3>This part-up is archived</h3>
+        <h3>{{_ 'pages-app-partup-archive-info' }} <strong>{{ partupDateOnly archived_at }}</strong></h3>
     </div>{{/if}}
 
     <!-- sidebarcontent -->
