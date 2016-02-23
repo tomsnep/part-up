@@ -38,37 +38,6 @@ Meteor.startup(function() {
     Meteor.subscribe('users.loggedin');
 
     /*************************************************************/
-    /* multiple meteor calls at once */
-    /*************************************************************/
-    /* example:
-        Meteor.callEach([{
-            method: 'swarms.exists',
-            parameter: swarmSlug
-        },{
-            method: 'networks.exists',
-            parameter: networkSlug
-        }], function(results) {
-            // do something with results
-        })
-    */
-    Meteor.callEach = function(methods, callBack) {
-        var allResponses = {};
-        var count = 0;
-        var max = methods.length;
-        _.each(methods, function(item, index) {
-            Meteor.call(item.method, item.parameter, function(error, response) {
-                allResponses[item.method] = {
-                    response: response,
-                    error: error
-                };
-
-                count++;
-                if (count === max) callBack(allResponses);
-            });
-        });
-    };
-
-    /*************************************************************/
     /* Language configuration */
     /*************************************************************/
     // sets the language of the user to user setting
