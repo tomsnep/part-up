@@ -661,15 +661,8 @@ Meteor.methods({
      */
     'networks.exists': function(networkSlug) {
         check(networkSlug, String);
-
-        try {
-            var network = Networks.findOneOrFail({slug: networkSlug});
-            console.log(network)
-            if (network) return true;
-            return false;
-        } catch (error) {
-            Log.error(error);
-            throw new Meteor.Error(400, 'network_does_not_exist');
-        }
+        var network = Networks.findOneOrFail({slug: networkSlug});
+        if (network) return true;
+        return false;
     }
 });
