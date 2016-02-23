@@ -437,12 +437,15 @@ Meteor.methods({
     /**
      * Check to see if a swarm with the swarmSlug parameter exists
      *
-     * @param {String} swarmSlug
+     * @param {String} slug
      */
-    'swarms.exists': function(swarmSlug) {
-        check(swarmSlug, String);
-        var swarm = Swarms.findOneOrFail({slug: swarmSlug});
-        if (swarm) return true;
-        return false;
+    'swarms.slug_is_swarm_or_network': function(slug) {
+        check(slug, String);
+        var swarm = Swarms.findOne({slug: slug});
+        var network = Networks.findOne({slug: slug});
+        return {
+            is_swarm: swarm ? true : false,
+            is_network: network ? true : false
+        };
     }
 });
