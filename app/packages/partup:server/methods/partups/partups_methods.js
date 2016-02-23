@@ -473,7 +473,7 @@ Meteor.methods({
         }
 
         try {
-            Partups.update(partup._id, {$set: {archived: true, archived_at: new Date()}});
+            Partups.update(partup._id, {$set: {archived_at: new Date()}});
 
             Event.emit('partups.archived', upper._id, partup);
         } catch (error) {
@@ -498,7 +498,7 @@ Meteor.methods({
         }
 
         try {
-            Partups.update(partup._id, {$set: {archived: false}});
+            Partups.update(partup._id, {$unset: {archived_at: ''}});
 
             Event.emit('partups.unarchived', upper._id, partup);
         } catch (error) {
