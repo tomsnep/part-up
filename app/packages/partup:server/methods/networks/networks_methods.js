@@ -652,17 +652,5 @@ Meteor.methods({
             Log.error(error);
             throw new Meteor.Error(400, 'network_access_token_could_not_be_converted_to_invite');
         }
-    },
-
-    /**
-     * Check to see if a network with the networkSlug parameter exists
-     *
-     * @param {String} networkSlug
-     */
-    'networks.exists': function(networkSlug) {
-        check(networkSlug, String);
-        var network = Networks.findOneOrFail({slug: networkSlug});
-        if (network) return true;
-        return false;
     }
 });
