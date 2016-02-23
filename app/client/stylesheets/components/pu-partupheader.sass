@@ -38,16 +38,17 @@
         height: 220px
 
 
-        // > .pu-sub-picture
-        //     filter: grayscale(100%); // geen IE support
+        > .pu-sub-picture
+            filter: grayscale(100%); // geen IE support
 
-        &:after
-            content: ''
-            display: block
-            position: absolute;
-            top: 0
-            left: 0
-            bottom: 0
-            right: 0
-            background-color: rgba(#000, .5)
-            z-index: 1;
+        // fallback for IE?
+        // &:after
+        //     content: ''
+        //     display: block
+        //     position: absolute;
+        //     top: 0
+        //     left: 0
+        //     bottom: 0
+        //     right: 0
+        //     background-color: rgba(#000, .5)
+        //     z-index: 1;
