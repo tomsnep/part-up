@@ -684,36 +684,30 @@ Router.route('/:slug', {
         var self = this;
         var slug = this.params.slug;
 
-        // use the custom callEach to do mulitple meteor calls
-        // this checks if the swarm and network exists
-        Meteor.callEach([{
-                method: 'swarms.exists',
-                parameter: slug
-            },{
-                method: 'networks.exists',
-                parameter: slug
-            }], function(results) {
-                // if the swarm exists, render the page
-                if (results['swarms.exists'].response) {
-                    self.render();
+        // this checks if the slug is a swarm or network and handles it accordingly
+        Meteor.call('swarms.slug_is_swarm_or_network', slug, function(error, result) {
+            var result = result || {};
+            // if something goes wrong, just continue rendering
+            if (error) self.render();
 
-                // if the swarm does not exist, check if there is a network with the slug
-                } else if (results['networks.exists'].response) {
-                    self.redirect('network-detail', {
-                        slug: self.params.slug
-                    }, {
-                        query: self.params.query
-                    });
+            // render the page if it's a swarm
+            if (result.is_swarm) {
+                self.render();
 
-                // if both the swarm and network do not exist just continue
-                // to render the swarm page as usual, the swarm page will handle a "not found" exception
-                } else {
-                    self.render();
+            // redirect to the network detail if it isn't a swarm but is a network
+            } else if (result.is_network) {
+                self.redirect('network-detail', {
+                    slug: self.params.slug
+                }, {
+                    query: self.params.query
+                });
 
-                }
-
+            // if it is neither a swarm or network, continue rendering the swarm page
+            // the page will handle a "not found" exception by itself
+            } else {
+                self.render();
             }
-        );
+        });
 
         // this prevents anything from happening
         // before the meteor call is completed
