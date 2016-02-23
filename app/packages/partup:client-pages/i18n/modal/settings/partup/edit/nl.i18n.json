@@ -6,12 +6,15 @@
     "pages-modal-partup_settings-delete": "Ik wil deze part-up graag verwijderen",
 
     "pages-modal-partup_settings-remove-confirmation-title": "Weet je het zeker?",
-    "pages-modal-partup_settings-remove-confirmation-message": "Je kunt het verwijderen van een Part-up niet ongedaan maken.",
+    "pages-modal-partup_settings-remove-confirmation-message": "Je kunt het verwijderen van een part-up niet ongedaan maken.",
     "pages-modal-partup_settings-remove-confirmation-confirm-button": "Ja, verwijder",
     "pages-modal-partup_settings-remove-confirmation-cancel-button": "Annuleren",
 
     "pages-modal-partup_settings-remove-confirmation-title": "Weet je het zeker?",
-    "pages-modal-partup_settings-remove-confirmation-message": "Het archiveren van een Part-up zal hem inactief maken",
+    "pages-modal-partup_settings-remove-confirmation-message": "Het archiveren van een part-up zal hem inactief maken",
     "pages-modal-partup_settings-remove-confirmation-confirm-button": "Ja, archiveer",
-    "pages-modal-partup_settings-remove-confirmation-cancel-button": "Annuleren"
+    "pages-modal-partup_settings-remove-confirmation-cancel-button": "Annuleren",
+
+    "pages-modal-partup_settings-archive": "Archiveer part-up",
+    "pages-modal-partup_settings-unarchive": "Activeer part-up"
 }

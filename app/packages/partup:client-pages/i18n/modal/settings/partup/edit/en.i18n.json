@@ -6,12 +6,15 @@
     "pages-modal-partup_settings-delete": "I want to delete this part-up",
 
     "pages-modal-partup_settings-remove-confirmation-title": "Are you sure?",
-    "pages-modal-partup_settings-remove-confirmation-message": "Deleting a Part-up cannot be undone.",
+    "pages-modal-partup_settings-remove-confirmation-message": "Deleting a part-up cannot be undone.",
     "pages-modal-partup_settings-remove-confirmation-confirm-button": "Yes, delete",
     "pages-modal-partup_settings-remove-confirmation-cancel-button": "Cancel",
 
     "pages-modal-partup_settings-archive-confirmation-title": "Are you sure?",
-    "pages-modal-partup_settings-archive-confirmation-message": "Archiving a Part-up will make it in-active, but you can still use it.",
+    "pages-modal-partup_settings-archive-confirmation-message": "Archiving a part-up will make it in-active, but you can still use it.",
     "pages-modal-partup_settings-archive-confirmation-confirm-button": "Yes, archive",
-    "pages-modal-partup_settings-archive-confirmation-cancel-button": "Cancel"
+    "pages-modal-partup_settings-archive-confirmation-cancel-button": "Cancel",
+
+    "pages-modal-partup_settings-archive": "Archive part-up",
+    "pages-modal-partup_settings-unarchive": "Unarchive part-up"
 }
