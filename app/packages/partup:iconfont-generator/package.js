@@ -1,8 +1,8 @@
 Package.describe({
-    summary: 'Generate an icon font from SVG files',
+    summary: 'Generate an icon font from SVG files. This is not a part-up original package, we just packaged it to include in our iconfont-process',
     version: '0.1.8',
     git:     'https://github.com/andrefgneves/meteor-iconfont.git',
-    name:    'andrefgneves:iconfont-refactored'
+    name:    'partup:iconfont-generator'
 });
 
 Package.registerBuildPlugin({

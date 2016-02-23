@@ -76,18 +76,18 @@ generateCacheChecksum = (options) ->
 generateFonts = (compileStep, options) ->
     # Always generate the SVG font as it is required to generate the TTF,
     # which in turn is used to generate the EOT and WOFF
-    generateSVGFont compileStep, options.files, options, (svgFontPath) ->
+    generateSVGFont options.files, options, (svgFontPath) ->
         if _.intersection(options.types, ['ttf', 'eot', 'woff']).length
-            generateTTFFont compileStep, svgFontPath, options, (ttfFontPath) ->
+            generateTTFFont svgFontPath, options, (ttfFontPath) ->
                 if _.contains options.types, 'eot'
-                    generateEOTFont compileStep, ttfFontPath, options
+                    generateEOTFont ttfFontPath, options
 
                 if _.contains options.types, 'woff'
-                    generateWoffFont compileStep, ttfFontPath, options
+                    generateWoffFont ttfFontPath, options
 
         generateStylesheets compileStep, options
 
-generateSVGFont = (compileStep, files, options, done) ->
+generateSVGFont = (files, options, done) ->
     codepoint = 0xE001
 
     options.glyphs = _.compact _.map(files, (file) ->
@@ -114,13 +114,16 @@ generateSVGFont = (compileStep, files, options, done) ->
         .pipe tempStream
         .on 'finish', ->
             if _.contains(options.types, 'svg')
-                compileStep.addAsset({ path: path.join(options.dest, options.fontName + '.svg'), data: fs.readFileSync(tempStream.path) });
+                svgDestPath = path.join process.cwd(), options.dest, options.fontName + '.svg'
+
+                fs.createFileSync svgDestPath
+                fs.writeFileSync svgDestPath, fs.readFileSync(tempStream.path)
 
                 options.fontFaceURLS.svg = path.join options.fontFaceBaseURL, options.fontName + '.svg'
 
             done tempStream.path if _.isFunction done
 
-generateTTFFont = (compileStep, svgFontPath, options, done) ->
+generateTTFFont = (svgFontPath, options, done) ->
     font     = svg2ttf fs.readFileSync(svgFontPath, encoding: 'utf8'), {}
     font     = new Buffer font.buffer
     tempFile = temp.openSync(options.fontName + '-ttf')
@@ -128,33 +131,42 @@ generateTTFFont = (compileStep, svgFontPath, options, done) ->
     fs.writeFileSync tempFile.path, font
 
     if _.contains options.types, 'ttf'
-        compileStep.addAsset({ path: path.join(options.dest, options.fontName + '.ttf'), data: font });
+        ttfDestPath = path.join process.cwd(), options.dest, options.fontName + '.ttf'
+
+        fs.createFileSync ttfDestPath
+        fs.writeFileSync ttfDestPath, font
 
         options.fontFaceURLS.ttf = path.join options.fontFaceBaseURL, options.fontName + '.ttf'
 
     done tempFile.path if _.isFunction (done)
 
-generateEOTFont = (compileStep, ttfFontPath, options, done) ->
+generateEOTFont = (ttfFontPath, options, done) ->
     ttf      = new Uint8Array fs.readFileSync(ttfFontPath)
     font     = new Buffer ttf2eot(ttf).buffer
     tempFile = temp.openSync options.fontName + '-eot'
 
     fs.writeFileSync tempFile.path, font
 
-    compileStep.addAsset({ path: path.join(options.dest, options.fontName + '.eot'), data: font });
+    eotDestPath = path.join process.cwd(), options.dest, options.fontName + '.eot'
+
+    fs.createFileSync eotDestPath
+    fs.writeFileSync eotDestPath, font
 
     options.fontFaceURLS.eot = path.join options.fontFaceBaseURL, options.fontName + '.eot'
 
     done tempFile.path if _.isFunction done
 
-generateWoffFont = (compileStep, ttfFontPath, options, done) ->
+generateWoffFont = (ttfFontPath, options, done) ->
     ttf      = new Uint8Array fs.readFileSync(ttfFontPath)
     font     = new Buffer ttf2woff(ttf).buffer
     tempFile = temp.openSync options.fontName + '-woff'
 
     fs.writeFileSync tempFile.path, font
 
-    compileStep.addAsset({ path: path.join(options.dest, options.fontName + '.woff'), data: font });
+    eotDestPath = path.join process.cwd(), options.dest, options.fontName + '.woff'
+
+    fs.createFileSync eotDestPath
+    fs.writeFileSync eotDestPath, font
 
     options.fontFaceURLS.woff = path.join options.fontFaceBaseURL, options.fontName + '.woff'
 
