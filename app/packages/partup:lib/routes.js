@@ -691,6 +691,7 @@ Router.route('/:slug', {
             if (error) self.render();
 
             // render the page if it's a swarm
+            // swarm always has priority over a network
             if (result.is_swarm) {
                 self.render();
 
