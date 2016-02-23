@@ -557,6 +557,9 @@ Partups.findForDiscover = function(userId, options, parameters) {
         selector['language'] = language;
     }
 
+    // Filter archived partups
+    selector['archived_at'] = {$exists: false};
+
     // Filter the partups that are in a given location
     if (locationId) {
         selector['location.place_id'] = locationId;
