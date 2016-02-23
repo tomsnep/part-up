@@ -26,10 +26,17 @@
                                     <span>{{_ 'pages-modal-partup_settings-save'}}</span>
                                     {{> Spinner color='inverted' type='small' }}
                                 </button>
-                                <button type="" class="pu-button pu-button-grey">
-                                    <i class="picon-archive picon-large"></i>
-                                    <span>Archive part-up</span>
-                                </button>
+                                {{#unless partup.archived_at}}
+                                    <button type="" class="pu-button pu-button-gray" data-archive>
+                                        <i class="picon-archive picon-large"></i>
+                                        <span>Archive part-up</span>
+                                    </button>
+                                {{else}}
+                                    <button type="" class="pu-button pu-button-gray" data-unarchive>
+                                        <i class="picon-unarchive picon-large"></i>
+                                        <span>Unarchive part-up</span>
+                                    </button>
+                                {{/unless}}
                             </div>
                         </footer>
 

@@ -36,10 +36,10 @@ Template.modal_partup_settings.events({
     'click [data-remove]': function(event, template) {
         event.preventDefault();
         Partup.client.prompt.confirm({
-            title: __('pages-modal-partup_settings-confirmation-title'),
-            message: __('pages-modal-partup_settings-confirmation-message'),
-            confirmButton: __('pages-modal-partup_settings-confirmation-confirm-button'),
-            cancelButton: __('pages-modal-partup_settings-confirmation-cancel-button'),
+            title: __('pages-modal-partup_settings-remove-confirmation-title'),
+            message: __('pages-modal-partup_settings-remove-confirmation-message'),
+            confirmButton: __('pages-modal-partup_settings-remove-confirmation-confirm-button'),
+            cancelButton: __('pages-modal-partup_settings-remove-confirmation-cancel-button'),
             onConfirm: function() {
                 Meteor.call('partups.remove', template.data.partupId, function(error) {
                     if (error) {
@@ -51,6 +51,50 @@ Template.modal_partup_settings.events({
             }
         });
     },
+    'click [data-archive]': function(event, template) {
+        event.preventDefault();
+        var partup = Partups.findOne(template.data.partupId);
+        Partup.client.prompt.confirm({
+            title: __('pages-modal-partup_settings-archive-confirmation-title'),
+            message: __('pages-modal-partup_settings-archive-confirmation-message'),
+            confirmButton: __('pages-modal-partup_settings-archive-confirmation-confirm-button'),
+            cancelButton: __('pages-modal-partup_settings-archive-confirmation-cancel-button'),
+            onConfirm: function() {
+                Meteor.call('partups.archive', template.data.partupId, function(error) {
+                    if (error) {
+                        Partup.client.notify.error(error.reason);
+                    } else {
+                        Intent.return('partup-settings', {
+                            fallback_route: {
+                                name: 'partup',
+                                params: {
+                                    slug: partup.slug
+                                }
+                            }
+                        });
+                    }
+                });
+            }
+        });
+    },
+    'click [data-unarchive]': function(event, template) {
+        event.preventDefault();
+        var partup = Partups.findOne(template.data.partupId);
+        Meteor.call('partups.unarchive', template.data.partupId, function(error) {
+            if (error) {
+                Partup.client.notify.error(error.reason);
+            } else {
+                Intent.return('partup-settings', {
+                    fallback_route: {
+                        name: 'partup',
+                        params: {
+                            slug: partup.slug
+                        }
+                    }
+                });
+            }
+        });
+    }
 });
 
 var updatePartup = function(partupId, insertDoc, callback) {
