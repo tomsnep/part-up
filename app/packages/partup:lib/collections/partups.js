@@ -650,6 +650,8 @@ Partups.findUpperPartupsForUser = function(user, parameters, loggedInUserId) {
         selector.network_id = parameters.network_id;
     }
 
+    selector.archived_at = {$exists: parameters.archived};
+
     return this.guardedFind(loggedInUserId, selector, options);
 };
 
@@ -685,6 +687,8 @@ Partups.findSupporterPartupsForUser = function(user, parameters, loggedInUserId)
     if (parameters.network_id) {
         selector.network_id = parameters.network_id;
     }
+
+    selector.archived_at = {$exists: parameters.archived};
 
     return this.guardedFind(loggedInUserId, selector, options);
 };
