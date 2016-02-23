@@ -432,5 +432,20 @@ Meteor.methods({
             Log.error(error);
             throw new Meteor.Error(400, 'related_networks_could_not_be_given');
         }
+    },
+
+    /**
+     * Check to see if a swarm with the swarmSlug parameter exists
+     *
+     * @param {String} slug
+     */
+    'swarms.slug_is_swarm_or_network': function(slug) {
+        check(slug, String);
+        var swarm = Swarms.findOne({slug: slug});
+        var network = Networks.findOne({slug: slug});
+        return {
+            is_swarm: swarm ? true : false,
+            is_network: network ? true : false
+        };
     }
 });

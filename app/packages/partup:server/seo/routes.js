@@ -123,7 +123,7 @@ SeoRouter.route('/profile/:id', function(params, request, response) {
 /**
  * SEO Route for the Network detail page
  */
-SeoRouter.route('/:slug', function(params, request, response) {
+SeoRouter.route('/tribes/:slug', function(params, request, response) {
     var slug = params.slug;
     var network = Networks.findOne({slug: slug});
 
@@ -138,7 +138,7 @@ SeoRouter.route('/:slug', function(params, request, response) {
 
     Template.seo_network.helpers({
         getNetworkUrl: function() {
-            return Meteor.absoluteUrl() + network.slug;
+            return Meteor.absoluteUrl() + 'tribes/' + network.slug;
         },
         getImageUrl: function() {
             if (!image) return Meteor.absoluteUrl() + 'images/partup-logo.png';
@@ -156,7 +156,7 @@ SeoRouter.route('/:slug', function(params, request, response) {
 /**
  * SEO Route for the Swarm page
  */
-SeoRouter.route('/swarm/:slug', function(params, request, response) {
+SeoRouter.route('/:slug', function(params, request, response) {
     var slug = params.slug;
     var swarm = Swarms.findOne({slug: slug});
 
@@ -171,7 +171,7 @@ SeoRouter.route('/swarm/:slug', function(params, request, response) {
 
     Template.seo_swarm.helpers({
         getSwarmUrl: function() {
-            return Meteor.absoluteUrl() + 'swarm/' + swarm.slug;
+            return Meteor.absoluteUrl() + swarm.slug;
         },
         getImageUrl: function() {
             if (!image) return Meteor.absoluteUrl() + 'images/partup-logo.png';
