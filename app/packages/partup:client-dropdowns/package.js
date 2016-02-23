@@ -34,6 +34,8 @@ Package.onUse(function(api) {
         'partials/updates-actions/updates-actions.js',
         'partials/activities-actions/activities-actions.html',
         'partials/activities-actions/activities-actions.js',
+        'partials/network-actions/network-actions.html',
+        'partials/network-actions/network-actions.js',
 
         'i18n/en.i18n.json',
         'i18n/nl.i18n.json'

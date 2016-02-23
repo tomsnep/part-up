@@ -23,6 +23,11 @@
     "dropdowns-updatesactions-option-contributions": "Just contribution updates",
     "dropdowns-updatesactions-option-my-updates": "My updates",
 
+    "dropdowns-networksactions-label": "Show:",
+    "dropdowns-networksactions-option-active": "Active part-ups",
+    "dropdowns-networksactions-option-archived": "Archived part-ups",
+    "dropdowns-networksactions-option-all": "All part-ups",
+
     "dropdowns-activitiesactions-label": "Show:",
     "dropdowns-activitiesactions-option-default": "All activities",
     "dropdowns-activitiesactions-option-my-activities": "My activities",
