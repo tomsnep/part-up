@@ -194,8 +194,10 @@ Template.app_network_partups.helpers({
             partupsLoading: function(selection) {
                 return __('pages-app-network-partups-' + selection + '-loading');
             },
-            partupsCount: function(selection) {
-                return __('pages-app-network-partups-' + selection + '-count');
+            partupsCount: function(selection, count) {
+                return __('pages-app-network-partups-' + selection + '-count', {
+                    count: count
+                });
             },
             partupsNone: function(selection) {
                 return __('pages-app-network-partups-' + selection + '-none');
