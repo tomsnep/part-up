@@ -108,7 +108,7 @@ Template.PartupTile.onRendered(function() {
     }
 
     // Focuspoint in discover image
-    if (template.data.partup.image) {
+    if (template.data.partup.image && !template.data.partup.archived_at) {
         var image = template.data.partup.imageObject || Images.findOne({_id: template.data.partup.image});
 
         if (image && image.focuspoint) {
