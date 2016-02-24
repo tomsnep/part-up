@@ -652,7 +652,7 @@ Partups.findUpperPartupsForUser = function(user, parameters, loggedInUserId) {
     } else {
         options.limit = parseInt(parameters.limit);
         options.skip = parseInt(parameters.skip);
-        options.sort = parameters.sort || {updated_at: -1};
+        options.sort = parameters.sort || {popularity: -1};
     }
 
     if (parameters.network_id) {
@@ -690,7 +690,7 @@ Partups.findSupporterPartupsForUser = function(user, parameters, loggedInUserId)
     } else {
         options.skip = parseInt(parameters.skip);
         options.limit = parseInt(parameters.limit);
-        options.sort = parameters.sort || {updated_at: -1};
+        options.sort = parameters.sort || {popularity: -1};
     }
 
     if (parameters.network_id) {
