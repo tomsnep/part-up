@@ -51,6 +51,8 @@ Package.onUse(function(api) {
         'notifications/notification/types/partup/update-comment.html',
         'notifications/notification/types/partup/upper-invite.html',
         'notifications/notification/types/partup/user-mention.html',
+        'notifications/notification/types/partup/archived.html',
+        'notifications/notification/types/partup/unarchived.html',
 
         'profile/profile.html',
         'profile/profile.js',
