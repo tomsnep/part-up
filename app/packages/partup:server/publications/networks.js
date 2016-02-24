@@ -70,7 +70,7 @@ Meteor.publishComposite('networks.one.partups', function(urlParams, parameters) 
     if (this.unblock) this.unblock();
 
     check(urlParams, {
-        slug: Match.Optional(String),
+        slug: Match.Optional(String)
     });
 
     parameters = parameters || {};
@@ -81,18 +81,23 @@ Meteor.publishComposite('networks.one.partups', function(urlParams, parameters) 
         limit: Match.Optional(Number),
         skip: Match.Optional(Number),
         userId: Match.Optional(String),
+        archived: Match.Optional(String)
     });
 
     var options = {};
     if (parameters.limit) options.limit = parameters.limit;
     if (parameters.skip) options.skip = parameters.skip;
 
+    var selector = {
+        archived: (parameters.archived) ? JSON.parse(parameters.archived) : false
+    };
+
     return {
         find: function() {
             var network = Networks.guardedFind(this.userId, {slug: urlParams.slug}).fetch().pop();
             if (!network) return;
 
-            return Partups.findForNetwork(network, {}, options, this.userId);
+            return Partups.findForNetwork(network, selector, options, this.userId);
         },
         children: [
             {find: Images.findForPartup},
