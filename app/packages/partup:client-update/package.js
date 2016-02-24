@@ -35,6 +35,8 @@ Package.onUse(function(api) {
         'types/tags-added.html',
         'types/tags-changed.html',
         'types/tags-removed.html',
+        'types/archived.html',
+        'types/unarchived.html',
 
         'i18n/common.en.i18n.json',
         'i18n/common.nl.i18n.json',
