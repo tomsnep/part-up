@@ -612,8 +612,10 @@ Partups.findForUpdate = function(userId, update) {
 Partups.findForNetwork = function(network, selector, options, loggedInUserId) {
     selector = selector || {};
     options = options || {};
+    options.sort = options.sort || {};
 
     selector.network_id = network._id;
+    options.sort['popularity'] = -1;
 
     return this.guardedFind(loggedInUserId, selector, options);
 };
