@@ -27,7 +27,7 @@ AutoForm.hooks({
                     return;
                 }
 
-                Partup.client.notify.success(__('modal-profilesettings-button-save_success'));
+                Partup.client.notify.success(TAPi18n.__('modal-profilesettings-button-save_success'));
                 self.done();
 
                 analytics.track('User details updated', {

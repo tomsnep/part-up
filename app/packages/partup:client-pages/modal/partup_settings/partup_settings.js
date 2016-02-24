@@ -36,10 +36,10 @@ Template.modal_partup_settings.events({
     'click [data-remove]': function(event, template) {
         event.preventDefault();
         Partup.client.prompt.confirm({
-            title: __('pages-modal-partup_settings-confirmation-title'),
-            message: __('pages-modal-partup_settings-confirmation-message'),
-            confirmButton: __('pages-modal-partup_settings-confirmation-confirm-button'),
-            cancelButton: __('pages-modal-partup_settings-confirmation-cancel-button'),
+            title: TAPi18n.__('pages-modal-partup_settings-confirmation-title'),
+            message: TAPi18n.__('pages-modal-partup_settings-confirmation-message'),
+            confirmButton: TAPi18n.__('pages-modal-partup_settings-confirmation-confirm-button'),
+            cancelButton: TAPi18n.__('pages-modal-partup_settings-confirmation-cancel-button'),
             onConfirm: function() {
                 Meteor.call('partups.remove', template.data.partupId, function(error) {
                     if (error) {

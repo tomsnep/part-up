@@ -49,7 +49,7 @@ Template.Comments.onCreated(function() {
 
                 Meteor.call('updates.comments.remove', updateId, commentId, function(error, result) {
                     if (error) {
-                        return Partup.client.notify.error(__('error-method-' + error.reason));
+                        return Partup.client.notify.error(TAPi18n.__('error-method-' + error.reason));
                     }
                     Partup.client.notify.success('Comment removed');
                 });
@@ -183,7 +183,7 @@ Template.Comments.helpers({
     // placeholders namespace
     placeholders: {
         comment: function() {
-            return __('widgetcommentfield-comment-placeholder');
+            return TAPi18n.__('widgetcommentfield-comment-placeholder');
         }
     },
     updateCommentId: function() {
@@ -194,7 +194,7 @@ Template.Comments.helpers({
         return Partup.helpers.mentions.decode(Partup.client.sanitize(this.content));
     },
     systemMessage: function(content) {
-        return __('comment-field-content-' + content);
+        return TAPi18n.__('comment-field-content-' + content);
     },
     isSystemMessage: function() {
         return this.type === 'system' || this.system;
@@ -356,10 +356,10 @@ AutoForm.addHooks(null, {
 
             Meteor.call('updates.comments.update', updateId, commentId, insertDoc, function(error, result) {
                 if (error) {
-                    return Partup.client.notify.error(__('error-method-' + error.reason));
+                    return Partup.client.notify.error(TAPi18n.__('error-method-' + error.reason));
                 }
                 if (result && result.warning) {
-                    Partup.client.notify.warning(__('warning-' + result.warning));
+                    Partup.client.notify.warning(TAPi18n.__('warning-' + result.warning));
                 }
                 // reset states
                 template.updateMessageRows.set(1);
@@ -393,10 +393,10 @@ AutoForm.addHooks(null, {
             Meteor.call('updates.comments.insert', updateId, insertDoc, function(error, result) {
                 template.submittingForm.set(false);
                 if (error) {
-                    return Partup.client.notify.error(__('error-method-' + error.reason));
+                    return Partup.client.notify.error(TAPi18n.__('error-method-' + error.reason));
                 }
                 if (result.warning) {
-                    Partup.client.notify.warning(__('warning-' + result.warning));
+                    Partup.client.notify.warning(TAPi18n.__('warning-' + result.warning));
                 }
 
                 template.messageRows.set(1);

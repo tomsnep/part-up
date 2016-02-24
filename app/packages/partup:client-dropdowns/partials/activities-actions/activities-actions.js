@@ -28,7 +28,7 @@ Template.PartialDropdownActivitiesActions.helpers({
         return Template.instance().dropdownOpen.get();
     },
     selectedAction: function() {
-        return __('dropdowns-activitiesactions-option-' + Template.instance().selectedOption.get());
+        return TAPi18n.__('dropdowns-activitiesactions-option-' + Template.instance().selectedOption.get());
     },
     notSelected: function(a) {
         return a !== 'dropdowns-activitiesactions-option-' + Template.instance().selectedOption.get();

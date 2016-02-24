@@ -5,7 +5,7 @@
         </a>
     {{ else }}
         {{# Autocomplete onSelect=onInterceptedSelect onQuery=onInterceptedQuery }}
-            <input type="text" placeholder="{{ placeholder }}" class="pu-input" data-queryinput="{{ id }}">
+            <input type="text" placeholder="{{ placeholder }}" class="pu-input" data-queryinput="{{ id }}" {{ selectorAttribute }}>
         {{/ Autocomplete }}
     {{/ if }}
 

@@ -64,6 +64,7 @@ partup:client-admin
 partup:client-admin-createtribe
 partup:client-admin-featured-networks
 partup:client-admin-featured-partups
+partup:client-admin-createswarm
 partup:client-autocomplete
 partup:client-comments
 partup:client-contribution
@@ -114,3 +115,4 @@ ejson
 spacebars
 check
 meteorhacks:kadira-profiler
+partup:client-network-tile

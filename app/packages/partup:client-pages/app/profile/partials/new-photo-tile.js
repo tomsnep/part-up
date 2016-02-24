@@ -1,6 +1,6 @@
 var placeholders = {
     'description': function() {
-        return __('pages-app-profile-description-placeholder');
+        return TAPi18n.__('pages-app-profile-description-placeholder');
     }
 };
 Template.NewPhotoTile.onCreated(function() {
@@ -29,7 +29,7 @@ Template.NewPhotoTile.helpers({
 
                     Partup.client.uploader.uploadImage(file, function(error, image) {
                         if (error) {
-                            Partup.client.notify.error(__('profilesettings-form-image-error'));
+                            Partup.client.notify.error(TAPi18n.__('profilesettings-form-image-error'));
                             template.uploadingPhoto.set(false);
                             return;
                         }

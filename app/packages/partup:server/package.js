@@ -75,6 +75,7 @@ Package.onUse(function(api) {
         'private/templates/seo/partup.html',
         'private/templates/seo/profile.html',
         'private/templates/seo/network.html',
+        'private/templates/seo/swarm.html',
         'private/templates/seo/home.html'
     ], ['server'], {isAsset: true});
 
@@ -107,6 +108,7 @@ Package.onUse(function(api) {
         'services/meurs_service.js',
         'services/profile_completeness_service.js',
         'services/partup_popularity_calculator_service.js',
+        'services/swarms_service.js',
         'seo/routes.js',
         'event_handlers/any_handler.js',
         'event_handlers/partups/partups_handler.js',
@@ -132,6 +134,7 @@ Package.onUse(function(api) {
         'event_handlers/invites/activities_invites_handler.js',
         'event_handlers/invites/networks_invites_handler.js',
         'event_handlers/notifications/notifications_handler.js',
+        'event_handlers/swarms/swarms_handler.js',
         'fixtures/users.js',
         'fixtures/partups.js',
         'fixtures/updates.js',
@@ -152,6 +155,7 @@ Package.onUse(function(api) {
         'publications/languages.js',
         'publications/tiles.js',
         'publications/notifications.js',
+        'publications/swarms.js',
         'routes/hooks.js',
         'routes/middleware.js',
         'routes/csv/csv_routes.js',
@@ -179,6 +183,7 @@ Package.onUse(function(api) {
         'methods/notifications/notifications_methods.js',
         'methods/uploads/uploads_methods.js',
         'methods/tiles/tiles_methods.js',
+        'methods/swarms/swarms_methods.js',
         'cron/reset_clicks_per_hour.js',
         'cron/calculate_partup_participation_score_for_users.js',
         'cron/calculate_partup_progress_score_for_partups.js',
@@ -186,6 +191,8 @@ Package.onUse(function(api) {
         'cron/send_daily_digest_users.js',
         'cron/update_shared_count.js',
         'cron/calculate_partup_popularity_score_for_partups.js',
+        'cron/update_swarm_shared_count.js',
+        'cron/update_swarm_stats.js',
         'migrations.js',
         'package-tap.i18n'
     ], ['server']);

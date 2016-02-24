@@ -27,7 +27,7 @@ AutoForm.hooks({
             Meteor.call('networks.admin_update', template.data.networkSlug.get(), insertDoc, function(error, result) {
                 parent.submitting.set(false);
                 if (error) {
-                    return Partup.client.notify.error(__('base-errors-' + error.reason));
+                    return Partup.client.notify.error(TAPi18n.__('base-errors-' + error.reason));
                 }
                 Partup.client.popup.close();
             });

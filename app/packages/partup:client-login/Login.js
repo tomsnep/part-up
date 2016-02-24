@@ -11,10 +11,10 @@ var isChrome = navigator.userAgent.match('CriOS');
 
 var formPlaceholders = {
     email: function() {
-        return __('login-form-email-placeholder');
+        return TAPi18n.__('login-form-email-placeholder');
     },
     password: function() {
-        return __('login-form-password-placeholder');
+        return TAPi18n.__('login-form-password-placeholder');
     }
 };
 
@@ -83,7 +83,7 @@ Template.Login.events({
             facebookLoading.set(false);
 
             if (error) {
-                Partup.client.notify.error(__('login-error_' + Partup.client.strings.slugify(error.reason)));
+                Partup.client.notify.error(TAPi18n.__('login-error_' + Partup.client.strings.slugify(error.reason)));
                 return;
             }
 
@@ -102,7 +102,7 @@ Template.Login.events({
             linkedinLoading.set(false);
 
             if (error) {
-                Partup.client.notify.error(__('login-error_' + Partup.client.strings.slugify(error.reason)));
+                Partup.client.notify.error(TAPi18n.__('login-error_' + Partup.client.strings.slugify(error.reason)));
                 return false;
             }
 
@@ -168,7 +168,7 @@ AutoForm.hooks({
                             Partup.client.forms.addStickyFieldError(self, 'password', 'passwordIncorrect');
                             break;
                         default:
-                            Partup.client.notify.error(__('login-error_' + Partup.client.strings.slugify(error.reason)));
+                            Partup.client.notify.error(TAPi18n.__('login-error_' + Partup.client.strings.slugify(error.reason)));
                     }
                     AutoForm.validateForm(self.formId);
                     self.done(new Error(error.message));

@@ -8,9 +8,9 @@ Template.modal_create_promote.onRendered(function() {
 
     // Copy to clipboard
     Partup.client.clipboard.applyToElement(elm, elm.value, function onCopySuccess() {
-        Partup.client.notify.success(__('pages-modal-create-promote-notify-copy-to-clipboard-success'));
+        Partup.client.notify.success(TAPi18n.__('pages-modal-create-promote-notify-copy-to-clipboard-success'));
     }, function onCopyError() {
-        Partup.client.notify.error(__('pages-modal-create-promote-notify-copy-to-clipboard-error'));
+        Partup.client.notify.error(TAPi18n.__('pages-modal-create-promote-notify-copy-to-clipboard-error'));
     });
 
     template.autorun(function() {

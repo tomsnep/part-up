@@ -31,7 +31,7 @@ Template.NetworkSettingsBulkinvite.helpers({
         var network = Networks.findOne({slug: this.networkSlug});
 
         return {
-            message: __('network-settings-bulkinvite-message_prefill', {
+            message: TAPi18n.__('network-settings-bulkinvite-message_prefill', {
                 networkName: network.name,
                 networkDescription: network.description,
                 inviterName: Meteor.user().profile.name
@@ -109,9 +109,9 @@ AutoForm.hooks({
 
                     parent.submitting.set(false);
                     if (error) {
-                        return Partup.client.notify.error(__('base-errors-' + error.reason));
+                        return Partup.client.notify.error(TAPi18n.__('base-errors-' + error.reason));
                     }
-                    Partup.client.notify.success(__('network-settings-bulkinvite-success'));
+                    Partup.client.notify.success(TAPi18n.__('network-settings-bulkinvite-success'));
                 });
 
             return false;

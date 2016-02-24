@@ -364,7 +364,7 @@ Networks.guardedMetaFind = function(selector, options) {
     options.fields = {_id: 1};
 
     // The fields that should be available on each network
-    var unguardedFields = ['name', 'description', 'website', 'slug', 'icon', 'image', 'privacy_type', 'pending_uppers', 'invites', 'language', 'tags', 'location'];
+    var unguardedFields = ['_id', 'name', 'description', 'website', 'slug', 'icon', 'image', 'privacy_type', 'pending_uppers', 'invites', 'language', 'tags', 'location', 'stats', 'swarms'];
 
     unguardedFields.forEach(function(unguardedField) {
         options.fields[unguardedField] = 1;
@@ -475,4 +475,17 @@ Networks.findForDiscoverFilter = function(loggedInUserId, options) {
     options.sort.upper_count = -1;
 
     return Networks.guardedFind(loggedInUserId, {}, options);
+};
+
+/**
+ * Find the networks in a swarm
+ *
+ * @memberOf Networks
+ * @param {Swarm} swarm
+ * @param {String} userId
+ * @return {Mongo.Cursor}
+ */
+Networks.findForSwarm = function(swarm, userId) {
+    var networks = swarm.networks || [];
+    return Networks.guardedFind(userId, {_id: {$in: networks}}, {});
 };

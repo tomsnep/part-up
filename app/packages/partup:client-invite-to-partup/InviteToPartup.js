@@ -18,7 +18,7 @@ Template.InviteToPartup.helpers({
         var partup = Partups.findOne(this.partupId);
 
         return {
-            message: __('invite-to-partup-popup-message-prefill', {
+            message: TAPi18n.__('invite-to-partup-popup-message-prefill', {
                 partupName: partup.name,
                 inviterName: Meteor.user().profile.name
             })
@@ -41,9 +41,9 @@ AutoForm.hooks({
                 function(error, result) {
                     parent.submitting.set(false);
                     if (error) {
-                        return Partup.client.notify.error(__('base-errors-' + error.reason));
+                        return Partup.client.notify.error(TAPi18n.__('base-errors-' + error.reason));
                     }
-                    Partup.client.notify.success(__('invite-to-partup-popup-success'));
+                    Partup.client.notify.success(TAPi18n.__('invite-to-partup-popup-success'));
                     Partup.client.popup.close();
                 });
 

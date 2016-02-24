@@ -509,6 +509,17 @@ Router.route('/admin/featured-tribes', {
         'modal_admin_featured_networks':    {to: 'modal_admin'}
     }
 });
+
+Router.route('/admin/swarms', {
+    name: 'admin-createswarm',
+    where: 'client',
+    yieldRegions: {
+        'modal':                 {to: 'main'},
+        'modal_admin':           {to: 'modal'},
+        'modal_create_swarm':    {to: 'modal_admin'}
+    }
+});
+
 /*************************************************************/
 /* Content pages */
 /*************************************************************/
@@ -530,28 +541,10 @@ Router.route('/pricing', {
     }
 });
 
-// Router.route('/faq', {
-//     name: 'faq',
-//     where: 'client',
-//     yieldRegions: {
-//         'app':      {to: 'main'},
-//         'app_home': {to: 'app'}
-//     }
-// });
-
-// Router.route('/contact', {
-//     name: 'contact',
-//     where: 'client',
-//     yieldRegions: {
-//         'app':      {to: 'main'},
-//         'app_home': {to: 'app'}
-//     }
-// });
-
 /*************************************************************/
 /* Networks */
 /*************************************************************/
-Router.route('/:slug', {
+Router.route('/tribes/:slug', {
     name: 'network-detail',
     where: 'client',
     yieldRegions: {
@@ -580,7 +573,7 @@ Router.route('/:slug', {
     }
 });
 
-Router.route('/:slug/uppers', {
+Router.route('/tribes/:slug/uppers', {
     name: 'network-uppers',
     where: 'client',
     yieldRegions: {
@@ -595,7 +588,7 @@ Router.route('/:slug/uppers', {
     }
 });
 
-Router.route('/:slug/invite', {
+Router.route('/tribes/:slug/invite', {
     name: 'network-invite',
     where: 'client',
     yieldRegions: {
@@ -612,7 +605,7 @@ Router.route('/:slug/invite', {
 /*************************************************************/
 /* Network (admin) */
 /*************************************************************/
-Router.route('/:slug/settings', {
+Router.route('/tribes/:slug/settings', {
     name: 'network-settings',
     where: 'client',
     yieldRegions: {
@@ -627,7 +620,7 @@ Router.route('/:slug/settings', {
     }
 });
 
-Router.route('/:slug/settings/uppers', {
+Router.route('/tribes/:slug/settings/uppers', {
     name: 'network-settings-uppers',
     where: 'client',
     yieldRegions: {
@@ -642,7 +635,7 @@ Router.route('/:slug/settings/uppers', {
     }
 });
 
-Router.route('/:slug/settings/bulk-invite', {
+Router.route('/tribes/:slug/settings/bulk-invite', {
     name: 'network-settings-bulkinvite',
     where: 'client',
     yieldRegions: {
@@ -657,7 +650,7 @@ Router.route('/:slug/settings/bulk-invite', {
     }
 });
 
-Router.route('/:slug/settings/requests', {
+Router.route('/tribes/:slug/settings/requests', {
     name: 'network-settings-requests',
     where: 'client',
     yieldRegions: {
@@ -668,6 +661,104 @@ Router.route('/:slug/settings/requests', {
     data: function() {
         return {
             networkSlug: this.params.slug
+        };
+    }
+});
+
+/*************************************************************/
+/* Swarm */
+/*************************************************************/
+
+Router.route('/:slug', {
+    name: 'swarm',
+    where: 'client',
+    yieldRegions: {
+        'swarm':            {to: 'main'}
+    },
+    data: function() {
+        return {
+            slug: this.params.slug
+        };
+    },
+    onBeforeAction: function() {
+        var self = this;
+        var slug = this.params.slug;
+
+        // this checks if the slug is a swarm or network and handles it accordingly
+        Meteor.call('swarms.slug_is_swarm_or_network', slug, function(error, result) {
+            var result = result || {};
+            // if something goes wrong, just continue rendering
+            if (error) self.render();
+
+            // render the page if it's a swarm
+            // swarm always has priority over a network
+            if (result.is_swarm) {
+                self.render();
+
+            // redirect to the network detail if it isn't a swarm but is a network
+            } else if (result.is_network) {
+                self.redirect('network-detail', {
+                    slug: self.params.slug
+                }, {
+                    query: self.params.query
+                });
+
+            // if it is neither a swarm or network, continue rendering the swarm page
+            // the page will handle a "not found" exception by itself
+            } else {
+                self.render();
+            }
+        });
+
+        // this prevents anything from happening
+        // before the meteor call is completed
+        this.stop();
+    }
+});
+
+/*************************************************************/
+/* Swarm (admin) */
+/*************************************************************/
+
+Router.route('/:slug/settings', {
+    name: 'swarm-settings-details',
+    where: 'client',
+    yieldRegions: {
+        'modal':                            {to: 'main'},
+        'modal_swarm_settings':             {to: 'modal'},
+        'modal_swarm_settings_details':  {to: 'modal_swarm_settings'}
+    },
+    data: function() {
+        return {
+            slug: this.params.slug
+        };
+    }
+});
+Router.route('/:slug/tribes', {
+    name: 'swarm-settings-tribes',
+    where: 'client',
+    yieldRegions: {
+        'modal':                            {to: 'main'},
+        'modal_swarm_settings':             {to: 'modal'},
+        'modal_swarm_settings_tribes':  {to: 'modal_swarm_settings'}
+    },
+    data: function() {
+        return {
+            slug: this.params.slug
+        };
+    }
+});
+Router.route('/:slug/quotes', {
+    name: 'swarm-settings-quotes',
+    where: 'client',
+    yieldRegions: {
+        'modal':                            {to: 'main'},
+        'modal_swarm_settings':             {to: 'modal'},
+        'modal_swarm_settings_quotes':      {to: 'modal_swarm_settings'}
+    },
+    data: function() {
+        return {
+            slug: this.params.slug
         };
     }
 });

@@ -70,13 +70,13 @@ Template.app_discover_filter.onCreated(function() {
         {
             value: 'popular',
             label: function() {
-                return __('pages-app-discover-filter-sorting-type-popular');
+                return TAPi18n.__('pages-app-discover-filter-sorting-type-popular');
             }
         },
         {
             value: 'new',
             label: function() {
-                return __('pages-app-discover-filter-sorting-type-newest');
+                return TAPi18n.__('pages-app-discover-filter-sorting-type-newest');
             }
         }
     ];

@@ -65,6 +65,8 @@ Meteor.startup(function() {
             nextLayout = 'modal';
         } else if (yieldRegions && yieldRegions.hasOwnProperty('app')) {
             nextLayout = 'app';
+        } else if (yieldRegions && yieldRegions.hasOwnProperty('swarm')) {
+            nextLayout = 'swarm';
         }
 
         // Check if previous layout and next layout aren't the same
@@ -88,7 +90,7 @@ Meteor.startup(function() {
 
         if (nextLayout === 'modal') {
             Bender.animate('slideOverUp', start, done);
-        } else if (nextLayout === 'app') {
+        } else if ((nextLayout === 'app' || nextLayout === 'swarm') && previousLayout === 'modal') {
             Bender.animate('slideOverUpClose', start, done);
         }
 
