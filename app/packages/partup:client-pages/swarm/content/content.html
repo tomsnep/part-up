@@ -53,7 +53,7 @@
         <!-- uppers -->
         <section class="pu-highlight pu-highlight-subtle">
             <h1>{{_ 'swarm-content-uppers-title' }}</h1>
-            <h3>{{_ 'swarm-content-uppers-subtitle' count=totalNumberOfUppers }}</h3>
+            <h3>{{_ 'swarm-content-uppers-subtitle' count=data.swarm.stats.upper_count }}</h3>
             <ul class="pu-avatar-stack pu-avatar-stack-large">
                 {{#each data.relatedUppers}}<li class="pu-avatar" style="{{#with image}}background-image: url('{{ partupImageUrl id=. store='80x80' }}'){{/with}}" data-hovercontainer="HoverContainer_upper" data-hovercontainer-context="{{ _id }}"></li>{{/each}}
             </ul>
