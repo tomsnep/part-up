@@ -1,34 +1,34 @@
 <template name="app_profile_upper_partups">
     <header class="pu-sub-header">
         <h2 class="pu-title">
-            {{# if countLoading }}
-                {{_ 'pages-app-profile-upper-partups-loading' }}
+            {{# if state.countLoading }}
+                {{ translations.partupsLoading state.selectedFilter }}
                 {{> Spinner type='small' }}
             {{ else }}
-                {{#if count}}
-                    {{_ 'pages-app-profile-upper-partups-prefix' name=firstname }}
+                {{#if data.partupCount}}
+                    {{ translations.partupsPrefix state.selectedFilter data.firstname }}
                     <span class="pu-sub-countlabel">
-                        {{_ 'pages-app-profile-upper-partups-count' count=count }}
+                        {{ translations.partupsCount state.selectedFilter data.partupCount }}
                     </span>
                 {{else}}
-                    {{_ 'pages-app-profile-upper-partups-none' name=firstname }}
+                    {{ translations.partupsNone state.selectedFilter data.firstname }}
                 {{/if}}
             {{/ if }}
         </h2>
 
         <aside class="pu-sub-right">
-            {{> PartialDropdownProfileUpperActions reactiveVar=filterReactiveVar}}
+            {{> PartialDropdownProfileUpperActions reactiveVar=data.filterReactiveVar}}
         </aside>
     </header>
 
     <div data-infinitescroll-container>
-        {{# ColumnTilesLayout instance=columnTilesLayout }}
+        {{# ColumnTilesLayout instance=data.columnTilesLayout }}
             <div class="pu-tile">
                 {{> PartupTile }}
             </div>
         {{/ ColumnTilesLayout }}
 
-        {{# unless endReached }}
+        {{# unless state.endReached }}
             <div class="pu-sub-loading-infinite-scroll">
                 {{> Spinner }}
             </div>
