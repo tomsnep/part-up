@@ -24,6 +24,18 @@ Package.onUse(function(api) {
         'Update.html',
         'Update.js',
 
+        'types/budget-changed.html',
+        'types/description-changed.html',
+        'types/end-date-changed.html',
+        'types/image-changed.html',
+        'types/invited.html',
+        'types/location-changed.html',
+        'types/message-added.html',
+        'types/name-changed.html',
+        'types/tags-added.html',
+        'types/tags-changed.html',
+        'types/tags-removed.html',
+
         'i18n/common.en.i18n.json',
         'i18n/common.nl.i18n.json',
         'i18n/types.en.i18n.json',

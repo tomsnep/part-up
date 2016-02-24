@@ -1,0 +1,10 @@
+<template name="update_partups_tags_changed">
+    {{#with update.data.type_data }}
+        <section>
+            <ul class="pu-list pu-list-horizontal pu-list-tags pu-list-arrows">
+                <li><span class="pu-tag">{{ old_tag }}</span></li>
+                <li><span class="pu-tag">{{ new_tag }}</span></li>
+            </ul>
+        </section>
+    {{/with}}
+</template>
