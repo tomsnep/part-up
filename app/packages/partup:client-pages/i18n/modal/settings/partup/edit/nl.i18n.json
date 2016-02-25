@@ -10,10 +10,10 @@
     "pages-modal-partup_settings-remove-confirmation-confirm-button": "Ja, verwijder",
     "pages-modal-partup_settings-remove-confirmation-cancel-button": "Annuleren",
 
-    "pages-modal-partup_settings-remove-confirmation-title": "Weet je het zeker?",
-    "pages-modal-partup_settings-remove-confirmation-message": "Het archiveren van een part-up zal hem inactief maken",
-    "pages-modal-partup_settings-remove-confirmation-confirm-button": "Ja, archiveer",
-    "pages-modal-partup_settings-remove-confirmation-cancel-button": "Annuleren",
+    "pages-modal-partup_settings-archive-confirmation-title": "Weet je het zeker?",
+    "pages-modal-partup_settings-archive-confirmation-message": "Het archiveren van een part-up zal hem inactief maken",
+    "pages-modal-partup_settings-archive-confirmation-confirm-button": "Ja, archiveer",
+    "pages-modal-partup_settings-archive-confirmation-cancel-button": "Annuleren",
 
     "pages-modal-partup_settings-archive": "Archiveer part-up",
     "pages-modal-partup_settings-unarchive": "Activeer part-up"

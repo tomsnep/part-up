@@ -11,7 +11,7 @@
     "pages-modal-partup_settings-remove-confirmation-cancel-button": "Cancel",
 
     "pages-modal-partup_settings-archive-confirmation-title": "Are you sure?",
-    "pages-modal-partup_settings-archive-confirmation-message": "Archiving a part-up will make it in-active, but you can still use it.",
+    "pages-modal-partup_settings-archive-confirmation-message": "Archiving a part-up will make it inactive, but you can still use it.",
     "pages-modal-partup_settings-archive-confirmation-confirm-button": "Yes, archive",
     "pages-modal-partup_settings-archive-confirmation-cancel-button": "Cancel",
 
