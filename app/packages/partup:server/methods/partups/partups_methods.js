@@ -468,7 +468,7 @@ Meteor.methods({
         var upper = Meteor.user();
         var partup = Partups.findOneOrFail(partupId);
 
-        if (!upper || !partup.hasUpper(upper._id)) {
+        if (!upper || (!User(upper).isAdmin() && !partup.hasUpper(upper._id))) {
             throw new Meteor.Error(401, 'unauthorized');
         }
 
@@ -493,7 +493,7 @@ Meteor.methods({
         var upper = Meteor.user();
         var partup = Partups.findOneOrFail(partupId);
 
-        if (!upper || !partup.hasUpper(upper._id)) {
+        if (!upper || (!User(upper).isAdmin() && !partup.hasUpper(upper._id))) {
             throw new Meteor.Error(401, 'unauthorized');
         }
 
