@@ -18,13 +18,11 @@ Template.Ring.onCreated(function() {
         return {
             inner: {
                 radius: 30,
-                offset: {top: -10},
                 startAngle: lodash.random(0, 360),
                 animate: true
             },
             outer: {
                 radius: 70,
-                offset: {top: -10},
                 startAngle: lodash.random(0, 360),
                 animate: true
             }
@@ -184,11 +182,11 @@ Template.Ring.helpers({
             currentPage: function() {
                 return template.currentPage.get();
             },
-            firstPage: function(index) {
-                return index === 0;
+            firstPage: function() {
+                return template.currentPage.get() === 0;
             },
-            lastPage: function(index) {
-                return (index + 1) === template.totalPages;
+            lastPage: function() {
+                return template.currentPage.get() === (template.totalPages - 1);
             },
             side: function() {
                 return template.currentPage.get() ? 'right' : 'left';

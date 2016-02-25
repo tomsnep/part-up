@@ -1,6 +1,8 @@
 Template.swarm_explorer.onCreated(function() {
-    this.rendered = new ReactiveVar(false);
-    this.pageLimit = 9;
+    var template = this;
+    template.rendered = new ReactiveVar(false);
+    template.readMoreClicked = new ReactiveVar(false);
+    template.pageLimit = 9;
 });
 Template.swarm_explorer.onRendered(function() {
     this.rendered.set(true);
@@ -11,6 +13,9 @@ Template.swarm_explorer.helpers({
         return {
             rendered: function() {
                 return template.rendered.get();
+            },
+            readMoreClicked: function() {
+                return template.readMoreClicked.get();
             }
         };
     },
@@ -100,7 +105,8 @@ Template.swarm_explorer.events({
     'click [data-findout]': function(event, template) {
         event.preventDefault();
         $('html, body').animate({
-            scrollTop: window.innerHeight - 90
+            scrollTop: window.innerHeight - 50
         }, 500);
+        template.readMoreClicked.set(true);
     }
 });
