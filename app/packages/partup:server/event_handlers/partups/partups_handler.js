@@ -91,7 +91,11 @@ Event.on('partups.archived', function(userId, partup) {
 
     var archiver = Meteor.users.findOneOrFail(userId);
 
-    partup.uppers.forEach(function(upperId) {
+    var notify_uppers = partup.uppers || [];
+    var partup_supporters = partup.supporters || [];
+    notify_uppers.push.apply(notify_uppers, partup_supporters);
+
+    notify_uppers.forEach(function(upperId) {
         // Dont send a notification to the archiver of the partup
         if (upperId === userId) return;
 
@@ -127,7 +131,11 @@ Event.on('partups.unarchived', function(userId, partup) {
 
     var unarchiver = Meteor.users.findOneOrFail(userId);
 
-    partup.uppers.forEach(function(upperId) {
+    var notify_uppers = partup.uppers || [];
+    var partup_supporters = partup.supporters || [];
+    notify_uppers.push.apply(notify_uppers, partup_supporters);
+
+    notify_uppers.forEach(function(upperId) {
         // Dont send a notification to the unarchiver of the partup
         if (upperId === userId) return;
 
