@@ -28,7 +28,7 @@ Template.PartialDropdownNetworkActions.helpers({
         return Template.instance().dropdownOpen.get();
     },
     selectedAction: function() {
-        return __('dropdowns-networksactions-option-' + Template.instance().selectedOption.get());
+        return TAPi18n.__('dropdowns-networksactions-option-' + Template.instance().selectedOption.get());
     },
     notSelected: function(a) {
         return a !== 'dropdowns-networksactions-option-' + Template.instance().selectedOption.get();
