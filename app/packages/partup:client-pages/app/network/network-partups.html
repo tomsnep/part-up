@@ -20,11 +20,11 @@
                     <i class="picon-plus"></i>
                     {{_ 'pages-app-network-partups-start_button' }}
                 </a>
+                <aside>
+                    {{> PartialDropdownNetworkActions reactiveVar=data.filterReactiveVar}}
+                </aside>
             </p>
         {{/ if }}
-        <aside class="pu-sub-right">
-            {{> PartialDropdownNetworkActions reactiveVar=data.filterReactiveVar}}
-        </aside>
     </header>
 
     <div data-infinitescroll-container>
