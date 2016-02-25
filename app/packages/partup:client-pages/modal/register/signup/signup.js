@@ -1,18 +1,18 @@
 var placeholders = {
     'name': function() {
-        return __('pages-modal-register-signup-form-name-placeholder');
+        return TAPi18n.__('pages-modal-register-signup-form-name-placeholder');
     },
     'email': function() {
-        return __('pages-modal-register-signup-form-email-placeholder');
+        return TAPi18n.__('pages-modal-register-signup-form-email-placeholder');
     },
     'password': function() {
-        return __('pages-modal-register-signup-form-password-placeholder');
+        return TAPi18n.__('pages-modal-register-signup-form-password-placeholder');
     },
     'confirmPassword': function() {
-        return __('pages-modal-register-signup-form-confirmPassword-placeholder');
+        return TAPi18n.__('pages-modal-register-signup-form-confirmPassword-placeholder');
     },
     'network': function() {
-        return __('pages-modal-register-signup-form-network-placeholder');
+        return TAPi18n.__('pages-modal-register-signup-form-network-placeholder');
     }
 };
 
@@ -72,7 +72,7 @@ Template.modal_register_signup.events({
             facebookLoading.set(false);
 
             if (error) {
-                Partup.client.notify.error(__('pages-modal-register-signup-error_' + Partup.client.strings.slugify(error.reason)));
+                Partup.client.notify.error(TAPi18n.__('pages-modal-register-signup-error_' + Partup.client.strings.slugify(error.reason)));
                 return;
             }
 
@@ -107,7 +107,7 @@ Template.modal_register_signup.events({
             linkedinLoading.set(false);
 
             if (error) {
-                Partup.client.notify.error(__('pages-modal-register-signup-error_' + Partup.client.strings.slugify(error.reason)));
+                Partup.client.notify.error(TAPi18n.__('pages-modal-register-signup-error_' + Partup.client.strings.slugify(error.reason)));
                 return false;
             }
 
@@ -132,7 +132,7 @@ Template.modal_register_signup.events({
 
             Meteor.call('settings.update', {locale: locale}, function(err) {
                 if (err) {
-                    Partup.client.notify.error(__('pages-modal-register-signup-error_' + Partup.client.strings.slugify('failed to update locale')));
+                    Partup.client.notify.error(TAPi18n.__('pages-modal-register-signup-error_' + Partup.client.strings.slugify('failed to update locale')));
                     return false;
                 }
 
@@ -172,7 +172,7 @@ AutoForm.hooks({
                             Partup.client.forms.addStickyFieldError(self, 'email', 'emailExists');
                             break;
                         default:
-                            Partup.client.notify.error(__('pages-modal-register-signup-error_' + Partup.client.strings.slugify(error.reason)));
+                            Partup.client.notify.error(TAPi18n.__('pages-modal-register-signup-error_' + Partup.client.strings.slugify(error.reason)));
                     }
                     AutoForm.validateForm(self.formId);
                     self.done(new Error(error.message));

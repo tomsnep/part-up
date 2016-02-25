@@ -30,7 +30,7 @@ AutoForm.hooks({
                 console.log(result);
                 parent.submitting.set(false);
                 if (error) {
-                    return Partup.client.notify.error(__('base-errors-' + error.reason));
+                    return Partup.client.notify.error(TAPi18n.__('base-errors-' + error.reason));
                 }
                 Partup.client.popup.close();
             });

@@ -197,7 +197,7 @@ MentionsInput.prototype.checkCaretPosition = function() {
         if (!self.suggestions.length) {
             var emptyEl = document.createElement('span');
             emptyEl.classList.add('pu-input-mentions-suggestions-empty');
-            emptyEl.textContent = __('base-client-language-mention-input-empty');
+            emptyEl.textContent = TAPi18n.__('base-client-language-mention-input-empty');
             self.suggestionsEl.appendChild(emptyEl);
             return;
         }

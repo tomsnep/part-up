@@ -36,10 +36,10 @@ Template.modal_partup_settings.events({
     'click [data-remove]': function(event, template) {
         event.preventDefault();
         Partup.client.prompt.confirm({
-            title: __('pages-modal-partup_settings-remove-confirmation-title'),
-            message: __('pages-modal-partup_settings-remove-confirmation-message'),
-            confirmButton: __('pages-modal-partup_settings-remove-confirmation-confirm-button'),
-            cancelButton: __('pages-modal-partup_settings-remove-confirmation-cancel-button'),
+            title: TAPi18n.__('pages-modal-partup_settings-remove-confirmation-title'),
+            message: TAPi18n.__('pages-modal-partup_settings-remove-confirmation-message'),
+            confirmButton: TAPi18n.__('pages-modal-partup_settings-remove-confirmation-confirm-button'),
+            cancelButton: TAPi18n.__('pages-modal-partup_settings-remove-confirmation-cancel-button'),
             onConfirm: function() {
                 Meteor.call('partups.remove', template.data.partupId, function(error) {
                     if (error) {
@@ -55,10 +55,10 @@ Template.modal_partup_settings.events({
         event.preventDefault();
         var partup = Partups.findOne(template.data.partupId);
         Partup.client.prompt.confirm({
-            title: __('pages-modal-partup_settings-archive-confirmation-title'),
-            message: __('pages-modal-partup_settings-archive-confirmation-message'),
-            confirmButton: __('pages-modal-partup_settings-archive-confirmation-confirm-button'),
-            cancelButton: __('pages-modal-partup_settings-archive-confirmation-cancel-button'),
+            title: TAPi18n.__('pages-modal-partup_settings-archive-confirmation-title'),
+            message: TAPi18n.__('pages-modal-partup_settings-archive-confirmation-message'),
+            confirmButton: TAPi18n.__('pages-modal-partup_settings-archive-confirmation-confirm-button'),
+            cancelButton: TAPi18n.__('pages-modal-partup_settings-archive-confirmation-cancel-button'),
             onConfirm: function() {
                 Meteor.call('partups.archive', template.data.partupId, function(error) {
                     if (error) {

@@ -38,9 +38,9 @@ Template.swarm_footer.events({
         var user = Meteor.user();
         var currentUrl = Router.url('swarm', {slug: swarm.slug});
         if (!user) {
-            var body = __('pages-app-swarm-share_mail_anonymous', {url: currentUrl, swarm_name:swarm.name});
+            var body = TAPi18n.__('pages-app-swarm-share_mail_anonymous', {url: currentUrl, swarm_name:swarm.name});
         } else {
-            var body = __('pages-app-swarm-share_mail', {url: currentUrl, swarm_name: swarm.name, user_name: user.profile.name});
+            var body = TAPi18n.__('pages-app-swarm-share_mail', {url: currentUrl, swarm_name: swarm.name, user_name: user.profile.name});
         }
         var subject = '';
         var shareUrl = Partup.client.socials.generateMailShareUrl(subject, body);

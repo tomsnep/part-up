@@ -14,9 +14,9 @@
 .pu-ring
     width: 100%
     $minus: 100px
-    height: 100%
+    height: calc(100% - 148px)
     position: relative
-    margin-bottom: -120px
+    // margin-bottom: -120px
     margin: auto
     z-index: 0
     perspective: 500px
@@ -48,48 +48,8 @@
             pointer-events: none
             z-index: 0
 
-            .pu-sub-floatingbutton
-                position: absolute
-                color: #fff
-                font-size: 20px
-                transition: color .2s
-                z-index: 10
-                width: 0px
-
-                i
-                    &:before
-                        display: block
-                        animation-name: pointer
-                        animation-iteration-count: infinite
-                        animation-duration: 4s
-
-                    &:after
-                        content: ''
-                        transition: background-color .2s
-                        border: 2px dashed #fff
-                        border-radius: 50%
-                        width: 50px
-                        height: 50px
-                        display: block
-                        left: -19px
-                        position: absolute
-                        top: -18px
-                        z-index: -1
-                &:hover
-                    color: $color-primary
-                    i:after
-                        background-color: #fff
-
             &.left
                 transform: translate3d(-75vw, 0, -15vw)
-            .pu-sub-floatingbutton
-                &.right
-                    right: 50px
-                    bottom: 50px
-                &.left
-                    left: 50px
-                    bottom: 50px
-                    transform: rotate(-180deg)
 
             &.right
                 transform: translate3d(75vw, 0, -15vw)
@@ -99,6 +59,54 @@
                 opacity: 1
                 z-index: 1
                 transform: translate3d(0vw, 0, 1vw)
+
+    > .pu-sub-floatingbutton
+        position: absolute
+        color: #fff
+        font-size: 20px
+        transition: color .2s
+        z-index: 900
+        width: 0px
+        opacity: 1
+        transition: opacity .2s
+
+        i
+            &:before
+                display: block
+                animation-name: pointer
+                animation-iteration-count: infinite
+                animation-duration: 4s
+
+            &:after
+                content: ''
+                transition: background-color .2s
+                border: 2px dashed #fff
+                border-radius: 50%
+                width: 50px
+                height: 50px
+                display: block
+                left: -19px
+                position: absolute
+                top: -18px
+                z-index: -1
+
+        &.right
+            right: 50px
+            bottom: 50px
+
+        &.left
+            left: 50px
+            bottom: 50px
+            transform: rotate(-180deg)
+
+        &.hidden
+            opacity: 0
+            pointer-events: none
+
+        &:hover
+            color: $color-primary
+            i:after
+                background-color: #fff
 
     > div.layer
         position: absolute
@@ -164,20 +172,19 @@
                 background-size: auto
                 z-index: 0
 
-    @media screen and (min-width: $breakpoint-desktop) and (min-height: $breakpoint-tablet + 1px)
+    @media screen and (min-width: $breakpoint-desktop) and (min-height: $breakpoint-tablet - 100px)
         width: 90%
-        height: calc(100% - #{$minus})
-        > section
-            &.pu-sub-page
+        height: calc(100% - 150px)
+        margin-bottom: -120px
 
-                .pu-sub-floatingbutton
-                    &.right
-                        right: auto
-                        bottom: auto
-                        left: 100%
-                        top: 40%
-                    &.left
-                        bottom: auto
-                        left: 0%
-                        top: 40%
-                        transform: rotate(-180deg)
+        > .pu-sub-floatingbutton
+            &.right
+                right: auto
+                bottom: auto
+                left: 100%
+                top: 40%
+            &.left
+                bottom: auto
+                left: 0%
+                top: 40%
+                transform: rotate(-180deg)

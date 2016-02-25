@@ -588,6 +588,8 @@
         height: auto
         font-weight: 700
         color: #fff
+        opacity: 1
+        transition: transform .2s, opacity .2s
         i
             width: 100%
             text-align: center
@@ -602,9 +604,10 @@
             color: $color-text-inverted
             transform: translateY(5px)
 
-        @media screen and (min-width: $breakpoint-desktop) and (min-height: $breakpoint-tablet + 1px)
-            i
-                margin-top: 20px
+        &.hidden
+            opacity: 0
+            pointer-events: none
+
     // Type: avatar
     &-avatar
         figure
@@ -866,6 +869,9 @@
         &:hover,
         &:focus
             background-color: darken($color-button-darkblue, 5%)
+
+    &-barelyvisible // used for staff only buttons
+        opacity: .5
 
     @media screen and (min-width: $breakpoint-desktop)
         &-header

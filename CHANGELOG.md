@@ -1,4 +1,19 @@
 # CHANGELOG
+
+## 1.16.8
+- Swarm page frame #192
+- Tribe explorer #193
+- Tribe tile #194
+- Swarm page settings / swarm #195
+- Swarm page settings / add tribes #196
+- Swarm page settings / Testimonials #197
+- Swarm page content blocks #198
+- Swarm page Upper section #199
+- Find tribes section of swarm page #200
+- Swarm overview and create in admin panel #208
+- Feat phraseapp refactor package.js and .phraseapp.yml
+
+
 ## 1.16.7
 - fix(autocomplete): security patch
 

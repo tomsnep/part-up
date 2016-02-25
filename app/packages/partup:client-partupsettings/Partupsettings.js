@@ -13,19 +13,19 @@
 var formId;
 var formPlaceholders = {
     name: function() {
-        return __('partupsettings-form-name-placeholder');
+        return TAPi18n.__('partupsettings-form-name-placeholder');
     },
     description: function() {
-        return __('partupsettings-form-description-placeholder');
+        return TAPi18n.__('partupsettings-form-description-placeholder');
     },
     tags_input: function() {
-        return __('partupsettings-form-tags_input-placeholder');
+        return TAPi18n.__('partupsettings-form-tags_input-placeholder');
     },
     end_date: function() {
-        return __('partupsettings-form-end_date-placeholder');
+        return TAPi18n.__('partupsettings-form-end_date-placeholder');
     },
     location_input: function() {
-        return __('partupsettings-form-location_input-placeholder');
+        return TAPi18n.__('partupsettings-form-location_input-placeholder');
     }
 };
 

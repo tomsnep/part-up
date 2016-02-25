@@ -31,7 +31,7 @@ Event.on('networks.accepted', function(userId, networkId, upperId) {
         typeData: {
             name: User(acceptedUpper).getFirstname(),
             networkName: network.name,
-            url: Meteor.absoluteUrl() + network.slug,
+            url: Meteor.absoluteUrl() + 'tribes/' + network.slug,
             unsubscribeOneUrl: Meteor.absoluteUrl() + 'unsubscribe-email-one/' + notificationType + '/' + acceptedUpper.profile.settings.unsubscribe_email_token,
             unsubscribeAllUrl: Meteor.absoluteUrl() + 'unsubscribe-email-all/' + acceptedUpper.profile.settings.unsubscribe_email_token
         },
@@ -80,7 +80,7 @@ Event.on('networks.new_pending_upper', function(network, pendingUpper) {
             name: User(admin).getFirstname(),
             pendingUpperName: pendingUpper.profile.name,
             networkName: network.name,
-            url: Meteor.absoluteUrl() + network.slug + '/settings/requests',
+            url: Meteor.absoluteUrl() + 'tribes/' + network.slug + '/settings/requests',
             unsubscribeOneUrl: Meteor.absoluteUrl() + 'unsubscribe-email-one/' + notificationType + '/' + admin.profile.settings.unsubscribe_email_token,
             unsubscribeAllUrl: Meteor.absoluteUrl() + 'unsubscribe-email-all/' + admin.profile.settings.unsubscribe_email_token
         },
@@ -137,7 +137,7 @@ Event.on('networks.uppers.inserted', function(newUpper, network) {
                 name: User(networkUpper).getFirstname(),
                 upperName: newUpper.profile.name,
                 networkName: network.name,
-                url: Meteor.absoluteUrl() + network.slug + '/uppers',
+                url: Meteor.absoluteUrl() + 'tribes/' + network.slug + '/uppers',
                 unsubscribeOneUrl: Meteor.absoluteUrl() + 'unsubscribe-email-one/' + notificationType + '/' + networkUpper.profile.settings.unsubscribe_email_token,
                 unsubscribeAllUrl: Meteor.absoluteUrl() + 'unsubscribe-email-all/' + networkUpper.profile.settings.unsubscribe_email_token
             },
@@ -188,7 +188,7 @@ Event.on('networks.uppers.removed', function(upper, network) {
             name: User(networkAdmin).getFirstname(),
             upperName: upper.profile.name,
             networkName: network.name,
-            url: Meteor.absoluteUrl() + network.slug + '/uppers',
+            url: Meteor.absoluteUrl() + 'tribes/' + network.slug + '/uppers',
             unsubscribeOneUrl: Meteor.absoluteUrl() + 'unsubscribe-email-one/' + notificationType + '/' + networkAdmin.profile.settings.unsubscribe_email_token,
             unsubscribeAllUrl: Meteor.absoluteUrl() + 'unsubscribe-email-all/' + networkAdmin.profile.settings.unsubscribe_email_token
         },

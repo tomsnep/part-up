@@ -191,20 +191,20 @@ Template.app_profile_supporter_partups.helpers({
         var template = Template.instance();
         return {
             partupsLoading: function(selection) {
-                return __('pages-app-profile-supporter-partups-' + selection + '-loading');
+                return TAPi18n.__('pages-app-profile-supporter-partups-' + selection + '-loading');
             },
             partupsPrefix: function(selection, name) {
-                return __('pages-app-profile-supporter-partups-' + selection + '-prefix', {
+                return TAPi18n.__('pages-app-profile-supporter-partups-' + selection + '-prefix', {
                     name: name
                 });
             },
             partupsCount: function(selection, count) {
-                return __('pages-app-profile-supporter-partups-' + selection + '-count', {
+                return TAPi18n.__('pages-app-profile-supporter-partups-' + selection + '-count', {
                     count: count
                 });
             },
             partupsNone: function(selection, name) {
-                return __('pages-app-profile-supporter-partups-' + selection + '-none', {
+                return TAPi18n.__('pages-app-profile-supporter-partups-' + selection + '-none', {
                     name: name
                 });
             }

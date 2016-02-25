@@ -3,37 +3,37 @@
 /*************************************************************/
 var placeholders = {
     'name': function() {
-        return __('profilesettings-form-name_input-placeholder');
+        return TAPi18n.__('profilesettings-form-name_input-placeholder');
     },
     'location_input': function() {
-        return __('profilesettings-form-location_input-placeholder');
+        return TAPi18n.__('profilesettings-form-location_input-placeholder');
     },
     'description': function() {
-        return __('profilesettings-form-description-placeholder');
+        return TAPi18n.__('profilesettings-form-description-placeholder');
     },
     'tags_input': function() {
-        return __('profilesettings-form-tags_input-placeholder');
+        return TAPi18n.__('profilesettings-form-tags_input-placeholder');
     },
     'facebook_url': function() {
-        return __('profilesettings-form-facebook_url-placeholder');
+        return TAPi18n.__('profilesettings-form-facebook_url-placeholder');
     },
     'twitter_url': function() {
-        return __('profilesettings-form-twitter_url-placeholder');
+        return TAPi18n.__('profilesettings-form-twitter_url-placeholder');
     },
     'instagram_url': function() {
-        return __('profilesettings-form-instagram_url-placeholder');
+        return TAPi18n.__('profilesettings-form-instagram_url-placeholder');
     },
     'linkedin_url': function() {
-        return __('profilesettings-form-linkedin_url-placeholder');
+        return TAPi18n.__('profilesettings-form-linkedin_url-placeholder');
     },
     'website': function() {
-        return __('profilesettings-form-website-placeholder');
+        return TAPi18n.__('profilesettings-form-website-placeholder');
     },
     'phonenumber': function() {
-        return __('profilesettings-form-phonenumber-placeholder');
+        return TAPi18n.__('profilesettings-form-phonenumber-placeholder');
     },
     'skype': function() {
-        return __('profilesettings-form-skype-placeholder');
+        return TAPi18n.__('profilesettings-form-skype-placeholder');
     }
 };
 

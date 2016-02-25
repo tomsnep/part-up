@@ -5,7 +5,7 @@ Template.AdminCreateSwarm.onCreated(function() {
 
 var placeholders = {
     'name': function() {
-        return __('pages-modal-create-details-form-name-placeholder');
+        return TAPi18n.__('pages-modal-create-details-form-name-placeholder');
     }
 };
 
@@ -43,7 +43,7 @@ Template.AdminCreateSwarm.events({
         var swarmId = $(event.currentTarget).data('swarm-remove');
         Meteor.call('swarms.remove', swarmId, function(error) {
             if (error) {
-                Partup.client.notify.error(__('pages-modal-admin-createswarm-error-' + error.reason));
+                Partup.client.notify.error(TAPi18n.__('pages-modal-admin-createswarm-error-' + error.reason));
                 return;
             }
             Partup.client.notify.success('Swarm removed correctly');
@@ -61,7 +61,7 @@ AutoForm.hooks({
 
             Meteor.call('swarms.insert', insertDoc, function(error, swarmId) {
                 if (error) {
-                    Partup.client.notify.error(__('pages-modal-admin-createswarm-error-' + error.reason));
+                    Partup.client.notify.error(TAPi18n.__('pages-modal-admin-createswarm-error-' + error.reason));
                     return;
                 }
                 Partup.client.notify.success('Swarm inserted correctly');

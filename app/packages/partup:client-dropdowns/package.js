@@ -7,7 +7,6 @@ Package.describe({
 
 Package.onUse(function(api) {
     api.use([
-        'tap:i18n',
         'meteorhacks:subs-manager'
     ], ['client', 'server']);
 
@@ -18,7 +17,6 @@ Package.onUse(function(api) {
     ], 'client');
 
     api.addFiles([
-        'package-tap.i18n',
 
         'dropdowns.js',
 
@@ -68,15 +66,7 @@ Package.onUse(function(api) {
         'partials/profile/upper-actions.html',
         'partials/profile/upper-actions.js',
         'partials/profile/supporter-actions.html',
-        'partials/profile/supporter-actions.js',
-
-        'i18n/en.i18n.json',
-        'i18n/nl.i18n.json'
+        'partials/profile/supporter-actions.js'
     ], 'client');
 
-    api.addFiles([
-        'package-tap.i18n',
-        'i18n/en.i18n.json',
-        'i18n/nl.i18n.json'
-    ], 'server');
 });

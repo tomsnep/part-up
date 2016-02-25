@@ -192,15 +192,15 @@ Template.app_network_partups.helpers({
         var template = Template.instance();
         return {
             partupsLoading: function(selection) {
-                return __('pages-app-network-partups-' + selection + '-loading');
+                return TAPi18n.__('pages-app-network-partups-' + selection + '-loading');
             },
             partupsCount: function(selection, count) {
-                return __('pages-app-network-partups-' + selection + '-count', {
+                return TAPi18n.__('pages-app-network-partups-' + selection + '-count', {
                     count: count
                 });
             },
             partupsNone: function(selection) {
-                return __('pages-app-network-partups-' + selection + '-none');
+                return TAPi18n.__('pages-app-network-partups-' + selection + '-none');
             }
         };
     }

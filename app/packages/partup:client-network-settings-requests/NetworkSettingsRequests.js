@@ -35,7 +35,7 @@ Template.NetworkSettingsRequests.events({
                 return;
             }
 
-            Partup.client.notify.success(__('network-settings-requests-accepted'));
+            Partup.client.notify.success(TAPi18n.__('network-settings-requests-accepted'));
         });
     },
     'click [data-request-reject]': function(e, template) {
@@ -47,7 +47,7 @@ Template.NetworkSettingsRequests.events({
                 return;
             }
 
-            Partup.client.notify.success(__('network-settings-requests-rejected'));
+            Partup.client.notify.success(TAPi18n.__('network-settings-requests-rejected'));
         });
     }
 });

@@ -8,7 +8,7 @@
 // jscs:enable
 var placeholders = {
     'email': function() {
-        return __('forgotpassword-form-email-placeholder');
+        return TAPi18n.__('forgotpassword-form-email-placeholder');
     }
 };
 

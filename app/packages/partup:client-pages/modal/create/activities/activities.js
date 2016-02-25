@@ -53,8 +53,8 @@ Template.modal_create_activities.helpers({
     },
     placeholderActivity: function() {
         return {
-            name: __('pages-modal-create-activities-placeholder-name'),
-            description: __('pages-modal-create-activities-placeholder-description')
+            name: TAPi18n.__('pages-modal-create-activities-placeholder-name'),
+            description: TAPi18n.__('pages-modal-create-activities-placeholder-description')
         };
     },
     isUpper: function() {

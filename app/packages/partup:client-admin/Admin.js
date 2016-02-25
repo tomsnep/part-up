@@ -81,7 +81,7 @@ Template.Admin.events({
             onConfirm: function() {
                 Meteor.call('users.deactivate', userId, function(error, result) {
                     if (error) {
-                        Partup.client.notify.error(__(error));
+                        Partup.client.notify.error(TAPi18n.__(error));
                         return;
                     }
                     Partup.client.notify.success('user deactivated');
@@ -94,7 +94,7 @@ Template.Admin.events({
         var userId = this._id;
         Meteor.call('users.admin_impersonate', userId, function(error) {
             if (error) {
-                Partup.client.notify.error(__(error));
+                Partup.client.notify.error(TAPi18n.__(error));
                 return;
             }
             Meteor.connection.setUserId(userId);
@@ -109,7 +109,7 @@ Template.Admin.events({
             onConfirm: function() {
                 Meteor.call('users.reactivate', userId, function(error, result) {
                     if (error) {
-                        Partup.client.notify.error(__(error));
+                        Partup.client.notify.error(TAPi18n.__(error));
                         return;
                     }
                     Partup.client.notify.success('user reactivated');

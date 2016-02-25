@@ -23,7 +23,7 @@ Template.Footer.events({
                 Intercom('showNewMessage');
             }
         } else {
-            window.location.href = 'mailto:' + __('footer-feedback-button-mailto') + '?subject=' + __('footer-feedback-button-mailto-subject');
+            window.location.href = 'mailto:' + TAPi18n.__('footer-feedback-button-mailto') + '?subject=' + TAPi18n.__('footer-feedback-button-mailto-subject');
         }
     }
 });
