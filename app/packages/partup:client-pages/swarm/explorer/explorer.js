@@ -105,7 +105,7 @@ Template.swarm_explorer.events({
     'click [data-findout]': function(event, template) {
         event.preventDefault();
         $('html, body').animate({
-            scrollTop: window.innerHeight - 50
+            scrollTop: window.innerHeight - (window.innerHeight / 100 * 4)
         }, 500);
         template.readMoreClicked.set(true);
     }
