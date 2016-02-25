@@ -28,7 +28,7 @@ Template.PartialDropdownProfileUpperActions.helpers({
         return Template.instance().dropdownOpen.get();
     },
     selectedAction: function() {
-        return __('dropdowns-profile-upperactions-option-' + Template.instance().selectedOption.get());
+        return TAPi18n.__('dropdowns-profile-upperactions-option-' + Template.instance().selectedOption.get());
     },
     notSelected: function(a) {
         return a !== 'dropdowns-profile-upperactions-option-' + Template.instance().selectedOption.get();
