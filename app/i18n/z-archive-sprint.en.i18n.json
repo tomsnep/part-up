@@ -1,0 +1,75 @@
+{
+    "dropdowns-networksactions-label": "Show:",
+    "dropdowns-networksactions-option-active": "Active part-ups",
+    "dropdowns-networksactions-option-archived": "Archived part-ups",
+    "dropdowns-networksactions-option-all": "All part-ups",
+
+    "dropdowns-profile-upperactions-label": "Show:",
+    "dropdowns-profile-upperactions-option-active": "Active part-ups",
+    "dropdowns-profile-upperactions-option-archived": "Archived part-ups",
+    "dropdowns-profile-upperactions-option-all": "All part-ups",
+
+    "dropdowns-profile-supporteractions-label": "Show:",
+    "dropdowns-profile-supporteractions-option-active": "Active part-ups",
+    "dropdowns-profile-supporteractions-option-archived": "Archived part-ups",
+    "dropdowns-profile-supporteractions-option-all": "All part-ups",
+
+    "dropdown-notification-partup_archived_by_upper": "__archiver__ has archived __partup__",
+    "dropdown-notification-partup_unarchived_by_upper": "__unarchiver__ has unarchived __partup__",
+
+    "partuptile-archive-date": "This part-up is archived",
+
+    "pages-app-network-partups-active-loading": "Active Part-ups in this tribe",
+    "pages-app-network-partups-active-none": "No active part-ups found",
+    "pages-app-network-partups-active-count": "1 active part-up",
+    "pages-app-network-partups-active-count_plural": "__count__ active part-ups",
+    "pages-app-network-partups-active-suffix": "in this tribe",
+
+    "pages-app-network-partups-archived-loading": "Archived Part-ups in this tribe",
+    "pages-app-network-partups-archived-none": "No archived part-ups found",
+    "pages-app-network-partups-archived-count": "1 archived part-up",
+    "pages-app-network-partups-archived-count_plural": "__count__ archived part-ups",
+    "pages-app-network-partups-archived-suffix": "in this tribe",
+
+    "pages-app-partup-archive-info": "This part-up is archived on",
+
+    "pages-app-profile-upper-partups-active-loading": "Active Part-ups",
+    "pages-app-profile-upper-partups-active-none": "__name__ is not yet a partner of an active part-up",
+    "pages-app-profile-upper-partups-active-count": "1 active part-up",
+    "pages-app-profile-upper-partups-active-count_plural": "__count__ active part-ups",
+    "pages-app-profile-upper-partups-active-prefix": "__name__ is partner in",
+
+    "pages-app-profile-upper-partups-archived-loading": "Archived Part-ups",
+    "pages-app-profile-upper-partups-archived-none": "__name__ is not a partner of an archived part-up",
+    "pages-app-profile-upper-partups-archived-count": "1 archived part-up",
+    "pages-app-profile-upper-partups-archived-count_plural": "__count__ archived part-ups",
+    "pages-app-profile-upper-partups-archived-prefix": "__name__ is partner in",
+
+    "pages-app-profile-supporter-partups-active-loading": "Active Part-ups",
+    "pages-app-profile-supporter-partups-active-none": "__name__ is not yet a supporter of an active part-up",
+    "pages-app-profile-supporter-partups-active-count": "1 active part-up",
+    "pages-app-profile-supporter-partups-active-count_plural": "__count__ active part-ups",
+    "pages-app-profile-supporter-partups-active-prefix": "__name__ is supporter in",
+
+    "pages-app-profile-supporter-partups-archived-loading": "Archived Part-ups",
+    "pages-app-profile-supporter-partups-archived-none": "__name__ is not a supporter of an archived part-up",
+    "pages-app-profile-supporter-partups-archived-count": "1 archived part-up",
+    "pages-app-profile-supporter-partups-archived-count_plural": "__count__ archived part-ups",
+    "pages-app-profile-supporter-partups-archived-prefix": "__name__ is supporter in",
+
+    "pages-modal-partup_settings-remove-confirmation-title": "Are you sure?",
+    "pages-modal-partup_settings-remove-confirmation-message": "Deleting a part-up cannot be undone.",
+    "pages-modal-partup_settings-remove-confirmation-confirm-button": "Yes, delete",
+    "pages-modal-partup_settings-remove-confirmation-cancel-button": "Cancel",
+
+    "pages-modal-partup_settings-archive-confirmation-title": "Are you sure?",
+    "pages-modal-partup_settings-archive-confirmation-message": "Archiving a part-up will make it inactive, but you can still use it.",
+    "pages-modal-partup_settings-archive-confirmation-confirm-button": "Yes, archive",
+    "pages-modal-partup_settings-archive-confirmation-cancel-button": "Cancel",
+
+    "pages-modal-partup_settings-archive": "Archive part-up",
+    "pages-modal-partup_settings-unarchive": "Unarchive part-up",
+
+    "update-type-partups_archived-title": "__name__ archived the part-up",
+    "update-type-partups_unarchived-title": "__name__ unarchived the part-up"
+}
