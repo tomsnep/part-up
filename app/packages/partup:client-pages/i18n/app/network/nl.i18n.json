@@ -8,17 +8,12 @@
     "pages-app-network-uppers-count_plural": "__count__ uppers",
     "pages-app-network-uppers-suffix": "in deze tribe",
 
-    "pages-app-network-partups-active-loading": "Active part-ups in deze tribe",
-    "pages-app-network-partups-active-none": "Geen active part-ups gevonden",
-    "pages-app-network-partups-active-count": "1 actieve part-up",
-    "pages-app-network-partups-active-count_plural": "__count__ active part-ups",
-    "pages-app-network-partups-active-suffix": "in deze tribe",
-
-    "pages-app-network-partups-archived-loading": "Gearchiveerde part-ups in deze tribe",
-    "pages-app-network-partups-archived-none": "Geen gearchiveerde part-ups gevonden",
-    "pages-app-network-partups-archived-count": "1 gearchiveerde part-up",
-    "pages-app-network-partups-archived-count_plural": "__count__ gearchiveerde part-ups",
-    "pages-app-network-partups-archived-suffix": "in deze tribe",
+    "pages-app-network-partups-loading": "Part-ups in deze tribe",
+    "pages-app-network-partups-none": "Geen part-ups gevonden",
+    "pages-app-network-partups-count": "1 part-up",
+    "pages-app-network-partups-count_plural": "__count__ part-ups",
+    "pages-app-network-partups-suffix": "in deze tribe",
+    "pages-app-network-partups-start_button": "Start een part-up in deze tribe",
 
     "pages-app-network-closed-title": "Dit is een besloten tribe",
     "pages-app-network-closed-description": "De uppers in deze tribe hebben ervoor gekozen om de community besloten te houden. Vraag om toegang tot de tribe via de oranje knop (rechts). Je krijgt een notificatie zodra de tribe admin je verzoek heeft geaccepteerd.",

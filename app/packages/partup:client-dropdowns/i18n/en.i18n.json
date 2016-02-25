@@ -23,21 +23,6 @@
     "dropdowns-updatesactions-option-contributions": "Just contribution updates",
     "dropdowns-updatesactions-option-my-updates": "My updates",
 
-    "dropdowns-networksactions-label": "Show:",
-    "dropdowns-networksactions-option-active": "Active part-ups",
-    "dropdowns-networksactions-option-archived": "Archived part-ups",
-    "dropdowns-networksactions-option-all": "All part-ups",
-
-    "dropdowns-profile-upperactions-label": "Show:",
-    "dropdowns-profile-upperactions-option-active": "Active part-ups",
-    "dropdowns-profile-upperactions-option-archived": "Archived part-ups",
-    "dropdowns-profile-upperactions-option-all": "All part-ups",
-
-    "dropdowns-profile-supporteractions-label": "Show:",
-    "dropdowns-profile-supporteractions-option-active": "Active part-ups",
-    "dropdowns-profile-supporteractions-option-archived": "Archived part-ups",
-    "dropdowns-profile-supporteractions-option-all": "All part-ups",
-
     "dropdowns-activitiesactions-label": "Show:",
     "dropdowns-activitiesactions-option-default": "All activities",
     "dropdowns-activitiesactions-option-my-activities": "My activities",
@@ -67,7 +52,5 @@
     "dropdown-notification-multiple_comments_in_conversation_since_visit": "__upper__ and __others_count__ others replied to a conversation you follow",
     "dropdown-notification-partups_multiple_updates_since_visit": "__upper__ and __others_count__ other(s) added updates",
     "dropdown-notification-partups_multiple_updates_since_visit_single_person": "__upper__ added several updates",
-    "dropdown-notification-networks_multiple_new_uppers_since_visit": "__upper__ and __others_count__ others joined __network__",
-    "dropdown-notification-partup_archived_by_upper": "__archiver__ has archived __partup__",
-    "dropdown-notification-partup_unarchived_by_upper": "__unarchiver__ has unarchived __partup__"
+    "dropdown-notification-networks_multiple_new_uppers_since_visit": "__upper__ and __others_count__ others joined __network__"
 }

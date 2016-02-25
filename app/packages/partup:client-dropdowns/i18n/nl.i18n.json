@@ -23,21 +23,6 @@
     "dropdowns-updatesactions-option-contributions": "Alleen bijdrage updates",
     "dropdowns-updatesactions-option-my-updates": "Mijn updates",
 
-    "dropdowns-networksactions-label": "Toon:",
-    "dropdowns-networksactions-option-active": "Actieve part-ups",
-    "dropdowns-networksactions-option-archived": "Gearchiveerde part-ups",
-    "dropdowns-networksactions-option-all": "Alle part-ups",
-
-    "dropdowns-profile-upperactions-label": "Toon:",
-    "dropdowns-profile-upperactions-option-active": "Actieve part-ups",
-    "dropdowns-profile-upperactions-option-archived": "Gearchiveerde part-ups",
-    "dropdowns-profile-upperactions-option-all": "Alle part-ups",
-
-    "dropdowns-profile-supporteractions-label": "Toon:",
-    "dropdowns-profile-supporteractions-option-active": "Actieve part-ups",
-    "dropdowns-profile-supporteractions-option-archived": "Gearchiveerde part-ups",
-    "dropdowns-profile-supporteractions-option-all": "Alle part-ups",
-
     "dropdowns-activitiesactions-label": "Toon:",
     "dropdowns-activitiesactions-option-default": "Alle activiteiten",
     "dropdowns-activitiesactions-option-my-activities": "Mijn activiteiten",
@@ -67,7 +52,5 @@
     "dropdown-notification-multiple_comments_in_conversation_since_visit": "__upper__ en __others_count__ anderen reageerden op een gesprek dat je volgt",
     "dropdown-notification-partups_multiple_updates_since_visit": "__upper__ en __others_count__ ander(en) plaatsten updates",
     "dropdown-notification-partups_multiple_updates_since_visit_single_person": "__upper__ plaatste meerdere updates",
-    "dropdown-notification-networks_multiple_new_uppers_since_visit": "__upper__ en __others_count__ anderen zijn nu lid van __network__",
-    "dropdown-notification-partup_archived_by_upper": "__archiver__ heeft __partup__ gearchiveerd",
-    "dropdown-notification-partup_unarchived_by_upper": "__unarchiver__ heeft __partup__ geactiveerd"
+    "dropdown-notification-networks_multiple_new_uppers_since_visit": "__upper__ en __others_count__ anderen zijn nu lid van __network__"
 }
