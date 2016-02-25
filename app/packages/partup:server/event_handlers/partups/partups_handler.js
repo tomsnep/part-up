@@ -83,3 +83,75 @@ Event.on('partups.updated', function(userId, partup, fields) {
     // Add language to collection if new
     Partup.server.services.language.addNewLanguage(partup.language);
 });
+
+Event.on('partups.archived', function(userId, partup) {
+    // "User archived this part-up" update
+    var update_archived = Partup.factories.updatesFactory.make(userId, partup._id, 'partups_archived', {});
+    Updates.insert(update_archived);
+
+    var archiver = Meteor.users.findOneOrFail(userId);
+
+    partup.uppers.forEach(function(upperId) {
+        // Dont send a notification to the archiver of the partup
+        if (upperId === userId) return;
+
+        var upper = Meteor.users.findOneOrFail(upperId);
+
+        // Set the notification details
+        var notificationOptions = {
+            userId: upper._id,
+            type: 'partups_archived',
+            typeData: {
+                archiver: {
+                    _id: archiver._id,
+                    name: archiver.profile.name,
+                    image: archiver.profile.image
+                },
+                partup: {
+                    _id: partup._id,
+                    name: partup.name,
+                    slug: partup.slug
+                }
+            }
+        };
+
+        // Send the notification
+        Partup.server.services.notifications.send(notificationOptions);
+    });
+});
+
+Event.on('partups.unarchived', function(userId, partup) {
+    // "User unarchived this part-up" update
+    var update_unarchived = Partup.factories.updatesFactory.make(userId, partup._id, 'partups_unarchived', {});
+    Updates.insert(update_unarchived);
+
+    var unarchiver = Meteor.users.findOneOrFail(userId);
+
+    partup.uppers.forEach(function(upperId) {
+        // Dont send a notification to the unarchiver of the partup
+        if (upperId === userId) return;
+
+        var upper = Meteor.users.findOneOrFail(upperId);
+
+        // Set the notification details
+        var notificationOptions = {
+            userId: upper._id,
+            type: 'partups_unarchived',
+            typeData: {
+                unarchiver: {
+                    _id: unarchiver._id,
+                    name: unarchiver.profile.name,
+                    image: unarchiver.profile.image
+                },
+                partup: {
+                    _id: partup._id,
+                    name: partup.name,
+                    slug: partup.slug
+                }
+            }
+        };
+
+        // Send the notification
+        Partup.server.services.notifications.send(notificationOptions);
+    });
+});
