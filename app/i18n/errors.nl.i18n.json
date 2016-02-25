@@ -33,7 +33,7 @@
 
     // Updates - Comments
     "base-errors-comment_is_not_allowed_on_a_system_update": "Leuk geprobeerd, maar je kunt geen reactie plaatsen onder een update van het systeem.",
-    "base-errors-comment_could_not_be_inserted": "Oeps, het is ons niet gelukt je reactie te plaatsen. Probeer het nog een keer.",,
+    "base-errors-comment_could_not_be_inserted": "Oeps, het is ons niet gelukt je reactie te plaatsen. Probeer het nog een keer.",
     "base-errors-partup_comment_could_not_be_updated": "Helaas, we kunnen je reactie niet bewerken.",
     "base-errors-partup_comment_could_not_be_removed": "Er is iets fout gegaan bij het verwijderen van je reactie.",
 
