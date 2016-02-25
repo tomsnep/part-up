@@ -22,7 +22,7 @@ Template.Ring.onCreated(function() {
                 animate: true
             },
             outer: {
-                radius: 70,
+                radius: 75,
                 startAngle: lodash.random(0, 360),
                 animate: true
             }

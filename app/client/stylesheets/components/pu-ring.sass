@@ -14,9 +14,9 @@
 .pu-ring
     width: 100%
     $minus: 100px
-    height: 100%
+    height: calc(100% - 148px)
     position: relative
-    margin-bottom: -120px
+    // margin-bottom: -120px
     margin: auto
     z-index: 0
     perspective: 500px
@@ -174,7 +174,8 @@
 
     @media screen and (min-width: $breakpoint-desktop) and (min-height: $breakpoint-tablet - 100px)
         width: 90%
-        height: calc(100% - #{$minus})
+        height: calc(100% - 150px)
+        margin-bottom: -120px
 
         > .pu-sub-floatingbutton
             &.right
