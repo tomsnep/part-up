@@ -18,6 +18,6 @@ Meteor.methods({
                 city: result.description
             };
         });
-    },
+    }
 
 });

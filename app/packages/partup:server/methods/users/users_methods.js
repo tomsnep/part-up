@@ -197,7 +197,7 @@ Meteor.methods({
         }
 
         var impersonateUser = Meteor.users.findOne(userId);
-        if (!impersonateUser) throw new Meteor.Error(404, 'user not found');
+        if (!impersonateUser) throw new Meteor.Error(404, 'user_could_not_be_found');
         this.setUserId(userId);
     },
 
