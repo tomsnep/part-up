@@ -61,7 +61,11 @@ Partup.server.services.google = {
 
         d('Loaded city with placeId [' + googlePlaceId + '] from Google');
 
-        return Places.insert(data);
+        // Insert new location
+        Places.insert(data);
+
+        // Return the retrieved data object
+        return data;
     },
 
     detectLanguage: function(query) {
