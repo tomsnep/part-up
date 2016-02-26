@@ -123,7 +123,7 @@ SeoRouter.route('/profile/:id', function(params, request, response) {
 /**
  * SEO Route for the Network detail page
  */
-SeoRouter.route('/:slug', function(params, request, response) {
+SeoRouter.route('/tribes/:slug', function(params, request, response) {
     var slug = params.slug;
     var network = Networks.findOne({slug: slug});
 
@@ -138,7 +138,7 @@ SeoRouter.route('/:slug', function(params, request, response) {
 
     Template.seo_network.helpers({
         getNetworkUrl: function() {
-            return Meteor.absoluteUrl() + network.slug;
+            return Meteor.absoluteUrl() + 'tribes/' + network.slug;
         },
         getImageUrl: function() {
             if (!image) return Meteor.absoluteUrl() + 'images/partup-logo.png';
@@ -148,6 +148,39 @@ SeoRouter.route('/:slug', function(params, request, response) {
     });
 
     var html = SSR.render('seo_network', network);
+
+    response.setHeader('Content-Type', 'text/html');
+    response.end(html);
+});
+
+/**
+ * SEO Route for the Swarm page
+ */
+SeoRouter.route('/:slug', function(params, request, response) {
+    var slug = params.slug;
+    var swarm = Swarms.findOne({slug: slug});
+
+    if (!swarm) {
+        response.statusCode = 404;
+        return response.end();
+    }
+
+    var image = Images.findOne(swarm.image);
+
+    SSR.compileTemplate('seo_swarm', Assets.getText('private/templates/seo/swarm.html'));
+
+    Template.seo_swarm.helpers({
+        getSwarmUrl: function() {
+            return Meteor.absoluteUrl() + swarm.slug;
+        },
+        getImageUrl: function() {
+            if (!image) return Meteor.absoluteUrl() + 'images/partup-logo.png';
+
+            return Partup.helpers.url.getImageUrl(image);
+        }
+    });
+
+    var html = SSR.render('seo_swarm', swarm);
 
     response.setHeader('Content-Type', 'text/html');
     response.end(html);

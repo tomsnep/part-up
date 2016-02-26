@@ -37,8 +37,8 @@ Template.app_network.onCreated(function() {
         if (!clickedElement || !clickedElement[0]) return;
         var parentElement = $(clickedElement[0].parentElement);
 
-        var collapsedText = __(clickedElement.data('collapsed-key')) || false;
-        var expandedText = __(clickedElement.data('expanded-key')) || false;
+        var collapsedText = TAPi18n.__(clickedElement.data('collapsed-key')) || false;
+        var expandedText = TAPi18n.__(clickedElement.data('expanded-key')) || false;
 
         if (expand) {
             if (expandedText) clickedElement.html(expandedText);
@@ -112,7 +112,7 @@ var leaveNetwork = function(template, network) {
         }
         template.joinToggle.set(!template.joinToggle.get());
 
-        Partup.client.notify.success(__('pages-app-network-notification-left'));
+        Partup.client.notify.success(TAPi18n.__('pages-app-network-notification-left'));
         Subs.reset();
         if (network.isClosedForUpper(Meteor.user())) {
             Router.go('discover');
@@ -138,9 +138,9 @@ Template.app_network.events({
                 template.joinToggle.set(!template.joinToggle.get());
 
                 if (network.isClosed()) {
-                    Partup.client.notify.success(__('pages-app-network-notification-accepted_waitingforapproval'));
+                    Partup.client.notify.success(TAPi18n.__('pages-app-network-notification-accepted_waitingforapproval'));
                 } else {
-                    Partup.client.notify.success(__('pages-app-network-notification-joined'));
+                    Partup.client.notify.success(TAPi18n.__('pages-app-network-notification-joined'));
                     analytics.track('joined network', {
                         networkId: network._id
                     });
@@ -153,7 +153,7 @@ Template.app_network.events({
         } else {
             Intent.go({route: 'login'}, function(loggedInUser) {
                 if (loggedInUser) proceed();
-                else Partup.client.notify.error(__('pages-app-network-notification-failed'));
+                else Partup.client.notify.error(TAPi18n.__('pages-app-network-notification-failed'));
             });
         }
     },
@@ -165,7 +165,7 @@ Template.app_network.events({
                 if (error) return Partup.client.notify.error(error.reason);
                 template.joinToggle.set(!template.joinToggle.get());
                 if (!network.isClosed()) {
-                    Partup.client.notify.success(__('pages-app-network-notification-joined'));
+                    Partup.client.notify.success(TAPi18n.__('pages-app-network-notification-joined'));
                 }
             });
         }
@@ -173,7 +173,7 @@ Template.app_network.events({
         if (!user) {
             Intent.go({route: 'login'}, function(loggedInUser) {
                 if (loggedInUser) proceedAccept(loggedInUser);
-                else Partup.client.notify.error(__('pages-app-network-notification-failed'));
+                else Partup.client.notify.error(TAPi18n.__('pages-app-network-notification-failed'));
             });
             return
         }
@@ -184,12 +184,12 @@ Template.app_network.events({
         var network = Networks.findOne({slug: template.data.networkSlug});
 
         Partup.client.prompt.confirm({
-            title: __('pages-app-network-confirmation-title', {
+            title: TAPi18n.__('pages-app-network-confirmation-title', {
                 tribe: network.name
             }),
-            message: __('pages-app-network-confirmation-message'),
-            confirmButton: __('pages-app-network-confirmation-confirm-button'),
-            cancelButton: __('pages-app-network-confirmation-cancel-button'),
+            message: TAPi18n.__('pages-app-network-confirmation-message'),
+            confirmButton: TAPi18n.__('pages-app-network-confirmation-confirm-button'),
+            cancelButton: TAPi18n.__('pages-app-network-confirmation-cancel-button'),
             onConfirm: function() {
                 leaveNetwork(template, network);
             }
@@ -204,7 +204,7 @@ Template.app_network.events({
             Meteor.call('networks.join', network._id, function(err) {
                 if (err) {
                     console.error(err);
-                    Partup.client.notify.error(__(err));
+                    Partup.client.notify.error(TAPi18n.__(err));
                 }
             });
         };

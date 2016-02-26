@@ -112,6 +112,36 @@
         a
             text-decoration: none
 
+    &-action
+        border-style: dashed
+        border-color: $color-border
+        text-align: center
+        padding: 40px
+
+    &-quote
+        padding: 40px
+
+        .pu-sub-upper
+            display: block
+            margin-top: 15px
+            text-align: left
+            font-weight: bold
+            color: $color-text
+            text-decoration: none
+
+            figure
+                vertical-align: middle
+                margin-right: 10px
+
+        p
+            word-break: break-word
+            padding-right: 60px
+
+        .pu-button
+            position: absolute
+            top: 40px
+            right: 40px
+
     &-activity
         padding: 0
         margin-bottom: 20px
@@ -168,6 +198,7 @@
 
                 &:last-child:after
                     content: ''
+
         &:hover
             .pu-sub-useractions
                 opacity: 1

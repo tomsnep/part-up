@@ -1,6 +1,6 @@
 var placeholders = {
     'video_url': function() {
-        return __('pages-app-profile-video_url-placeholder');
+        return TAPi18n.__('pages-app-profile-video_url-placeholder');
     }
 };
 Template.NewVideoTile.onCreated(function() {

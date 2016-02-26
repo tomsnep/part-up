@@ -82,6 +82,34 @@ Partup.schemas.entities.network = new SimpleSchema([networkBaseSchema, {
         type: String,
         regEx: SimpleSchema.RegEx.Id
     },
+    stats: {
+        type: Object
+    },
+    'stats.activity_count': {
+        type: Number,
+        min: 0
+    },
+    'stats.partner_count': {
+        type: Number,
+        min: 0
+    },
+    'stats.partup_count': {
+        type: Number,
+        min: 0
+    },
+    'stats.supporter_count': {
+        type: Number,
+        min: 0
+    },
+    'stats.upper_count': {
+        type: Number,
+        min: 0
+    },
+    swarms: {
+        type: [String],
+        optional: true,
+        regEx: SimpleSchema.RegEx.Id
+    },
     tags: {
         type: [String],
         minCount: 1
@@ -143,7 +171,7 @@ Partup.schemas.forms.networkCreate = new SimpleSchema([networkBaseSchema, {
 
 /**
  * network create form schema
- * @name networkCreate
+ * @name networkEdit
  * @memberof Partup.schemas.forms
  */
 Partup.schemas.forms.networkEdit = new SimpleSchema({
@@ -162,13 +190,13 @@ Partup.schemas.forms.featureNetwork = new SimpleSchema({
         type: Boolean
     },
     comment: {
-        type: String,
+        type: String
     },
     author_id: {
-        type: String,
+        type: String
     },
     job_title: {
-        type: String,
+        type: String
     },
     language: {
         type: String,

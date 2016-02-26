@@ -243,7 +243,7 @@ Partup.client.uploader = {
             return true;
         }
 
-        if (/Edge\/12./i.test(navigator.userAgent)) {
+        if (/Edge/.test(navigator.userAgent)) {
             // this is Microsoft Edge
             return true;
         }

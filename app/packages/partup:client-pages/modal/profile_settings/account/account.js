@@ -1,12 +1,12 @@
 var placeholders = {
     'currentPassword': function() {
-        return __('modal-profilesettings-account-currentpassword');
+        return TAPi18n.__('modal-profilesettings-account-currentpassword');
     },
     'password': function() {
-        return __('modal-profilesettings-account-password');
+        return TAPi18n.__('modal-profilesettings-account-password');
     },
     'confirmPassword': function() {
-        return __('modal-profilesettings-account-confirmpassword');
+        return TAPi18n.__('modal-profilesettings-account-confirmpassword');
     }
 };
 Template.modal_profile_settings_account.helpers({

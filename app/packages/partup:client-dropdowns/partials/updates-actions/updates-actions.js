@@ -28,7 +28,7 @@ Template.PartialDropdownUpdatesActions.helpers({
         return Template.instance().dropdownOpen.get();
     },
     selectedAction: function() {
-        return __('dropdowns-updatesactions-option-' + Template.instance().selectedOption.get());
+        return TAPi18n.__('dropdowns-updatesactions-option-' + Template.instance().selectedOption.get());
     },
     notSelected: function(a) {
         return a !== 'dropdowns-updatesactions-option-' + Template.instance().selectedOption.get();

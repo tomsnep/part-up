@@ -35,7 +35,7 @@ Event.on('invites.inserted.network', function(inviter, network, invitee) {
             networkName: network.name,
             networkDescription: network.description,
             inviterName: inviter.profile.name,
-            url: Meteor.absoluteUrl() + network.slug,
+            url: Meteor.absoluteUrl() + 'tribes/' + network.slug,
             unsubscribeOneUrl: Meteor.absoluteUrl() + 'unsubscribe-email-one/invite_upper_to_network/' + invitee.profile.settings.unsubscribe_email_token,
             unsubscribeAllUrl: Meteor.absoluteUrl() + 'unsubscribe-email-all/' + invitee.profile.settings.unsubscribe_email_token
         },
@@ -58,7 +58,7 @@ Event.on('invites.inserted.network.by_email', function(inviter, network, email, 
 
     // Interpolate email message (replace [name] with invitee name and [url] with network url)
     var interpolate = function(message) {
-        var url = Meteor.absoluteUrl() + network.slug + '?token=' + accessToken;
+        var url = Meteor.absoluteUrl() + 'tribes/' + network.slug + '?token=' + accessToken;
 
         return Partup.helpers.interpolateEmailMessage(message, {
             url: '<a href="' + url + '">' + url + '</a>',

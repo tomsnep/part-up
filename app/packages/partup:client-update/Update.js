@@ -20,15 +20,15 @@
 var budgetDisplay = function(type, value, currency) {
     var currency = currency || 'EUR';
     if (type === 'charity') {
-        return __('update-budget-type-none');
+        return TAPi18n.__('update-budget-type-none');
     } else if (type === 'enterprising') {
-        return __('update-budget-type-none');
+        return TAPi18n.__('update-budget-type-none');
     } else if (type === 'commercial') {
-        return __('update-budget-type-money-' + currency, value);
+        return TAPi18n.__('update-budget-type-money-' + currency, value);
     } else if (type === 'organization') {
-        return __('update-budget-type-money-' + currency, value);
+        return TAPi18n.__('update-budget-type-money-' + currency, value);
     }
-    return __('update-budget-type-none');
+    return TAPi18n.__('update-budget-type-none');
 };
 
 /*************************************************************/
@@ -99,7 +99,7 @@ Template.Update.helpers({
                         self.metadata.invitee_names.forEach(function(name, index) {
                             if (index === 0) return; // Already in sentence
                             if (index === nameListCount - 1) {
-                                nameSentence = nameSentence + ' ' + __('update-general-and') + ' ' + name; // Last name of the list
+                                nameSentence = nameSentence + ' ' + TAPi18n.__('update-general-and') + ' ' + name; // Last name of the list
                             } else {
                                 nameSentence = nameSentence + ', ' + name; // Just add it up
                             }
@@ -119,7 +119,7 @@ Template.Update.helpers({
                     params.contributor = User(contributor).getFirstname();
                 }
 
-                return __(titleKey, params);
+                return TAPi18n.__(titleKey, params);
             },
             mayComment: function() {
                 return user ? true : false;
@@ -141,11 +141,11 @@ Template.Update.helpers({
             },
 
             messageContent: function() {
-                return Partup.client.strings.newlineToBreak(Partup.helpers.mentions.decode(self.new_value));
+                return Partup.client.strings.newlineToBreak(Partup.helpers.mentions.decode(Partup.client.sanitize(self.new_value)));
             },
 
             systemMessageContent: function() {
-                return Partup.client.strings.newlineToBreak(__('update-type-partups_message_added-system-' + self.type + '-content'));
+                return Partup.client.strings.newlineToBreak(TAPi18n.__('update-type-partups_message_added-system-' + self.type + '-content'));
             },
 
             commentable: function() {

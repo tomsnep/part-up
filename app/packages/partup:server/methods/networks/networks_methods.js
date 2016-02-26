@@ -15,7 +15,7 @@ Meteor.methods({
 
         try {
             var network = {};
-            network.name = sanitizeHtml(fields.name);
+            network.name = fields.name;
             network.privacy_type = fields.privacy_type;
             network.slug = Partup.server.services.slugify.slugify(fields.name);
             network.uppers = [user._id];
@@ -442,7 +442,32 @@ Meteor.methods({
         }
 
         try {
-            return Networks.guardedMetaFind({name: new RegExp('.*' + query + '.*', 'i')}, {limit: 30}).fetch();
+            query = query.replace(/-/g, ' '); // Replace dashes with spaces
+            return Networks.guardedMetaFind({slug: new RegExp('.*' + query + '.*', 'i')}, {limit: 30}).fetch();
+        } catch (error) {
+            Log.error(error);
+            throw new Meteor.Error(400, 'networks_could_not_be_autocompleted');
+        }
+    },
+
+    /**
+     * Return a list of networks based on search query and swarm
+     *
+     * @param {String} query
+     */
+    'networks.autocomplete_swarm': function(query, swarmSlug) {
+        check(query, String);
+
+        this.unblock();
+
+        var user = Meteor.user();
+        if (!user) {
+            throw new Meteor.Error(401, 'unauthorized');
+        }
+        var swarm = Swarms.guardedMetaFind({slug: swarmSlug}, {limit: 1}).fetch().pop();
+        try {
+            query = query.replace(/-/g, ' '); // Replace dashes with spaces
+            return Networks.guardedMetaFind({slug: new RegExp('.*' + query + '.*', 'i'), swarms: {$nin: [swarm._id]}}, {limit: 30}).fetch();
         } catch (error) {
             Log.error(error);
             throw new Meteor.Error(400, 'networks_could_not_be_autocompleted');
@@ -508,6 +533,10 @@ Meteor.methods({
         try {
             Networks.remove(networkId);
             Meteor.users.update(user._id, {$pull: {networks: network._id}});
+            var network_swarms = Swarms.find({networks: {$in: [networkId]}}).fetch();
+            network_swarms.forEach(function(swarm) {
+                Swarms.update(swarm._id, {$pull: {networks: networkId}});
+            });
 
             return {
                 _id: networkId

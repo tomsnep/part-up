@@ -92,12 +92,12 @@ Template.app_profile_about.events({
         var tile = this;
         var tileId = tile._id;
         Partup.client.prompt.confirm({
-            title: __('pages-app-profile-about-tile-prompt-title'),
-            message: __('pages-app-profile-about-tile-prompt-message'),
+            title: TAPi18n.__('pages-app-profile-about-tile-prompt-title'),
+            message: TAPi18n.__('pages-app-profile-about-tile-prompt-message'),
             onConfirm: function() {
                 Meteor.call('tiles.remove', tileId, function(error, result) {
                     if (error) {
-                        Partup.client.notify.error(__(error));
+                        Partup.client.notify.error(TAPi18n.__(error));
                         return;
                     }
                     Partup.client.notify.success('Tile removed');

@@ -15,7 +15,6 @@ Package.onUse(function(api) {
         'aldeed:autoform',
         'chrismbeckett:toastr',
         'momentjs:moment',
-        'tap:i18n',
         'matb33:collection-hooks',
         'partup:client-copy-to-clipboard',
         'lifely:mout',
@@ -52,6 +51,7 @@ Package.onUse(function(api) {
         'collections/places_autocompletes.js',
         'collections/languages.js',
         'collections/tiles.js',
+        'collections/swarms.js',
         'schemas/activity.js',
         'schemas/update.js',
         'schemas/contribution.js',
@@ -68,12 +68,14 @@ Package.onUse(function(api) {
         'schemas/networkBulkinvite.js',
         'schemas/language.js',
         'schemas/tile.js',
+        'schemas/swarm.js',
         'transformers/activity.js',
         'transformers/partup.js',
         'transformers/user.js',
         'transformers/update.js',
         'transformers/contributions.js',
         'transformers/network.js',
+        'transformers/swarm.js',
         'helpers/parselocale.js',
         'helpers/mentions.js',
         'helpers/normalize.js',
@@ -119,6 +121,7 @@ Package.onUse(function(api) {
     api.export('Uploads');
     api.export('Languages');
     api.export('Tiles');
+    api.export('Swarms');
 
     // Globals
     api.export('get');

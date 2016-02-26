@@ -1,4 +1,44 @@
 # CHANGELOG
+
+## 1.16.8
+- Swarm page frame #192
+- Tribe explorer #193
+- Tribe tile #194
+- Swarm page settings / swarm #195
+- Swarm page settings / add tribes #196
+- Swarm page settings / Testimonials #197
+- Swarm page content blocks #198
+- Swarm page Upper section #199
+- Find tribes section of swarm page #200
+- Swarm overview and create in admin panel #208
+- Feat phraseapp refactor package.js and .phraseapp.yml
+
+
+## 1.16.7
+- fix(autocomplete): security patch
+
+## 1.16.6
+- fix(pricing): updated the new pricing policy fixing #163 
+- fix(motivation): give each comment field form a unique ID to prevent conflicting behaviour on the same update fixes #228
+- fix(comments): fix Comments posted to different message than commented on #236
+hack(comments): created a rerender hack for the update detail, this fixes the wrong comment bug for now
+- Copy changes as requested in issues #223 and #133
+- fix(file-uploader): fixed the RegEdge to allow for file upload in the Edge browser 
+
+## 1.16.5
+- feat(analytics): add second google analytics tracker, issue #160 
+- fix(notifications): mentions in partup messages now only generate one notification when partners are mentioned, fixes #150
+- fix(tribe-uppers): only show activate uppers on the tribe uppers overview, fixes #159
+- fix(verify-email): fix empty page when clicking the URL, Fix issue #143
+- fix(message): fix safari file upload, issue #161
+- feat(login): redirect to discover after login as requested in issue #177  
+- fix(discover): fix hidden private partups by fixing route authorization to get personal data, Fix #184
+- fix(signin): small fix in securitypatch for facebook and linkedin signups
+- fix(user): fix security hole where the user can edit his entire profile object from the client
+- fix(plain-register): compose profile server-side instead of pass profile object
+- fix(hovercontainer): uncomment mouseleave event to fix the bug where the hovercontainer never disappears
+
+
 ## 1.16.4
 - fix(partup): better input sanitation
 

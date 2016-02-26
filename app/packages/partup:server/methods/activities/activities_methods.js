@@ -127,6 +127,7 @@ Meteor.methods({
 
         try {
             Activities.update(activityId, {$set: {archived: false}});
+            Partups.update(partup._id, {$inc: {activity_count: 1}});
 
             // Post system message
             Partup.server.services.system_messages.send(upper, activity.update_id, 'system_activities_unarchived');
@@ -163,6 +164,7 @@ Meteor.methods({
 
         try {
             Activities.update(activityId, {$set: {archived: true}});
+            Partups.update(partup._id, {$inc: {activity_count: -1}});
 
             // Post system message
             Partup.server.services.system_messages.send(upper, activity.update_id, 'system_activities_archived');

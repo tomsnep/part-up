@@ -1,9 +1,9 @@
 Template.ResultTile.helpers({
     resultTitle: function(id) {
-        return __('pages-app-profile-about-result-' + id + '-title');
+        return TAPi18n.__('pages-app-profile-about-result-' + id + '-title');
     },
     resultDescription: function(id) {
-        return __('pages-app-profile-about-result-' + id + '-description', {name: Template.instance().data.user.profile.name});
+        return TAPi18n.__('pages-app-profile-about-result-' + id + '-description', {name: Template.instance().data.user.profile.name});
     },
     results: function() {
         return this.meurs.results;
@@ -30,14 +30,13 @@ Template.ResultTile.events({
             id: 'info'
         }, function(result) {
             // template.tiles.refresh();
-            console.log(result);
         });
     },
     'click [data-reset]': function(event, template) {
         event.preventDefault();
         Partup.client.prompt.confirm({
-            title: __('pages-app-profile-about-result-reset-title'),
-            message: __('pages-app-profile-about-result-reset-description'),
+            title: TAPi18n.__('pages-app-profile-about-result-reset-title'),
+            message: TAPi18n.__('pages-app-profile-about-result-reset-description'),
             onConfirm: function() {
                 Meteor.call('meurs.reset', function(error) {
                     if (error) {

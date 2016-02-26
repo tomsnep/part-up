@@ -18,7 +18,7 @@ Template.InviteToNetwork.helpers({
         var network = Networks.findOne(this.networkId);
 
         return {
-            message: __('invite-to-network-popup-message-prefill', {
+            message: TAPi18n.__('invite-to-network-popup-message-prefill', {
                 networkName: network.name,
                 networkDescription: network.description,
                 inviterName: Meteor.user().profile.name
@@ -42,7 +42,7 @@ AutoForm.hooks({
                     if (error) {
                         return Partup.client.notify.error(TAPi18n.__('base-errors-' + error.reason));
                     }
-                    Partup.client.notify.success(__('invite-to-network-popup-success'));
+                    Partup.client.notify.success(TAPi18n.__('invite-to-network-popup-success'));
                     Partup.client.popup.close();
                 });
 

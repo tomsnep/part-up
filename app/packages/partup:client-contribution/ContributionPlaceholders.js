@@ -1,8 +1,8 @@
 Partup.services.placeholders.contribution = {
     'hours': function () {
-        return __('contribution-form-hours-placeholder');
+        return TAPi18n.__('contribution-form-hours-placeholder');
     },
     'rate': function () {
-        return __('contribution-form-rate-placeholder');
+        return TAPi18n.__('contribution-form-rate-placeholder');
     }
 };

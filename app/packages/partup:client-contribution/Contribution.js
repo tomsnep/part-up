@@ -74,7 +74,7 @@ Template.Contribution.helpers({
     },
     rateTranslation: function() {
         var currency = this.contribution.currency || 'EUR';
-        return __('contribution-hourly-rate-' + currency);
+        return TAPi18n.__('contribution-hourly-rate-' + currency);
     }
 });
 

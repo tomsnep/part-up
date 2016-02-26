@@ -1,29 +1,30 @@
 var UpperProduct = function(type) {
-    this.name = __('pages-app-pricing-upper-' + type + '-name');
-    this.summary = __('pages-app-pricing-upper-' + type + '-summary');
-    this.price = __('pages-app-pricing-upper-' + type + '-price');
-    this.price_info = __('pages-app-pricing-upper-' + type + '-price-info');
+    this.name = TAPi18n.__('pages-app-pricing-upper-' + type + '-name');
+    this.summary = TAPi18n.__('pages-app-pricing-upper-' + type + '-summary');
+    this.price = TAPi18n.__('pages-app-pricing-upper-' + type + '-price');
+    this.price_info = TAPi18n.__('pages-app-pricing-upper-' + type + '-price-info');
     this.features = [
         {
-            name: __('pages-app-pricing-upper-' + type + '-feature'),
-            value: __('pages-app-pricing-upper-' + type + '-feature-value')
+            name: TAPi18n.__('pages-app-pricing-upper-' + type + '-feature'),
+            value: TAPi18n.__('pages-app-pricing-upper-' + type + '-feature-value')
         }
     ];
     this.type = type;
 };
 
-var TribeProduct = function(type) {
-    this.name = __('pages-app-pricing-tribe-' + type + '-name');
-    this.summary = __('pages-app-pricing-tribe-' + type + '-summary');
-    this.price = __('pages-app-pricing-tribe-' + type + '-price');
-    this.price_info = __('pages-app-pricing-tribe-' + type + '-price-info');
+var TribeProduct = function(type, more) {
+    this.name = TAPi18n.__('pages-app-pricing-tribe-' + type + '-name');
+    this.summary = TAPi18n.__('pages-app-pricing-tribe-' + type + '-summary');
+    this.price = TAPi18n.__('pages-app-pricing-tribe-' + type + '-price');
+    this.price_info = TAPi18n.__('pages-app-pricing-tribe-' + type + '-price-info');
     this.features = [
         {
-            name: __('pages-app-pricing-tribe-' + type + '-feature1'),
-            value: __('pages-app-pricing-tribe-' + type + '-feature1-value')
+            name: TAPi18n.__('pages-app-pricing-tribe-' + type + '-feature1'),
+            value: TAPi18n.__('pages-app-pricing-tribe-' + type + '-feature1-value'),
+            more: more ? TAPi18n.__('pages-app-pricing-tribe-' + type + '-feature1-more') : false
         }, {
-            name: __('pages-app-pricing-tribe-' + type + '-feature2'),
-            value: __('pages-app-pricing-tribe-' + type + '-feature2-value')
+            name: TAPi18n.__('pages-app-pricing-tribe-' + type + '-feature2'),
+            value: TAPi18n.__('pages-app-pricing-tribe-' + type + '-feature2-value')
         }
     ];
     this.type = type;
@@ -42,9 +43,8 @@ Template.app_pricing.helpers({
     tribe_products: function() {
         return [
             new TribeProduct('socialimpact'),
-            new TribeProduct('small'),
-            new TribeProduct('medium'),
-            new TribeProduct('large')
+            new TribeProduct('starterskit', true),
+            new TribeProduct('enterprise')
         ];
     }
 });

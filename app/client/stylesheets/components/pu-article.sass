@@ -56,14 +56,6 @@
             display: table-caption
             margin-bottom: 16px
 
-            &:after
-                content: ''
-                width: 60px
-                height: 2px
-                background-color: $color-primary
-                display: block
-                margin-top: 30px
-
         .pu-sub-text,
         .pu-sub-image
             vertical-align: top
@@ -112,3 +104,98 @@
         padding-left: 0
         padding-right: 0
 
+    &-videos
+        font-size: 0
+
+        h2
+            font-weight: normal
+        p
+            font-size: 14px
+
+        section, .pu-video
+            width: 100%
+            display: inline-block
+            vertical-align: middle
+            margin: 0
+            //margin-bottom: 40px
+
+        section
+            padding: 0 10px
+            margin-bottom: 20px
+
+        .pu-video
+            width: 100%
+            position: relative
+            margin-bottom: 40px
+
+            figure,
+            iframe
+                position: absolute
+                top: 0
+                right: 0
+                bottom: 0
+                left: 0
+
+            &:before
+                content: ''
+                display: block
+                padding-top: 56.25% // 100% x 56.25% = 16:9
+
+        @extend %clearfix
+
+        .pu-sub-medialayout
+            .pu-video
+                width: 100%
+                margin-bottom: 0
+
+            &-cell
+                margin-bottom: 30px
+
+                &:last-child
+                    margin-bottom: 0
+
+            + .pu-sub-medialayout
+                margin-top: 40px
+                margin-bottom: -30px
+
+            &-desktop
+                display: none
+
+        @media screen and (min-width: $breakpoint-tablet)
+            section
+                padding: 0 10px
+
+        @media screen and (min-width: $breakpoint-desktop)
+            section
+                padding: 0 20px
+
+            .pu-sub-medialayout
+                display: table
+                $spacing: 30px
+                margin: 0 (-$spacing)
+                margin-top: 0
+
+                &-cell
+                    display: table-cell
+                    width: 50%
+                    margin-bottom: 0
+                    vertical-align: middle
+                    padding: 0 $spacing
+
+
+                + .pu-sub-medialayout
+                    margin-bottom: -20px
+
+                &-desktop
+                    display: block
+
+                &-mobile
+                    display: none
+
+        @media screen and (min-width: 1150px)
+            section
+                padding: 0 30px
+
+        @media screen and (min-width: 1340px)
+            section
+                padding: 0 50px

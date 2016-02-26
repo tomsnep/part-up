@@ -5,7 +5,7 @@ Template.AdminCreateTribe.onCreated(function() {
 
 var placeholders = {
     'name': function() {
-        return __('pages-modal-create-details-form-name-placeholder');
+        return TAPi18n.__('pages-modal-create-details-form-name-placeholder');
     }
 };
 
@@ -65,7 +65,7 @@ Template.AdminCreateTribe.events({
         var networkId = $(event.currentTarget).data('network-remove');
         Meteor.call('networks.remove', networkId, function(error) {
             if (error) {
-                Partup.client.notify.error(__('pages-modal-admin-createtribe-error-' + error.reason));
+                Partup.client.notify.error(TAPi18n.__('pages-modal-admin-createtribe-error-' + error.reason));
                 return;
             }
             Partup.client.notify.success('Tribe removed correctly');
@@ -83,7 +83,7 @@ AutoForm.hooks({
 
             Meteor.call('networks.insert', insertDoc, function(error, networkId) {
                 if (error) {
-                    Partup.client.notify.error(__('pages-modal-admin-createtribe-error-' + error.reason));
+                    Partup.client.notify.error(TAPi18n.__('pages-modal-admin-createtribe-error-' + error.reason));
                     return;
                 }
                 Partup.client.notify.success('Tribe inserted correctly');

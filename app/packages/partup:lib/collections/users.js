@@ -179,7 +179,13 @@ Meteor.users.findForContribution = function(contribution) {
  */
 Meteor.users.findActiveUsers = function(selector, options) {
     selector = selector || {};
+    options = options || {};
+    if (!options.fields) {
+        options.fields = publicUserFields;
+    }
+
     selector.deactivatedAt = {$exists: false};
+    options.fields = publicUserFields;
     return Meteor.users.find(selector, options);
 };
 
@@ -328,6 +334,16 @@ User = function(user) {
         isSomeNetworkAdmin: function() {
             if (!user) return false;
             return !!Networks.findOne({admin_id: user._id});
+        },
+
+        /**
+         * Check if user is admin of a swarm
+         *
+         * @return {Boolean}
+         */
+        isSwarmAdmin: function(swarmId) {
+            if (!user) return false;
+            return !!Swarms.findOne({_id: swarmId, admin_id: user._id});
         },
 
         /**
