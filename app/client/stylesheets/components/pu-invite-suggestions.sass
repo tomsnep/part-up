@@ -8,6 +8,12 @@
         padding: 20px 0
         border-bottom: 2px solid #eee
 
+        > a, > p
+            display: table-cell
+
+        > a:first-child
+            width: 70px
+
     .pu-sub-image
         display: table-cell
         vertical-align: middle
@@ -21,6 +27,10 @@
         display: table-cell
         padding: 0 0 0 10px
         vertical-align: middle
+        max-width: 300px
+        overflow: hidden
+        text-overflow: ellipsis
+        white-space: nowrap
 
     .pu-sub-name
         color: inherit
@@ -38,6 +48,7 @@
         display: table-cell
         text-align: right
         vertical-align: middle
+        min-width: 200px
 
     .pu-button
         margin: 10px 0 0 10px
