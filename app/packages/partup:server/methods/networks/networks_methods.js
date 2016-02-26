@@ -563,7 +563,7 @@ Meteor.methods({
         if (!User(user).isAdmin()) throw new Meteor.Error(401, 'unauthorized');
 
         var author = Meteor.users.findOne(fields.author_id);
-        if (!author) throw new Meteor.Error(400, 'author does not exist');
+        if (!author) throw new Meteor.Error(400, 'user_could_not_be_found');
 
         var featured = {
             'active': true,

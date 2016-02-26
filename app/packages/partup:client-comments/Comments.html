@@ -57,8 +57,11 @@
                             <div>
                                 {{#if partupEquals _id state.editCommentId}}
                                     {{#autoForm schema=formSchema id=updateCommentId class='pu-row pu-state-expanded' doc=commentDoc}}
-                                        <div class="cell stretch">
-                                            {{> afFieldInput type='textarea' name='content' data-update-comment="" data-submit="return" class='pu-textarea pu-textarea-grow pu-sub-comment' rows=state.updateMessageRows }}
+                                        <div class="cell stretch {{#if state.updateMessageTooLong}}pu-state-error{{/if}}">
+                                            {{> afFieldInput type='textarea' name='content' data-update-comment=updateCommentId data-submit="return" class='pu-textarea pu-textarea-grow pu-sub-comment' rows=state.updateMessageRows }}
+                                            {{#if state.updateMessageTooLong}}
+                                                <span class="pu-sub-error">{{_ 'widgetcommentfield-comment-maxreached'}}</span>
+                                            {{/if}}
                                         </div>
                                         <div class="cell">
                                             <button type="submit" class="pu-button pu-button-inputheight {{# if state.submittingForm }}pu-state-disabled pu-state-loading{{/ if }}">
@@ -101,7 +104,7 @@
             >
                 <li class="{{#if state.messageTooLong}}pu-state-error{{/if}}">
                     {{# if isMotivation }}
-                        {{> afFieldInput type='textarea' name='content' class='pu-textarea pu-sub-comment' data='commentfield' data-submit="return" placeholder=placeholders.comment }}
+                        {{> afFieldInput type='textarea' name='content' class='pu-textarea pu-sub-comment' data='commentfield' data-submit="return" placeholder=placeholders.comment data-validate-keyup=""}}
                     {{ else }}
                         {{> afFieldInput type='textarea' name='content' class='pu-textarea pu-textarea-grow pu-sub-comment' data='commentfield' data-submit="return" placeholder=placeholders.comment rows=state.messageRows }}
                     {{/ if }}

@@ -228,7 +228,7 @@ Meteor.methods({
 
         } catch (error) {
             Log.error(error);
-            throw new Meteor.Error(400, 'partups_could_not_be_featured');
+            throw new Meteor.Error(400, 'partup_could_not_be_featured');
         }
     },
 
@@ -446,7 +446,7 @@ Meteor.methods({
         var upper = Meteor.user();
 
         if (!upper) {
-            throw new Meteor.Error(401, 'Unauthorized');
+            throw new Meteor.Error(401, 'unauthorized');
         }
 
         var users = Partup.server.services.matching.matchUppersForPartup(partupId, options);
