@@ -15,7 +15,7 @@ Package.onUse(function(api) {
     api.addFiles([
 
         'DropboxChooser.html',
-        'DropboxChooser.js'
+        'DropboxChooser.ctrl.js'
 
     ], 'client');
 

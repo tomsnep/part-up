@@ -117,3 +117,5 @@ ejson
 spacebars
 check
 meteorhacks:kadira-profiler
+mike:mocha
+velocity:console-reporter
