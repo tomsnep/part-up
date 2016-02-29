@@ -103,6 +103,14 @@
         width: 120px
         height: 120px
 
+    &-responsive
+        width: 160px
+        height: 160px
+
+        @media screen and (max-height: 768px)
+            width: 80px
+            height: 80px
+
     &-border
         border: 2px solid $color-border-light
     &-square
@@ -168,6 +176,18 @@
                 width: 48px
                 height: 48px
                 margin-right: -20px
+
+        &-extralarge
+            padding-right: 20px
+            > .pu-avatar
+                border: 4px solid #fff
+                width: 56px
+                height: 56px
+                margin-right: -20px
+
+        &-blue
+            > .pu-avatar
+                border: 4px solid $color-primary
 
     &-plain
         width: 40px
