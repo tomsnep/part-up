@@ -22,40 +22,46 @@ Template.app_profile_about.onCreated(function() {
 
 Template.app_profile_about.onRendered(function() {
     var template = this;
+    var profileId = template.data.profileId;
 
     template.handle = null;
     template.refresh = function() {
         if (template.handle) template.handle.stop();
 
-        template.handle = template.subscribe('tiles.profile', template.data.profileId, {
+        template.handle = template.subscribe('tiles.profile', profileId, {
             onReady: function() {
-                var tiles = Tiles.find({upper_id: template.data.profileId}).fetch();
-                var user = Meteor.users.findOne(template.data.profileId);
-                var isMine = Meteor.userId() === template.data.profileId;
+                var tiles = Tiles.find({upper_id: profileId}).fetch();
+                var user = Meteor.users.findOne(profileId);
 
-                if (!tiles || !tiles.length && isMine) {
-                    tiles.push({
-                        type: 'image',
-                        placeholder: true
-                    });
-                }
+                var meurs = user.profile.meurs || {};
 
-                var meurs = {};
-                if (user.profile.meurs) {
-                    meurs = user.profile.meurs;
-                }
+                var profileIsCurrentUser = Meteor.userId() === profileId;
+                var profileHasResults = meurs.results && meurs.results.length;
+                var profileDoesNotHaveMediaTiles = !tiles || !tiles.length;
 
-                if ((meurs.results && meurs.results.length) || isMine) {
-                    tiles.unshift({
+                var addResults = function() {
+                    if (!profileHasResults || !profileIsCurrentUser) return;
+                    template.columnTilesLayout.addTiles([{
                         type: 'result',
                         user: user,
                         meurs: meurs
-                    });
-                }
+                    }]);
+                };
 
-                // Add tiles to the column layout
+                var addTiles = function() {
+                    if (profileDoesNotHaveMediaTiles && profileIsCurrentUser) {
+                        template.columnTilesLayout.addTiles([{
+                            type: 'image',
+                            placeholder: true
+                        }]);
+                    } else {
+                        template.columnTilesLayout.addTiles(tiles);
+                    }
+                };
+
                 template.columnTilesLayout.clear(function() {
-                    template.columnTilesLayout.addTiles(tiles);
+                    addResults();
+                    Meteor.defer(addTiles);
                 });
             }
         });
@@ -79,12 +85,6 @@ Template.app_profile_about.events({
             id: 'new-' + type
         }, function(result) {
             template.refresh();
-        });
-    },
-    'click [data-start-test]': function(event, template) {
-        event.preventDefault();
-        Meteor.call('meurs.create_test', function(error, url) {
-            if (url) document.location.href = url;
         });
     },
     'click [data-delete]': function(event, template) {
@@ -114,7 +114,7 @@ Template.app_profile_about.helpers({
         var user = Meteor.users.findOne(this.profileId);
         return User(user).getFirstname();
     },
-    isMine: function() {
+    profileIsCurrentUser: function() {
         return this.profileId === Meteor.userId();
     }
 });

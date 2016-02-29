@@ -1,3 +1,6 @@
+Template.ResultTile.onCreated(function() {
+    console.log(this)
+})
 Template.ResultTile.helpers({
     resultTitle: function(id) {
         return TAPi18n.__('pages-app-profile-about-result-' + id + '-title');
@@ -19,7 +22,7 @@ Template.ResultTile.helpers({
         return this.user._id === Meteor.userId();
     },
     isLoading: function() {
-        return this.meurs.initiating_test && !this.meurs.fetched_results;
+        return false;//this.meurs.initiating_test && !this.meurs.fetched_results;
     }
 });
 
@@ -30,6 +33,13 @@ Template.ResultTile.events({
             id: 'info'
         }, function(result) {
             // template.tiles.refresh();
+        });
+    },
+    'click [data-start-test]': function(event, template) {
+        event.preventDefault();
+        Meteor.call('meurs.create_test', function(error, url) {
+            console.log(error, url)
+            if (url) document.location.href = url;
         });
     },
     'click [data-reset]': function(event, template) {
