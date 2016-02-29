@@ -45,7 +45,7 @@
         <li>
             <figure class="pu-avatar" style="background-image: url('{{ partupImageUrl id=image }}');"></figure>
             <p class="pu-sub-name">
-                <a href="{{pathFor 'network-detail' slug }}">{{ name }}</a>,
+                <a href="{{pathFor 'network' slug }}">{{ name }}</a>,
                 ({{ privacyType privacy_type }}),
                 ({{ upperCount . }} uppers),
                 (<a href="{{ pathFor 'profile' _id=getNetworkAdmin._id }}" data-hovercontainer="HoverContainer_upper" data-hovercontainer-context="{{ getNetworkAdmin._id }}"><figure class="pu-avatar pu-avatar-micro" style="background-image: url('{{ partupImageUrl id=getNetworkAdmin.profile.image }}');"></figure> {{ getNetworkAdmin.profile.name }}</a>)

@@ -545,12 +545,12 @@ Router.route('/pricing', {
 /* Networks */
 /*************************************************************/
 Router.route('/tribes/:slug', {
-    name: 'network-detail',
+    name: 'network',
     where: 'client',
     yieldRegions: {
         'app':                      {to: 'main'},
-        'app_network':              {to: 'app'},
-        'app_network_partups':      {to: 'app_network'}
+        'app_network_start':        {to: 'app'},
+        // 'app_network_start':      {to: 'app_network'}
     },
     data: function() {
         return {
@@ -570,6 +570,21 @@ Router.route('/tribes/:slug', {
         }
 
         this.next();
+    }
+});
+
+Router.route('/tribes/:slug/partups', {
+    name: 'network-detail',
+    where: 'client',
+    yieldRegions: {
+        'app':                      {to: 'main'},
+        'app_network':              {to: 'app'},
+        'app_network_partups':      {to: 'app_network'}
+    },
+    data: function() {
+        return {
+            networkSlug: this.params.slug
+        };
     }
 });
 
