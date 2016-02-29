@@ -24,16 +24,19 @@ Partup.client.strings = {
 
     /**
      * Emoji helper
-     * turns text into emojis
-     * See: https://github.com/lookback/meteor-emoji
+     *
+     * turns text into emojis using emoji.js
+     * See: https://github.com/iamcal/js-emoji
+     * @memberof Partup.client
+     * @param {String} string to emoji
      */
     emojify: function(stringToEmoji) {
-        
+
         if (typeof stringToEmoji !== 'string') {
             return stringToEmoji;
         }
 
-        return emoji.replace_colons(emoji.replace_emoticons(stringToEmoji))
+        return emoji.replace_colons(emoji.replace_emoticons(stringToEmoji));
     },
 
     tagsStringToArray: function(tagString) {

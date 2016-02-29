@@ -142,7 +142,7 @@ Template.Update.helpers({
 
             messageContent: function() {
                 return Partup.client.strings.emojify(
-                    Partup.client.strings.newlineToBreak(Partup.helpers.mentions.decode(Partup.client.sanitize(self.new_value)));
+                    Partup.client.strings.newlineToBreak(Partup.helpers.mentions.decode(Partup.client.sanitize(self.new_value)))
                 );
             },
 
