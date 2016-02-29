@@ -19,10 +19,10 @@ Template.PartupTile.onCreated(function() {
     var template = this;
 
     // Partup image reactive hover state
-    template.hovering = new ReactiveVar(false);
 
     // Transform partup
     var partup = template.data.partup;
+    template.data.partup.hovering = new ReactiveVar(false);
 
     // -- Partup details
     partup.name = Partup.helpers.url.capitalizeFirstLetter(partup.name);
@@ -125,16 +125,16 @@ Template.PartupTile.onRendered(function() {
 });
 
 Template.PartupTile.helpers({
-    avatarPosition: function() {
-        return Template.instance().hovering.get() ? this.position.hover : this.position.default;
+    templateName: function() {
+        return this.archived_at ? 'PartupTile_archived' : 'PartupTile_active';
     }
 });
 
 Template.PartupTile.events({
     'mouseenter .pu-partupcircle': function(event, template) {
-        template.hovering.set(true);
+        template.data.partup.hovering.set(true);
     },
     'mouseleave .pu-partupcircle': function(event, template) {
-        template.hovering.set(false);
+        template.data.partup.hovering.set(false);
     }
 });
