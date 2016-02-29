@@ -54,16 +54,17 @@ Template.app_profile_supporter_partups.onCreated(function() {
     template.initialize = function(filter) {
         template.getArchivedPartups = filter === 'archived' ? true : false;
 
+        var query = {};
+        query.userId =  Meteor.userId();
+        query.token =  Accounts._storedLoginToken();
+        query.archived = template.getArchivedPartups;
         // Get count
         template.states.partupCountLoading.set(true);
-        HTTP.get('/users/' + template.data.profileId + '/supporterpartups/count' + mout.queryString.encode({
-            userId:  Meteor.userId(),
-            token:  Accounts._storedLoginToken(),
-            archived: template.getArchivedPartups
-        }), function(error, response) {
+        HTTP.get('/users/' + template.data.profileId + '/supporterpartups/count' + mout.queryString.encode(query), function(error, response) {
+            if (query.archived !== template.getArchivedPartups) return;
+
             template.states.partupCountLoading.set(false);
             if (error || !response || !mout.lang.isString(response.content)) { return; }
-
             var content = JSON.parse(response.content);
             template.partupCount.set(content.count);
         });
@@ -90,6 +91,8 @@ Template.app_profile_supporter_partups.onCreated(function() {
                 Authorization: 'Bearer ' + Accounts._storedLoginToken()
             }
         }, function(error, response) {
+            if (query.archived !== template.getArchivedPartups) return;
+
             if (error || !response.data.partups || response.data.partups.length === 0) {
                 template.states.loadingInfiniteScroll = false;
                 template.states.pagingEndReached.set(true);
