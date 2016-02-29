@@ -1,0 +1,42 @@
+<template name="app_network_start">
+    <article class="pu-page pu-page-overlay">
+        <div class="pu-tribe-background {{#if state.loaded}}pu-state-loaded{{/if}}"></div>
+
+        <div class="pu-composition pu-composition-tribestart">
+            {{#unless state.loaded}}
+                {{> Spinner color='inverted' }}
+            {{else}}
+                <nav><a href="{{ pathFor route='network-detail' slug=data.network.slug }}" class="pu-button pu-button-icononly"><i class="picon-times"></i></a></nav>
+                <header class="pu-highlight pu-highlight-inverted">
+                    <figure class="pu-avatar pu-avatar-responsive pu-avatar-square" style="{{#with data.network.image }}background-image:url('{{ partupImageUrl id=. store='360x360'}}');{{/with }}"></figure>
+                    <h1>{{data.network.name}}</h1>
+                    <h3>{{data.network.description}}</h3>
+                    {{#if data.network.tags.length}}
+                        <ul class="pu-list pu-list-horizontal pu-list-tags">
+                            {{#each data.network.tags}}
+                                <li><a href="#" class="pu-tag pu-tag-dark">{{.}}</a></li>
+                            {{/each}}
+                        </ul>
+                    {{/if}}
+                    <!-- join or leave button -->
+                    {{> app_network_joinbutton network=data.network }}
+                </header>
+                <footer>
+                    <section>
+                        <ul class="pu-avatar-stack pu-avatar-stack-extralarge pu-avatar-stack-blue">
+                            {{#each data.network.uppers}}<li class="pu-avatar" style="{{#with image}}background-image: url('{{ partupImageUrl id=. store='80x80' }}'){{/with}}" data-hovercontainer="HoverContainer_upper" data-hovercontainer-context="{{ _id }}"></li>{{/each}}
+                        </ul>
+                        <a class="pu-button pu-button-translucent" href="{{ pathFor route='network-detail' slug=data.network.slug }}">Find your part-up</a>
+                    </section>
+                    <section>
+                        <ul class="pu-avatar-stack pu-avatar-stack-extralarge pu-avatar-stack-blue">
+                            {{#each data.network.uppers}}<li class="pu-avatar" style="{{#with image}}background-image: url('{{ partupImageUrl id=. store='80x80' }}'){{/with}}" data-hovercontainer="HoverContainer_upper" data-hovercontainer-context="{{ _id }}"></li>{{/each}}
+                        </ul>
+                        <a class="pu-button pu-button-translucent" href="{{ pathFor route='network-detail' slug=data.network.slug }}">Join the activity</a>
+                    </section>
+                </footer>
+            {{/unless}}
+        </div>
+
+    </article>
+</template>

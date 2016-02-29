@@ -58,12 +58,18 @@ Package.onUse(function(api) {
             'app/network/network.js',
 
             // App: network tabs
-            'app/network/network-partups.html',
-            'app/network/network-partups.js',
-            'app/network/network-uppers.html',
-            'app/network/network-uppers.js',
-            'app/network/network-closed.html',
-            'app/network/network-closed.js',
+            'app/network/start.html',
+            'app/network/start.js',
+
+            'app/network/partials/joinbutton.html',
+            'app/network/partials/joinbutton.js',
+
+            'app/network/tabs/partups.html',
+            'app/network/tabs/partups.js',
+            'app/network/tabs/uppers.html',
+            'app/network/tabs/uppers.js',
+            'app/network/tabs/closed.html',
+            'app/network/tabs/closed.js',
 
             // App:profile
             'app/profile/profile.html',
