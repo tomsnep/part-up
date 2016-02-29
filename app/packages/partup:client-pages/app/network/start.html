@@ -1,6 +1,5 @@
 <template name="app_network_start">
     <article class="pu-page pu-page-overlay">
-        <div class="pu-tribe-background {{#if state.loaded}}pu-state-loaded{{/if}}"></div>
 
         <div class="pu-composition pu-composition-tribestart">
             {{#unless state.loaded}}
@@ -36,6 +35,8 @@
                     </section>
                 </footer>
             {{/unless}}
+
+            <div class="pu-tribebackground {{#if state.loaded}}pu-state-loaded{{/if}}"></div>
         </div>
 
     </article>
