@@ -31,11 +31,12 @@
         list-style: none
         z-index: 4
         pointer-events: none
+        padding-right: 7px
 
         li
             display: block
             margin: 10px 0 0
-            transform: translateX(-100%)
+            transform: translateX(calc(-100% - 7px))
             transition: transform .2s ease-out
 
         .pu-tag
