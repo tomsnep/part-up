@@ -558,20 +558,34 @@ Router.route('/tribes/:slug', {
         };
     },
     onBeforeAction: function() {
-        var networkSlug = this.params.slug;
-        var accessToken = this.params.query.token;
-        var redirect = this.params.query.redirect ? JSON.parse(this.params.query.redirect) : true;
+        var route = this;
+        var networkSlug = route.params.slug;
+        var accessToken = route.params.query.token;
+        var showStartpage = route.params.query.show;
+        var userId = Meteor.userId();
         if (networkSlug && accessToken) {
             Session.set('network_access_token', accessToken);
             Session.set('network_access_token_for_network', networkSlug);
         }
-        if (Meteor.userId() && networkSlug && accessToken) {
+        if (userId && networkSlug && accessToken) {
             Meteor.call('networks.convert_access_token_to_invite', networkSlug, accessToken);
         }
-        if (!redirect) {
-            this.next();
+        if (showStartpage === 'true') {
+            // console.log('showing startpage');
+            route.next();
+        } else if (showStartpage === 'false') {
+            // console.log('redirecting to network-detail');
+            route.renderRoute('network-detail');
         } else {
-            this.renderRoute('network-detail');
+            // console.log('checking if user is a member');
+            Meteor.call('users.member_of_network', userId, networkSlug, function(error, response) {
+                if (response.has_member) {
+                    route.renderRoute('network-detail');
+                } else {
+                    route.render();
+                }
+            });
+            route.stop();
         }
     }
 });
