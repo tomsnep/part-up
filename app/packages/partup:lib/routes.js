@@ -561,7 +561,6 @@ Router.route('/tribes/:slug', {
         var networkSlug = this.params.slug;
         var accessToken = this.params.query.token;
         var redirect = this.params.query.redirect ? JSON.parse(this.params.query.redirect) : true;
-        console.log(redirect);
         if (networkSlug && accessToken) {
             Session.set('network_access_token', accessToken);
             Session.set('network_access_token_for_network', networkSlug);
@@ -572,8 +571,7 @@ Router.route('/tribes/:slug', {
         if (!redirect) {
             this.next();
         } else {
-            this.stop();
-            Meteor.call('');
+            this.renderRoute('network-detail');
         }
     }
 });
@@ -901,6 +899,17 @@ if (Meteor.isClient) {
         if (data) currentRoute.state.set('data', data);
         currentRoute.render('app', {to: 'main'}); // this is so it also works for modals
         currentRoute.render('app_notfound', {to: 'app'});
+    };
+
+    // renders the yield regions of a different route
+    // basically a redirect without the redirect
+    // users can still use the browser "back" button
+    RouteController.prototype.renderRoute = function(routeName) {
+        var self = this;
+        var regions = Router.routes[routeName].options.yieldRegions;
+        _.each(regions, function(item, key) {
+            self.render(key, item);
+        });
     };
 
     Router.replaceYieldTemplate = function(newTemplate, target) {
