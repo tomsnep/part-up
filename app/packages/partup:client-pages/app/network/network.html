@@ -1,8 +1,9 @@
 <template name="app_network">
 
     <article class="pu-page pu-page-tinted pu-page-network">
-            <header class="pu-sub-pageheader pu-sub-pageheader-layered {{# if shrinkHeader }}pu-sub-pageheader-layered-shrinked{{/ if }}">
+            <header class="pu-sub-pageheader pu-sub-pageheader-layered {{# if state.shrinkHeader }}pu-sub-pageheader-layered-shrinked{{/ if }}">
                 <!-- profile -->
+
                 <style>
                     .pu-coverheader:after {
                         background-image: url(/images/about-image.jpg);
@@ -10,11 +11,13 @@
                 </style>
                 <section class="pu-coverheader">
                     <div class="pu-wrap pu-wrap-columnlayout pu-tribeheader">
-                        {{# with network }}
+                        {{# with data.network }}
                             <figure class="pu-avatar pu-avatar-square" style="{{#with image }}background-image:url('{{ partupImageUrl id=. store='360x360'}}');{{/with }}">
                             </figure>
                             <h1>{{ name }}</h1>
-                            <a href="{{ pathFor route='network' slug=slug query='redirect=false'}}" class="pu-button pu-button-darktext"><i class="picon-photo"></i>Show start</a>
+                            <a href="{{ pathFor route='network' slug=slug query='show=true'}}" class="pu-button pu-button-darktext"><i class="picon-photo"></i>Show start</a>
+                        {{ else }}
+                            {{> Spinner color='inverted'}}
                         {{/ with }}
                     </div>
                     <div class="pu-tribebackground pu-state-loaded"></div>
@@ -26,14 +29,14 @@
 
                             <ul class="pu-list pu-list-horizontal">
                                 <li>
-                                    <a href="{{ pathFor route='network-detail' slug=network.slug }}"
+                                    <a href="{{ pathFor route='network-detail' slug=data.network.slug }}"
                                         class="pu-button pu-button-nav pu-button-nav-secondary {{ isActiveRoute name='network-detail' class='pu-state-active'}}">
                                         <i class="picon-globe"></i>
                                         {{_ 'pages-app-network-tab-button-partups'}}
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="{{ pathFor route='network-uppers' slug=network.slug }}"
+                                    <a href="{{ pathFor route='network-uppers' slug=data.network.slug }}"
                                         class="pu-button pu-button-nav pu-button-nav-secondary {{ isActiveRoute name='network-uppers' class='pu-state-active'}}">
                                         <i class="picon-chart"></i>
                                         {{_ 'pages-app-network-tab-button-uppers'}}
@@ -43,7 +46,7 @@
 
                             <!-- actions -->
                             <ul class="pu-list pu-list-horizontal pu-sub-right">
-                                {{# with network }}
+                                {{# with data.network }}
 
                                     <!-- settings button -->
                                     {{# if isAdmin currentUser._id }}
@@ -74,20 +77,21 @@
                         </nav>
                     </div>
                 </section>
+
             </header>
 
             <div class="pu-sub-pagecontent">
                 <div class="pu-wrap pu-wrap-columnlayout">
                     <section class="pu-composition pu-composition-network">
-                        {{# if network }}
-                            {{# if network.isClosedForUpper currentUserId }}
-                                {{> app_network_closed network=network.name }}
+                        {{# if data.network }}
+                            {{# if data.network.isClosedForUpper currentUserId }}
+                                {{> app_network_closed network=data.network.name }}
                             {{ else }}
 
                                 <!-- We use refresh=. to trigger a yield refresh when networkId changes.
                                      'refresh' is not an accepted attribute of yield, but in general,
                                      template-includes will re-run when (one of) its attributes change.  -->
-                                {{> yield region='app_network' refresh=networkSlug refresh2=joinToggle }}
+                                {{> yield region='app_network' refresh=data.networkSlug refresh2=joinToggle }}
 
                             {{/ if }}
                         {{/ if }}
