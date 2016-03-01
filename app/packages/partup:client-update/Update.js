@@ -15,23 +15,6 @@
 // jscs:enable
 
 /*************************************************************/
-/* Helper functions */
-/*************************************************************/
-var budgetDisplay = function(type, value, currency) {
-    var currency = currency || 'EUR';
-    if (type === 'charity') {
-        return TAPi18n.__('update-budget-type-none');
-    } else if (type === 'enterprising') {
-        return TAPi18n.__('update-budget-type-none');
-    } else if (type === 'commercial') {
-        return TAPi18n.__('update-budget-type-money-' + currency, value);
-    } else if (type === 'organization') {
-        return TAPi18n.__('update-budget-type-money-' + currency, value);
-    }
-    return TAPi18n.__('update-budget-type-none');
-};
-
-/*************************************************************/
 /* Widget created */
 /*************************************************************/
 Template.Update.onCreated(function() {
@@ -151,9 +134,6 @@ Template.Update.helpers({
                 }
             }
         };
-    },
-    editMessagePopupId: function() {
-        return 'edit-message-' + this.updateId;
     }
 });
 

@@ -15,7 +15,7 @@
         <article class="pu-block pu-block-message">
             <p class="pu-paragraph">{{{ partupAutolink messageContent }}}</p>
             {{# if type_data.images }}
-                {{> ImageGallery images=images updateId=_id}}
+                {{> ImageGallery images=type_data.images updateId=_id}}
             {{/ if}}
             {{#if partupEquals upper_id currentUserId }}
                 <footer class="pu-sub-useractions">
