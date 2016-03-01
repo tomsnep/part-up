@@ -44,10 +44,6 @@ Partup.schemas.entities.network = new SimpleSchema([networkBaseSchema, {
         type: String,
         regEx: SimpleSchema.RegEx.Id
     },
-    active_partners: {
-        type: [String],
-        optional: true
-    },
     admin_id: {
         type: String,
         regEx: SimpleSchema.RegEx.Id
