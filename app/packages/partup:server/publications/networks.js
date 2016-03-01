@@ -66,38 +66,30 @@ Meteor.publishComposite('networks.one', function(networkSlug) {
  * @param {Object} urlParams
  * @param {Object} parameters
  */
-Meteor.publishComposite('networks.one.partups', function(urlParams, parameters) {
-    if (this.unblock) this.unblock();
+Meteor.routeComposite('/networks/:slug/partups', function(request, parameters) {
+    check(parameters.slug, String);
 
-    check(urlParams, {
-        slug: Match.Optional(String)
-    });
-
-    parameters = parameters || {};
-    if (parameters.limit) parameters.limit = parseInt(parameters.limit);
-    if (parameters.skip) parameters.skip = parseInt(parameters.skip);
-
-    check(parameters, {
-        limit: Match.Optional(Number),
-        skip: Match.Optional(Number),
+    check(parameters.query, {
+        limit: Match.Optional(String),
+        skip: Match.Optional(String),
         userId: Match.Optional(String),
         archived: Match.Optional(String)
     });
 
     var options = {};
-    if (parameters.limit) options.limit = parameters.limit;
-    if (parameters.skip) options.skip = parameters.skip;
+    if (parameters.query.limit) options.limit = parseInt(parameters.query.limit);
+    if (parameters.query.skip) options.skip = parseInt(parameters.query.skip);
 
-    var selector = {
-        archived: (parameters.archived) ? JSON.parse(parameters.archived) : false
+    var findParameters = {
+        archived: (parameters.query.archived === 'true') ? true : false
     };
 
     return {
         find: function() {
-            var network = Networks.guardedFind(this.userId, {slug: urlParams.slug}).fetch().pop();
+            var network = Networks.guardedFind(this.userId, {slug: parameters.slug}).fetch().pop();
             if (!network) return;
 
-            return Partups.findForNetwork(network, selector, options, this.userId);
+            return Partups.findForNetwork(network, findParameters, options, this.userId);
         },
         children: [
             {find: Images.findForPartup},
@@ -110,9 +102,7 @@ Meteor.publishComposite('networks.one.partups', function(urlParams, parameters) 
             ]}
         ]
     };
-}, {url: 'networks/:slug/partups', getArgsFromRequest: function(request) {
-    return [request.params, request.query];
-}});
+});
 
 /**
  * Publish all uppers in a network
