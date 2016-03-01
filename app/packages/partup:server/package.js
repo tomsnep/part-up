@@ -109,6 +109,7 @@ Package.onUse(function(api) {
         'services/profile_completeness_service.js',
         'services/partup_popularity_calculator_service.js',
         'services/swarms_service.js',
+        'services/networks_service.js',
         'seo/routes.js',
         'event_handlers/any_handler.js',
         'event_handlers/partups/partups_handler.js',
