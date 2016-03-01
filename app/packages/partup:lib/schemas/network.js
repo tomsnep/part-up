@@ -9,6 +9,10 @@ var tagsConfiguration = {
  * @private
  */
 var networkBaseSchema = new SimpleSchema({
+    background_image: {
+        type: String,
+        optional: true
+    },
     description: {
         type: String,
         max: 350,
