@@ -2,6 +2,9 @@
  * Generic Email Configuration
  */
 Accounts.emailTemplates.from = Partup.constants.EMAIL_FROM;
+Accounts.emailTemplates.headers = {
+    'X-Mailgun-Tag': 'email-accountsmanagement'
+};
 
 /**
  * Password Reset Email

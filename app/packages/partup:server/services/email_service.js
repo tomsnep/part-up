@@ -49,6 +49,9 @@ Partup.server.services.emails = {
 
         var template = 'email-' + options.type + '-' + options.locale;
         emailSettings.html = SSR.render(template, options.typeData);
+        emailSettings.headers = {
+            'X-Mailgun-Tag': template
+        };
 
         Email.send(emailSettings);
     }
