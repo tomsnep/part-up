@@ -9,6 +9,7 @@
 - Enabling emoji for updates
 - fix daily digest for locales other than nl/en
 - reduced the swarm stats update interval to every 2 hours
+- feat(mailgun): add mailgun tags to track all emails separately
 
 ## 1.16.8
 - Swarm page frame #192
