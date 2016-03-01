@@ -63,6 +63,9 @@ Template.Update.helpers({
             data: function() {
                 return update;
             },
+            templateName: function() {
+                return 'update_' + update.type;
+            },
             activityData: function() {
                 return activity;
             },
@@ -131,19 +134,6 @@ Template.Update.helpers({
                 if (!user) return false;
                 if (!partup) return false;
                 return partup.uppers.indexOf(user._id) > -1;
-            },
-            oldBudget: function() {
-                return budgetDisplay(self.old_type, self.old_value, self.old_currency);
-            },
-
-            newBudget: function() {
-                return budgetDisplay(self.new_type, self.new_value, self.new_currency);
-            },
-
-            messageContent: function() {
-                return Partup.client.strings.emojify(
-                    Partup.client.strings.newlineToBreak(Partup.helpers.mentions.decode(Partup.client.sanitize(self.new_value)))
-                );
             },
 
             systemMessageContent: function() {

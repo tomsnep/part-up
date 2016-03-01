@@ -1,10 +1,8 @@
 <template name="update_partups_location_changed">
-    {{#with update.data.type_data }}
-        <section>
-            <ul class="pu-list pu-list-horizontal pu-list-tags pu-list-arrows">
-                <li><span class="pu-tag pu-tag-angular">{{ old_location.city }}</span></li>
-                <li><span class="pu-tag pu-tag-angular">{{ new_location.city }}</span></li>
-            </ul>
-        </section>
-    {{/with}}
+    <section>
+        <ul class="pu-list pu-list-horizontal pu-list-tags pu-list-arrows">
+            <li><span class="pu-tag pu-tag-angular">{{ type_data.old_location.city }}</span></li>
+            <li><span class="pu-tag pu-tag-angular">{{ type_data.new_location.city }}</span></li>
+        </ul>
+    </section>
 </template>

@@ -21,18 +21,31 @@ Package.onUse(function(api) {
         'Update.js',
 
         'types/budget-changed.html',
+        'types/budget-changed.js',
         'types/description-changed.html',
+        'types/description-changed.js',
         'types/end-date-changed.html',
+        'types/end-date-changed.js',
         'types/image-changed.html',
+        'types/image-changed.js',
         'types/invited.html',
+        'types/invited.js',
         'types/location-changed.html',
+        'types/location-changed.js',
         'types/message-added.html',
+        'types/message-added.js',
         'types/name-changed.html',
+        'types/name-changed.js',
         'types/tags-added.html',
+        'types/tags-added.js',
         'types/tags-changed.html',
+        'types/tags-changed.js',
         'types/tags-removed.html',
+        'types/tags-removed.js',
         'types/archived.html',
-        'types/unarchived.html'
+        'types/archived.js',
+        'types/unarchived.html',
+        'types/unarchived.js'
     ], 'client');
 
 });

@@ -51,7 +51,18 @@
             </header>
 
             <!-- - - - - - - - - - - TYPES START - - - - - - - - - - -->
-            {{> Template.dynamic template=update.data.type}}
+            {{# if metadata.is_system }}
+                {{# with update.data.type_data }}
+                    <section>
+                        <article class="pu-block pu-block-message">
+                            <p class="pu-paragraph">{{{ update.systemMessageContent }}}</p>
+                        </article>
+                    </section>
+                {{/ with}}
+            {{ else }}
+
+                {{> Template.dynamic template=update.templateName data=update.data }}
+            {{/if}}
 
             <!-- activity related updates -->
             {{# if update.data.isActivityUpdate }}
