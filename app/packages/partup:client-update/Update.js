@@ -15,23 +15,6 @@
 // jscs:enable
 
 /*************************************************************/
-/* Helper functions */
-/*************************************************************/
-var budgetDisplay = function(type, value, currency) {
-    var currency = currency || 'EUR';
-    if (type === 'charity') {
-        return TAPi18n.__('update-budget-type-none');
-    } else if (type === 'enterprising') {
-        return TAPi18n.__('update-budget-type-none');
-    } else if (type === 'commercial') {
-        return TAPi18n.__('update-budget-type-money-' + currency, value);
-    } else if (type === 'organization') {
-        return TAPi18n.__('update-budget-type-money-' + currency, value);
-    }
-    return TAPi18n.__('update-budget-type-none');
-};
-
-/*************************************************************/
 /* Widget created */
 /*************************************************************/
 Template.Update.onCreated(function() {
@@ -62,6 +45,9 @@ Template.Update.helpers({
         return {
             data: function() {
                 return update;
+            },
+            templateName: function() {
+                return 'update_' + update.type;
             },
             activityData: function() {
                 return activity;
@@ -132,17 +118,6 @@ Template.Update.helpers({
                 if (!partup) return false;
                 return partup.uppers.indexOf(user._id) > -1;
             },
-            oldBudget: function() {
-                return budgetDisplay(self.old_type, self.old_value, self.old_currency);
-            },
-
-            newBudget: function() {
-                return budgetDisplay(self.new_type, self.new_value, self.new_currency);
-            },
-
-            messageContent: function() {
-                return Partup.client.strings.newlineToBreak(Partup.helpers.mentions.decode(Partup.client.sanitize(self.new_value)));
-            },
 
             systemMessageContent: function() {
                 return Partup.client.strings.newlineToBreak(TAPi18n.__('update-type-partups_message_added-system-' + self.type + '-content'));
@@ -159,9 +134,6 @@ Template.Update.helpers({
                 }
             }
         };
-    },
-    editMessagePopupId: function() {
-        return 'edit-message-' + this.updateId;
     }
 });
 

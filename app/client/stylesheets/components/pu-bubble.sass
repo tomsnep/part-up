@@ -25,7 +25,7 @@
     $size: 50px
     width: 50px
     height: 50px
-    margin-left: -25px
+    // margin-left: -25px
     opacity: 0
     transition: opacity .2s linear, transform .2s cubic-bezier(0.3, 0.7, 0.9, 1)
     transform: translate3d(0, 0, -1px)
@@ -43,16 +43,18 @@
         display: none
 
     .pu-sub-container
+        margin: 0 auto
+        margin-left: 0px - $border - ($size / 2)
+        margin-top: 0px - $border - ($size / 2)
+        width: $size + $border + $border
+        height: $size + $border + $border
+        padding: $border
         z-index: 0
         display: block
-        margin: 0 auto
         transition: transform .2s
         border-radius: 50%
         position: relative
         background-color: rgba(#fff, .2)
-        width: $size + $border + $border
-        height: $size + $border + $border
-        padding: $border
 
         &:after
             content: ''
@@ -182,8 +184,10 @@
         $size: 60px
         width: 60px
         height: 60px
-        margin-left: -30px
+        // margin-left: -30px
         .pu-sub-container
+            margin-left: 0px - $border - ($size / 2)
+            margin-top: 0px - $border - ($size / 2)
             width: $size + $border + $border
             height: $size + $border + $border
             padding: $border
@@ -206,8 +210,10 @@
         $size: 70px
         width: 70px
         height: 70px
-        margin-left: -35px
+        // margin-left: -35px
         .pu-sub-container
+            margin-left: 0px - $border - ($size / 2)
+            margin-top: 0px - $border - ($size / 2)
             width: $size + $border + $border
             height: $size + $border + $border
             padding: $border
@@ -227,8 +233,10 @@
         $size: 80px
         width: 80px
         height: 80px
-        margin-left: -40px
+        // margin-left: -40px
         .pu-sub-container
+            margin-left: 0px - $border - ($size / 2)
+            margin-top: 0px - $border - ($size / 2)
             width: $size + $border + $border
             height: $size + $border + $border
             padding: $border

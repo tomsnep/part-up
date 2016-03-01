@@ -1,5 +1,16 @@
 # CHANGELOG
 
+## 1.16.9
+- Visualize archived part-ups #22
+- Add archived/active filter to profile/partner and profile/supporter #251
+- Show new tribe tile design for archived part-ups #252
+- Show archived state on part-up page #253
+- Refactor Swarm and Tribe routing #256
+- Enabling emoji for updates
+- fix daily digest for locales other than nl/en
+- reduced the swarm stats update interval to every 2 hours
+- feat(mailgun): add mailgun tags to track all emails separately
+
 ## 1.16.8
 - Swarm page frame #192
 - Tribe explorer #193

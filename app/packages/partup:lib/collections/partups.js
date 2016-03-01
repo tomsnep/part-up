@@ -344,6 +344,16 @@ Partup.prototype.increaseEmailShareCount = function() {
 };
 
 /**
+ * Check if partup is archived
+ *
+ * @memberOf Partups
+ * @return {Boolean}
+ */
+Partup.prototype.isArchived = function() {
+    return !!this.archived;
+};
+
+/**
  * Partups describe collaborations between several uppers
  * @namespace Partups
  */
@@ -498,7 +508,7 @@ Partups.guardedMetaFind = function(selector, options) {
     options.fields = {_id: 1};
 
     // The fields that should be available on each partup
-    var unguardedFields = ['privacy_type'];
+    var unguardedFields = ['privacy_type', 'archived_at'];
 
     unguardedFields.forEach(function(unguardedField) {
         options.fields[unguardedField] = 1;
@@ -547,6 +557,9 @@ Partups.findForDiscover = function(userId, options, parameters) {
         selector['language'] = language;
     }
 
+    // Filter archived partups
+    selector['archived_at'] = {$exists: false};
+
     // Filter the partups that are in a given location
     if (locationId) {
         selector['location.place_id'] = locationId;
@@ -591,16 +604,25 @@ Partups.findForUpdate = function(userId, update) {
  *
  * @memberof Partups
  * @param {Network} network
- * @param {Object} selector
+ * @param {Object} parameters
  * @param {Object} options
  * @param {String} loggedInUserId
  * @return {Cursor}
  */
-Partups.findForNetwork = function(network, selector, options, loggedInUserId) {
-    selector = selector || {};
+Partups.findForNetwork = function(network, parameters, options, loggedInUserId) {
+    parameters = parameters || {};
     options = options || {};
+    options.sort = options.sort || {};
 
-    selector.network_id = network._id;
+    var selector = {
+        network_id: network._id
+    };
+
+    options.sort['popularity'] = -1;
+
+    if (parameters.hasOwnProperty('archived')) {
+        selector.archived_at = {$exists: parameters.archived};
+    }
 
     return this.guardedFind(loggedInUserId, selector, options);
 };
@@ -630,12 +652,14 @@ Partups.findUpperPartupsForUser = function(user, parameters, loggedInUserId) {
     } else {
         options.limit = parseInt(parameters.limit);
         options.skip = parseInt(parameters.skip);
-        options.sort = parameters.sort || {updated_at: -1};
+        options.sort = parameters.sort || {popularity: -1};
     }
 
     if (parameters.network_id) {
         selector.network_id = parameters.network_id;
     }
+
+    selector.archived_at = {$exists: parameters.archived};
 
     return this.guardedFind(loggedInUserId, selector, options);
 };
@@ -666,12 +690,14 @@ Partups.findSupporterPartupsForUser = function(user, parameters, loggedInUserId)
     } else {
         options.skip = parseInt(parameters.skip);
         options.limit = parseInt(parameters.limit);
-        options.sort = parameters.sort || {updated_at: -1};
+        options.sort = parameters.sort || {popularity: -1};
     }
 
     if (parameters.network_id) {
         selector.network_id = parameters.network_id;
     }
+
+    selector.archived_at = {$exists: parameters.archived};
 
     return this.guardedFind(loggedInUserId, selector, options);
 };

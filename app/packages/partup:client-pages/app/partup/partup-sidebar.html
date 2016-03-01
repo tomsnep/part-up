@@ -7,11 +7,13 @@
         {{> contentFor region="PopupContent" data=. template="app_partup_takepart" }}
     {{/if}}
 
-    <!-- sidebar header image -->
-    <header class="pu-partupheader">
+    <header class="pu-partupheader {{#if partup.archived_at}}pu-partupheader-archived{{/if}}">
         <figure class="pu-sub-picture" style="{{#with partup.image }}background-image: url('{{ partupImageUrl id=. store='1200x520' }}');{{/with}}" data-partupcover-focuspoint></figure>
         <h1>{{ partup.name }}</h1>
     </header>
+    {{#if partup.archived_at}}<div class="pu-state-message">
+        <h3><i class="picon-warning"></i>{{_ 'pages-app-partup-archive-info' }} <strong>{{ partupDateOnly archived_at }}</strong></h3>
+    </div>{{/if}}
 
     <!-- sidebarcontent -->
     <aside class="pu-sidebar">

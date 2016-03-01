@@ -29,6 +29,7 @@ Meteor.routeComposite('/users/:id/upperpartups', function(request, params) {
 
     if (request.limit) options.limit = parseInt(request.query.limit);
     if (request.skip) options.skip = parseInt(request.query.skip);
+    if (request.query.archived) options.archived = JSON.parse(request.query.archived);
 
     return {
         find: function() {
@@ -62,6 +63,7 @@ Meteor.routeComposite('/users/:id/supporterpartups', function(request, params) {
 
     if (request.limit) options.limit = parseInt(request.query.limit);
     if (request.skip) options.skip = parseInt(request.query.skip);
+    if (request.query.archived) options.archived = JSON.parse(request.query.archived);
 
     return {
         find: function() {

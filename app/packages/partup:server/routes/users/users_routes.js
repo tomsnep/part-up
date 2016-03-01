@@ -24,8 +24,11 @@ Router.route('/users/:id/upperpartups/count', {where: 'server'}).get(function() 
 
     var parameters = {
         limit: request.query.limit,
-        skip: request.query.skip
+        skip: request.query.skip,
+        archived: request.query.archived || false
     };
+
+    parameters.archived = (request.query.archived) ? JSON.parse(request.query.archived) : false;
 
     var userId = request.user ? request.user._id : null;
 
@@ -53,8 +56,11 @@ Router.route('/users/:id/supporterpartups/count', {where: 'server'}).get(functio
 
     var parameters = {
         limit: request.query.limit,
-        skip: request.query.skip
+        skip: request.query.skip,
+        archived: request.query.archived || false
     };
+
+    parameters.archived = (request.query.archived) ? JSON.parse(request.query.archived) : false;
 
     var userId = request.user ? request.user._id : null;
 

@@ -228,7 +228,7 @@ Meteor.methods({
 
         } catch (error) {
             Log.error(error);
-            throw new Meteor.Error(400, 'partups_could_not_be_featured');
+            throw new Meteor.Error(400, 'partup_could_not_be_featured');
         }
     },
 
@@ -446,7 +446,7 @@ Meteor.methods({
         var upper = Meteor.user();
 
         if (!upper) {
-            throw new Meteor.Error(401, 'Unauthorized');
+            throw new Meteor.Error(401, 'unauthorized');
         }
 
         var users = Partup.server.services.matching.matchUppersForPartup(partupId, options);
@@ -455,5 +455,55 @@ Meteor.methods({
         return users.map(function(user) {
             return user._id;
         });
+    },
+
+    /**
+     * Archive a partup
+     *
+     * @param {String} partupId
+     */
+    'partups.archive': function(partupId) {
+        check(partupId, String);
+
+        var upper = Meteor.user();
+        var partup = Partups.findOneOrFail(partupId);
+
+        if (!upper || (!User(upper).isAdmin() && !partup.hasUpper(upper._id))) {
+            throw new Meteor.Error(401, 'unauthorized');
+        }
+
+        try {
+            Partups.update(partup._id, {$set: {archived_at: new Date()}});
+
+            Event.emit('partups.archived', upper._id, partup);
+        } catch (error) {
+            Log.error(error);
+            throw new Meteor.Error(500, 'partup_could_not_be_archived');
+        }
+    },
+
+    /**
+     * Unarchive a partup
+     *
+     * @param {String} partupId
+     */
+    'partups.unarchive': function(partupId) {
+        check(partupId, String);
+
+        var upper = Meteor.user();
+        var partup = Partups.findOneOrFail(partupId);
+
+        if (!upper || (!User(upper).isAdmin() && !partup.hasUpper(upper._id))) {
+            throw new Meteor.Error(401, 'unauthorized');
+        }
+
+        try {
+            Partups.update(partup._id, {$unset: {archived_at: ''}});
+
+            Event.emit('partups.unarchived', upper._id, partup);
+        } catch (error) {
+            Log.error(error);
+            throw new Meteor.Error(500, 'partup_could_not_be_unarchived');
+        }
     }
 });

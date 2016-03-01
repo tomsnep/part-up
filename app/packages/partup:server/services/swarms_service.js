@@ -48,7 +48,7 @@ Partup.server.services.swarms = {
             var unique_network_supporters = [];
 
             // Store the partup IDs to loop through for the activities
-            var partups = Partups.find({network_id: network._id, deleted_at: {$exists: false}}, {_id: 1}).fetch();
+            var partups = Partups.find({network_id: network._id, deleted_at: {$exists: false}, archived_at: {$exists: false}}, {_id: 1}).fetch();
             var network_partups = [];
             partups.forEach(function(partup) {
                 network_partups.push(partup._id);

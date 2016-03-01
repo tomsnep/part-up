@@ -19,7 +19,7 @@ Meteor.routeComposite('/partups/discover', function(request, parameters) {
         limit: Match.Optional(String),
         skip: Match.Optional(String),
         language: Match.Optional(String),
-        userId: Match.Optional(String),
+        userId: Match.Optional(String)
     });
 
     parameters = {

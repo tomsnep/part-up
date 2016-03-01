@@ -47,6 +47,9 @@ Package.onUse(function(api) {
             'app/discover/partials/discover-page.js',
             'app/discover/partials/tile/tile.html',
             'app/discover/partials/tile/tile.js',
+            'app/discover/partials/tile/archived.html',
+            'app/discover/partials/tile/active.html',
+            'app/discover/partials/tile/active.js',
             'app/discover/partials/tile/featured.html',
             'app/discover/partials/tile/featured.js',
 

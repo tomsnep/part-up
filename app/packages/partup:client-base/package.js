@@ -44,6 +44,7 @@ Package.onUse(function(api) {
         'client/forms-mentionsInput.js',
         'client/spinner.js',
         'client/elements.js',
+        'client/emoji.js',
         'client/popup.js',
         'client/uploader.js',
         'client/focuslayer.js',
@@ -82,6 +83,7 @@ Package.onUse(function(api) {
         'helpers/Autolinkjs.js',
         'helpers/autolink.js',
         'helpers/mobileHelpers.js',
+
         'bootstrap.js',
         'analytics.js'
 

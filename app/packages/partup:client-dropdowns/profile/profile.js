@@ -29,7 +29,8 @@ Template.DropdownProfile.onCreated(function() {
 
     // Partups headers for http calls
     var query = {
-        token: Accounts._storedLoginToken()
+        token: Accounts._storedLoginToken(),
+        archived: false
     };
 
     // Dropdown opened state + callback

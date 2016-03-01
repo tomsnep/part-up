@@ -58,6 +58,8 @@ Partup.client.constructors.ColumnTilesLayout = function(options) {
 
     C.addTiles = function(tiles, cb) {
         Meteor.defer(function() {
+            if (!C._template) return;
+
             _tiles = _tiles.concat(tiles);
             var columns = C.columns.get();
 

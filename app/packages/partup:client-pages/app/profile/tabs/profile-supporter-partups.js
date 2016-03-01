@@ -6,29 +6,16 @@ var getAmountOfColumns = function(screenwidth) {
 
 Template.app_profile_supporter_partups.onCreated(function() {
     var template = this;
+    template.getArchivedPartups = false;
+    // Partup result count
+    template.partupCount = new ReactiveVar();
 
     // States such as loading states
     template.states = {
-        loading_infinite_scroll: false,
-        paging_end_reached: new ReactiveVar(false),
-        count_loading: new ReactiveVar(false)
+        loadingInfiniteScroll: false,
+        pagingEndReached: new ReactiveVar(false),
+        partupCountLoading: new ReactiveVar(true)
     };
-
-    // Partup result count
-    template.count = new ReactiveVar();
-
-    // Get count
-    template.states.count_loading.set(true);
-    HTTP.get('/users/' + template.data.profileId + '/supporterpartups/count' + mout.queryString.encode({
-        userId:  Meteor.userId(),
-        token:  Accounts._storedLoginToken()
-    }), function(error, response) {
-        template.states.count_loading.set(false);
-        if (error || !response || !mout.lang.isString(response.content)) { return; }
-
-        var content = JSON.parse(response.content);
-        template.count.set(content.count);
-    });
 
     // Column layout
     template.columnTilesLayout = new Partup.client.constructors.ColumnTilesLayout({
@@ -63,6 +50,83 @@ Template.app_profile_supporter_partups.onCreated(function() {
         }
 
     });
+
+    template.initialize = function(filter) {
+        template.getArchivedPartups = filter === 'archived' ? true : false;
+
+        var query = {};
+        query.userId =  Meteor.userId();
+        query.token =  Accounts._storedLoginToken();
+        query.archived = template.getArchivedPartups;
+        // Get count
+        template.states.partupCountLoading.set(true);
+        HTTP.get('/users/' + template.data.profileId + '/supporterpartups/count' + mout.queryString.encode(query), function(error, response) {
+            if (query.archived !== template.getArchivedPartups) return;
+
+            template.states.partupCountLoading.set(false);
+            if (error || !response || !mout.lang.isString(response.content)) { return; }
+            var content = JSON.parse(response.content);
+            template.partupCount.set(content.count);
+        });
+
+        // When the page changes due to infinite scroll
+        template.page.set(0);
+    };
+
+    // When the page changes due to infinite scroll
+    template.page = new ReactiveVar(false, function(previousPage, page) {
+
+        // Add some parameters to the query
+        var query = {};
+        query.limit = PAGING_INCREMENT;
+        query.skip = page * PAGING_INCREMENT;
+        query.archived = template.getArchivedPartups;
+
+        // Update state(s)
+        template.states.loadingInfiniteScroll = true;
+
+        // Call the API for data
+        HTTP.get('/users/' + template.data.profileId + '/supporterpartups' + mout.queryString.encode(query), {
+            headers: {
+                Authorization: 'Bearer ' + Accounts._storedLoginToken()
+            }
+        }, function(error, response) {
+            if (query.archived !== template.getArchivedPartups) return;
+
+            if (error || !response.data.partups || response.data.partups.length === 0) {
+                template.states.loadingInfiniteScroll = false;
+                template.states.pagingEndReached.set(true);
+                return;
+            }
+
+            var result = response.data;
+            template.states.pagingEndReached.set(result.partups.length < PAGING_INCREMENT);
+
+            var tiles = result.partups.map(function(partup) {
+                Partup.client.embed.partup(partup, result['cfs.images.filerecord'], result.networks, result.users);
+
+                return {
+                    partup: partup
+                };
+            });
+
+            // Add tiles to the column layout
+            template.columnTilesLayout.addTiles(tiles, function callback() {
+                template.states.loadingInfiniteScroll = false;
+            });
+        });
+    });
+
+    var switchFilter = function(filter) {
+        template.columnTilesLayout.clear(function() {
+            template.initialize(filter);
+        });
+    };
+
+    template.filter = new ReactiveVar('active', function(a, b) {
+        if (a !== b) switchFilter(b);
+    });
+    template.initialize('active');
 });
 
 Template.app_profile_supporter_partups.onRendered(function() {
@@ -78,57 +142,13 @@ Template.app_profile_supporter_partups.onRendered(function() {
         }
     });
 
-    // When the page changes due to infinite scroll
-    template.page = new ReactiveVar(false, function(previousPage, page) {
-
-        // Add some parameters to the query
-        var query = {};
-        query.limit = PAGING_INCREMENT;
-        query.skip = page * PAGING_INCREMENT;
-
-        // Update state(s)
-        template.states.loading_infinite_scroll = true;
-
-        // Call the API for data
-        HTTP.get('/users/' + template.data.profileId + '/supporterpartups' + mout.queryString.encode(query), {
-            headers: {
-                Authorization: 'Bearer ' + Accounts._storedLoginToken()
-            }
-        }, function(error, response) {
-            if (error || !response.data.partups || response.data.partups.length === 0) {
-                template.states.loading_infinite_scroll = false;
-                template.states.paging_end_reached.set(true);
-                return;
-            }
-
-            var result = response.data;
-            template.states.paging_end_reached.set(result.partups.length < PAGING_INCREMENT);
-
-            var tiles = result.partups.map(function(partup) {
-                Partup.client.embed.partup(partup, result['cfs.images.filerecord'], result.networks, result.users);
-
-                return {
-                    partup: partup
-                };
-            });
-
-            // Add tiles to the column layout
-            template.columnTilesLayout.addTiles(tiles, function callback() {
-                template.states.loading_infinite_scroll = false;
-            });
-        });
-    });
-
-    // Trigger first page to load
-    template.page.set(0);
-
     // Infinite scroll
     Partup.client.scroll.infinite({
         template: template,
         element: template.find('[data-infinitescroll-container]'),
         offset: 1500
     }, function() {
-        if (template.states.loading_infinite_scroll || template.states.paging_end_reached.curValue) { return; }
+        if (template.states.loadingInfiniteScroll || template.states.pagingEndReached.curValue) { return; }
 
         var nextPage = template.page.get() + 1;
         template.page.set(nextPage);
@@ -136,20 +156,61 @@ Template.app_profile_supporter_partups.onRendered(function() {
 });
 
 Template.app_profile_supporter_partups.helpers({
-    columnTilesLayout: function() {
-        return Template.instance().columnTilesLayout;
+    data: function() {
+        var template = Template.instance();
+        var self = this;
+        return {
+            columnTilesLayout: function() {
+                return template.columnTilesLayout;
+            },
+            partupCount: function() {
+                return template.partupCount.get();
+            },
+            firstname: function() {
+                var user = Meteor.users.findOne(self.profileId);
+                return User(user).getFirstname();
+            },
+            filterReactiveVar: function() {
+                return template.filter;
+            }
+        };
     },
-    endReached: function() {
-        return Template.instance().states.paging_end_reached.get();
+    state: function() {
+        var template = Template.instance();
+        var states = template.states;
+        return {
+            endReached: function() {
+                return states.pagingEndReached.get();
+            },
+            countLoading: function() {
+                return states.partupCountLoading.get();
+            },
+            selectedFilter: function() {
+                return template.filter.get();
+            }
+        };
     },
-    count: function() {
-        return Template.instance().count.get();
-    },
-    countLoading: function() {
-        return Template.instance().states.count_loading.get();
-    },
-    firstname: function() {
-        var user = Meteor.users.findOne(this.profileId);
-        return User(user).getFirstname();
+    translations: function() {
+        var template = Template.instance();
+        return {
+            partupsLoading: function(selection) {
+                return TAPi18n.__('pages-app-profile-supporter-partups-' + selection + '-loading');
+            },
+            partupsPrefix: function(selection, name) {
+                return TAPi18n.__('pages-app-profile-supporter-partups-' + selection + '-prefix', {
+                    name: name
+                });
+            },
+            partupsCount: function(selection, count) {
+                return TAPi18n.__('pages-app-profile-supporter-partups-' + selection + '-count', {
+                    count: count
+                });
+            },
+            partupsNone: function(selection, name) {
+                return TAPi18n.__('pages-app-profile-supporter-partups-' + selection + '-none', {
+                    name: name
+                });
+            }
+        };
     }
 });

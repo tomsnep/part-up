@@ -175,7 +175,7 @@ Template.modal_invite_to_partup.events({
         window.scrollTo(0, 0);
     },
     'blur [data-search-query-input]': function(e, template) {
-        template.submitFilterForm();
+        // template.submitFilterForm();
     },
     'click [data-reset-search-query-input]': function(event, template) {
         event.preventDefault();
@@ -184,13 +184,7 @@ Template.modal_invite_to_partup.events({
     },
 
     'keyup [data-search-query-input]': function(e, template) {
-        if (window.PU_IE_VERSION === -1) return;
-        // IE fix (return key submit)
-        var pressedKey = e.which ? e.which : e.keyCode;
-        if (pressedKey == 13) {
-            template.submitFilterForm();
-            return false;
-        }
+        template.submitFilterForm();
     },
 
     // Location selector events

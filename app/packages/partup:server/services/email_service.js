@@ -20,7 +20,7 @@ Partup.server.services.emails = {
      * @param {String|null} options.body
      */
     send: function(options) {
-        var options = options || {};
+        options = options || {};
         var emailSettings = {};
 
         if (!options.type) throw new Meteor.Error('Required argument [options.type] is missing for method [Partup.server.services.emails::send]');
@@ -42,8 +42,16 @@ Partup.server.services.emails = {
         emailSettings.to = options.toAddress;
         emailSettings.subject = options.subject;
 
+        // Check if locale needs a fallback to provide an existing mail template
+        if (options.locale !== 'en' && options.locale !== 'nl') {
+            options.locale = 'en';
+        }
+
         var template = 'email-' + options.type + '-' + options.locale;
         emailSettings.html = SSR.render(template, options.typeData);
+        emailSettings.headers = {
+            'X-Mailgun-Tag': template
+        };
 
         Email.send(emailSettings);
     }

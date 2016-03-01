@@ -9,12 +9,16 @@ Router.route('/networks/:slug/partups/count', {where: 'server'}).get(function() 
     // We are going to respond in JSON format
     response.setHeader('Content-Type', 'application/json');
 
-    var parameters = {
-        limit: request.query.limit,
+    var options = {
+        limit: request.query.limit || 0,
         skip: request.query.skip
     };
 
     var userId = request.user ? request.user._id : null;
+
+    var parameters = {
+        archived: (request.query.archived) ? JSON.parse(request.query.archived) : false
+    };
 
     var network = Networks.guardedFind(userId, {slug: params.slug}).fetch().pop();
     if (!network) {
@@ -22,7 +26,7 @@ Router.route('/networks/:slug/partups/count', {where: 'server'}).get(function() 
         return response.end(JSON.stringify({error: {reason: 'error-network-notfound'}}));
     }
 
-    var partups = Partups.findForNetwork(network, {}, {}, userId);
+    var partups = Partups.findForNetwork(network, parameters, options, userId);
 
     return response.end(JSON.stringify({error: false, count: partups.count()}));
 });

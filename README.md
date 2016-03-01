@@ -33,6 +33,16 @@ With a funcionality, you can think of a widget which will fulfill one standalone
 ### Small component
 The whole app is made up of small styled components. These components are not functional by themselves, but only provides styling. For example: buttons, inputs, titles, paragraphs and menus. Each component should be defined as a Sass class prefixed with “pu-”, for example “pu-button”. Be aware not to define any styling dealing with the position of the component inside its parent or relative to its siblings.
 
+### Adding an icon
+1. `cd app/`
+2. `meteor add partup:iconfont-generator`
+3. Add the new icon SVG to the */client/icons* folder
+4. Wait for `[iconfont] generating`
+5. In */client/stylesheets/font-faces* a new `_picons.scss` is generated, convert the content to `.sass` at (http://www.sasstoscss.com/) and replace the contents of `icons.sass` NOTE: `icons.sass` cannot be used to change icon styles, do this in */client/stylesheets/components/pu-icons.sass*
+6. `meteor remove partup:iconfont-generator`
+7. You now have a new icon added to the project *cheers*. Push the icon file changes to your current branch.
+
+
 # Backend
 ## Collections manipulation flow
 

@@ -110,6 +110,10 @@ Partup.schemas.entities.partup = new SimpleSchema([partupBaseSchema, {
         type: Number,
         defaultValue: 0
     },
+    archived_at: {
+        type: Date,
+        optional: true
+    },
     created_at: {
         type: Date,
         defaultValue: new Date()

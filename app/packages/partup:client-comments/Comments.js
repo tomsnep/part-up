@@ -26,6 +26,7 @@ Template.Comments.onCreated(function() {
     template.showComments = template.data.SHOW_COMMENTS === undefined || template.data.SHOW_COMMENTS === true;
     template.messageRows = new ReactiveVar(1);
     template.tooManyCharacters = new ReactiveVar(false);
+    template.tooManyUpdateCharacters = new ReactiveVar(false);
 
     template.updateMessageRows = new ReactiveVar(1);
     template.currentEditCommentId = new ReactiveVar();
@@ -122,6 +123,9 @@ Template.Comments.helpers({
             messageTooLong: function() {
                 return template.tooManyCharacters.get();
             },
+            updateMessageTooLong: function() {
+                return template.tooManyUpdateCharacters.get();
+            },
             editCommentId: function() {
                 return template.currentEditCommentId.get();
             },
@@ -191,7 +195,9 @@ Template.Comments.helpers({
     },
     formSchema: Partup.schemas.forms.updateComment,
     content: function() {
-        return Partup.helpers.mentions.decode(Partup.client.sanitize(this.content));
+        return Partup.client.strings.emojify(
+			Partup.helpers.mentions.decode(Partup.client.sanitize(this.content))
+		);
     },
     systemMessage: function(content) {
         return TAPi18n.__('comment-field-content-' + content);
@@ -276,6 +282,18 @@ Template.Comments.events({
         }
         if ([8, 46].indexOf(event.keyCode) > -1) {
             AutoForm.validateForm(template.uniqueId + 'commentForm-' + template.data.update._id);
+        }
+    },
+    'keyup [data-update-comment]': function(event, template) {
+        var updateCommentFormId = $(event.currentTarget).data('update-comment');
+        var totalCharacters = event.currentTarget.value.length;
+        if (totalCharacters > 1000) {
+            template.tooManyUpdateCharacters.set(true);
+        } else {
+            template.tooManyUpdateCharacters.set(false);
+        }
+        if ([8, 46].indexOf(event.keyCode) > -1) {
+            AutoForm.validateForm(updateCommentFormId);
         }
     },
     'keydown [data-submit=return]': function(event, template) {
@@ -366,6 +384,7 @@ AutoForm.addHooks(null, {
                 template.mentionsEditInput.destroy();
                 template.mentionsEditInput.reset();
                 template.currentEditCommentId.set(false);
+                template.tooManyUpdateCharacters.set(false);
                 template.submittingForm.set(false);
                 self.done();
             });
@@ -401,6 +420,7 @@ AutoForm.addHooks(null, {
 
                 template.messageRows.set(1);
                 template.tooManyCharacters.set(false);
+                template.tooManyUpdateCharacters.set(false);
 
                 template.submitButtonActive.set(false);
                 self.done();

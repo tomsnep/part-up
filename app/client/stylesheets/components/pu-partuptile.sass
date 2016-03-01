@@ -31,11 +31,12 @@
         list-style: none
         z-index: 4
         pointer-events: none
+        padding-right: 7px
 
         li
             display: block
             margin: 10px 0 0
-            transform: translateX(-100%)
+            transform: translateX(calc(-100% - 7px))
             transition: transform .2s ease-out
 
         .pu-tag
@@ -91,7 +92,7 @@
 
             &.pu-avatar-more
                 filter: none
-                line-height: 34px
+                line-height: 17px
 
     .pu-sub-partup-stats
         overflow: hidden
@@ -130,6 +131,17 @@
             font-size: 12px
             line-height: 12px
             font-weight: bold
+
+    .pu-archive-info
+            margin-top: 10px
+            font-weight: bold
+
+            span
+                display: block
+                color: $color-text-subtle
+                font-size: 12px;
+                line-height: 12px;
+                font-weight: bold;
 
     footer
         .pu-networktile

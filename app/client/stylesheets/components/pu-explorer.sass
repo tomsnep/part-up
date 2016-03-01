@@ -5,7 +5,7 @@
     right: 0
     bottom: 0
     left: 0
-    padding: 0px 0px 60px 0px
+    // padding: 0px 0px 60px 0px
 
     header
         font-size: 25px
@@ -15,7 +15,8 @@
         text-align: center
         z-index: 1
         position: relative
-        margin-bottom: -20px
+        top: 0
+        // margin-bottom: -20px
 
         .pu-sub-notfound
             font-family: $font-primary
@@ -25,8 +26,8 @@
 
         figure
             display: block
-            margin: 20px auto 10px auto
-            height: 30px
+            padding: 20px 0 10px 0
+            height: 60px
 
             h1
                 font-weight: 700
@@ -50,7 +51,6 @@
         li
             font-weight: bold
             font-family: $font-secondary
-            font-size: 12px
             color: rgba(255,255,255,0.80)
             line-height: 21px
 
@@ -68,34 +68,32 @@
         bottom: 0
         width: 100%
         padding-bottom: 10px
-        display: none
+        display: block
 
-    @media screen and (min-width: $breakpoint-desktop) and (min-height: $breakpoint-tablet + 1px)
-        padding: 60px 0px 120px 0px
+        > .pu-button
+            text-decoration: underline
+
+            i
+                display: none
+
+    @media screen and (min-width: $breakpoint-desktop) and (min-height: $breakpoint-tablet - 100px)
+        padding: 4vh 0px 8vh 0px
 
         header
-            margin-top: 60px
+            margin-top: 4vh
             margin-bottom: 0
 
             ul
                 margin-top: 35px
             figure
                 margin: 20px auto
+                height: 30px
 
         footer
             display: block
-            padding-bottom: 90px
+            padding-bottom: 4vh
 
-//     @media screen and (min-width: $breakpoint-tablet)
-
-//         header
-//             figure
-//                 h1
-//                     font-size: 40px
-
-//             ul
-//                 margin-top: 35px
-
-//             li
-//                 font-size: 15px
-
+            > .pu-button
+                text-decoration: none
+                i
+                    display: block

@@ -22,6 +22,23 @@ Partup.client.strings = {
             .toLowerCase();                 // ensure lower case characters
     },
 
+    /**
+     * Emoji helper
+     *
+     * turns text into emojis using emoji.js
+     * See: https://github.com/iamcal/js-emoji
+     * @memberof Partup.client
+     * @param {String} string to emoji
+     */
+    emojify: function(stringToEmoji) {
+
+        if (typeof stringToEmoji !== 'string') {
+            return stringToEmoji;
+        }
+
+        return emoji.replace_colons(emoji.replace_emoticons(stringToEmoji));
+    },
+
     tagsStringToArray: function(tagString) {
         if (!tagString) return [];
         return tagsArray = tagString.replace(/\s/g, '').split(',').map(function(tag) {
