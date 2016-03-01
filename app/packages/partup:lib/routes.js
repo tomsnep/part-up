@@ -549,8 +549,7 @@ Router.route('/tribes/:slug', {
     where: 'client',
     yieldRegions: {
         'app':                      {to: 'main'},
-        'app_network_start':        {to: 'app'},
-        // 'app_network_start':      {to: 'app_network'}
+        'app_network_start':        {to: 'app'}
     },
     data: function() {
         return {
@@ -559,8 +558,10 @@ Router.route('/tribes/:slug', {
         };
     },
     onBeforeAction: function() {
-        var networkSlug = this.data().networkSlug;
-        var accessToken = this.data().accessToken;
+        var networkSlug = this.params.slug;
+        var accessToken = this.params.query.token;
+        var redirect = this.params.query.redirect ? JSON.parse(this.params.query.redirect) : true;
+        console.log(redirect);
         if (networkSlug && accessToken) {
             Session.set('network_access_token', accessToken);
             Session.set('network_access_token_for_network', networkSlug);
@@ -568,8 +569,12 @@ Router.route('/tribes/:slug', {
         if (Meteor.userId() && networkSlug && accessToken) {
             Meteor.call('networks.convert_access_token_to_invite', networkSlug, accessToken);
         }
-
-        this.next();
+        if (!redirect) {
+            this.next();
+        } else {
+            this.stop();
+            Meteor.call('');
+        }
     }
 });
 
@@ -712,11 +717,14 @@ Router.route('/:slug', {
 
             // redirect to the network detail if it isn't a swarm but is a network
             } else if (result.is_network) {
+                var oldURL = document.referrer;
                 self.redirect('network-detail', {
                     slug: self.params.slug
                 }, {
                     query: self.params.query
                 });
+                console.log(oldURL)
+                history.pushState({}, 'partup', oldURL);
 
             // if it is neither a swarm or network, continue rendering the swarm page
             // the page will handle a "not found" exception by itself

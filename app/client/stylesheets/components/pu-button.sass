@@ -883,6 +883,20 @@
             background-color: #fff
             color: $color-primary
 
+    &-darktext
+        background-color: transparent
+        color: $color-primary-dark
+        i
+            color: $color-primary-dark
+        &:hover,
+        &:focus,
+        &:active
+            background-color: transparent
+            color: darken($color-primary-dark, 10%)
+
+            i
+                color: darken($color-primary-dark, 10%)
+
     @media screen and (min-width: $breakpoint-desktop)
         &-header
             @include button_header_desktop
