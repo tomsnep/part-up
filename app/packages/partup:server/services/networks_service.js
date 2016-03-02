@@ -36,5 +36,53 @@ Partup.server.services.networks = {
                 updated_at: new Date()
             }
         });
+    },
+
+    /**
+     * Create tags that are common in the underlying partups of the network
+     *
+     * @param {Object} network
+     */
+    getCommonTags: function(network) {
+        // Initialization
+        var partup_tags = [];
+
+        // Get the tags of all partups in this networks in one array
+        Partups.find({network_id: network._id, deleted_at: {$exists: false}, archived_at: {$exists: false}}).fetch().forEach(function(partup) {
+            var tags = partup.tags || [];
+            partup_tags.push.apply(partup_tags, tags);
+        });
+
+        // We now have all the tags, so sort on frequency
+        partup_tags = lodash.chain(partup_tags)
+            .countBy()
+            .pairs()
+            .sortBy(1)
+            .reverse()
+            .pick(function(value, key) {
+                return value[1] > 1; // Only collect the tags that occur more than once
+            })
+            .value();
+
+        // Create an array of tag objects containing their frequency
+        var common_tags = [];
+        for (var key in partup_tags) {
+            if (partup_tags.hasOwnProperty(key)) {
+                var tagArray = partup_tags[key];
+
+                common_tags.push({
+                    tag: tagArray[0],
+                    frequency: tagArray[1]
+                });
+            }
+        }
+
+        // Update the network
+        Networks.update(network._id, {
+            $set: {
+                common_tags: common_tags,
+                updated_at: new Date()
+            }
+        });
     }
 };
