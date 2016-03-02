@@ -3,11 +3,11 @@
         <h2 class="pu-title pu-title-modal">{{_ 'network-settings-uppers-title' }}</h2>
         <p>{{_ 'network-settings-uppers-paragraph' }}</p>
 
-        {{# if network.uppers }}
+        {{# if data.network.uppers }}
         <h3>{{_ 'network-settings-uppers-listheading' }}</h3>
         <ul class="pu-list pu-list-lineseparated">
-            {{# each network.uppers }}
-                {{# with upper }}
+            {{# each data.network.uppers }}
+                {{# with data.upper }}
                     <li>
                         <figure class="pu-avatar" style="background-image: url('{{ partupImageUrl id=profile.image }}');" data-hovercontainer="HoverContainer_upper" data-hovercontainer-context="{{ _id }}"></figure>
                         <p class="pu-sub-name">

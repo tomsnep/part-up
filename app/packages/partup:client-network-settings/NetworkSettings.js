@@ -5,26 +5,28 @@
  * @param {Number} networkSlug    the slug of the network whose settings are rendered
  */
 Template.NetworkSettings.onCreated(function() {
-    var tpl = this;
+    var template = this;
     var userId = Meteor.userId();
 
-    tpl.subscription = tpl.subscribe('networks.one', tpl.data.networkSlug, function() {
-        var network = Networks.findOne({slug: tpl.data.networkSlug});
-        if (!network) Router.pageNotFound('network');
-        if (network.isClosedForUpper(userId)) Router.pageNotFound('network');
+    template.subscription = template.subscribe('networks.one', template.data.networkSlug, {
+        onReady: function() {
+            var network = Networks.findOne({slug: template.data.networkSlug});
+            if (!network) Router.pageNotFound('network');
+            if (network.isClosedForUpper(userId)) Router.pageNotFound('network');
+        }
     });
-    tpl.charactersLeft = new ReactiveDict();
-    tpl.submitting = new ReactiveVar();
-    tpl.current = new ReactiveDict();
-    tpl.uploading = new ReactiveDict();
+    template.charactersLeft = new ReactiveDict();
+    template.submitting = new ReactiveVar();
+    template.current = new ReactiveDict();
+    template.uploading = new ReactiveDict();
 
-    tpl.locationSelection = new ReactiveVar();
+    template.locationSelection = new ReactiveVar();
 
-    tpl.autorun(function() {
-        var network = Networks.findOne({slug: tpl.data.networkSlug});
+    template.autorun(function() {
+        var network = Networks.findOne({slug: template.data.networkSlug});
         if (!network) return;
 
-        if (network.location && network.location.place_id) tpl.locationSelection.set(network.location);
+        if (network.location && network.location.place_id) template.locationSelection.set(network.location);
 
         network = Partup.transformers.network.toFormNetwork(network);
 
@@ -33,168 +35,183 @@ Template.NetworkSettings.onCreated(function() {
 
         ['description', 'name', 'tags_input', 'location_input', 'website'].forEach(function(n) {
             valueLength = network[n] ? network[n].length : 0;
-            tpl.charactersLeft.set(n, formSchema[n].max - valueLength);
+            template.charactersLeft.set(n, formSchema[n].max - valueLength);
         });
     });
 });
 
 Template.NetworkSettings.helpers({
-    imageInput: function() {
+    data: function() {
         var template = Template.instance();
+        var network = Networks.findOne({slug: template.data.networkSlug});
         return {
-            button: 'data-image-browse',
-            input: 'data-image-input',
-            onFileChange: function(event) {
-                Partup.client.uploader.eachFile(event, function(file) {
-                    template.uploading.set('image', true);
+            network: function() {
+                return network;
+            },
+            imageUrl: function() {
+                var imageId = template.current.get('image');
 
-                    Partup.client.uploader.uploadImage(file, function(error, image) {
-                        template.uploading.set('image', false);
+                if (!imageId) {
+                    if (network) imageId = network.image;
+                }
 
-                        if (error) {
-                            Partup.client.notify.error(TAPi18n.__(error.reason));
-                            return;
-                        }
+                if (imageId) {
+                    var image = Images.findOne({_id: imageId});
+                    if (image) return Partup.helpers.url.getImageUrl(image, '360x360');
+                }
 
-                        template.find('[name=image]').value = image._id;
-                        template.current.set('image', image._id);
-                    });
+                return '/images/smile.png';
+            },
 
-                });
+            iconUrl: function() {
+                var iconId = template.current.get('icon');
 
+                if (!iconId) {
+                    if (network) iconId = network.icon;
+                }
+
+                if (iconId) {
+                    var icon = Images.findOne({_id: iconId});
+                    if (icon) return Partup.helpers.url.getImageUrl(icon, '360x360');
+                }
+
+                return '/images/smile.png';
             }
         };
     },
-    iconInput: function() {
+    form: function() {
         var template = Template.instance();
+        var network = Networks.findOne({slug: template.data.networkSlug});
         return {
-            button: 'data-icon-browse',
-            input: 'data-icon-input',
-            onFileChange: function(event) {
-                Partup.client.uploader.eachFile(event, function(file) {
-                    template.uploading.set('icon', true);
+            imageInput: function() {
+                return {
+                    button: 'data-image-browse',
+                    input: 'data-image-input',
+                    onFileChange: function(event) {
+                        Partup.client.uploader.eachFile(event, function(file) {
+                            template.uploading.set('image', true);
 
-                    Partup.client.uploader.uploadImage(file, function(error, image) {
-                        template.uploading.set('icon', false);
+                            Partup.client.uploader.uploadImage(file, function(error, image) {
+                                template.uploading.set('image', false);
 
-                        if (error) {
-                            Partup.client.notify.error(TAPi18n.__(error.reason));
-                            return;
-                        }
+                                if (error) {
+                                    Partup.client.notify.error(TAPi18n.__(error.reason));
+                                    return;
+                                }
 
-                        template.find('[name=icon]').value = image._id;
-                        template.current.set('icon', image._id);
+                                template.find('[name=image]').value = image._id;
+                                template.current.set('image', image._id);
+                            });
+
+                        });
+
+                    }
+                };
+            },
+            iconInput: function() {
+                return {
+                    button: 'data-icon-browse',
+                    input: 'data-icon-input',
+                    onFileChange: function(event) {
+                        Partup.client.uploader.eachFile(event, function(file) {
+                            template.uploading.set('icon', true);
+
+                            Partup.client.uploader.uploadImage(file, function(error, image) {
+                                template.uploading.set('icon', false);
+
+                                if (error) {
+                                    Partup.client.notify.error(TAPi18n.__(error.reason));
+                                    return;
+                                }
+
+                                template.find('[name=icon]').value = image._id;
+                                template.current.set('icon', image._id);
+                            });
+
+                        });
+
+                    }
+                };
+            },
+            schema: Partup.schemas.forms.network,
+            fieldsForNetwork: function() {
+                if (!network) return;
+
+                return Partup.transformers.network.toFormNetwork(network);
+            },
+            // Location autocomplete helpers
+            locationLabel: function() {
+                return Partup.client.strings.locationToDescription;
+            },
+            locationFormvalue: function() {
+                return function(location) {
+                    return location.id;
+                };
+            },
+            locationSelectionReactiveVar: function() {
+                return template.locationSelection;
+            },
+            locationQuery: function() {
+                return function(query, sync, async) {
+                    Meteor.call('google.cities.autocomplete', query, function(error, locations) {
+                        lodash.each(locations, function(loc) {
+                            loc.value = Partup.client.strings.locationToDescription(loc);
+                        });
+                        async(locations);
                     });
-
-                });
-
+                };
             }
         };
     },
-    formSchema: Partup.schemas.forms.network,
-    placeholders: {
-        name: function() {
-            return TAPi18n.__('network-settings-form-name-placeholder');
-        },
-        description: function() {
-            return TAPi18n.__('network-settings-form-description-placeholder');
-        },
-        tags_input: function() {
-            return TAPi18n.__('network-settings-form-tags_input-placeholder');
-        },
-        location_input: function() {
-            return TAPi18n.__('network-settings-form-location_input-placeholder');
-        },
-        website: function() {
-            return TAPi18n.__('network-settings-form-website-placeholder');
-        }
-    },
-    descriptionCharactersLeft: function() {
-        return Template.instance().charactersLeft.get('description');
-    },
-    nameCharactersLeft: function() {
-        return Template.instance().charactersLeft.get('name');
-    },
-    tags_inputCharactersLeft: function() {
-        return Template.instance().charactersLeft.get('tags_input');
-    },
-    location_inputCharactersLeft: function() {
-        return Template.instance().charactersLeft.get('location_input');
-    },
-    websiteCharactersLeft: function() {
-        return Template.instance().charactersLeft.get('website');
-    },
-    network: function() {
-        return Networks.findOne({slug: this.networkSlug});
-    },
-    fieldsForNetwork: function() {
-        var network = Networks.findOne({slug: this.networkSlug});
-        if (!network) return;
-
-        return Partup.transformers.network.toFormNetwork(network);
-    },
-    submitting: function() {
-        return Template.instance().submitting.get();
-    },
-    imageUploading: function() {
-        return !!Template.instance().uploading.get('image');
-    },
-    imageUrl: function() {
-        var imageId = Template.instance().current.get('image');
-
-        if (!imageId) {
-            var network = Networks.findOne({slug: this.networkSlug});
-            if (network) imageId = network.image;
-        }
-
-        if (imageId) {
-            var image = Images.findOne({_id: imageId});
-            if (image) return Partup.helpers.url.getImageUrl(image, '360x360');
-        }
-
-        return '/images/smile.png';
-    },
-    iconUploading: function() {
-        return !!Template.instance().uploading.get('icon');
-    },
-    iconUrl: function() {
-        var iconId = Template.instance().current.get('icon');
-
-        if (!iconId) {
-            var network = Networks.findOne({slug: this.networkSlug});
-            if (network) iconId = network.icon;
-        }
-
-        if (iconId) {
-            var icon = Images.findOne({_id: iconId});
-            if (icon) return Partup.helpers.url.getImageUrl(icon, '360x360');
-        }
-
-        return '/images/smile.png';
-    },
-
-    // Location autocomplete helpers
-    locationLabel: function() {
-        return Partup.client.strings.locationToDescription;
-    },
-    locationFormvalue: function() {
-        return function(location) {
-            return location.id;
+    state: function() {
+        var template = Template.instance();
+        return {
+            imageUploading: function() {
+                return !!template.uploading.get('image');
+            },
+            iconUploading: function() {
+                return !!template.uploading.get('icon');
+            },
+            descriptionCharactersLeft: function() {
+                return template.charactersLeft.get('description');
+            },
+            nameCharactersLeft: function() {
+                return template.charactersLeft.get('name');
+            },
+            tags_inputCharactersLeft: function() {
+                return template.charactersLeft.get('tags_input');
+            },
+            location_inputCharactersLeft: function() {
+                return template.charactersLeft.get('location_input');
+            },
+            websiteCharactersLeft: function() {
+                return template.charactersLeft.get('website');
+            },
+            submitting: function() {
+                return template.submitting.get();
+            }
         };
     },
-    locationSelectionReactiveVar: function() {
-        return Template.instance().locationSelection;
-    },
-    locationQuery: function() {
-        return function(query, sync, async) {
-            Meteor.call('google.cities.autocomplete', query, function(error, locations) {
-                lodash.each(locations, function(loc) {
-                    loc.value = Partup.client.strings.locationToDescription(loc);
-                });
-                async(locations);
-            });
+    placeholders: function() {
+        return {
+            name: function() {
+                return TAPi18n.__('network-settings-form-name-placeholder');
+            },
+            description: function() {
+                return TAPi18n.__('network-settings-form-description-placeholder');
+            },
+            tags_input: function() {
+                return TAPi18n.__('network-settings-form-tags_input-placeholder');
+            },
+            location_input: function() {
+                return TAPi18n.__('network-settings-form-location_input-placeholder');
+            },
+            website: function() {
+                return TAPi18n.__('network-settings-form-website-placeholder');
+            }
         };
     }
+
 });
 
 Template.NetworkSettings.events({
