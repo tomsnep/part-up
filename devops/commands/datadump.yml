@@ -23,5 +23,5 @@
      run_once: true
 
    - name: datadump | remove all tokens
-     local_action: shell devops/commands/scripts/datadump.sh ../backups/{{ app.env.NODE_ENV }}/datadump/{{ database.name }}
+     local_action: shell commands/scripts/datadump.sh ../backups/{{ app.env.NODE_ENV }}/datadump/{{ database.name }}
      run_once: true
