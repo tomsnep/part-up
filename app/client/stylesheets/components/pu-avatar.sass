@@ -91,6 +91,10 @@
         width: 30px
         height: 30px
 
+    &-normal
+        width: 40px
+        height: 40px
+
     &-medium
         width: 60px
         height: 60px
@@ -104,12 +108,12 @@
         height: 120px
 
     &-responsive
-        width: 160px
-        height: 160px
+        width: 80px
+        height: 80px
 
-        @media screen and (max-height: 768px)
-            width: 80px
-            height: 80px
+        @media screen and (min-height: 1000px)
+            width: 160px
+            height: 160px
 
     &-border
         border: 2px solid $color-border-light
@@ -151,7 +155,7 @@
         list-style: none
         padding: 0
 
-        &-small
+        &-tiny
             > .pu-avatar
                 border: 2px solid #fff
                 float: right
@@ -170,19 +174,20 @@
                     &:first-child
                         margin-right: 0
 
-        &-large
-            > .pu-avatar
+        &-normal
+            > .pu-avatar,
+            > .pu-avatar-normal
                 border: 4px solid #fff
                 width: 48px
                 height: 48px
                 margin-right: -20px
 
-        &-extralarge
+        &-medium
             padding-right: 20px
-            > .pu-avatar
+            > .pu-avatar-medium
                 border: 4px solid #fff
-                width: 56px
-                height: 56px
+                width: 68px
+                height: 68px
                 margin-right: -20px
 
         &-blue
