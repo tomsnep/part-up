@@ -1,11 +1,13 @@
 Template.app_network_start.onCreated(function() {
     var template = this;
+    var networkSlug = template.data.networkSlug;
     template.loaded = new ReactiveVar(false);
-    template.subscribe('networks.one', template.data.networkSlug, {
+    template.subscribe('networks.one', networkSlug, {
         onReady: function() {
             template.loaded.set(true);
         }
     });
+    template.subscribe('networks.one.partups', {slug: networkSlug});
 });
 
 Template.app_network_start.helpers({
@@ -16,6 +18,9 @@ Template.app_network_start.helpers({
         return {
             network: function() {
                 return network;
+            },
+            partups: function() {
+                return Partups.findForNetwork(network);
             }
         };
     },
