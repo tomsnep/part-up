@@ -729,14 +729,11 @@ Router.route('/:slug', {
 
             // redirect to the network detail if it isn't a swarm but is a network
             } else if (result.is_network) {
-                var oldURL = document.referrer;
-                self.redirect('network-detail', {
+                self.redirect('network', {
                     slug: self.params.slug
                 }, {
                     query: self.params.query
                 });
-                console.log(oldURL)
-                history.pushState({}, 'partup', oldURL);
 
             // if it is neither a swarm or network, continue rendering the swarm page
             // the page will handle a "not found" exception by itself

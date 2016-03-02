@@ -63,6 +63,10 @@ Package.onUse(function(api) {
 
             'app/network/partials/joinbutton.html',
             'app/network/partials/joinbutton.js',
+            'app/network/partials/uppers.html',
+            'app/network/partials/uppers.js',
+            'app/network/partials/partups.html',
+            'app/network/partials/partups.js',
 
             'app/network/tabs/partups.html',
             'app/network/tabs/partups.js',
