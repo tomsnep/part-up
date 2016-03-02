@@ -17,7 +17,8 @@ Partup.server.services.networks = {
         var network_partners = [];
 
         Partups.find({network_id: network._id, deleted_at: {$exists: false}, archived_at: {$exists: false}}).fetch().forEach(function(partup) {
-            network_partners.push.apply(network_partners, partup.uppers);
+            var uppers = partup.uppers || [];
+            network_partners.push.apply(network_partners, uppers);
         });
 
         // We now have all the partners, so sort on frequency
