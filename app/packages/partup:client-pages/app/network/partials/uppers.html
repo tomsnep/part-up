@@ -1,0 +1,5 @@
+<template name="app_network_start_uppers">
+    <ul class="pu-avatar-stack pu-avatar-stack-medium pu-avatar-stack-blue">
+        {{#each data.uppers}}<li class="pu-avatar pu-avatar-medium" style="{{#with profile.image}}background-image: url('{{ partupImageUrl id=. store='80x80' }}'){{/with}}" data-hovercontainer="HoverContainer_upper" data-hovercontainer-context="{{ _id }}"></li>{{/each}}
+    </ul>
+</template>

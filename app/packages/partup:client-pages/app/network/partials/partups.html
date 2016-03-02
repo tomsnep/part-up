@@ -1,0 +1,7 @@
+<template name="app_network_start_partups">
+    <ul class="pu-avatar-stack pu-avatar-stack-medium pu-avatar-stack-blue">
+        {{#each data.partups}}
+            <li class="pu-avatar pu-avatar-medium" style="{{#with image}}background-image: url('{{ partupImageUrl id=. store='80x80' }}'){{/with}}"></li>
+        {{/each}}
+    </ul>
+</template>

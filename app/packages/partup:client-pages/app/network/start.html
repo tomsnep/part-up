@@ -22,15 +22,11 @@
                 </header>
                 <footer>
                     <section>
-                        <ul class="pu-avatar-stack pu-avatar-stack-extralarge pu-avatar-stack-blue">
-                            {{#each data.network.uppers}}<li class="pu-avatar" style="{{#with image}}background-image: url('{{ partupImageUrl id=. store='80x80' }}'){{/with}}" data-hovercontainer="HoverContainer_upper" data-hovercontainer-context="{{ _id }}"></li>{{/each}}
-                        </ul>
+                        {{> app_network_start_partups partups=data.network.partups }}
                         <a class="pu-button pu-button-translucent" href="{{ pathFor route='network-detail' slug=data.network.slug }}">Find your part-up</a>
                     </section>
                     <section>
-                        <ul class="pu-avatar-stack pu-avatar-stack-extralarge pu-avatar-stack-blue">
-                            {{#each data.network.uppers}}<li class="pu-avatar" style="{{#with image}}background-image: url('{{ partupImageUrl id=. store='80x80' }}'){{/with}}" data-hovercontainer="HoverContainer_upper" data-hovercontainer-context="{{ _id }}"></li>{{/each}}
-                        </ul>
+                        {{> app_network_start_uppers uppers=data.network.uppers }}
                         <a class="pu-button pu-button-translucent" href="{{ pathFor route='network-detail' slug=data.network.slug }}">Join the activity</a>
                     </section>
                 </footer>
