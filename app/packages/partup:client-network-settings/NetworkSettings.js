@@ -76,7 +76,21 @@ Template.NetworkSettings.helpers({
                 }
 
                 return '/images/smile.png';
-            }
+            },
+            backgroundImageUrl: function() {
+                var backgroundImageId = template.current.get('background_image');
+
+                if (!backgroundImageId) {
+                    if (network) backgroundImageId = network.background_image;
+                }
+
+                if (backgroundImageId) {
+                    var backgroundImage = Images.findOne({_id: backgroundImageId});
+                    if (backgroundImage) return Partup.helpers.url.getImageUrl(backgroundImage, '360x360');
+                }
+
+                return '/images/smile.png';
+            },
         };
     },
     form: function() {
@@ -126,6 +140,31 @@ Template.NetworkSettings.helpers({
 
                                 template.find('[name=icon]').value = image._id;
                                 template.current.set('icon', image._id);
+                            });
+
+                        });
+
+                    }
+                };
+            },
+            backgroundImageInput: function() {
+                return {
+                    button: 'data-backgroundimage-browse',
+                    input: 'data-backgroundimage-input',
+                    onFileChange: function(event) {
+                        Partup.client.uploader.eachFile(event, function(file) {
+                            template.uploading.set('background_image', true);
+
+                            Partup.client.uploader.uploadImage(file, function(error, backgroundImage) {
+                                template.uploading.set('background_image', false);
+
+                                if (error) {
+                                    Partup.client.notify.error(TAPi18n.__(error.reason));
+                                    return;
+                                }
+
+                                template.find('[name=background_image]').value = backgroundImage._id;
+                                template.current.set('background_image', backgroundImage._id);
                             });
 
                         });
