@@ -13,3 +13,4 @@ Partup.constants.CRON_POPULARITY = process.env.PARTUP_CRON_POPULARITY || 'every 
 Partup.constants.CRON_SWARM_UPDATE_STATS = process.env.PARTUP_CRON_SWARM_UPDATE_STATS || 'every 2 hours on the 17th minute';
 Partup.constants.CRON_SWARM_SHARED_COUNTS = process.env.PARTUP_CRON_SWARM_SHARED_COUNTS || 'every 10 hours on the 38th minute';
 Partup.constants.CRON_SORT_ACTIVE_NETWORK_UPPERS = process.env.CRON_SORT_ACTIVE_NETWORK_UPPERS || 'every 4 hours on the 19th minute';
+Partup.constants.CRON_GET_COMMON_NETWORK_TAGS = process.env.CRON_GET_COMMON_NETWORK_TAGS || 'every 6 hours on the 25th minute';

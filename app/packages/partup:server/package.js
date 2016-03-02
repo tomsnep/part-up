@@ -195,6 +195,7 @@ Package.onUse(function(api) {
         'cron/update_swarm_shared_count.js',
         'cron/update_swarm_stats.js',
         'cron/sort_network_uppers.js',
+        'cron/get_common_network_tags.js',
         'migrations.js',
         'package-tap.i18n'
     ], ['server']);
