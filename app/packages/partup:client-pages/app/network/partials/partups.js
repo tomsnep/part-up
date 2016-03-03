@@ -1,7 +1,9 @@
 Template.app_network_start_partups.onCreated(function() {
     var template = this;
-
-    template.activeImage = new ReactiveVar(template.data.partups.fetch().shift().image);
+    template.activeImage = new ReactiveVar();
+    var partups = template.data.partups.fetch();
+    var firstPartup = partups.shift();
+    if (firstPartup) template.activeImage.set(firstPartup.image);
     template.maxPartups = 3;
 
 });
