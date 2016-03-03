@@ -23,15 +23,15 @@
                 <footer>
                     <section>
                         {{> app_network_start_partups partups=data.partups }}
-                        <a class="pu-button pu-button-translucent" href="{{ pathFor route='network-detail' slug=data.network.slug }}">Find your part-up</a>
+                        <a class="pu-button pu-button-translucent" href="{{ pathFor route='network-detail' slug=data.network.slug }}">{{_ 'pages-app-network-start-button-explore' }}</a>
                     </section>
                     <section>
                         {{> app_network_start_uppers uppers=data.network.uppers }}
-                        <a class="pu-button pu-button-translucent" href="{{ pathFor route='network-detail' slug=data.network.slug }}">Join the activity</a>
+                        <a class="pu-button pu-button-translucent" href="{{ pathFor route='network-detail' slug=data.network.slug }}">{{_ 'pages-app-network-start-button-activity' }}</a>
                     </section>
                 </footer>
             {{/unless}}
-            <div class="pu-tribebackground {{#if state.loaded}}pu-state-loaded{{/if}}" style="{{#with data.network.background_image }}background-image:url('{{ partupImageUrl id=. store='360x360'}}');{{/with }}"></div>
+            <div class="pu-tribebackground {{#if state.loaded}}pu-state-loaded{{/if}}" style="{{#with data.network.background_image }}background-image:url('{{ partupImageUrl id=. store='1200x520'}}');{{/with }}"></div>
         </div>
 
     </article>

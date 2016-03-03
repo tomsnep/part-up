@@ -4,5 +4,13 @@
     "pages-app-notfound-networkstart-tag1": "TRIBE",
     "pages-app-notfound-networkstart-tag2": "NOT",
     "pages-app-notfound-networkstart-tag3": "FOUND",
-    "pages-app-notfound-networkstart-button": "Discover part-up"
+    "pages-app-notfound-networkstart-button": "Discover part-up",
+
+    "network-settings-form-backgroundimage-label": "Background image",
+    "network-settings-form-background_image-button": "From your computer",
+    "network-settings-form-background_image-info": "Preferrably a high resolution photo",
+
+    "pages-app-network-start-button-explore": "Find your part-up",
+    "pages-app-network-start-button-activity": "Join the activity"
+
 }

@@ -4,5 +4,12 @@
     "pages-app-notfound-networkstart-tag1": "TRIBE",
     "pages-app-notfound-networkstart-tag2": "NIET",
     "pages-app-notfound-networkstart-tag3": "GEVONDEN",
-    "pages-app-notfound-networkstart-button": "Ontdek part-up"
+    "pages-app-notfound-networkstart-button": "Ontdek part-up",
+
+    "network-settings-form-backgroundimage-label": "Achtergrond",
+    "network-settings-form-background_image-button": "Vanaf jouw computer",
+    "network-settings-form-background_image-info": "Het liefst een hoge resolutie",
+
+    "pages-app-network-start-button-explore": "Vind jouw part-up",
+    "pages-app-network-start-button-activity": "Voeg je bij de activiteit"
 }
