@@ -579,6 +579,7 @@ Router.route('/tribes/:slug', {
         } else {
             // console.log('checking if user is a member');
             Meteor.call('users.member_of_network', userId, networkSlug, function(error, response) {
+                var response = response || {};
                 if (response.has_member) {
                     route.renderRoute('network-detail');
                 } else {

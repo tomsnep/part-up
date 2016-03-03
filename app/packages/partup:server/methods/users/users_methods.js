@@ -216,9 +216,9 @@ Meteor.methods({
      */
     'users.member_of_network': function(userId, networkSlug) {
         var network = Networks.findOne({slug: networkSlug});
-        var response = {
+        var response = network ? {
             has_member: network.hasMember(userId)
-        };
+        } : false;
         return response;
     }
 });

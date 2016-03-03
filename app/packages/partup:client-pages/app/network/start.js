@@ -5,6 +5,9 @@ Template.app_network_start.onCreated(function() {
     template.subscribe('networks.one', networkSlug, {
         onReady: function() {
             template.loaded.set(true);
+            var network = Networks.findOne({slug: networkSlug});
+            if (!network) Router.pageNotFound('network');
+            template.networkLoaded.set(true);
         }
     });
     template.subscribe('networks.one.partups', {slug: networkSlug});
