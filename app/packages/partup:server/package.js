@@ -193,7 +193,7 @@ Package.onUse(function(api) {
         'cron/update_shared_count.js',
         'cron/calculate_partup_popularity_score_for_partups.js',
         'cron/update_swarm_shared_count.js',
-        'cron/update_swarm_stats.js',
+        'cron/update_swarm_network_stats.js',
         'cron/sort_network_uppers.js',
         'cron/get_common_network_tags.js',
         'migrations.js',

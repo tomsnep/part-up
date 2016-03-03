@@ -109,5 +109,8 @@ Partup.server.services.swarms = {
                 updated_at: new Date()
             }
         });
+
+        // Return the list of network IDs that have been updated
+        return networks;
     }
 };
