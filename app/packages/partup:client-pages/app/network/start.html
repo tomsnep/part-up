@@ -22,11 +22,11 @@
                 </header>
                 <footer>
                     <section>
-                        {{> app_network_start_partups partups=data.partups }}
+                        {{> app_network_start_partups partups=data.activePartups }}
                         <a class="pu-button pu-button-translucent" href="{{ pathFor route='network-detail' slug=data.network.slug }}">{{_ 'pages-app-network-start-button-explore' }}</a>
                     </section>
                     <section>
-                        {{> app_network_start_uppers uppers=data.network.uppers }}
+                        {{> app_network_start_uppers uppers=data.activeUppers }}
                         <a class="pu-button pu-button-translucent" href="{{ pathFor route='network-detail' slug=data.network.slug }}">{{_ 'pages-app-network-start-button-activity' }}</a>
                     </section>
                 </footer>

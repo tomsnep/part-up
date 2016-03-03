@@ -18,12 +18,25 @@ Template.app_network_start.helpers({
         var template = Template.instance();
         var self = this;
         var network = Networks.findOne({slug: self.networkSlug});
+        if (!network) return;
         return {
             network: function() {
                 return network;
             },
             partups: function() {
                 return Partups.findForNetwork(network);
+            },
+            activeUppers: function() {
+                return {
+                    uppers: network.most_active_uppers,
+                    totalUppers: network.stats.upper_count
+                };
+            },
+            activePartups: function() {
+                return {
+                    partups: network.most_active_partups,
+                    totalPartups: network.stats.partup_count
+                };
             },
             tags: function() {
                 var tags = [];
