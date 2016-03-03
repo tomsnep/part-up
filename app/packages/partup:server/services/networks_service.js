@@ -69,11 +69,11 @@ Partup.server.services.networks = {
     },
 
     /**
-     * Sort the network uppers based on activeness
+     * Calculate the most active uppers of a network
      *
      * @param {Object} network
      */
-    sortActiveUppers: function(network) {
+    calculateActiveUppers: function(network) {
         // Initialization
         var network_uppers = network.uppers || [];
         var network_partners = [];
@@ -87,14 +87,50 @@ Partup.server.services.networks = {
         network_partners = lodash.chain(network_partners).countBy().pairs().sortBy(1).reverse().pluck(0).value();
 
         // We only want the uppers that are member of the tribe in our array
-        var sorted_network_uppers = lodash.intersection(network_partners, network_uppers);
-        var leftover_uppers = lodash.difference(network_uppers, sorted_network_uppers);
-        sorted_network_uppers.push.apply(sorted_network_uppers, leftover_uppers);
+        var active_uppers = lodash.intersection(network_partners, network_uppers);
+        var leftover_uppers = lodash.difference(network_uppers, active_uppers);
+        active_uppers.push.apply(active_uppers, leftover_uppers);
 
         // Update the network with the new stats
         Networks.update(network._id, {
             $set: {
-                uppers: sorted_network_uppers,
+                most_active_uppers: active_uppers.slice(0, 7), // We only need to show 7 uppers
+                updated_at: new Date()
+            }
+        });
+    },
+
+    /**
+     * Calculate the most active partups of a network
+     *
+     * @param {Object} network
+     */
+    calculateActivePartups: function(network) {
+        var partups = Partups.find({
+            network_id: network._id,
+            deleted_at: {$exists: false},
+            archived_at: {$exists: false}
+        }, {
+            fields: {
+                _id: 1,
+                popularity: 1
+            },
+            sort: {
+                popularity: -1
+            },
+            limit: 3
+        }).fetch();
+
+        // We now have all the partup objects, so transform them into an array containing the IDs
+        var popular_partups = [];
+        partups.forEach(function(partup) {
+            popular_partups.push(partup._id);
+        });
+
+        // Update the network with the new stats
+        Networks.update(network._id, {
+            $set: {
+                most_active_partups: popular_partups,
                 updated_at: new Date()
             }
         });
