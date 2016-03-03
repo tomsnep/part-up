@@ -12,6 +12,9 @@
 
     "pages-app-network-start-button-explore": "Vind jouw part-up",
     "pages-app-network-start-button-activity": "Voeg je bij de activiteit",
+    "pages-app-network-start-label-activities": "activiteiten",
+    "pages-app-network-start-label-supporters": "supporters",
+    "pages-app-network-start-label-active": "dagen actief",
 
     "pages-app-network-tab-button-showstart": "Start tonen"
 }
