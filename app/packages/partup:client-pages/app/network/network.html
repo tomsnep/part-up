@@ -9,7 +9,7 @@
                         <figure class="pu-avatar pu-avatar-square" style="{{#with image }}background-image:url('{{ partupImageUrl id=. store='360x360'}}');{{/with }}">
                         </figure>
                         <h1>{{ name }}</h1>
-                        <a href="{{ pathFor route='network' slug=slug query='show=true'}}" class="pu-button pu-button-darktext"><i class="picon-photo"></i>{{_ 'pages-app-network-tab-button-showstart' }}</a>
+                        <a href="{{ pathFor route='network' slug=slug query='show=true'}}" class="pu-button pu-button-darktext"><i class="picon-show"></i>{{_ 'pages-app-network-tab-button-showstart' }}</a>
                     {{ else }}
                         {{> Spinner color='inverted'}}
                     {{/ with }}
