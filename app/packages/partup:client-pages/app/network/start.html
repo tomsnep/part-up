@@ -10,9 +10,9 @@
                     <figure class="pu-avatar pu-avatar-responsive pu-avatar-square" style="{{#with data.network.image }}background-image:url('{{ partupImageUrl id=. store='360x360'}}');{{/with }}"></figure>
                     <h1>{{data.network.name}}</h1>
                     <h3>{{data.network.description}}</h3>
-                    {{#if data.network.tags.length}}
+                    {{#if data.tags.length}}
                         <ul class="pu-list pu-list-horizontal pu-list-tags">
-                            {{#each data.network.tags}}
+                            {{#each data.tags}}
                                 <li><a href="#" class="pu-tag pu-tag-dark">{{.}}</a></li>
                             {{/each}}
                         </ul>

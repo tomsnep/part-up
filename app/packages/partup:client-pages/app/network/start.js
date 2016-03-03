@@ -10,6 +10,7 @@ Template.app_network_start.onCreated(function() {
         }
     });
     template.subscribe('networks.one.partups', {slug: networkSlug});
+    template.maxTags = 5;
 });
 
 Template.app_network_start.helpers({
@@ -23,6 +24,27 @@ Template.app_network_start.helpers({
             },
             partups: function() {
                 return Partups.findForNetwork(network);
+            },
+            tags: function() {
+                var tags = [];
+                var commonTags = network.common_tags || [];
+                var customTags = network.tags || [];
+
+                _.times(template.maxTags, function() {
+                    var tag = commonTags.shift();
+                    if (!tag) return;
+                    tags.push(tag.tag);
+                });
+
+                if (tags.length === template.maxTags) return tags;
+
+                _.times((template.maxTags - tags.length), function() {
+                    var tag = customTags.shift();
+                    if (!tag) return;
+                    tags.push(tag);
+                });
+
+                return tags;
             }
         };
     },
