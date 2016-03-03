@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 1.16.10
+- revert change to fix private tribe partups
+
 ## 1.16.9
 - Visualize archived part-ups #22
 - Add archived/active filter to profile/partner and profile/supporter #251
