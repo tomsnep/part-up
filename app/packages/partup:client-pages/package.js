@@ -26,8 +26,21 @@ Package.onUse(function(api) {
             'app/app.html',
             'app/app.js',
 
-            'app/app-notfound.html',
-            'app/app-notfound.js',
+            'app/404/layout.html',
+            'app/404/layout.js',
+            'app/404/default.html',
+
+            'app/404/partup/partup.html',
+            'app/404/partup/closed.html',
+            'app/404/partup/not-allowed.html',
+
+            'app/404/network/network.html',
+            'app/404/network/settings.html',
+
+            'app/404/profile/profile.html',
+            'app/404/profile/not-allowed.html',
+
+            'app/404/swarm/settings.html',
             // App:home
             'app/home/home.html',
             'app/home/home.js',
