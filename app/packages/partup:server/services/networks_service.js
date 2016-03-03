@@ -146,7 +146,7 @@ Partup.server.services.networks = {
         var partup_tags = [];
 
         // Get the tags of all partups in this networks in one array
-        Partups.find({network_id: network._id, deleted_at: {$exists: false}, archived_at: {$exists: false}}).fetch().forEach(function(partup) {
+        Partups.find({network_id: network._id, deleted_at: {$exists: false}}).fetch().forEach(function(partup) {
             var tags = partup.tags || [];
             partup_tags.push.apply(partup_tags, tags);
         });
