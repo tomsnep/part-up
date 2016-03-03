@@ -11,6 +11,8 @@
     "network-settings-form-background_image-info": "Preferrably a high resolution photo",
 
     "pages-app-network-start-button-explore": "Find your part-up",
-    "pages-app-network-start-button-activity": "Join the activity"
+    "pages-app-network-start-button-activity": "Join the activity",
+
+    "pages-app-network-tab-button-showstart": "Show start"
 
 }
