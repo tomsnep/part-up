@@ -194,7 +194,7 @@ Package.onUse(function(api) {
         'cron/calculate_partup_popularity_score_for_partups.js',
         'cron/update_swarm_shared_count.js',
         'cron/update_swarm_network_stats.js',
-        'cron/sort_network_uppers.js',
+        'cron/calculate_active_network_uppers_partups.js',
         'cron/get_common_network_tags.js',
         'migrations.js',
         'package-tap.i18n'
