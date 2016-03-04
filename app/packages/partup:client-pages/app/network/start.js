@@ -29,13 +29,15 @@ Template.app_network_start.helpers({
             activeUppers: function() {
                 return {
                     uppers: network.most_active_uppers,
-                    totalUppers: network.stats.upper_count
+                    totalUppers: network.stats.upper_count,
+                    networkSlug: self.networkSlug
                 };
             },
             activePartups: function() {
                 return {
                     partups: network.most_active_partups,
-                    totalPartups: network.stats.partup_count
+                    totalPartups: network.stats.partup_count,
+                    networkSlug: self.networkSlug
                 };
             },
             tags: function() {

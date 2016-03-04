@@ -1,6 +1,6 @@
 Template.app_network_start_partups.onCreated(function() {
     var template = this;
-    template.MAX_PARTUPS = 3;
+    template.MAX_PARTUPS = 3; // 3
     template.activeImage = new ReactiveVar();
     template.subscribe('partups.by_ids', template.data.partups.partups, {
         onReady: function() {
@@ -30,6 +30,9 @@ Template.app_network_start_partups.helpers({
             remainingPartups: function() {
                 var remaining = partupCount > template.MAX_PARTUPS ? partupCount - template.MAX_PARTUPS : 0;
                 return remaining;
+            },
+            networkSlug: function() {
+                return template.data.partups.networkSlug;
             }
         };
     },

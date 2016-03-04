@@ -1,6 +1,6 @@
 Template.app_network_start_uppers.onCreated(function() {
     var template = this;
-    template.MAX_UPPERS = 7;
+    template.MAX_UPPERS = 7; // 7
     template.subscribe('users.by_ids', template.data.uppers.uppers);
 });
 Template.app_network_start_uppers.helpers({
@@ -15,6 +15,9 @@ Template.app_network_start_uppers.helpers({
             remainingUppers: function() {
                 var remaining = upperCount > template.MAX_UPPERS ? upperCount - template.MAX_UPPERS : 0;
                 return remaining;
+            },
+            networkSlug: function() {
+                return template.data.uppers.networkSlug;
             }
         };
     }
