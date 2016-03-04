@@ -293,6 +293,8 @@ Package.onUse(function(api) {
             'swarm/content/content.js',
             'swarm/content/video/video.html',
             'swarm/content/video/video.js',
+            'swarm/content/networks/networks.html',
+            'swarm/content/networks/networks.js',
 
             'swarm/footer/footer.html',
             'swarm/footer/footer.js'

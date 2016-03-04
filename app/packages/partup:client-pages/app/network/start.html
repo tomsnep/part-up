@@ -18,13 +18,13 @@
                     <figure class="pu-avatar pu-avatar-responsive pu-avatar-square" style="{{#with data.network.image }}background-image:url('{{ partupImageUrl id=. store='360x360'}}');{{/with }}"></figure>
                     <h1>{{data.network.name}}</h1>
                     <h3>{{data.network.description}}</h3>
-                    {{#if data.tags.length}}
+                    {{#with data.network.displayTags}}
                         <ul class="pu-list pu-list-horizontal pu-list-tags">
-                            {{#each data.tags}}
+                            {{#each .}}
                                 <li><a href="#" class="pu-tag pu-tag-dark">{{.}}</a></li>
                             {{/each}}
                         </ul>
-                    {{/if}}
+                    {{/with}}
                     <!-- join or leave button -->
                     {{> app_network_joinbutton network=data.network }}
                 </header>

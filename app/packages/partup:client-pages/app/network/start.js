@@ -39,27 +39,6 @@ Template.app_network_start.helpers({
                     totalPartups: network.stats.partup_count,
                     networkSlug: self.networkSlug
                 };
-            },
-            tags: function() {
-                var tags = [];
-                var commonTags = network.common_tags || [];
-                var customTags = network.tags || [];
-
-                _.times(template.maxTags, function() {
-                    var tag = commonTags.shift();
-                    if (!tag) return;
-                    tags.push(tag.tag);
-                });
-
-                if (tags.length === template.maxTags) return tags;
-
-                _.times((template.maxTags - tags.length), function() {
-                    var tag = customTags.shift();
-                    if (!tag) return;
-                    tags.push(tag);
-                });
-
-                return tags;
             }
         };
     },
