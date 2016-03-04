@@ -1,14 +1,14 @@
 Template.app_profile.onCreated(function() {
     var template = this;
 
-    var profileId = template.data.profileId;
     template.autorun(function() {
         var data = Template.currentData();
+        if (!data.profileId) return;
         template.subscribe('users.one', data.profileId, {
             onReady: function() {
-                var profile = Meteor.users.findOne(data.profileId);
-                var isViewable = User(profile).aboutPageIsViewable();
-                if (!isViewable) {
+                var user = Meteor.users.findOne(data.profileId);
+                var isViewable = User(user).aboutPageIsViewable();
+                if (!isViewable && Router.current().route.getName() === 'profile') {
                     Router.replaceYieldTemplate('app_profile_upper_partups', 'app_profile');
                 }
             }
