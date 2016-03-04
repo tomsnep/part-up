@@ -211,6 +211,9 @@ Template.NetworkSettings.helpers({
             iconUploading: function() {
                 return !!template.uploading.get('icon');
             },
+            backgroundImageUploading: function() {
+                return !!template.uploading.get('background_image');
+            },
             descriptionCharactersLeft: function() {
                 return template.charactersLeft.get('description');
             },
