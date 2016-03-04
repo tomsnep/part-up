@@ -5,7 +5,15 @@
             {{#unless state.loaded}}
                 {{> Spinner color='inverted' }}
             {{else}}
-                <nav><a href="{{ pathFor route='network-detail' slug=data.network.slug }}" class="pu-button pu-button-icononly"><i class="picon-times"></i></a></nav>
+                <nav>
+                    {{# if data.network.isAdmin currentUser._id }}
+                        <a href="{{pathFor 'network-settings' slug=slug}}" data-open-networksettings
+                            class="pu-button pu-button-spinning">
+                            <i class="picon-cog"></i>
+                        </a>
+                    {{/if}}
+                    <a href="{{ pathFor route='network-detail' slug=data.network.slug }}" class="pu-button"><i class="picon-times"></i></a>
+                </nav>
                 <header class="pu-highlight pu-highlight-inverted">
                     <figure class="pu-avatar pu-avatar-responsive pu-avatar-square" style="{{#with data.network.image }}background-image:url('{{ partupImageUrl id=. store='360x360'}}');{{/with }}"></figure>
                     <h1>{{data.network.name}}</h1>

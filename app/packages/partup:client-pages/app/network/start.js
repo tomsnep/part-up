@@ -70,3 +70,15 @@ Template.app_network_start.helpers({
         };
     }
 });
+Template.app_network_start.events({
+    'click [data-open-networksettings]': function(event, template) {
+        event.preventDefault();
+        var networkSlug = template.data.networkSlug;
+        Intent.go({
+            route: 'network-settings',
+            params: {
+                slug: networkSlug
+            }
+        });
+    }
+});
