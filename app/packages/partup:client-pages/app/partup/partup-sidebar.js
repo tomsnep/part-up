@@ -129,7 +129,9 @@ Template.app_partup_sidebar.helpers({
             var network = Networks.findOne({_id: partup.network_id});
             if (network) {
                 networkText = network.name;
-                networkPath = Router.path('network', {slug: network.slug});
+                var query = {};
+                if (network.hasMember(Meteor.userId())) query.show = false;
+                networkPath = Router.path('network', {slug: network.slug}, {query: query});
             }
         }
 
