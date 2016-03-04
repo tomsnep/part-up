@@ -2,7 +2,7 @@ var SECOND_TRACKER_NAME = 'newPartupAnalyticsTracker';
 var second_tracker_id = get(Meteor, 'settings.public.secondGATracker');
 
 Meteor.startup(function() {
-
+    return;
     // Set up second tracker if set
     if (second_tracker_id) {
         analytics.ready(function() {

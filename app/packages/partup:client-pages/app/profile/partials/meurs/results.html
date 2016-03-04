@@ -1,24 +1,24 @@
 <template name="ResultTile">
-    {{#if hasResults }}
+    {{#if data.results.length }}
         <article class="pu-profiletile pu-profiletile-results">
-            {{#each results}}
+            {{#each data.results}}
                 <article class="pu-resulttile">
                     <header>
-                        <h2>{{ resultTitle code }}</h2>
+                        <h2>{{ translations.title code }}</h2>
                     </header>
                     <section>
                         <figure style="background-image: url('/images/results/{{ code }}.svg');"></figure>
-                        <p>{{ resultDescription code }}</p>
+                        <p>{{ translations.description code }}</p>
                     </section>
                 </article>
             {{/each}}
-            {{#if isCurrentusersResultTile}}
             <footer>
-                <a href="#" data-reset class="pu-button pu-button-text pu-button-text-subtle">{{_ 'pages-app-profile-result-tile-reset'}}</a>
+                {{#if data.profileIsCurrentUser}}
+                    <a href="#" data-reset class="pu-button pu-button-text pu-button-text-subtle">{{_ 'pages-app-profile-result-tile-reset'}}</a>
+                {{/if}}
             </footer>
-            {{/if}}
         </article>
     {{else}}
-        {{> PlaceholderTile type="results" loading=isLoading}}
+        {{> PlaceholderTile type="results" loading=state.loading }}
     {{/if}}
 </template>

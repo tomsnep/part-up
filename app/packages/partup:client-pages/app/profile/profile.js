@@ -1,13 +1,19 @@
-var Subs = new SubsManager({
-    cacheLimit: 1,
-    expireIn: 10
-});
-
 Template.app_profile.onCreated(function() {
     var template = this;
 
     var profileId = template.data.profileId;
-    template.subscribe('users.one', profileId);
+    template.autorun(function() {
+        var data = Template.currentData();
+        template.subscribe('users.one', data.profileId, {
+            onReady: function() {
+                var profile = Meteor.users.findOne(data.profileId);
+                var isViewable = User(profile).aboutPageIsViewable();
+                if (!isViewable) {
+                    Router.replaceYieldTemplate('app_profile_upper_partups', 'app_profile');
+                }
+            }
+        });
+    });
 
     template.autorun(function() {
         var scrolled = Partup.client.scroll.pos.get() > 100;
@@ -37,18 +43,6 @@ Template.app_profile.onCreated(function() {
             clickedElement.parents('.pu-sub-pageheader').toggleClass('pu-state-descriptionexpanded');
         }
     };
-    template.profileLoaded = new ReactiveVar(false);
-    template.autorun(function(computation) {
-        var loaded = template.profileLoaded.get();
-        if (!loaded) return;
-        Tracker.nonreactive(function() {
-            var profile = Meteor.users.findOne(template.data.profileId);
-            var isViewable = User(profile).aboutPageIsViewable();
-            if (!isViewable) {
-                Router.replaceYieldTemplate('app_profile_upper_partups', 'app_profile');
-            }
-        });
-    });
 });
 
 /*************************************************************/
@@ -56,11 +50,9 @@ Template.app_profile.onCreated(function() {
 /*************************************************************/
 Template.app_profile.helpers({
     profile: function() {
-        var profile = Meteor.users.findOne(this.profileId);
+        var data = Template.currentData();
+        var profile = Meteor.users.findOne(data.profileId);
         if (!profile) return;
-
-        // hide about page when there is no content
-        Template.instance().profileLoaded.set(true);
 
         return {
             data: profile.profile,
@@ -72,9 +64,6 @@ Template.app_profile.helpers({
             },
             roundedScore: function() {
                 return User(profile).getReadableScore();
-            },
-            isCurrentUser: function() {
-                return profile._id === Meteor.userId();
             },
             hasTilesOrIsCurrentUser: function() {
                 var viewable = User(pofile).aboutPageIsViewable();

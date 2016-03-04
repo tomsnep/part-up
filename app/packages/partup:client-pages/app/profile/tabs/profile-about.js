@@ -32,36 +32,32 @@ Template.app_profile_about.onRendered(function() {
             onReady: function() {
                 var tiles = Tiles.find({upper_id: profileId}).fetch();
                 var user = Meteor.users.findOne(profileId);
+                var displayTiles = [];
 
                 var meurs = user.profile.meurs || {};
 
                 var profileIsCurrentUser = Meteor.userId() === profileId;
-                var profileHasResults = meurs.results && meurs.results.length;
+                var profileHasResults = meurs.results && meurs.results.length && meurs.fetched_results;
                 var profileDoesNotHaveMediaTiles = !tiles || !tiles.length;
 
-                var addResults = function() {
-                    if (!profileHasResults || !profileIsCurrentUser) return;
-                    template.columnTilesLayout.addTiles([{
+                if (profileHasResults || profileIsCurrentUser) {
+                    displayTiles = displayTiles.concat([{
                         type: 'result',
-                        user: user,
-                        meurs: meurs
+                        profileId: profileId
                     }]);
-                };
+                }
 
-                var addTiles = function() {
-                    if (profileDoesNotHaveMediaTiles && profileIsCurrentUser) {
-                        template.columnTilesLayout.addTiles([{
-                            type: 'image',
-                            placeholder: true
-                        }]);
-                    } else {
-                        template.columnTilesLayout.addTiles(tiles);
-                    }
-                };
+                if (profileDoesNotHaveMediaTiles && profileIsCurrentUser) {
+                    displayTiles = displayTiles.concat([{
+                        type: 'image',
+                        placeholder: true
+                    }]);
+                } else {
+                    displayTiles = displayTiles.concat(tiles);
+                }
 
                 template.columnTilesLayout.clear(function() {
-                    addResults();
-                    Meteor.defer(addTiles);
+                    template.columnTilesLayout.addTiles(displayTiles);
                 });
             }
         });

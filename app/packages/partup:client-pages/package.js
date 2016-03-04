@@ -100,23 +100,25 @@ Package.onUse(function(api) {
             'app/profile/tabs/profile-about.html',
             'app/profile/tabs/profile-about.js',
 
-            // App: profile partials
-            'app/profile/partials/profile-tile.html',
-            'app/profile/partials/profile-tile.js',
-            'app/profile/partials/media-tile.html',
-            'app/profile/partials/media-tile.js',
-            'app/profile/partials/result-tile.html',
-            'app/profile/partials/result-tile.js',
-            'app/profile/partials/placeholder-tile.html',
-            'app/profile/partials/placeholder-tile.js',
+            // App: profile tiles
+            'app/profile/partials/profile/profile.html',
+            'app/profile/partials/profile/profile.js',
+            'app/profile/partials/profile/media.html',
+            'app/profile/partials/profile/media.js',
+
+            // App: profile meurs tiles
+            'app/profile/partials/meurs/placeholder.html',
+            'app/profile/partials/meurs/placeholder.js',
+            'app/profile/partials/meurs/results.html',
+            'app/profile/partials/meurs/results.js',
 
             // App: profile popups
-            'app/profile/partials/new-photo-tile.html',
-            'app/profile/partials/new-photo-tile.js',
-            'app/profile/partials/new-video-tile.html',
-            'app/profile/partials/new-video-tile.js',
-            'app/profile/partials/info-popup.html',
-            'app/profile/partials/info-popup.js',
+            'app/profile/partials/popups/info.html',
+            'app/profile/partials/popups/info.js',
+            'app/profile/partials/popups/video.html',
+            'app/profile/partials/popups/video.js',
+            'app/profile/partials/popups/photo.html',
+            'app/profile/partials/popups/photo.js',
 
             // App:partup:takepart (popup)
             'app/partup/takepart/takepart.html',
