@@ -89,7 +89,7 @@ Template.NetworkSettings.helpers({
                     if (backgroundImage) return Partup.helpers.url.getImageUrl(backgroundImage, '360x360');
                 }
 
-                return '/images/smile.png';
+                return '/images/tribestart.jpg';
             },
         };
     },
