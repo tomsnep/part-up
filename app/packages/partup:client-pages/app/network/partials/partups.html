@@ -1,5 +1,5 @@
 <template name="app_network_start_partups">
-    {{#unless data.partups}}
+    {{#unless state.activeImage}}
         {{> Spinner color='inverted' }}
     {{else}}
         <ul class="pu-list pu-list-horizontal pu-stack" data-stack>
