@@ -916,6 +916,8 @@ if (Meteor.isClient) {
     // renders the yield regions of a different route
     // basically a redirect without the redirect
     // users can still use the browser "back" button
+    // WARNING: this should only be used to render child routes
+    // for example: /tribes/:slug > /tribes/:slug/partups not /tribes/:slug > /profile/:_id
     RouteController.prototype.renderRoute = function(routeName) {
         var self = this;
         var regions = Router.routes[routeName].options.yieldRegions;
