@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 1.16.11
+- fix linkedin registration issue
+
 ## 1.16.10
 - revert change to fix private tribe partups
 
