@@ -715,6 +715,10 @@ Router.route('/:slug', {
     },
     onBeforeAction: function() {
         var self = this;
+
+        //N.B. this param rewrite ensures case insensitive urls for swarms
+        this.params.slug = Partup.client.strings.slugify(self.params.slug);
+
         var slug = this.params.slug;
 
         // this checks if the slug is a swarm or network and handles it accordingly
