@@ -175,3 +175,8 @@
 @import "client/stylesheets/components/pu-talltile.sass";
 @import "client/stylesheets/components/pu-floatingbutton.sass";
 @import "client/stylesheets/components/pu-state-message.sass";
+
+
+div#velocity-status-widget {
+  display: none;
+}
