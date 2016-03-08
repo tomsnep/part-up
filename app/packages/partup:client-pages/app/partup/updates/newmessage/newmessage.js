@@ -70,6 +70,10 @@ Template.app_partup_updates_newmessage.helpers({
     documentLimitReached: function() {
         return Template.instance().totalDocuments.get() === Template.instance().maxDocuments;
     },
+    mediaLimitReached: function() {
+        var mediaItems = Template.instance().totalPhotos.get() + Template.instance().totalDocuments.get();
+        return mediaItems >= Template.instance().maxMediaItems;
+    },
     uploadingMedia: function() {
         var uploading = [
             Template.instance().uploadingPhotos.get(),
@@ -147,7 +151,7 @@ Template.app_partup_updates_newmessage.events({
         template.uploadedPhotos.set([]);
         template.uploadedDocuments.set([]);
     },
-    'click [data-remove-upload]': function removeUpload(event, template) {
+    'click [data-type="image"][data-remove-upload]': function removeUpload(event, template) {
         var imageId = $(event.currentTarget).data('remove-upload');
         // template.uploadedPhotos.set([]);
         var uploadedPhotos = template.uploadedPhotos.get();

@@ -47,6 +47,9 @@ DropboxChooser.prototype.partupUploadPhoto = function(template, fileUrlLink) {
             uploaded.push(image._id);
             template.uploadedPhotos.set(uploaded);
             template.uploadingPhotos.set(false);
+
+            //re-correct the total items based on the uploaded item
+            template.totalPhotos.set(uploaded.length);
             resolve(uploaded);
         });
     });
@@ -55,14 +58,16 @@ DropboxChooser.prototype.partupUploadPhoto = function(template, fileUrlLink) {
 DropboxChooser.prototype.partupUploadDoc = function(template, dropboxFile) {
     return new Promise(function(resolve, reject) {
 
-
-
         dropboxFile._id = new Meteor.Collection.ObjectID()._str;
 
         var uploaded = template.uploadedDocuments.get();
+
         uploaded.push(dropboxFile);
         template.uploadedDocuments.set(uploaded);
         template.uploadingDocuments.set(false);
+
+        //re-correct the total items based on the uploaded item
+        template.totalDocuments.set(uploaded.length);
         resolve(uploaded);
 
     });

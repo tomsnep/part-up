@@ -16,28 +16,35 @@ if (Meteor.isClient) {
          */
         var template = Template.instance().parent();
 
+
         Dropbox.init({ appKey: 'vn3c8yxjactncjs' });
 
         var button = Dropbox.createChooseButton({
             // Required. Called when a user selects an item in the Chooser.
             success: function(files) {
 
-
-                var total = template.totalPhotos.get();
+                function totalMediaItems() {
+                    return template.totalDocuments.get() + template.totalPhotos.get()
+                }
 
                 files.forEach(function(dropboxFile) {
-                    if (total === template.maxPhotos) return;
+
+                    if(totalMediaItems() === template.maxMediaItems) return;
 
                     if(dropboxHelper.fileNameIsImage(dropboxFile.name)) {
                         template.uploadingPhotos.set(true);
+                        template.totalPhotos.set(
+                            template.totalPhotos.get() + 1
+                        );
                         dropboxHelper.partupUploadPhoto(template, dropboxFile.link);
                     }
                     else if(dropboxHelper.fileNameIsDoc(dropboxFile.name)) {
                         template.uploadingDocuments.set(true);
+                        template.totalDocuments.set(
+                            template.totalDocuments.get() + 1
+                        );
                         dropboxHelper.partupUploadDoc(template, dropboxFile);
                     }
-                    total++;
-                    template.totalPhotos.set(total);
                 });
             },
             cancel: function() {},

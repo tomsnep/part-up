@@ -3,13 +3,13 @@
         <label class="pu-formfield">
             <div class="pu-sub-validations">
                 <span class="pu-sub-input">
-                    <div class="pu-message {{#if uploadedPhotos.length}}pu-message-haspictures{{/ if}}">
+                    <div class="pu-message {{#if hasUploadedMedia }}pu-message-haspictures{{/ if}}">
                         {{> afFieldInput name="text" data-message-input="" placeholder=placeholders.text class="pu-textarea" rows=3 autofocus=""}}
                         {{#if hasUploadedMedia}}
                             <ul class="pu-sub-photos">
                                 {{#each uploadedPhotos}}
                                     <li>
-                                        <figure class="pu-thumbnail pu-thumbnail-removable" style="background-image:url('{{ partupImageUrl id=. }}')" data-remove-upload="{{ . }}"></figure>
+                                        <figure data-type="image" class="pu-thumbnail pu-thumbnail-removable" style="background-image:url('{{ partupImageUrl id=. }}')" data-remove-upload="{{ . }}"></figure>
                                     </li>
                                 {{/each}}
                                 {{#each uploadedDocuments}}
@@ -42,7 +42,7 @@
                 {{#FileInput inputSettings=imageInput}}
                     {{> DropboxChooser }}
                     <br>
-                    <button class="pu-button pu-button-secondary {{#if uploadingMedia}}pu-state-loading{{/if}} {{#if photoLimitReached}}pu-state-disabled{{/if}}" data-browse-photos>
+                    <button class="pu-button pu-button-secondary {{#if uploadingMedia}}pu-state-loading{{/if}} {{#if mediaLimitReached}}pu-state-disabled{{/if}}" data-browse-photos>
                         <span>{{_ 'pages-app-partup-updates-newmessage-addphoto'}}</span>
                         {{#if uploadingMedia}}
                             {{> Spinner color='inverted' type='small'}}
