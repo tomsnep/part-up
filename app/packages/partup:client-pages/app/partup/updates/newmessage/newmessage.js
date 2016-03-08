@@ -156,6 +156,15 @@ Template.app_partup_updates_newmessage.events({
         var total = Template.instance().totalPhotos.get();
         total--;
         Template.instance().totalPhotos.set(total);
+    },
+    'click [data-type="document"][data-remove-upload]': function removeUpload(event, template) {
+        var documentId = $(event.currentTarget).data('remove-upload');
+        var uploadedDocuments = template.uploadedDocuments.get();
+        uploadedDocuments = _.without(uploadedDocuments, _.findWhere(uploadedDocuments, {_id: documentId}));
+        template.uploadedDocuments.set(uploadedDocuments);
+        var total = Template.instance().totalDocuments.get();
+        total--;
+        Template.instance().totalDocuments.set(total);
     }
 });
 
