@@ -5,11 +5,16 @@
                 <span class="pu-sub-input">
                     <div class="pu-message {{#if uploadedPhotos.length}}pu-message-haspictures{{/ if}}">
                         {{> afFieldInput name="text" data-message-input="" placeholder=placeholders.text class="pu-textarea" rows=3 autofocus=""}}
-                        {{#if uploadedPhotos.length}}
+                        {{#if hasUploadedMedia}}
                             <ul class="pu-sub-photos">
                                 {{#each uploadedPhotos}}
                                     <li>
                                         <figure class="pu-thumbnail pu-thumbnail-removable" style="background-image:url('{{ partupImageUrl id=. }}')" data-remove-upload="{{ . }}"></figure>
+                                    </li>
+                                {{/each}}
+                                {{#each uploadedDocuments}}
+                                    <li>
+                                        <figure data-type="document" class="pu-thumbnail pu-thumbnail-removable" style="background-image:url('{{ icon }}'); background-color: transparent;" data-remove-upload="{{ _id }}"></figure>
                                     </li>
                                 {{/each}}
                             </ul>

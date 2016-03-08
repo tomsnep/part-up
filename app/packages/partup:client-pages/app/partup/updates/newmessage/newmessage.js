@@ -59,7 +59,7 @@ Template.app_partup_updates_newmessage.helpers({
         return Template.instance().uploadedPhotos.get();
     },
     photoLimitReached: function() {
-        return Template.instance().totalPhotos.get() === 4;
+        return Template.instance().totalPhotos.get() === Template.instance().maxPhotos;
     },
     uploadingDocuments: function() {
         return Template.instance().uploadingDocuments.get();
@@ -68,7 +68,7 @@ Template.app_partup_updates_newmessage.helpers({
         return Template.instance().uploadedDocuments.get();
     },
     documentLimitReached: function() {
-        return Template.instance().totalDocuments.get() === 4;
+        return Template.instance().totalDocuments.get() === Template.instance().maxDocuments;
     },
     uploadingMedia: function() {
         var uploading = [
@@ -81,6 +81,12 @@ Template.app_partup_updates_newmessage.helpers({
         });
 
       return uploading.isActive > 0;
+    },
+    hasUploadedMedia: function() {
+        return (
+            Template.instance().uploadedPhotos.get().length ||
+            Template.instance().uploadedDocuments.get().length
+        )
     },
     submitting: function() {
         return Template.instance().submitting.get();
