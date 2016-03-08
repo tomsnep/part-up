@@ -36,22 +36,36 @@ DropboxChooser.prototype.partupUploadPhoto = function(template, fileUrlLink) {
     return new Promise(function(resolve, reject) {
 
         Partup.client.uploader.uploadImageByUrl(fileUrlLink, function(error, image) {
-            template.uploadingPhotos.set(false);
+
             if (error) {
                 Partup.client.notify.error(TAPi18n.__(error.reason));
                 reject(error);
                 return;
             }
+
             var uploaded = template.uploadedPhotos.get();
             uploaded.push(image._id);
             template.uploadedPhotos.set(uploaded);
+            template.uploadingPhotos.set(false);
             resolve(uploaded);
         });
     });
 };
 
 DropboxChooser.prototype.partupUploadDoc = function(template, dropboxFile) {
+    return new Promise(function(resolve, reject) {
 
+
+
+        dropboxFile._id = new Meteor.Collection.ObjectID()._str;
+
+        var uploaded = template.uploadedDocuments.get();
+        uploaded.push(dropboxFile);
+        template.uploadedDocuments.set(uploaded);
+        template.uploadingDocuments.set(false);
+        resolve(uploaded);
+
+    });
 };
 
 Partup.helpers.DropboxChooser = DropboxChooser;

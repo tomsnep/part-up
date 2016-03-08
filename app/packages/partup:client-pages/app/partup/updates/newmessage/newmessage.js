@@ -70,6 +70,18 @@ Template.app_partup_updates_newmessage.helpers({
     documentLimitReached: function() {
         return Template.instance().totalDocuments.get() === 4;
     },
+    uploadingMedia: function() {
+        var uploading = [
+            Template.instance().uploadingPhotos.get(),
+            Template.instance().uploadingDocuments.get()
+        ];
+
+        uploading =  _.countBy(uploading, function(value) {
+            return (value) ? 'isActive' : 'notActive';
+        });
+
+      return uploading.isActive > 0;
+    },
     submitting: function() {
         return Template.instance().submitting.get();
     },

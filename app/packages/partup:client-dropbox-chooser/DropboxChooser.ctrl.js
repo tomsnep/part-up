@@ -22,17 +22,19 @@ if (Meteor.isClient) {
             // Required. Called when a user selects an item in the Chooser.
             success: function(files) {
 
-                template.uploadingPhotos.set(true);
+
                 var total = template.totalPhotos.get();
 
-                files.forEach(function(file) {
+                files.forEach(function(dropboxFile) {
                     if (total === template.maxPhotos) return;
 
-                    if(dropboxHelper.fileNameIsImage(file.name)) {
-                        dropboxHelper.partupUploadPhoto(template, file.link);
+                    if(dropboxHelper.fileNameIsImage(dropboxFile.name)) {
+                        template.uploadingPhotos.set(true);
+                        dropboxHelper.partupUploadPhoto(template, dropboxFile.link);
                     }
-                    else if(dropboxHelper.fileNameIsDoc(file.name)) {
-                        dropboxHelper.partupUploadDoc(template, file.link);
+                    else if(dropboxHelper.fileNameIsDoc(dropboxFile.name)) {
+                        template.uploadingDocuments.set(true);
+                        dropboxHelper.partupUploadDoc(template, dropboxFile);
                     }
                     total++;
                     template.totalPhotos.set(total);
