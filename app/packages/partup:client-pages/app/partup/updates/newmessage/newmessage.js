@@ -14,6 +14,14 @@ Template.app_partup_updates_newmessage.onCreated(function() {
     template.maxPhotos = 4;
     template.submitting = new ReactiveVar(false);
     template.partupId = this.data.partup_id || this.data.partupId;
+
+    template.uploadingDocuments = new ReactiveVar(false);
+    var documents = this.data._id ? this.data.type_data.documents : [];
+    template.uploadedDocuments = new ReactiveVar(documents);
+    template.totalDocuments = new ReactiveVar(0);
+    template.maxDocuments = 4;
+
+    template.maxMediaItems = 4;
 });
 
 Template.afFieldInput.onRendered(function() {
@@ -53,6 +61,15 @@ Template.app_partup_updates_newmessage.helpers({
     photoLimitReached: function() {
         return Template.instance().totalPhotos.get() === 4;
     },
+    uploadingDocuments: function() {
+        return Template.instance().uploadingDocuments.get();
+    },
+    uploadedDocuments: function() {
+        return Template.instance().uploadedDocuments.get();
+    },
+    documentLimitReached: function() {
+        return Template.instance().totalDocuments.get() === 4;
+    },
     submitting: function() {
         return Template.instance().submitting.get();
     },
@@ -72,7 +89,8 @@ Template.app_partup_updates_newmessage.helpers({
         if (!this._id) return;
         return {
             text: this.type_data.new_value,
-            images: this.type_data.images || []
+            images: this.type_data.images || [],
+            documents: this.type_data.documents || []
         };
     },
     imageInput: function() {
@@ -109,6 +127,7 @@ Template.app_partup_updates_newmessage.helpers({
 Template.app_partup_updates_newmessage.events({
     'click [data-dismiss]': function clearForm(event, template) {
         template.uploadedPhotos.set([]);
+        template.uploadedDocuments.set([]);
     },
     'click [data-remove-upload]': function removeUpload(event, template) {
         var imageId = $(event.currentTarget).data('remove-upload');
@@ -178,6 +197,9 @@ AutoForm.hooks({
             insertDoc.images = uploadedPhotos;
             insertDoc.text = parent.mentionsInput.getValue();
 
+            var uploadedDocuments = parent.uploadedDocuments.get();
+            insertDoc.documents = uploadedDocuments;
+
             // close popup before call is made, an error notifier
             // will be the feedback when it fails
             Partup.client.popup.close();
@@ -209,6 +231,7 @@ AutoForm.hooks({
                 template.mentionsInput.reset();
                 self.done();
                 parent.uploadedPhotos.set([]);
+                parent.uploadedDocuments.set([]);
                 Partup.client.events.emit('partup:updates:message_added');
             });
 
