@@ -1,10 +1,19 @@
 if (Meteor.isClient) {
+    var dropboxHelper = new Partup.helpers.DropboxChooser({
+        allowedExtensions: {
+            images: ['.jpg', '.png'],
+            docs: ['.doc', '.docx', '.pdf']
+        }
+    });
 
     Template.DropboxChooser.helpers({});
     Template.DropboxChooser.events({});
 
     Template.DropboxChooser.onRendered(function() {
 
+        /*
+         newmessage.html template
+         */
         var template = Template.instance().parent();
 
         Dropbox.init({ appKey: 'vn3c8yxjactncjs' });
@@ -15,19 +24,16 @@ if (Meteor.isClient) {
 
                 template.uploadingPhotos.set(true);
                 var total = template.totalPhotos.get();
+
                 files.forEach(function(file) {
                     if (total === template.maxPhotos) return;
 
-                    Partup.client.uploader.uploadImageByUrl(file.link, function(error, image) {
-                        template.uploadingPhotos.set(false);
-                        if (error) {
-                            Partup.client.notify.error(TAPi18n.__(error.reason));
-                            return;
-                        }
-                        var uploaded = template.uploadedPhotos.get();
-                        uploaded.push(image._id);
-                        template.uploadedPhotos.set(uploaded);
-                    });
+                    if(dropboxHelper.fileNameIsImage(file.name)) {
+                        dropboxHelper.partupUploadPhoto(template, file.link);
+                    }
+                    else if(dropboxHelper.fileNameIsDoc(file.name)) {
+                        dropboxHelper.partupUploadDoc(template, file.link);
+                    }
                     total++;
                     template.totalPhotos.set(total);
                 });
@@ -35,7 +41,7 @@ if (Meteor.isClient) {
             cancel: function() {},
             linkType: "direct", // or "direct"
             multiselect: true, // or true
-            extensions: ['.jpg', '.png']
+            extensions: dropboxHelper.getAllExtensions()
         });
 
         document.querySelector('[data-dropbox-chooser]').appendChild(button);
