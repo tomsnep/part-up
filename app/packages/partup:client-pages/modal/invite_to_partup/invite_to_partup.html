@@ -48,12 +48,18 @@
                         <!-- Hidden send button -->
                         <input type="submit" class="pu-sub-submit">
                     </div>
+
+                    <div class="pu-filterbar">
+                        <div class="pu-sub-input pu-sub-input-large">
+                            <input type="text" class="pu-input pu-input-filter" name="search_query" placeholder="Designer" data-search-query-input="">
+                        </div>
+                    </div>
                 </form>
 
-                {{# if loading }}
+                <!-- {{# if loading }}
                     {{> Spinner }}
-                {{ else }}
-                    <ul class="pu-invite-suggestions">
+                {{ else }} -->
+                    <!-- <ul class="pu-invite-suggestions">
                         {{# each suggestions }}
                             <li>
                                 <a href="{{ pathFor 'profile' _id }}" target="_blank" data-hovercontainer="HoverContainer_upper" data-hovercontainer-context="{{_id}}">
@@ -96,8 +102,220 @@
                                 </p>
                             </li>
                         {{/ each }}
+                    </ul> -->
+                <!-- {{/ if }} -->
+                <div class="pu-invite-suggestions">
+                    <p>Uppers recommended for your part-up:</p>
+                    <ul>
+                        <li>
+                            <article class="pu-invitetile">
+                                <header>
+                                    <a href="/profile/K5c5M4Pbdg3B82wQH" class="pu-sub-figure">
+                                        <figure class="pu-avatar pu-avatar-medium" style="background-image: url('https://s3-eu-west-1.amazonaws.com/partup-development/360x360/images/phAjM4pX5hYZCWQq9-phAjM4pX5hYZCWQq9.jpg');">
+                                            <span class="pu-score pu-score-small">10</span>
+                                        </figure>
+                                    </a>
+                                    <div class="pu-sub-title">
+                                        <h4>
+                                            <a href="/profile/K5c5M4Pbdg3B82wQH">Default User</a>
+                                        </h4>
+                                        <p>Amsterdam</p>
+                                    </div>
+                                </header>
+                                <article>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tempor mollis ex eget aliquet</p>
+                                </article>
+                                <article>
+                                    <ul class="pu-list pu-list-horizontal pu-list-tags">
+                                        <li>
+                                            <a href="#" class="pu-tag">design</a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="pu-tag">ux</a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="pu-tag">photography</a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="pu-tag">nonprofit</a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="pu-tag">design</a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="pu-tag">ux</a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="pu-tag">photography</a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="pu-tag">nonprofit</a>
+                                        </li>
+                                    </ul>
+                                </article>
+                                <footer>
+                                    <a href="/tribes/lifely-open" class="pu-button">View tribe</a>
+                                </footer>
+                            </article>
+                        </li>
+                        <li>
+                            <article class="pu-invitetile">
+                                <header>
+                                    <a href="/profile/K5c5M4Pbdg3B82wQH" class="pu-sub-figure">
+                                        <figure class="pu-avatar pu-avatar-medium" style="background-image: url('https://s3-eu-west-1.amazonaws.com/partup-development/360x360/images/phAjM4pX5hYZCWQq9-phAjM4pX5hYZCWQq9.jpg');">
+                                            <span class="pu-score pu-score-small">10</span>
+                                        </figure>
+                                    </a>
+                                    <div class="pu-sub-title">
+                                        <h4>
+                                            <a href="/profile/K5c5M4Pbdg3B82wQH">Default User</a>
+                                        </h4>
+                                        <p>Amsterdam</p>
+                                        <p class="pu-relevance">3 part-ups in common</p>
+                                    </div>
+                                </header>
+                                <article>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tempor mollis ex eget aliquet</p>
+                                </article>
+                                <article>
+                                    <ul class="pu-list pu-list-horizontal pu-list-tags">
+                                        <li>
+                                            <a href="#" class="pu-tag">design</a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="pu-tag">ux</a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="pu-tag">photography</a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="pu-tag">nonprofit</a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="pu-tag">design</a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="pu-tag">ux</a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="pu-tag">photography</a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="pu-tag">nonprofit</a>
+                                        </li>
+                                    </ul>
+                                </article>
+                                <footer>
+                                    <a href="/tribes/lifely-open" class="pu-button">View tribe</a>
+                                </footer>
+                            </article>
+                        </li>
+                        <li>
+                            <article class="pu-invitetile">
+                                <header>
+                                    <a href="/profile/K5c5M4Pbdg3B82wQH" class="pu-sub-figure">
+                                        <figure class="pu-avatar pu-avatar-medium" style="background-image: url('https://s3-eu-west-1.amazonaws.com/partup-development/360x360/images/phAjM4pX5hYZCWQq9-phAjM4pX5hYZCWQq9.jpg');">
+                                            <span class="pu-score pu-score-small">10</span>
+                                        </figure>
+                                    </a>
+                                    <div class="pu-sub-title">
+                                        <h4>
+                                            <a href="/profile/K5c5M4Pbdg3B82wQH">Default User</a>
+                                        </h4>
+                                        <p>Amsterdam</p>
+                                        <p class="pu-relevance">3 part-ups in common</p>
+                                    </div>
+                                </header>
+                                <article>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tempor mollis ex eget aliquet</p>
+                                </article>
+                                <article>
+                                    <ul class="pu-list pu-list-horizontal pu-list-tags">
+                                        <li>
+                                            <a href="#" class="pu-tag">design</a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="pu-tag">ux</a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="pu-tag">photography</a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="pu-tag">nonprofit</a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="pu-tag">design</a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="pu-tag">ux</a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="pu-tag">photography</a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="pu-tag">nonprofit</a>
+                                        </li>
+                                    </ul>
+                                </article>
+                                <footer>
+                                    <a href="/tribes/lifely-open" class="pu-button">View tribe</a>
+                                </footer>
+                            </article>
+                        </li>
+                        <li>
+                            <article class="pu-invitetile">
+                                <header>
+                                    <a href="/profile/K5c5M4Pbdg3B82wQH" class="pu-sub-figure">
+                                        <figure class="pu-avatar pu-avatar-medium" style="background-image: url('https://s3-eu-west-1.amazonaws.com/partup-development/360x360/images/phAjM4pX5hYZCWQq9-phAjM4pX5hYZCWQq9.jpg');">
+                                            <span class="pu-score pu-score-small">10</span>
+                                        </figure>
+                                    </a>
+                                    <div class="pu-sub-title">
+                                        <h4>
+                                            <a href="/profile/K5c5M4Pbdg3B82wQH">Default User</a>
+                                        </h4>
+                                        <p>Amsterdam</p>
+                                        <p class="pu-relevance">3 part-ups in common</p>
+                                    </div>
+                                </header>
+                                <article>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tempor mollis ex eget aliquet</p>
+                                </article>
+                                <article>
+                                    <ul class="pu-list pu-list-horizontal pu-list-tags">
+                                        <li>
+                                            <a href="#" class="pu-tag">design</a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="pu-tag">ux</a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="pu-tag">photography</a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="pu-tag">nonprofit</a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="pu-tag">design</a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="pu-tag">ux</a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="pu-tag">photography</a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="pu-tag">nonprofit</a>
+                                        </li>
+                                    </ul>
+                                </article>
+                                <footer>
+                                    <a href="/tribes/lifely-open" class="pu-button">View tribe</a>
+                                </footer>
+                            </article>
+                        </li>
                     </ul>
-                {{/ if }}
+                </div>
             </div>
         </div>
     </article>
