@@ -190,6 +190,9 @@ AutoForm.hooks({
             insertDoc.images = uploadedPhotos;
             insertDoc.text = parent.mentionsInput.getValue();
 
+            var uploadedDocuments = parent.uploadedDocuments.get();
+            insertDoc.documents = uploadedDocuments;
+
             // close popup before call is made, an error notifier
             // will be the feedback when it fails
             Partup.client.popup.close();
@@ -210,6 +213,7 @@ AutoForm.hooks({
                 template.mentionsInput.reset();
                 self.done();
                 parent.uploadedPhotos.set([]);
+                parent.uploadedDocuments.set([]);
             });
 
             return false;
