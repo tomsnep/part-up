@@ -16,7 +16,7 @@ Template.app_partup_updates_newmessage.onCreated(function() {
     template.partupId = this.data.partup_id || this.data.partupId;
 
     template.uploadingDocuments = new ReactiveVar(false);
-    var documents = this.data._id ? this.data.type_data.documents : [];
+    var documents = this.data._id && this.data.type_data.documents ? this.data.type_data.documents : [];
     template.uploadedDocuments = new ReactiveVar(documents);
     template.totalDocuments = new ReactiveVar(0);
     template.maxDocuments = 4;
