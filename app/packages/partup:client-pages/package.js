@@ -103,6 +103,9 @@ Package.onUse(function(api) {
             'app/partup/gallery/gallery.html',
             'app/partup/gallery/gallery.js',
 
+            // App:partup:document-renderer (update)
+            'app/partup/document-renderer/document-renderer.html',
+
             // App:partup:updates
             'app/partup/updates/updates.html',
             'app/partup/updates/updates.js',
