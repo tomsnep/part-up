@@ -24,12 +24,17 @@ if (Meteor.isClient) {
             success: function(files) {
 
                 function totalMediaItems() {
-                    return template.totalDocuments.get() + template.totalPhotos.get()
+                    return template.uploadedDocuments.get().length +
+                        template.uploadedPhotos.get().length;
                 }
 
-                files.forEach(function(dropboxFile) {
+                var leftOver =  template.maxMediaItems - totalMediaItems();
 
-                    if(totalMediaItems() === template.maxMediaItems) return;
+                if(leftOver <= 0) { return false; }
+
+                for(var i = 0; i < leftOver; i++) {
+
+                    var dropboxFile = files[i];
 
                     if(dropboxHelper.fileNameIsImage(dropboxFile.name)) {
                         template.uploadingPhotos.set(true);
@@ -45,7 +50,7 @@ if (Meteor.isClient) {
                         );
                         dropboxHelper.partupUploadDoc(template, dropboxFile);
                     }
-                });
+                }
             },
             cancel: function() {},
             linkType: "direct", // or "direct"

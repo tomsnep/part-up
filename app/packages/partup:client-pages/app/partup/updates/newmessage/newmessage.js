@@ -71,8 +71,10 @@ Template.app_partup_updates_newmessage.helpers({
         return Template.instance().totalDocuments.get() === Template.instance().maxDocuments;
     },
     mediaLimitReached: function() {
-        var mediaItems = Template.instance().totalPhotos.get() + Template.instance().totalDocuments.get();
-        return mediaItems >= Template.instance().maxMediaItems;
+        var mediaItems = Template.instance().uploadedPhotos.get().length +
+            Template.instance().uploadedDocuments.get().length;
+
+        return mediaItems === Template.instance().maxMediaItems;
     },
     uploadingMedia: function() {
         var uploading = [
