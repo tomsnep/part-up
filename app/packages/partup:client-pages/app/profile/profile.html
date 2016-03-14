@@ -101,7 +101,7 @@
                          'refresh' is not an accepted attribute of yield, but in general,
                          template-includes will re-run when (one of) its attributes change.  -->
                     {{#if profile}}
-                        {{> yield region='app_profile' refresh=profileId refresh2=profile.isCurrentUser }}
+                        {{> yield region='app_profile' refresh=profileId }}
                     {{/if}}
                 </section>
             </div>
