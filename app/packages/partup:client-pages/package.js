@@ -26,8 +26,21 @@ Package.onUse(function(api) {
             'app/app.html',
             'app/app.js',
 
-            'app/app-notfound.html',
-            'app/app-notfound.js',
+            'app/404/layout.html',
+            'app/404/layout.js',
+            'app/404/default.html',
+
+            'app/404/partup/partup.html',
+            'app/404/partup/closed.html',
+            'app/404/partup/not-allowed.html',
+
+            'app/404/network/network.html',
+            'app/404/network/settings.html',
+
+            'app/404/profile/profile.html',
+            'app/404/profile/not-allowed.html',
+
+            'app/404/swarm/settings.html',
             // App:home
             'app/home/home.html',
             'app/home/home.js',
@@ -58,12 +71,22 @@ Package.onUse(function(api) {
             'app/network/network.js',
 
             // App: network tabs
-            'app/network/network-partups.html',
-            'app/network/network-partups.js',
-            'app/network/network-uppers.html',
-            'app/network/network-uppers.js',
-            'app/network/network-closed.html',
-            'app/network/network-closed.js',
+            'app/network/start.html',
+            'app/network/start.js',
+
+            'app/network/partials/joinbutton.html',
+            'app/network/partials/joinbutton.js',
+            'app/network/partials/uppers.html',
+            'app/network/partials/uppers.js',
+            'app/network/partials/partups.html',
+            'app/network/partials/partups.js',
+
+            'app/network/tabs/partups.html',
+            'app/network/tabs/partups.js',
+            'app/network/tabs/uppers.html',
+            'app/network/tabs/uppers.js',
+            'app/network/tabs/closed.html',
+            'app/network/tabs/closed.js',
 
             // App:profile
             'app/profile/profile.html',
@@ -270,6 +293,8 @@ Package.onUse(function(api) {
             'swarm/content/content.js',
             'swarm/content/video/video.html',
             'swarm/content/video/video.js',
+            'swarm/content/networks/networks.html',
+            'swarm/content/networks/networks.js',
 
             'swarm/footer/footer.html',
             'swarm/footer/footer.js'

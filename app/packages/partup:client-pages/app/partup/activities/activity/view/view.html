@@ -57,9 +57,9 @@
                 <!-- Contributors -->
                 {{# unless COMPACT }}
                     {{# unless expanded }}
-                        <ul class="pu-avatar-stack pu-avatar-stack-small">
+                        <ul class="pu-avatar-stack pu-avatar-stack-tiny">
                             {{# each contributions }}
-                                <li class="pu-avatar" style="{{#with upper.profile.image }}background-image: url('{{ partupImageUrl id=. store='80x80' }}');{{/with }}}"></li>
+                                <li class="pu-avatar pu-avatar-tiny" style="{{#with upper.profile.image }}background-image: url('{{ partupImageUrl id=. store='80x80' }}');{{/with }}}"></li>
                             {{/ each }}
                         </ul>
                     {{/ unless }}

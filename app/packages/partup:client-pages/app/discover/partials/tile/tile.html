@@ -28,7 +28,7 @@
         {{# unless HIDE_NETWORKTILE }}
             {{# with partup.networkObject }}
                 <footer>
-                    <a href="{{ pathFor 'network-detail' slug }}" class="pu-networktile">
+                    <a href="{{ pathFor route='network' slug=slug query=showStartQuery }}" class="pu-networktile">
                         <div class="pu-sub-wrapper">
                             <div class="pu-sub-figurecontainer">
                                 <figure style="
