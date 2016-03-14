@@ -61,11 +61,6 @@ Template.modal_invite_to_partup.onCreated(function() {
                 return Partup.client.notify.error(TAPi18n.__('base-errors-' + error.reason));
             }
 
-            // Sort users by invited first
-            userIds.sort(function(userId) {
-                return partup.hasInvitedUpper(userId) ? 1 : -1;
-            });
-
             self.userIds.set(userIds);
             self.subscription.set(self.subscribe('users.by_ids', userIds));
 
