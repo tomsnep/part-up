@@ -70,29 +70,16 @@ Template.app_partup_updates_newmessage.helpers({
     documentLimitReached: function() {
         return Template.instance().totalDocuments.get() === Template.instance().maxDocuments;
     },
-    mediaLimitReached: function() {
-        var mediaItems = Template.instance().uploadedPhotos.get().length +
-            Template.instance().uploadedDocuments.get().length;
-
-        return mediaItems === Template.instance().maxMediaItems;
-    },
-    uploadingMedia: function() {
-        var uploading = [
-            Template.instance().uploadingPhotos.get(),
-            Template.instance().uploadingDocuments.get()
-        ];
-
-        uploading =  _.countBy(uploading, function(value) {
-            return (value) ? 'isActive' : 'notActive';
-        });
-
-      return uploading.isActive > 0;
-    },
+    mediaLimitReached: mediaLimitReached,
+    uploadingMedia: uploadingMedia,
     hasUploadedMedia: function() {
         return (
             Template.instance().uploadedPhotos.get().length ||
             Template.instance().uploadedDocuments.get().length
         )
+    },
+    uploadTriggerAllowed: function() {
+      return !uploadingMedia() && !mediaLimitReached();
     },
     submitting: function() {
         return Template.instance().submitting.get();
@@ -146,6 +133,26 @@ Template.app_partup_updates_newmessage.helpers({
         };
     }
 });
+
+function uploadingMedia() {
+    var uploading = [
+        Template.instance().uploadingPhotos.get(),
+        Template.instance().uploadingDocuments.get()
+    ];
+
+    uploading =  _.countBy(uploading, function(value) {
+        return (value) ? 'isActive' : 'notActive';
+    });
+
+    return uploading.isActive > 0;
+}
+
+function mediaLimitReached() {
+    var mediaItems = Template.instance().uploadedPhotos.get().length +
+        Template.instance().uploadedDocuments.get().length;
+
+    return mediaItems === Template.instance().maxMediaItems;
+}
 
 // events
 Template.app_partup_updates_newmessage.events({

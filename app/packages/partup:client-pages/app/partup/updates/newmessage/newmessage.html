@@ -40,8 +40,10 @@
             </div>
             <div class="cell last">
                 {{#FileInput inputSettings=imageInput}}
-                    {{> DropboxChooser }}
-                    <br>
+                    {{#if uploadTriggerAllowed}}
+                        {{> DropboxChooser}}
+                    {{/if}}
+
                     <button class="pu-button pu-button-secondary {{#if uploadingMedia}}pu-state-loading{{/if}} {{#if mediaLimitReached}}pu-state-disabled{{/if}}" data-browse-photos>
                         <span>{{_ 'pages-app-partup-updates-newmessage-addphoto'}}</span>
                         {{#if uploadingMedia}}
