@@ -2,18 +2,18 @@
     <header class="pu-sub-header">
         <h2 class="pu-title">
             {{# if state.countLoading }}
-                {{_ 'pages-app-network-uppers-loading' }}
+                {{_ 'pages-app-profile-partners-loading' }}
                 {{> Spinner type='small' }}
             {{ else }}
                 <span class="pu-sub-countlabel">
                     {{#if data.count}}
-                        {{_ 'pages-app-network-uppers-count' count=data.count }}
+                        {{_ 'pages-app-profile-partners-count' count=data.count }}
                     {{else}}
-                        {{_ 'pages-app-network-uppers-none' }}
+                        {{_ 'pages-app-profile-partners-none' }}
                     {{/if}}
                 </span>
 
-                {{_ 'pages-app-network-uppers-suffix' }}
+                {{_ 'pages-app-profile-partners-suffix' }}
             {{/ if }}
         </h2>
     </header>

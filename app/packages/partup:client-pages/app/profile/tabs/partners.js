@@ -183,28 +183,5 @@ Template.app_profile_partners.helpers({
                 return template.filter.get();
             }
         };
-    },
-    translations: function() {
-        var template = Template.instance();
-        return {
-            partnersLoading: function(selection) {
-                return TAPi18n.__('pages-app-profile-partners-' + selection + '-loading');
-            },
-            partnersPrefix: function(selection, name) {
-                return TAPi18n.__('pages-app-profile-partners-' + selection + '-prefix', {
-                    name: name
-                });
-            },
-            partnersCount: function(selection, count) {
-                return TAPi18n.__('pages-app-profile-partners-' + selection + '-count', {
-                    count: count
-                });
-            },
-            partnersNone: function(selection, name) {
-                return TAPi18n.__('pages-app-profile-partners-' + selection + '-none', {
-                    name: name
-                });
-            }
-        };
     }
 });
