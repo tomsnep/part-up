@@ -105,6 +105,7 @@ Package.onUse(function(api) {
 
             // App:partup:document-renderer (update)
             'app/partup/document-renderer/document-renderer.html',
+            'app/partup/document-renderer/document-renderer.js',
 
             // App:partup:updates
             'app/partup/updates/updates.html',

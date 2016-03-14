@@ -1,10 +1,5 @@
 if (Meteor.isClient) {
-    var dropboxHelper = new Partup.helpers.DropboxChooser({
-        allowedExtensions: {
-            images: ['.jpg', '.png'],
-            docs: ['.doc', '.docx', '.pdf']
-        }
-    });
+    var dropboxHelper = new Partup.helpers.DropboxChooser();
 
     Template.DropboxChooser.helpers();
 
@@ -28,7 +23,7 @@ if (Meteor.isClient) {
 
             Dropbox.choose({
                 success: onFileChange,
-                linkType: "direct", // or "direct"
+                linkType: "direct", // or "preview"
                 multiselect: true, // or true
                 extensions: dropboxHelper.getAllExtensions()
             });

@@ -1,7 +1,7 @@
 <template name="DocumentRenderer">
     <ul class="pu-document-renderer">
         {{# each documents }}
-            <a href="{{link}}" target="_blank">
+            <a href="{{DropboxRenderer.createPreviewLinkFromDirectLink  link name}}" target="_blank">
                 <li data-document="{{ name }}">
                    <img src="{{ icon }}" />
                     <p class="pu-document-name">{{name}}</p>

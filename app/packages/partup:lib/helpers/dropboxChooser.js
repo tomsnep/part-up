@@ -1,8 +1,14 @@
 DropboxChooser = function(options) {
     this.options = _.defaultsDeep({
         allowedExtensions: {
-            images: ['.jpg', '.png'],
-            docs: ['.doc', '.docx', '.pdf']
+            images: ['.gif', '.jpg', '.jpeg', '.png'],
+            docs:
+                [
+                    '.doc', '.docx', '.csv', '.pps',
+                    '.ppsx', '.ppt', '.pptx', '.rtf', '.xls',
+                    '.xlsx', '.ai', '.bmp', '.eps', '.psd',
+                    '.tiff', '.tif', '.svg'
+                ]
         }
     }, options);
 };
@@ -74,3 +80,23 @@ DropboxChooser.prototype.partupUploadDoc = function(template, dropboxFile) {
 };
 
 Partup.helpers.DropboxChooser = DropboxChooser;
+
+var DropboxRenderer = function() {
+
+    return {
+        getFileIdFromDirectLink: getFileIdFromDirectLink,
+        createPreviewLinkFromDirectLink: createPreviewLinkFromDirectLink
+    };
+
+    function getFileIdFromDirectLink (fileUrl) {
+        return fileUrl.match(/view\/(\w+)/)[1];
+    }
+
+    function createPreviewLinkFromDirectLink(directLinkUrl, fileName) {
+        var fileId = getFileIdFromDirectLink(directLinkUrl);
+        return 'https://www.dropbox.com/s/' + fileId + '/' + fileName + '?dl=0';
+    }
+
+};
+
+Partup.helpers.DropboxRenderer = DropboxRenderer;
