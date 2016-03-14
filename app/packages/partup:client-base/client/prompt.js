@@ -64,8 +64,8 @@ Partup.client.prompt = {
     _reset: function() {
         this.title.set('Alert');
         this.message.set('Are you sure?');
-        this.confirmButton.set('Ok');
-        this.cancelButton.set('Cancel');
+        this.confirmButton.set(undefined);
+        this.cancelButton.set(undefined);
         this.cancelCallback = false;
         this.confirmCallback = false;
     }
