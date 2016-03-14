@@ -1,0 +1,34 @@
+<template name="app_profile_partners">
+    <header class="pu-sub-header">
+        <h2 class="pu-title">
+            {{# if state.countLoading }}
+                {{_ 'pages-app-network-uppers-loading' }}
+                {{> Spinner type='small' }}
+            {{ else }}
+                <span class="pu-sub-countlabel">
+                    {{#if data.count}}
+                        {{_ 'pages-app-network-uppers-count' count=data.count }}
+                    {{else}}
+                        {{_ 'pages-app-network-uppers-none' }}
+                    {{/if}}
+                </span>
+
+                {{_ 'pages-app-network-uppers-suffix' }}
+            {{/ if }}
+        </h2>
+    </header>
+
+    <div data-infinitescroll-container>
+        {{# ColumnTilesLayout instance=data.columnTilesLayout }}
+            <div class="pu-tile">
+                {{> UpperTile }}
+            </div>
+        {{/ ColumnTilesLayout }}
+
+        {{# unless state.endReached }}
+            <div class="pu-sub-loading-infinite-scroll">
+                {{> Spinner }}
+            </div>
+        {{/ unless }}
+    </div>
+</template>
