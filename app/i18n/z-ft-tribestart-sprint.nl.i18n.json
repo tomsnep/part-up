@@ -20,5 +20,8 @@
     "pages-app-network-start-message-description": "De tribe chat komt binnenkort",
     "pages-app-network-start-message-confirmbutton": "Ok",
 
-    "pages-app-network-tab-button-showstart": "Start tonen"
+    "pages-app-network-tab-button-showstart": "Start tonen",
+
+    "generic-button-prompt-confirm": "Ok",
+    "generic-button-prompt-cancel": "Annuleren"
 }
