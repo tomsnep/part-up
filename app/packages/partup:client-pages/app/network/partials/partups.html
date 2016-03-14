@@ -2,7 +2,7 @@
     {{#unless state.activeImage}}
         {{> Spinner color='inverted' }}
     {{else}}
-        <ul class="pu-list pu-list-horizontal pu-accordion">
+        <ul class="pu-list pu-list-horizontal pu-accordion {{#if isIEorEdge}}pu-fallback-ie{{/if}}">
             {{#each data.partups}}
                 <li class="item {{#if partupEquals image state.activeImage}}active{{/if}}" data-expand>
                     <a href="{{ pathFor route='partup' slug=slug}}">
