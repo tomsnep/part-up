@@ -9,8 +9,9 @@ Template.InviteTile.onCreated(function() {
     });
     template.inviteType = new ReactiveVar('partup-invite');
 
-    if (template.data.partupId && !template.data.activityId) template.inviteType.set('partup-invite');
+    if (template.data.partupId) template.inviteType.set('partup-invite');
     if (template.data.partupId && template.data.activityId) template.inviteType.set('partup-activity-invite');
+    if (template.data.networkSlug) template.inviteType.set('network-invite');
 });
 
 Template.InviteTile.helpers({
@@ -56,13 +57,18 @@ Template.InviteTile.helpers({
     state: function() {
         var template = Template.instance();
         var partup = Partups.findOne(template.data.partupId);
+        var network = Networks.findOne({slug: template.data.networkSlug});
         var user = Meteor.users.findOne({_id: template.data.userId});
         return {
             inviteSent: function() {
-                return partup.hasInvitedUpper(user._id);
+                if (partup) return partup.hasInvitedUpper(user._id);
+                if (network) return network.isUpperInvited(user._id);
+                return false;
             },
             alreadyPartner: function() {
-                return User(user).isPartnerInPartup(partup._id);
+                if (partup) return User(user).isPartnerInPartup(partup._id);
+                if (network) return network.hasMember(user._id);
+                return false;
             },
             inviteLoadingForUser: function() {
                 return template.inviting.get();
@@ -106,9 +112,9 @@ Template.InviteTile.events({
 
         if (User(invitingUser).isPartnerInPartup(template.data.partupId) || activity.isUpperInvited(invitingUserId)) return;
 
-        template.inviting.set(invitingUserId, true);
+        template.inviting.set(true);
         Meteor.call('activities.invite_existing_upper', activityId, invitingUserId, function(err) {
-            template.inviting.set(invitingUserId, false);
+            template.inviting.set(false);
 
             if (err) {
                 Partup.client.notify.error(err.reason);
@@ -116,4 +122,21 @@ Template.InviteTile.events({
             }
         });
     },
+
+    'click [data-network-invite]': function(event, template) {
+       var invitingUserId = template.data.userId;
+        var network = Networks.findOne({slug: template.data.networkSlug});
+
+        if (network.hasMember(invitingUserId) || network.isUpperInvited(invitingUserId)) return;
+
+        template.inviting.set(true);
+        Meteor.call('networks.invite_existing_upper', network._id, invitingUserId, function(err) {
+            template.inviting.set(false);
+
+            if (err) {
+                Partup.client.notify.error(err.reason);
+                return;
+            }
+        });
+    }
 });

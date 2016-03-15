@@ -12,5 +12,9 @@
     "pages-app-profile-partners-count": "1 partner",
     "pages-app-profile-partners-count_plural": "__count__ partners",
     "pages-app-profile-partners-none": "Geen partners",
-    "pages-app-profile-partners-loading": "Partners laden"
+    "pages-app-profile-partners-loading": "Partners laden",
+
+    "pages-modal-network_invite-suggestions-label": "Uppers aanbevolen voor jouw tribe",
+    "pages-modal-partup_invite-suggestions-label": "Uppers aanbevolen voor jouw part-up",
+    "pages-modal-partup-activity_invite-suggestions-label": "Uppers aanbevolen voor jouw activiteit"
 }
