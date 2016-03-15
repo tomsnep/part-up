@@ -5,6 +5,7 @@
                 {{_ 'pages-app-profile-partners-loading' }}
                 {{> Spinner type='small' }}
             {{ else }}
+                {{_ 'pages-app-profile-partners-prefix' name=data.firstname }}
                 <span class="pu-sub-countlabel">
                     {{#if data.count}}
                         {{_ 'pages-app-profile-partners-count' count=data.count }}
@@ -13,7 +14,7 @@
                     {{/if}}
                 </span>
 
-                {{_ 'pages-app-profile-partners-suffix' }}
+
             {{/ if }}
         </h2>
     </header>

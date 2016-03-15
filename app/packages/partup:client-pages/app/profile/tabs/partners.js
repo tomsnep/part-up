@@ -29,7 +29,7 @@ Template.app_profile_partners.onCreated(function() {
             var BASE_HEIGHT = 308;
             var MARGIN = 18;
             var _partner = tileData.user;
-            console.log(_partner)
+
             var NAME_PADDING = 40;
             var NAMe_LINEHEIGHT = 22;
             var nameCharsPerLine = 0.099 * (columnWidth - NAME_PADDING);
@@ -39,10 +39,10 @@ Template.app_profile_partners.onCreated(function() {
             var DESCRIPTION_PADDING = 40;
             var DESCRIPTION_LINEHEIGHT = 22;
             var descriptionCharsPerLine = 0.145 * (columnWidth - DESCRIPTION_PADDING);
-            var description = _partner.profile.description ? _partner.profile.description.length : '';
-            var descriptionLines = Math.ceil(description.length / descriptionCharsPerLine);
+            var descriptionText = _partner.profile.description ? _partner.profile.description.length : '';
+            var descriptionLength = descriptionText.length || 0;
+            var descriptionLines = Math.ceil(descriptionLength / descriptionCharsPerLine);
             var description = descriptionLines * DESCRIPTION_LINEHEIGHT;
-
             return BASE_HEIGHT + MARGIN + name + description;
         }
 
