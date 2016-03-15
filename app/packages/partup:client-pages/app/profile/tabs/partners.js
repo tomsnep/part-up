@@ -28,24 +28,22 @@ Template.app_profile_partners.onCreated(function() {
             // using the given partup object
             var BASE_HEIGHT = 308;
             var MARGIN = 18;
-            console.log(tileData)
-            var _partner = tileData.partner;
-
+            var _partner = tileData.user;
+            console.log(_partner)
             var NAME_PADDING = 40;
             var NAMe_LINEHEIGHT = 22;
             var nameCharsPerLine = 0.099 * (columnWidth - NAME_PADDING);
-            var nameLines = Math.ceil(_partner.name.length / nameCharsPerLine);
+            var nameLines = Math.ceil(_partner.profile.name.length / nameCharsPerLine);
             var name = nameLines * NAMe_LINEHEIGHT;
 
             var DESCRIPTION_PADDING = 40;
             var DESCRIPTION_LINEHEIGHT = 22;
             var descriptionCharsPerLine = 0.145 * (columnWidth - DESCRIPTION_PADDING);
-            var descriptionLines = Math.ceil(_partner.description.length / descriptionCharsPerLine);
+            var description = _partner.profile.description ? _partner.profile.description.length : '';
+            var descriptionLines = Math.ceil(description.length / descriptionCharsPerLine);
             var description = descriptionLines * DESCRIPTION_LINEHEIGHT;
 
-            var tribe = _partner.network ? 47 : 0;
-
-            return BASE_HEIGHT + MARGIN + name + description + tribe;
+            return BASE_HEIGHT + MARGIN + name + description;
         }
 
     });
@@ -58,7 +56,6 @@ Template.app_profile_partners.onCreated(function() {
         // Get count
         template.states.partnerCountLoading.set(true);
         HTTP.get('/users/' + template.data.profileId + '/partners/count' + mout.queryString.encode(query), function(error, response) {
-
             template.states.partnerCountLoading.set(false);
             if (error || !response || !mout.lang.isString(response.content)) { return; }
             var content = JSON.parse(response.content);
@@ -86,15 +83,14 @@ Template.app_profile_partners.onCreated(function() {
                 Authorization: 'Bearer ' + Accounts._storedLoginToken()
             }
         }, function(error, response) {
-
             if (error || !response.data.users || response.data.users.length === 0) {
-                template.states.loading_infinite_scroll = false;
-                template.states.paging_end_reached.set(true);
+                template.states.loadingInfiniteScroll = false;
+                template.states.pagingEndReached.set(true);
                 return;
             }
 
             var result = response.data;
-            template.states.paging_end_reached.set(result.users.length < PAGING_INCREMENT);
+            template.states.pagingEndReached.set(result.users.length < PAGING_INCREMENT);
 
             var tiles = result.users.map(function(user) {
                 Partup.client.embed.user(user, result['cfs.images.filerecord']);
@@ -106,7 +102,7 @@ Template.app_profile_partners.onCreated(function() {
 
             // Add tiles to the column layout
             template.columnTilesLayout.addTiles(tiles, function callback() {
-                template.states.loading_infinite_scroll = false;
+                template.states.loadingInfiniteScroll = false;
             });
         });
     });
@@ -157,7 +153,7 @@ Template.app_profile_partners.helpers({
             columnTilesLayout: function() {
                 return template.columnTilesLayout;
             },
-            partnerCount: function() {
+            count: function() {
                 return template.partnerCount.get();
             },
             firstname: function() {
