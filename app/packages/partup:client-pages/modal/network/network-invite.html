@@ -34,7 +34,7 @@
                         <ul>
                             {{# each data.suggestionIds }}
                                 <li>
-                                    {{> InviteTile userId=. partupId=data.partupId highlight=data.textsearch }}
+                                    {{> InviteTile userId=. networkSlug=data.networkSlug highlight=data.textsearch }}
                                 </li>
                             {{/ each }}
                         </ul>
