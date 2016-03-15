@@ -148,13 +148,19 @@ Meteor.users.findPartnersForUpper = function(upper) {
     var upper_partups = upper.upperOf || [];
     var upper_partners = [];
 
+    // Gather all upper IDs from the partups the user is partner of
     upper_partups.forEach(function(partupId) {
         var partup = Partups.findOne(partupId);
         var partup_uppers = partup.uppers || [];
         upper_partners.push.apply(upper_partners, partup_uppers);
     });
 
-    var partners = lodash.unique(upper_partners);
+    // Remove duplicates and the requested user from the partner list
+    var partners = lodash.chain(upper_partners)
+        .unique()
+        .pull(upper._id)
+        .value();
+
     return Meteor.users.findMultiplePublicProfiles(partners);
 };
 
