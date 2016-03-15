@@ -1,3 +1,10 @@
 {
-    "pages-app-profile-partners-nav": "Partners"
+    "pages-app-profile-partners-nav": "Partners",
+
+    "invitetile-relevance-partups-count": "Was je partner in een part-up",
+    "invitetile-relevance-partups-count_plural": "Was je partner in __count__ part-ups",
+    "invitetile-relevance-networks-count": "Is lid in een van jouw tribes",
+    "invitetile-relevance-networks-count_plural": "Is lid in __count__ van jouw tribes",
+    "invitetile-relevance-supporter-count": "Was supporter in een van jouw part-ups",
+    "invitetile-relevance-supporter-count_plural": "Was supporter in __count__ van jouw part-ups"
 }
