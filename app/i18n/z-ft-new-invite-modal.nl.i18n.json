@@ -1,10 +1,10 @@
 {
     "pages-app-profile-partners-nav": "Partners",
 
-    "invitetile-relevance-partups-count": "Was je partner in een part-up",
-    "invitetile-relevance-partups-count_plural": "Was je partner in __count__ part-ups",
-    "invitetile-relevance-networks-count": "Is lid in een van jouw tribes",
-    "invitetile-relevance-networks-count_plural": "Is lid in __count__ van jouw tribes",
-    "invitetile-relevance-supporter-count": "Was supporter in een van jouw part-ups",
-    "invitetile-relevance-supporter-count_plural": "Was supporter in __count__ van jouw part-ups"
+    "invitetile-relevance-partups-count": "1 part-up gemeen",
+    "invitetile-relevance-partups-count_plural": "__count__ part-ups gemeen",
+    "invitetile-relevance-networks-count": "1 tribe gemeen",
+    "invitetile-relevance-networks-count_plural": "__count__ tribes gemeen",
+    "invitetile-relevance-supporter-count": "supporter in 1 van jouw part-ups",
+    "invitetile-relevance-supporter-count_plural": "supporter in __count__ van jouw part-ups"
 }
