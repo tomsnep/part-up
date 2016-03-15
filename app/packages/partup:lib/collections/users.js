@@ -139,6 +139,26 @@ Meteor.users.findSupportersForPartup = function(partup) {
 };
 
 /**
+ * Find the partners of an upper
+ *
+ * @memberOf Meteor.users
+ * @return {Mongo.Cursor}
+ */
+Meteor.users.findPartnersForUpper = function(upper) {
+    var upper_partups = upper.upperOf || [];
+    var upper_partners = [];
+
+    upper_partups.forEach(function(partupId) {
+        var partup = Partups.findOne(partupId);
+        var partup_uppers = partup.uppers || [];
+        upper_partners.push.apply(upper_partners, partup_uppers);
+    });
+
+    var partners = lodash.unique(upper_partners);
+    return Meteor.users.findMultiplePublicProfiles(partners);
+};
+
+/**
  * Find the user of an update
  *
  * @memberOf Meteor.users
