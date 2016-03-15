@@ -7,6 +7,10 @@ Template.InviteTile.onCreated(function() {
             template.loading.set(false);
         }
     });
+    template.inviteType = new ReactiveVar('partup-invite');
+
+    if (template.data.partupId && !template.data.activityId) template.inviteType.set('partup-invite');
+    if (template.data.partupId && template.data.activityId) template.inviteType.set('partup-activity-invite');
 });
 
 Template.InviteTile.helpers({
@@ -65,6 +69,9 @@ Template.InviteTile.helpers({
             },
             loading: function() {
                 return template.loading.get();
+            },
+            inviteButtonType: function() {
+                return 'data-' + template.inviteType.get();
             }
         };
     }
@@ -74,9 +81,8 @@ Template.InviteTile.events({
     'click [data-partup-invite]': function(event, template) {
         var partupId = template.data.partupId;
         var partup = Partups.findOne(partupId);
-
-        var invitingUserId = $(event.currentTarget).data('partup-invite');
-        var invitingUser = Meteor.users.findOne({_id: template.data.userId});
+        var invitingUserId = template.data.userId;
+        var invitingUser = Meteor.users.findOne({_id: invitingUserId});
 
         if (User(invitingUser).isPartnerInPartup(partupId) || partup.hasInvitedUpper(invitingUserId)) return;
 
@@ -90,5 +96,24 @@ Template.InviteTile.events({
                 return;
             }
         });
-    }
+    },
+
+    'click [data-partup-activity-invite]': function(event, template) {
+        var activityId = template.data.activityId;
+        var activity = Activities.findOne(activityId);
+        var invitingUserId = template.data.userId;
+        var invitingUser = Meteor.users.findOne({_id: invitingUserId});
+
+        if (User(invitingUser).isPartnerInPartup(template.data.partupId) || activity.isUpperInvited(invitingUserId)) return;
+
+        template.inviting.set(invitingUserId, true);
+        Meteor.call('activities.invite_existing_upper', activityId, invitingUserId, function(err) {
+            template.inviting.set(invitingUserId, false);
+
+            if (err) {
+                Partup.client.notify.error(err.reason);
+                return;
+            }
+        });
+    },
 });

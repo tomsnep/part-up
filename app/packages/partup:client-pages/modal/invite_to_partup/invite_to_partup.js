@@ -4,8 +4,6 @@ Template.modal_invite_to_partup.onCreated(function() {
     template.userIds = new ReactiveVar([]);
     template.searchQuery = new ReactiveVar('');
 
-    template.inviting = new ReactiveDict(); // loading boolean for each individual invite button
-
     template.loading = new ReactiveVar();
 
     template.subscribe('partups.one', template.data.partupId);

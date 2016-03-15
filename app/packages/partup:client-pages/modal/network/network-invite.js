@@ -1,37 +1,37 @@
 Template.modal_network_invite.onCreated(function() {
-    var tpl = this;
+    var template = this;
     var userId = Meteor.userId();
-    tpl.subscribe('networks.one', tpl.data.networkSlug, function() {
-        var network = Networks.findOne({slug: tpl.data.networkSlug});
+    template.subscribe('networks.one', template.data.networkSlug, function() {
+        var network = Networks.findOne({slug: template.data.networkSlug});
         if (!network || network.isClosedForUpper(userId)) {
             Router.pageNotFound();
         }
     });
-    tpl.userIds = new ReactiveVar([]);
-    tpl.subscription = new ReactiveVar();
-    tpl.suggestionsOptions = new ReactiveVar({});
+    template.userIds = new ReactiveVar([]);
+    template.subscription = new ReactiveVar();
+    template.suggestionsOptions = new ReactiveVar({});
 
-    tpl.inviting = new ReactiveDict(); // loading boolean for each individual invite button
+    template.inviting = new ReactiveDict(); // loading boolean for each individual invite button
 
-    tpl.loading = new ReactiveVar();
+    template.loading = new ReactiveVar();
 
     // Submit filter form
-    tpl.submitFilterForm = function() {
+    template.submitFilterForm = function() {
         Meteor.defer(function() {
-            var form = tpl.find('form#suggestionsQuery');
+            var form = template.find('form#suggestionsQuery');
             $(form).submit();
         });
     };
 
     // Location filter datamodel
-    tpl.location = {
+    template.location = {
         value: new ReactiveVar(),
         selectorState: new ReactiveVar(false, function(a, b) {
             if (!b) return;
 
             // Focus the searchfield
             Meteor.defer(function() {
-                var searchfield = tpl.find('form#locationSelector').elements.search;
+                var searchfield = template.find('form#locationSelector').elements.search;
                 if (searchfield) searchfield.focus();
             });
         }),
@@ -40,22 +40,22 @@ Template.modal_network_invite.onCreated(function() {
 
             return {
                 onSelect: function(location) {
-                    tpl.location.selectorState.set(false);
+                    template.location.selectorState.set(false);
 
                     Meteor.setTimeout(function() {
-                        tpl.location.value.set(location);
-                        tpl.submitFilterForm();
+                        template.location.value.set(location);
+                        template.submitFilterForm();
                     }, DROPDOWN_ANIMATION_DURATION);
                 }
             };
         }
     };
 
-    tpl.autorun(function() {
-        tpl.loading.set(true);
-        var network = Networks.findOne({slug: tpl.data.networkSlug});
+    template.autorun(function() {
+        template.loading.set(true);
+        var network = Networks.findOne({slug: template.data.networkSlug});
         if (!network) return;
-        var options = tpl.suggestionsOptions.get();
+        var options = template.suggestionsOptions.get();
 
         Meteor.call('networks.user_suggestions', network._id, options, function(err, userIds) {
             if (err) {
@@ -68,10 +68,10 @@ Template.modal_network_invite.onCreated(function() {
                 return network.isUpperInvited(userId) ? 1 : -1;
             });
 
-            tpl.userIds.set(userIds);
-            tpl.subscription.set(tpl.subscribe('users.by_ids', userIds));
+            template.userIds.set(userIds);
+            template.subscription.set(template.subscribe('users.by_ids', userIds));
 
-            tpl.loading.set(false);
+            template.loading.set(false);
         });
     });
 });

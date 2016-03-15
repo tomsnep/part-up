@@ -40,34 +40,32 @@
                 </ul>
             </article>
             <footer>
-                {{#if partupId}}
-                    <button data-partup-invite="{{ data.user._id }}" type="button"
-                        class="pu-button
-                            {{#if state.alreadyPartner }}
-                                pu-button-positivestate
-                            {{ else }}
-                                {{# if state.inviteSent }}
-                                    pu-button-success
-                                {{/ if }}
+                <button {{state.inviteButtonType}} type="button"
+                    class="pu-button
+                        {{#if state.alreadyPartner }}
+                            pu-button-positivestate
+                        {{ else }}
+                            {{# if state.inviteSent }}
+                                pu-button-success
                             {{/ if }}
-                            {{# if state.inviteLoadingForUser }}
-                                pu-state-loading pu-state-disabled
-                            {{/ if }}">
-                        <span>
-                            {{# if state.alreadyPartner }}
-                                {{_ 'pages-modal-invite_to_partup-button-already-partner' }}
+                        {{/ if }}
+                        {{# if state.inviteLoadingForUser }}
+                            pu-state-loading pu-state-disabled
+                        {{/ if }}">
+                    <span>
+                        {{# if state.alreadyPartner }}
+                            {{_ 'pages-modal-invite_to_partup-button-already-partner' }}
+                        {{ else }}
+                            {{# if state.inviteSent }}
+                                {{_ 'pages-modal-invite_to_partup-button-invited-upper' }}
                             {{ else }}
-                                {{# if state.inviteSent }}
-                                    {{_ 'pages-modal-invite_to_partup-button-invited-upper' }}
-                                {{ else }}
-                                    {{_ 'pages-modal-invite_to_partup-button-invite-upper' }}
-                                {{/ if }}
+                                {{_ 'pages-modal-invite_to_partup-button-invite-upper' }}
                             {{/ if }}
-                        </span>
-                        <i class="picon-check pu-sub-success"></i>
-                        {{> Spinner color='inverted' type='small' }}
-                    </button>
-                {{/if}}
+                        {{/ if }}
+                    </span>
+                    <i class="picon-check pu-sub-success"></i>
+                    {{> Spinner color='inverted' type='small' }}
+                </button>
             </footer>
         {{/if}}
     </article>
