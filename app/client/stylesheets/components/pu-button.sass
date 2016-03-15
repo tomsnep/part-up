@@ -873,6 +873,30 @@
     &-barelyvisible // used for staff only buttons
         opacity: .5
 
+    &-translucent
+        border: 2px solid #fff
+        background-color: transparent
+        padding: 10px 15px
+        &:hover,
+        &:focus,
+        &:active
+            background-color: #fff
+            color: $color-primary
+
+    &-darktext
+        background-color: transparent
+        color: $color-primary-deepdark
+        i
+            color: $color-primary-deepdark
+        &:hover,
+        &:focus,
+        &:active
+            background-color: transparent
+            color: darken($color-primary-deepdark, 5%)
+
+            i
+                color: darken($color-primary-deepdark, 5%)
+
     @media screen and (min-width: $breakpoint-desktop)
         &-header
             @include button_header_desktop

@@ -4,15 +4,17 @@
  * @param {Number} networkSlug
  */
 Template.NetworkSettingsRequests.onCreated(function() {
-    var tpl = this;
+    var template = this;
     var userId = Meteor.userId();
 
-    tpl.subscribe('networks.one', tpl.data.networkSlug, function() {
-        var network = Networks.findOne({slug: tpl.data.networkSlug});
-        if (!network) Router.pageNotFound('network');
-        if (network.isClosedForUpper(userId)) Router.pageNotFound('network');
+    template.subscribe('networks.one', template.data.networkSlug, {
+        onReady: function() {
+            var network = Networks.findOne({slug: template.data.networkSlug});
+            if (!network) Router.pageNotFound('network');
+            if (network.isClosedForUpper(userId)) Router.pageNotFound('network');
+        }
     });
-    tpl.subscribe('networks.one.pending_uppers', tpl.data.networkSlug);
+    template.subscribe('networks.one.pending_uppers', template.data.networkSlug);
 });
 
 Template.NetworkSettingsRequests.helpers({

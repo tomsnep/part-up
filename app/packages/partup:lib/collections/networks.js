@@ -310,6 +310,29 @@ Network.prototype.leave = function(upperId) {
     Meteor.users.update(upperId, {$pull: {networks: this._id}});
 };
 
+Network.prototype.displayTags = function() {
+    var maxTags = 5;
+    var tags = [];
+    var commonTags = this.common_tags || [];
+    var customTags = this.tags || [];
+
+    _.times(maxTags, function() {
+        var tag = commonTags.shift();
+        if (!tag) return;
+        tags.push(tag.tag);
+    });
+
+    if (tags.length === maxTags) return tags;
+
+    _.times((maxTags - tags.length), function() {
+        var tag = customTags.shift();
+        if (!tag) return;
+        tags.push(tag);
+    });
+
+    return tags;
+};
+
 /**
  Networks, also known as "Tribes" are entities that group users and partups
  @namespace Networks
@@ -364,7 +387,7 @@ Networks.guardedMetaFind = function(selector, options) {
     options.fields = {_id: 1};
 
     // The fields that should be available on each network
-    var unguardedFields = ['_id', 'name', 'description', 'website', 'slug', 'icon', 'image', 'privacy_type', 'pending_uppers', 'invites', 'language', 'tags', 'location', 'stats', 'swarms'];
+    var unguardedFields = ['_id', 'name', 'description', 'website', 'slug', 'icon', 'image', 'privacy_type', 'pending_uppers', 'invites', 'language', 'tags', 'location', 'stats', 'swarms', 'background_image', 'common_tags', 'most_active_partups', 'most_active_uppers'];
 
     unguardedFields.forEach(function(unguardedField) {
         options.fields[unguardedField] = 1;

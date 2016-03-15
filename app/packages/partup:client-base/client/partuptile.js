@@ -80,6 +80,12 @@ Partup.client.partuptile = {
             x: x,
             y: y
         };
-    }
+    },
 
+    userIsDefinitlyMemberOfNetwork: function(networkObject, userId) {
+        if (!userId) return false;
+        if (!networkObject) return false;
+        var uppers = networkObject.uppers || [];
+        return mout.lang.isString(userId) && uppers.indexOf(userId) > -1;
+    }
 };

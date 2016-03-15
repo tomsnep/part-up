@@ -7,7 +7,7 @@
      run_once: true
 
    - name: datadump | dump database
-     local_action: shell mongodump -h {{ database.host }} -u {{ database.user }} -p {{ database.password }}  --db {{ database.name }} -o ../backups/{{ app.env.NODE_ENV }}/datadump
+     local_action: shell mongodump -h {{ database.host }} -u {{ database.user }} -p {{ database.password }} --db {{ database.name }} -o ../backups/{{ app.env.NODE_ENV }}/datadump
      run_once: true
 
    - name: datadump | remove metadata
@@ -23,5 +23,5 @@
      run_once: true
 
    - name: datadump | remove all tokens
-     local_action: shell scripts/datadump.sh ../backups/{{ app.env.NODE_ENV }}/datadump/{{ database.name }}
+     local_action: shell commands/scripts/datadump.sh ../backups/{{ app.env.NODE_ENV }}/datadump/{{ database.name }}
      run_once: true

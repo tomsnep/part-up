@@ -13,7 +13,7 @@ Template.app_partup_updates_newmessage.onCreated(function() {
     template.totalPhotos = new ReactiveVar(0);
     template.maxPhotos = 4;
     template.submitting = new ReactiveVar(false);
-    template.partupId = this.data.partup_id || this.data.partupId
+    template.partupId = this.data.partup_id || this.data.partupId;
 });
 
 Template.afFieldInput.onRendered(function() {
@@ -101,7 +101,7 @@ Template.app_partup_updates_newmessage.helpers({
                     template.totalPhotos.set(total);
                 });
             }
-        }
+        };
     }
 });
 
@@ -119,29 +119,6 @@ Template.app_partup_updates_newmessage.events({
         var total = Template.instance().totalPhotos.get();
         total--;
         Template.instance().totalPhotos.set(total);
-    },
-    'click [data-submit]': function(event, template) {
-        // var input = template.find('[data-message-input]');
-        // var valueWithoutWhitespace = input.value.split(' ').join('');
-        // if (!valueWithoutWhitespace.length) {
-        //     var updateId = this._id || false;
-        //     Partup.client.prompt.confirm({
-        //         onConfirm: function() {
-        //             Partup.client.popup.close();
-        //             Meteor.call('updates.messages.remove', updateId, function(error, result) {
-        //                 if (error) {
-        //                     Partup.client.notify.error(error.reason);
-        //                     self.done(new Error(error.message));
-        //                     return;
-        //                 }
-        //                 template.submitting.set(false);
-        //                 AutoForm.resetForm('editMessageForm');
-        //                 template.mentionsInput.reset();
-        //                 template.uploadedPhotos.set([]);
-        //             });
-        //         }
-        //     });
-        // }
     }
 });
 

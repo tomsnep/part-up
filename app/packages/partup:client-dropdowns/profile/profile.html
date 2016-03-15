@@ -35,7 +35,7 @@
         <section>
             {{#if selectedNetwork}}
                 <header class="pu-dropdownitem pu-dropdownheader">
-                    <a href="{{ pathFor 'network-detail' slug=selectedNetwork.slug }}">
+                    <a href="{{ pathFor 'network' slug=selectedNetwork.slug query='show=false' }}">
                         <figure class="pu-avatar pu-avatar-square" style="{{# with partupGetImageUrl selectedNetwork.imageObject '80x80'}}background-image:url('{{ . }}');{{/ with}}"></figure>
                         <p>{{ selectedNetwork.name }}</p>
                     </a>

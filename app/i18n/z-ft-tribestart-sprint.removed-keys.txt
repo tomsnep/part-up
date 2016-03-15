@@ -1,0 +1,5 @@
+{
+    "pages-app-notfound-network-title": "",
+    "pages-app-notfound-network-description": "",
+    "pages-app-notfound-backbutton": ""
+}

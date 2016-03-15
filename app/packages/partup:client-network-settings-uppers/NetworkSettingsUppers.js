@@ -6,38 +6,34 @@
  * @param {Number} networkSlug    the slug of the network whose uppers are rendered
  */
 // jscs:enable
-
-var Subs = new SubsManager({
-    cacheLimit: 1,
-    expireIn: 10
-});
-
 Template.NetworkSettingsUppers.onCreated(function() {
-    var tpl = this;
+    var template = this;
     var userId = Meteor.userId();
 
-    var network_sub = Subs.subscribe('networks.one', tpl.data.networkSlug);
-    Subs.subscribe('networks.one.uppers', {
-        slug: tpl.data.networkSlug
-    });
-
-    tpl.autorun(function(computation) {
-        if (network_sub.ready()) {
-            computation.stop();
-            var network = Networks.findOne({slug: tpl.data.networkSlug});
+    template.subscription = template.subscribe('networks.one', template.data.networkSlug, {
+        onReady: function() {
+            var network = Networks.findOne({slug: template.data.networkSlug});
             if (!network) Router.pageNotFound('network');
             if (network.isClosedForUpper(userId)) Router.pageNotFound('network');
         }
     });
+    template.subscribe('networks.one.uppers', {slug: template.data.networkSlug});
 });
 
 Template.NetworkSettingsUppers.helpers({
-    network: function() {
-        return Networks.findOne({slug: this.networkSlug});
-    },
-    upper: function() {
-        var upperId = this.toString();
-        return Meteor.users.findOne(upperId);
+    data: function() {
+        var template = Template.instance();
+        var network = Networks.findOne({slug: template.data.networkSlug});
+        var self = this;
+        return {
+            network: function() {
+                return network;
+            },
+            upper: function() {
+                var upperId = self.toString();
+                return Meteor.users.findOne(upperId);
+            }
+        };
     }
 });
 

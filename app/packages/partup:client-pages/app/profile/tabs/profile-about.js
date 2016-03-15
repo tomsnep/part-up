@@ -22,40 +22,42 @@ Template.app_profile_about.onCreated(function() {
 
 Template.app_profile_about.onRendered(function() {
     var template = this;
+    var profileId = template.data.profileId;
 
     template.handle = null;
     template.refresh = function() {
         if (template.handle) template.handle.stop();
 
-        template.handle = template.subscribe('tiles.profile', template.data.profileId, {
+        template.handle = template.subscribe('tiles.profile', profileId, {
             onReady: function() {
-                var tiles = Tiles.find({upper_id: template.data.profileId}).fetch();
-                var user = Meteor.users.findOne(template.data.profileId);
-                var isMine = Meteor.userId() === template.data.profileId;
+                var tiles = Tiles.find({upper_id: profileId}).fetch();
+                var user = Meteor.users.findOne(profileId);
+                var displayTiles = [];
 
-                if (!tiles || !tiles.length && isMine) {
-                    tiles.push({
+                var meurs = user.profile.meurs || {};
+
+                var profileIsCurrentUser = Meteor.userId() === profileId;
+                var profileHasResults = meurs.results && meurs.results.length && meurs.fetched_results;
+                var profileDoesNotHaveMediaTiles = !tiles || !tiles.length;
+
+                if (profileHasResults || profileIsCurrentUser) {
+                    displayTiles = displayTiles.concat([{
+                        type: 'result',
+                        profileId: profileId
+                    }]);
+                }
+
+                if (profileDoesNotHaveMediaTiles && profileIsCurrentUser) {
+                    displayTiles = displayTiles.concat([{
                         type: 'image',
                         placeholder: true
-                    });
+                    }]);
+                } else {
+                    displayTiles = displayTiles.concat(tiles);
                 }
 
-                var meurs = {};
-                if (user.profile.meurs) {
-                    meurs = user.profile.meurs;
-                }
-
-                if ((meurs.results && meurs.results.length) || isMine) {
-                    tiles.unshift({
-                        type: 'result',
-                        user: user,
-                        meurs: meurs
-                    });
-                }
-
-                // Add tiles to the column layout
                 template.columnTilesLayout.clear(function() {
-                    template.columnTilesLayout.addTiles(tiles);
+                    template.columnTilesLayout.addTiles(displayTiles);
                 });
             }
         });
@@ -79,12 +81,6 @@ Template.app_profile_about.events({
             id: 'new-' + type
         }, function(result) {
             template.refresh();
-        });
-    },
-    'click [data-start-test]': function(event, template) {
-        event.preventDefault();
-        Meteor.call('meurs.create_test', function(error, url) {
-            if (url) document.location.href = url;
         });
     },
     'click [data-delete]': function(event, template) {
@@ -114,7 +110,7 @@ Template.app_profile_about.helpers({
         var user = Meteor.users.findOne(this.profileId);
         return User(user).getFirstname();
     },
-    isMine: function() {
+    profileIsCurrentUser: function() {
         return this.profileId === Meteor.userId();
     }
 });
