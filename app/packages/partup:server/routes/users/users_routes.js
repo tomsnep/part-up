@@ -91,7 +91,7 @@ Router.route('/users/:id/partners/count', {where: 'server'}).get(function() {
         return response.end(JSON.stringify({error: {reason: 'error-user-notfound'}}));
     }
 
-    var partners = Users.findPartnersForUpper(user);
+    var partners = Meteor.users.findPartnersForUpper(user);
 
     return response.end(JSON.stringify({error: false, count: partners.count()}));
 });
