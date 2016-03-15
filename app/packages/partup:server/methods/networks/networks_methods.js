@@ -496,15 +496,15 @@ Meteor.methods({
     /**
      * Get user suggestions for a given network
      *
-     * @param {String} networkId
+     * @param {String} networkSlug
      * @param {Object} options
      * @param {String} options.locationId
      * @param {String} options.query
      *
      * @return {Array}
      */
-    'networks.user_suggestions': function(networkId, options) {
-        check(networkId, String);
+    'networks.user_suggestions': function(networkSlug, options) {
+        check(networkSlug, String);
         check(options, {
             locationId: Match.Optional(String),
             query: Match.Optional(String)
@@ -518,7 +518,7 @@ Meteor.methods({
             throw new Meteor.Error(401, 'unauthorized');
         }
 
-        var users = Partup.server.services.matching.matchUppersForNetwork(networkId, options);
+        var users = Partup.server.services.matching.matchUppersForNetwork(networkSlug, options);
 
         // We are returning an array of IDs instead of an object
         return users.map(function(user) {

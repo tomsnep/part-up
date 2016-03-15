@@ -26,15 +26,15 @@ Partup.server.services.matching = {
     /**
      * Match uppers for a given network
      *
-     * @param {String} networkId
+     * @param {String} networkSlug
      * @param {Object} searchOptions
      * @param {String} searchOptions.locationId
      * @param {String} searchOptions.query
      *
      * @return {[String]}
      */
-    matchUppersForNetwork: function(networkId, searchOptions) {
-        var network = Networks.findOneOrFail(networkId);
+    matchUppersForNetwork: function(networkSlug, searchOptions) {
+        var network = Networks.findOneOrFail({slug: networkSlug});
         var tags = network.tags || [];
         var uppers = network.uppers || [];
 
