@@ -22,8 +22,21 @@ Meteor.methods({
             network.admin_id = user._id;
             network.created_at = new Date();
             network.updated_at = new Date();
+            network.stats = {
+                'activity_count' : 0,
+                'partner_count' : 0,
+                'partup_count' : 0,
+                'supporter_count' : 0,
+                'upper_count' : 1
+            },
+            network.most_active_uppers = [
+                user._id
+            ];
+            network.most_active_partups = [];
+            network.common_tags = [];
 
             network._id = Networks.insert(network);
+
             Meteor.users.update(user._id, {$addToSet: {networks: network._id}});
 
             return {
