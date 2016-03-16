@@ -103,6 +103,8 @@ Meteor.users.findMultiplePublicProfiles = function(userIds, options, parameters)
  *
  * @memberOf Meteor.users
  * @param {Network} network
+ * @param {Object} options
+ * @param {Object} parameters
  * @return {Mongo.Cursor}
  */
 Meteor.users.findUppersForNetwork = function(network, options, parameters) {
@@ -201,7 +203,8 @@ Meteor.users.findForContribution = function(contribution) {
  * Safely find users that are not disabled
  *
  * @memberOf Meteor.users
- * @param {Contributions} contribution
+ * @param {Object} selector
+ * @param {Object} options
  * @return {Mongo.Cursor}
  */
 Meteor.users.findActiveUsers = function(selector, options) {
@@ -220,7 +223,8 @@ Meteor.users.findActiveUsers = function(selector, options) {
  * Find for admin list
  *
  * @memberOf Meteor.users
- * @param {Contributions} contribution
+ * @param {Object} selector
+ * @param {Object} options
  * @return {Mongo.Cursor}
  */
 Meteor.users.findForAdminList = function(selector, options) {
@@ -238,7 +242,7 @@ Meteor.users.findForAdminList = function(selector, options) {
 };
 
 Meteor.users.findStatsForAdmin = function() {
-    var results = {
+    return {
         'servicecounts': {
             'password': Meteor.users.find({'services.password':{'$exists':true}}).count(),
             'linkedin': Meteor.users.find({'services.linkedin':{'$exists':true}}).count(),
@@ -252,7 +256,6 @@ Meteor.users.findStatsForAdmin = function() {
             'ratings': Ratings.find({}).count()
         }
     };
-    return results;
 };
 
 /**
@@ -271,7 +274,6 @@ Meteor.users.findByUnsubscribeEmailToken = function(token) {
  * @ignore
  */
 User = function(user) {
-
     return {
 
         /**
