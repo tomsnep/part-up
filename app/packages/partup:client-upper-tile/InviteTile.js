@@ -12,15 +12,21 @@ Template.InviteTile.onCreated(function() {
     if (template.data.partupId) template.inviteType.set('partup-invite');
     if (template.data.partupId && template.data.activityId) template.inviteType.set('partup-activity-invite');
     if (template.data.networkSlug) template.inviteType.set('network-invite');
+    template.searchQuery = new ReactiveVar(false);
+    template.autorun(function() {
+        var data = Template.currentData();
+        template.searchQuery.set(data.highlight);
+    });
 });
 
 Template.InviteTile.helpers({
     data: function() {
+        var self = this;
         var template = Template.instance();
         var data = Template.currentData();
         var user = Meteor.users.findOne({_id: template.data.userId});
         var currentUser = Meteor.user();
-        var self = this;
+        var tags = user.profile.tags || [];
         return {
             user: function() {
                 return user;
@@ -29,10 +35,16 @@ Template.InviteTile.helpers({
                 return User(user).getReadableScore();
             },
             highlightText: function() {
-                var highlight = Partup.client.sanitize(data.highlight);
+                var text = template.searchQuery.get();
+                var highlight = Partup.client.sanitize(text);
                 var description = user.profile.description || '';
                 var text = description.length ? description.split(highlight).join('<span>' + highlight + '</span>') : '';
                 return text;
+            },
+            highlightTag: function() {
+                var text = template.searchQuery.get();
+                var highlightTag = tags.indexOf(text);
+                return tags[highlightTag];
             },
             relevance: function() {
                 var userPartups = user.upperOf || [];
