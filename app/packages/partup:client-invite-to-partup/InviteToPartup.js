@@ -54,7 +54,7 @@ Template.InviteToPartup.events({
         event.preventDefault();
         var self = this;
         var index = self.index;
-        Autoform.removeArrayItem('inviteToPartupForm', 'invitees', index);
+        AutoForm.removeArrayItem('inviteToPartupForm', 'invitees', index);
     }
 });
 

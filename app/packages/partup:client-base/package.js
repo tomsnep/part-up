@@ -31,6 +31,7 @@ Package.onUse(function(api) {
 
         'client/Debugger.js',
         'autoform/afFieldInput.js',
+        'autoform/arrayHelpers.js',
         'client/error.js',
         'client/isMobile.js',
         'client/events.js',
