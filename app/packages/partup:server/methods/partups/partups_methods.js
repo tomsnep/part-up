@@ -429,7 +429,6 @@ Meteor.methods({
      *
      * @param {string} partupId
      * @param {Object} options
-     * @param {string} options.locationId
      * @param {string} options.query
      *
      * @return {[string]}
@@ -437,7 +436,6 @@ Meteor.methods({
     'partups.user_suggestions': function(partupId, options) {
         check(partupId, String);
         check(options, {
-            locationId: Match.Optional(String),
             query: Match.Optional(String)
         });
 

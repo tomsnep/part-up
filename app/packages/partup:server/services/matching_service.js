@@ -9,7 +9,6 @@ Partup.server.services.matching = {
      *
      * @param {String} activityId
      * @param {Object} searchOptions
-     * @param {String} searchOptions.locationId
      * @param {String} searchOptions.query
      *
      * @return {[String]}
@@ -28,7 +27,6 @@ Partup.server.services.matching = {
      *
      * @param {String} networkSlug
      * @param {Object} searchOptions
-     * @param {String} searchOptions.locationId
      * @param {String} searchOptions.query
      *
      * @return {[String]}
@@ -46,7 +44,6 @@ Partup.server.services.matching = {
      *
      * @param {String} partupId
      * @param {Object} searchOptions
-     * @param {String} searchOptions.locationId
      * @param {String} searchOptions.query
      *
      * @return {[String]}
@@ -60,7 +57,7 @@ Partup.server.services.matching = {
     },
 
     /**
-     * Find upeprs that match with the provided criteria
+     * Find uppers that match with the provided criteria
      *
      * @param {Object} searchOptions
      * @param {[String]} tags
@@ -70,47 +67,45 @@ Partup.server.services.matching = {
      */
     findMatchingUppers: function(searchOptions, tags, excludedUppers) {
         var selector = {};
-        var options = {};
-        var searchOptionsProvided = searchOptions.locationId || searchOptions.query;
-        var limit = searchOptionsProvided ? 30 : 10;
-
-        if (searchOptionsProvided) {
-            if (searchOptions.locationId) {
-                selector['profile.location.place_id'] = searchOptions.locationId;
-            }
-            if (searchOptions.query) {
-                // Remove accents that might have been added to the query
-                searchOptions.query = mout.string.replaceAccents(searchOptions.query.toLowerCase());
-                selector['profile.normalized_name'] = new RegExp('.*' + searchOptions.query + '.*', 'i');
-            }
-        } else {
-            // Match the uppers on the provided tags
-            tags = tags || [];
-            selector['profile.tags'] = {$in: tags};
-        }
 
         // Exclude the current logged in user from the results
         selector['_id'] = {$nin: [Meteor.userId()]};
 
-        // Exclude provided uppers from result, unless a search is happening
-        if (!searchOptionsProvided) {
+        if (searchOptions.query !== '') {
+            // Remove accents that might have been added to the query
+            var searchQuery = mout.string.replaceAccents(searchOptions.query.toLowerCase());
+
+            // Set the search criteria
+            var searchCriteria = [
+                {'profile.normalized_name': new RegExp('.*' + searchQuery + '.*', 'i')},
+                {'profile.tags': new RegExp('.*' + searchQuery + '.*', 'i')},
+                {'profile.location.city': new RegExp('.*' + searchQuery + '.*', 'i')}
+            ];
+
+            // Combine it in an $or selector
+            selector = {$and: [selector, {$or: searchCriteria}]};
+        } else {
+            // No search query is provided, so match the uppers on the provided tags
+            tags = tags || [];
+            selector['profile.tags'] = {$in: tags};
+
+            // Exclude provided uppers from result
             excludedUppers = excludedUppers || [];
             selector['_id'] = {$nin: excludedUppers};
         }
 
-        // Sort the uppers on participation_score
-        options['sort'] = {participation_score: -1};
-
-        // Only return the IDs
-        options['fields'] = {_id: 1};
-
-        // Limit results
-        options['limit'] = limit;
+        // Set options
+        var options = {
+            limit: searchOptions.limit ? parseInt(searchOptions.limit) : 10,
+            skip: searchOptions.skip ? parseInt(searchOptions.skip) : 0,
+            sort: {participation_score: -1}, // Sort the uppers on participation_score
+            fields: {_id: 1} // Only return the IDs
+        };
 
         var results = Meteor.users.findActiveUsers(selector, options).fetch();
 
         // If there are no results, we remove some matching steps (only when no search options were provided)
-        if (!searchOptionsProvided) {
+        if (!searchOptions.query) {
             var iteration = 0;
             while (results.length === 0) {
                 if (iteration === 0) delete selector['profile.tags'];

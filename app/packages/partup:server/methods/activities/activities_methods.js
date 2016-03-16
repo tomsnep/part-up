@@ -232,7 +232,6 @@ Meteor.methods({
      *
      * @param {string} activityId
      * @param {Object} options
-     * @param {string} options.locationId
      * @param {string} options.query
      *
      * @return {[string]}
@@ -240,7 +239,6 @@ Meteor.methods({
     'activities.user_suggestions': function(activityId, options) {
         check(activityId, String);
         check(options, {
-            locationId: Match.Optional(String),
             query: Match.Optional(String)
         });
 

@@ -498,7 +498,6 @@ Meteor.methods({
      *
      * @param {String} networkSlug
      * @param {Object} options
-     * @param {String} options.locationId
      * @param {String} options.query
      *
      * @return {Array}
@@ -506,7 +505,6 @@ Meteor.methods({
     'networks.user_suggestions': function(networkSlug, options) {
         check(networkSlug, String);
         check(options, {
-            locationId: Match.Optional(String),
             query: Match.Optional(String)
         });
 
