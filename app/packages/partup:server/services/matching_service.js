@@ -78,6 +78,7 @@ Partup.server.services.matching = {
             // Set the search criteria
             var searchCriteria = [
                 {'profile.normalized_name': new RegExp('.*' + searchQuery + '.*', 'i')},
+                {'profile.description': new RegExp('.*' + searchQuery + '.*', 'i')},
                 {'profile.tags': new RegExp('.*' + searchQuery + '.*', 'i')},
                 {'profile.location.city': new RegExp('.*' + searchQuery + '.*', 'i')}
             ];
