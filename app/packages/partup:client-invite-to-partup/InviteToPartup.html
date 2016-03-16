@@ -8,36 +8,35 @@
         {{_ 'invite-to-partup-popup-placeholder-explaination'}}
     </p>
 
-    {{#autoForm schema=formSchema id="inviteToPartupForm" class="pu-form pu-form-popup" validation="submitThenBlur" doc=defaultDoc}}
-        <div class="pu-row">
-            <div class="cell top">
-
-                <!-- Name of invitee -->
-                <label class="pu-formfield">
-                    <span class="pu-label">{{_ 'invite-to-partup-popup-input-name'}}</span>
-                    <div class="pu-sub-validations {{#if afFieldIsInvalid name='name' }}pu-state-invalid{{/if}}">
-                        <span class="pu-sub-input">
-                            {{> afFieldInput name='name' class="pu-input" }}
-                        </span>
-                        <span class="pu-sub-error">{{ afFieldMessage name='name' }}</span>
-                    </div>
-                </label>
+    {{#autoForm schema=form.schema id="inviteToPartupForm" class="pu-form pu-form-popup" validation="submitThenBlur" doc=form.doc}}
+        {{#afEachArrayItem name='invitees'}}
+            {{log this}}
+            <div class="pu-row" data-remove>
+                <div class="cell top">
+                    <label class="pu-formfield">
+                        <span class="pu-label">{{_ 'invite-to-partup-popup-input-name'}}</span>
+                        <div class="pu-sub-validations {{#if afFieldIsInvalid name=current.name }}pu-state-invalid{{/if}}">
+                            <span class="pu-sub-input">
+                                {{> afFieldInput name=current.name class="pu-input" }}
+                            </span>
+                            <span class="pu-sub-error">{{ afFieldMessage name=current.name }}</span>
+                        </div>
+                    </label>
+                </div>
+                <div class="cell top">
+                    <label class="pu-formfield">
+                        <span class="pu-label">{{_ 'invite-to-partup-popup-input-email'}}</span>
+                        <div class="pu-sub-validations {{#if afFieldIsInvalid name=current.email }}pu-state-invalid{{/if}}">
+                            <span class="pu-sub-input">
+                                {{> afFieldInput name=current.email class="pu-input" }}
+                            </span>
+                            <span class="pu-sub-error">{{ afFieldMessage name=current.email }}</span>
+                        </div>
+                    </label>
+                </div>
             </div>
-            <div class="cell top">
-
-                <!-- Emailaddress of invitee -->
-                <label class="pu-formfield">
-                    <span class="pu-label">{{_ 'invite-to-partup-popup-input-email'}}</span>
-                    <div class="pu-sub-validations {{#if afFieldIsInvalid name='email' }}pu-state-invalid{{/if}}">
-                        <span class="pu-sub-input">
-                            {{> afFieldInput name='email' class="pu-input" }}
-                        </span>
-                        <span class="pu-sub-error">{{ afFieldMessage name='email' }}</span>
-                    </div>
-                </label>
-            </div>
-        </div>
-
+        {{/afEachArrayItem}}
+        <button class="pu-button" data-add>add</button>
         <!-- Custom email message for invitee -->
         <label class="pu-formfield">
             <span class="pu-label">{{_ 'invite-to-partup-popup-input-message'}}</span>
@@ -51,7 +50,7 @@
 
         <footer class="pu-sub-formfooter pu-row pu-row-scalable">
             <div class="cell stretch">
-                <button type="submit" class="pu-button {{# if submitting }}pu-state-loading pu-state-disabled{{/ if }}">
+                <button type="submit" class="pu-button {{# if state.submitting }}pu-state-loading pu-state-disabled{{/ if }}">
                     <span>{{_ 'invite-to-partup-popup-form-copy-confirm'}}</span>
                     {{> Spinner color='inverted' type='small' }}
                 </button>
