@@ -37,8 +37,6 @@ Template.InviteToPartup.helpers({
 AutoForm.hooks({
     inviteToPartupForm: {
         onSubmit: function(insertDoc, updateDoc, currentDoc) {
-            console.log(insertDoc);
-            return false;
             var self = this;
             var template = self.template.parent();
 
