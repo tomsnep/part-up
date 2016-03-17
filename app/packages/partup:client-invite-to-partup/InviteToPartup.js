@@ -46,27 +46,28 @@ Template.InviteToPartup.helpers({
 });
 
 Template.InviteToPartup.events({
-    'click [data-add]': function(event, template) {
+    'keyup [data-add]': function(event, template) {
         event.preventDefault();
-        AutoForm.addArrayItem('inviteToPartupForm', 'invitees');
+        var inputs = template.$('input');
+        var allHaveValues = true;
+        _.each(inputs, function(item) {
+            if (!$(item).val()) allHaveValues = false;
+        });
+        var last = $(event.currentTarget).data('add');
+        if (allHaveValues && last) AutoForm.addArrayItem('inviteToPartupForm', 'invitees');
+        $(event.currentTarget).removeClass('pu-state-selectable');
     },
     'click [data-remove]': function(event, template) {
         event.preventDefault();
-        var self = this;
-        var index = self.index;
-        AutoForm.removeArrayItem('inviteToPartupForm', 'invitees', index);
+        AutoForm.removeArrayItem('inviteToPartupForm', 'invitees', this.index);
     }
 });
 
 AutoForm.hooks({
     inviteToPartupForm: {
-        onSuccess: function(formType, result) {},
-        onError: function(formType, error) {
-            console.log(formType,error)
-        },
         onSubmit: function(insertDoc, updateDoc, currentDoc) {
-            console.log(insertDoc)
-            return
+            console.log(insertDoc);
+            return false;
             var self = this;
             var template = self.template.parent();
 

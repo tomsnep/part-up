@@ -10,8 +10,12 @@
 
     {{#autoForm schema=form.schema id="inviteToPartupForm" class="pu-form pu-form-popup" validation="submitThenBlur" doc=form.doc}}
         {{#afEachArrayItem name='invitees'}}
-            {{log this}}
-            <div class="pu-row {{#unless afArrayFieldIsFirstVisible}}{{#if afArrayFieldIsLastVisible}}pu-state-selectable{{/if}}{{/unless}}" data-remove>
+            <div data-add="{{ afArrayFieldIsLastVisible }}" class="pu-row pu-inputrow
+            {{#unless afArrayFieldIsFirstVisible}}
+                {{#if afArrayFieldIsLastVisible}}
+                    pu-state-selectable
+                {{/if}}
+            {{/unless}}">
                 <div class="cell top">
                     <label class="pu-formfield">
                         {{#if afArrayFieldIsFirstVisible}}
@@ -38,9 +42,18 @@
                         </div>
                     </label>
                 </div>
+                {{#if afArrayFieldIsLastVisible}}
+                    {{#unless afArrayFieldIsFirstVisible}}
+                        <div class="cell">
+                            <label class="pu-formfield">
+                                <button class="pu-button pu-button-icononly pu-button-gray" data-remove><i class="picon-times"></i></button>
+                            </label>
+                        </div>
+                    {{/unless}}
+                {{/if}}
             </div>
         {{/afEachArrayItem}}
-        <button class="pu-button" data-add>add</button>
+        <!-- <button class="pu-button" data-add>add</button> -->
         <!-- Custom email message for invitee -->
         <label class="pu-formfield">
             <span class="pu-label">{{_ 'invite-to-partup-popup-input-message'}}</span>

@@ -65,9 +65,21 @@
         .stretch + .cell
             float: right
 
-    &.pu-state-selectable
-        opacity: .5
-        transition: opacity .2s
+.pu-inputrow
+    margin-bottom: 10px
+    > .cell
+        &:first-child
+            width: 280px
 
-        &:hover
-            opacity: .9
+        .pu-button
+            width: 100%
+    &.pu-state-selectable
+        input
+            opacity: .5
+            transition: opacity .2s
+
+            &:hover
+                opacity: .9
+
+            &:focus
+                opacity: 1
