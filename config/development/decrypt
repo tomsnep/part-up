@@ -6,6 +6,4 @@ cp env.sh-encrypted env.sh-decrypting
 ansible-vault decrypt env.sh-decrypting
 mv env.sh-decrypting env.sh
 
-cp env-encrypted env-decrypting
-ansible-vault decrypt env-decrypting
-mv env-decrypting env
+ansible-vault decrypt --output=env env-encrypted
