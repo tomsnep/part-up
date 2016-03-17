@@ -101,7 +101,7 @@ Template.InviteTile.events({
         var partup = Partups.findOne(partupId);
         var invitingUserId = template.data.userId;
         var invitingUser = Meteor.users.findOne({_id: invitingUserId});
-        var searchQuery = template.searchQuery.get() || undefined;
+        var searchQuery = template.searchQuery.get() || '';
 
         if (User(invitingUser).isPartnerInPartup(partupId) || partup.hasInvitedUpper(invitingUserId)) return;
 
