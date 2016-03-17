@@ -207,10 +207,12 @@ Meteor.methods({
      *
      * @param {String} networkId
      * @param {String} inviteeId
+     * @param {String} searchQuery
      */
-    'networks.invite_existing_upper': function(networkId, inviteeId) {
+    'networks.invite_existing_upper': function(networkId, inviteeId, searchQuery) {
         check(networkId, String);
         check(inviteeId, String);
+        check(searchQuery, Match.Optional(String));
 
         var inviter = Meteor.user();
         var network = Networks.findOneOrFail(networkId);
@@ -240,7 +242,7 @@ Meteor.methods({
 
         Invites.insert(invite);
 
-        Event.emit('invites.inserted.network', inviter, network, invitee);
+        Event.emit('invites.inserted.network', inviter, network, invitee, searchQuery);
     },
 
     /**

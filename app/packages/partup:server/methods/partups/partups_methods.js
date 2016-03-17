@@ -323,10 +323,12 @@ Meteor.methods({
      *
      * @param {string} partupId
      * @param {string} inviteeId
+     * @param {string} searchQuery
      */
-    'partups.invite_existing_upper': function(partupId, inviteeId) {
+    'partups.invite_existing_upper': function(partupId, inviteeId, searchQuery) {
         check(partupId, String);
         check(inviteeId, String);
+        check(searchQuery, Match.Optional(String));
 
         var inviter = Meteor.user();
         if (!inviter) {
@@ -368,15 +370,14 @@ Meteor.methods({
             Partups.update(partup._id, {$addToSet: {invites: invitee._id}});
         }
 
-        Event.emit('invites.inserted.partup', inviter, partup, invitee);
+        Event.emit('invites.inserted.partup', inviter, partup, invitee, searchQuery);
     },
 
     /**
      * Invite someone to an partup
      *
      * @param {string} partupId
-     * @param {string} email
-     * @param {string} name
+     * @param {object} fields
      */
     'partups.invite_by_email': function(partupId, fields) {
         check(fields, Partup.schemas.forms.inviteUpper);

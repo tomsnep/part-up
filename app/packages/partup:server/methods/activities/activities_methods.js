@@ -322,10 +322,12 @@ Meteor.methods({
      *
      * @param {string} activityId
      * @param {string} inviteeId
+     * @param {string} searchQuery
      */
-    'activities.invite_existing_upper': function(activityId, inviteeId) {
+    'activities.invite_existing_upper': function(activityId, inviteeId, searchQuery) {
         check(activityId, String);
         check(inviteeId, String);
+        check(searchQuery, Match.Optional(String));
 
         var inviter = Meteor.user();
         if (!inviter) {
@@ -369,6 +371,6 @@ Meteor.methods({
             Partups.update(partup._id, {$addToSet: {invites: invitee._id}});
         }
 
-        Event.emit('invites.inserted.activity', inviter, partup, activity, invitee);
+        Event.emit('invites.inserted.activity', inviter, partup, activity, invitee, searchQuery);
     }
 });

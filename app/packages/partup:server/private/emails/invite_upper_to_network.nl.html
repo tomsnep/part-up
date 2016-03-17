@@ -5,7 +5,9 @@
 <p style="margin: 1em 0;font: 16px proxima nova, sans-serif;">
     Ik zag deze gave tribe op Part-up: "{{ networkName }}". Volgens mij zou
     jij goed bij deze tribe passen en helpen het doel te bereiken:
-    "{{ networkDescription }}".
+    "{{ networkDescription }}". {{#if searchQuery}}Ik vond jou doordat ik zocht
+    op "{{ searchQuery }}" en dit leek bij jou te passen.{{else}}Ik vond jou doordat je
+    werd gesuggereerd als beste match.{{/if}}
 </p>
 
 <p style="margin: 1em 0;font: 16px proxima nova, sans-serif;">

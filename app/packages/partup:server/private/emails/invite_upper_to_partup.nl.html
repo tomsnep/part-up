@@ -4,7 +4,9 @@
 
 <p style="margin: 1em 0;font: 16px proxima nova, sans-serif;">
     Ik zag op Part-up deze gave part-up voor jou: "{{ partupName }}". Volgens
-    mij zou jij goed in het team passen.
+    mij zou jij goed in het team passen. {{#if searchQuery}}Ik vond jou doordat ik zocht
+    op "{{ searchQuery }}" en dit leek bij jou te passen.{{else}}Ik vond jou doordat je
+    werd gesuggereerd als beste match.{{/if}}
     Je kunt zelf via deze link de part-up bekijken
     <a href="{{ url }}" style="color: #3070c6;">{{ url }}</a>
     en (als je wilt) jouw bijdrage voorstellen aan het team.
