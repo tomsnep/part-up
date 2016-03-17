@@ -8,14 +8,6 @@ Template.InviteToPartup.onCreated(function() {
 });
 
 Template.InviteToPartup.helpers({
-    data: function() {
-        var template = Template.instance();
-        return {
-            invites: function() {
-                return template.invites.get();
-            }
-        };
-    },
     form: function() {
         var template = Template.instance();
         var partup = Partups.findOne(template.data.partupId);
@@ -29,9 +21,6 @@ Template.InviteToPartup.helpers({
                         inviterName: user.profile.name
                     })
                 };
-            },
-            invites: function() {
-                return template.invites.get();
             }
         };
     },
@@ -42,24 +31,6 @@ Template.InviteToPartup.helpers({
                 return template.submitting.get();
             },
         };
-    }
-});
-
-Template.InviteToPartup.events({
-    'keyup [data-add]': function(event, template) {
-        event.preventDefault();
-        var inputs = template.$('input');
-        var allHaveValues = true;
-        _.each(inputs, function(item) {
-            if (!$(item).val()) allHaveValues = false;
-        });
-        var last = $(event.currentTarget).data('add');
-        if (allHaveValues && last) AutoForm.addArrayItem('inviteToPartupForm', 'invitees');
-        $(event.currentTarget).removeClass('pu-state-selectable');
-    },
-    'click [data-remove]': function(event, template) {
-        event.preventDefault();
-        AutoForm.removeArrayItem('inviteToPartupForm', 'invitees', this.index);
     }
 });
 

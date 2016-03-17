@@ -46,7 +46,7 @@
 
     {{#if partupIsPopupActive 'popup.invite-to-network' }}
         {{#contentFor region="PopupContent" data=. }}
-            {{> InviteToNetwork networkId=network._id }}
+            {{> InviteToNetwork networkId=data.network._id }}
         {{/contentFor}}
     {{/if}}
 </template>

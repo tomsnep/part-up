@@ -9,51 +9,45 @@
     </p>
 
     {{#autoForm schema=form.schema id="inviteToPartupForm" class="pu-form pu-form-popup" validation="submitThenBlur" doc=form.doc}}
-        {{#afEachArrayItem name='invitees'}}
-            <div data-add="{{ afArrayFieldIsLastVisible }}" class="pu-row pu-inputrow
-            {{#unless afArrayFieldIsFirstVisible}}
-                {{#if afArrayFieldIsLastVisible}}
-                    pu-state-selectable
-                {{/if}}
-            {{/unless}}">
-                <div class="cell top">
-                    <label class="pu-formfield">
-                        {{#if afArrayFieldIsFirstVisible}}
-                            <span class="pu-label">{{_ 'invite-to-partup-popup-input-name'}}</span>
-                        {{/if}}
-                        <div class="pu-sub-validations {{#if afFieldIsInvalid name=current.name }}pu-state-invalid{{/if}}">
-                            <span class="pu-sub-input">
-                                {{> afFieldInput name=current.name class="pu-input" }}
-                            </span>
-                            <span class="pu-sub-error">{{ afFieldMessage name=current.name }}</span>
-                        </div>
-                    </label>
+        {{#MultiInviteInput formId="inviteToPartupForm" fieldName="invitees" }}
+            {{#afEachArrayItem name='invitees'}}
+                <div data-inputrow="{{ afArrayFieldIsLastVisible }}" class="pu-row pu-inputrow">
+                    {{log this}}
+                    <div class="cell top">
+                        <label class="pu-formfield">
+                            {{#if afArrayFieldIsFirstVisible}}
+                                <span class="pu-label">{{_ 'invite-to-partup-popup-input-name'}}</span>
+                            {{/if}}
+                            <div class="pu-sub-validations {{#if afFieldIsInvalid name=current.name }}pu-state-invalid{{/if}}">
+                                <span class="pu-sub-input">
+                                    {{> afFieldInput name=current.name class="pu-input" }}
+                                </span>
+                                <span class="pu-sub-error">{{ afFieldMessage name=current.name }}</span>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="cell top">
+                        <label class="pu-formfield">
+                            {{#if afArrayFieldIsFirstVisible}}
+                                <span class="pu-label">{{_ 'invite-to-partup-popup-input-email'}}</span>
+                            {{/if}}
+                            <div class="pu-sub-validations {{#if afFieldIsInvalid name=current.email }}pu-state-invalid{{/if}}">
+                                <span class="pu-sub-input">
+                                    {{> afFieldInput name=current.email class="pu-input" }}
+                                </span>
+                                <span class="pu-sub-error">{{ afFieldMessage name=current.email }}</span>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="cell bottom">
+                        <label class="pu-formfield">
+                            <button class="pu-button pu-button-icononly pu-button-gray" data-remove data-first="{{afArrayFieldIsFirstVisible}}" data-last="{{afArrayFieldIsLastVisible}}"><i class="picon-times"></i></button>
+                        </label>
+                    </div>
                 </div>
-                <div class="cell top">
-                    <label class="pu-formfield">
-                        {{#if afArrayFieldIsFirstVisible}}
-                            <span class="pu-label">{{_ 'invite-to-partup-popup-input-email'}}</span>
-                        {{/if}}
-                        <div class="pu-sub-validations {{#if afFieldIsInvalid name=current.email }}pu-state-invalid{{/if}}">
-                            <span class="pu-sub-input">
-                                {{> afFieldInput name=current.email class="pu-input" }}
-                            </span>
-                            <span class="pu-sub-error">{{ afFieldMessage name=current.email }}</span>
-                        </div>
-                    </label>
-                </div>
-                {{#if afArrayFieldIsLastVisible}}
-                    {{#unless afArrayFieldIsFirstVisible}}
-                        <div class="cell">
-                            <label class="pu-formfield">
-                                <button class="pu-button pu-button-icononly pu-button-gray" data-remove><i class="picon-times"></i></button>
-                            </label>
-                        </div>
-                    {{/unless}}
-                {{/if}}
-            </div>
-        {{/afEachArrayItem}}
-        <!-- <button class="pu-button" data-add>add</button> -->
+            {{/afEachArrayItem}}
+        {{/MultiInviteInput}}
+
         <!-- Custom email message for invitee -->
         <label class="pu-formfield">
             <span class="pu-label">{{_ 'invite-to-partup-popup-input-message'}}</span>
