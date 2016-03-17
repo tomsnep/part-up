@@ -11,10 +11,12 @@
     {{#autoForm schema=form.schema id="inviteToPartupForm" class="pu-form pu-form-popup" validation="submitThenBlur" doc=form.doc}}
         {{#afEachArrayItem name='invitees'}}
             {{log this}}
-            <div class="pu-row" data-remove>
+            <div class="pu-row {{#unless afArrayFieldIsFirstVisible}}{{#if afArrayFieldIsLastVisible}}pu-state-selectable{{/if}}{{/unless}}" data-remove>
                 <div class="cell top">
                     <label class="pu-formfield">
-                        <span class="pu-label">{{_ 'invite-to-partup-popup-input-name'}}</span>
+                        {{#if afArrayFieldIsFirstVisible}}
+                            <span class="pu-label">{{_ 'invite-to-partup-popup-input-name'}}</span>
+                        {{/if}}
                         <div class="pu-sub-validations {{#if afFieldIsInvalid name=current.name }}pu-state-invalid{{/if}}">
                             <span class="pu-sub-input">
                                 {{> afFieldInput name=current.name class="pu-input" }}
@@ -25,7 +27,9 @@
                 </div>
                 <div class="cell top">
                     <label class="pu-formfield">
-                        <span class="pu-label">{{_ 'invite-to-partup-popup-input-email'}}</span>
+                        {{#if afArrayFieldIsFirstVisible}}
+                            <span class="pu-label">{{_ 'invite-to-partup-popup-input-email'}}</span>
+                        {{/if}}
                         <div class="pu-sub-validations {{#if afFieldIsInvalid name=current.email }}pu-state-invalid{{/if}}">
                             <span class="pu-sub-input">
                                 {{> afFieldInput name=current.email class="pu-input" }}

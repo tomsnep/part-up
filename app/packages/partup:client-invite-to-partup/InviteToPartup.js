@@ -50,7 +50,7 @@ Template.InviteToPartup.events({
         event.preventDefault();
         AutoForm.addArrayItem('inviteToPartupForm', 'invitees');
     },
-    'click [data-remove]': function(event, template){
+    'click [data-remove]': function(event, template) {
         event.preventDefault();
         var self = this;
         var index = self.index;
