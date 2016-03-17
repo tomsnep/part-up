@@ -101,12 +101,12 @@ Template.InviteTile.events({
         var partup = Partups.findOne(partupId);
         var invitingUserId = template.data.userId;
         var invitingUser = Meteor.users.findOne({_id: invitingUserId});
+        var searchQuery = template.searchQuery.get() || undefined;
 
         if (User(invitingUser).isPartnerInPartup(partupId) || partup.hasInvitedUpper(invitingUserId)) return;
 
         template.inviting.set(true);
-
-        Meteor.call('partups.invite_existing_upper', partupId, invitingUserId, function(err) {
+        Meteor.call('partups.invite_existing_upper', partupId, invitingUserId, searchQuery, function(err) {
             template.inviting.set(false);
 
             if (err) {
@@ -121,11 +121,12 @@ Template.InviteTile.events({
         var activity = Activities.findOne(activityId);
         var invitingUserId = template.data.userId;
         var invitingUser = Meteor.users.findOne({_id: invitingUserId});
+        var searchQuery = template.searchQuery.get() || undefined;
 
         if (User(invitingUser).isPartnerInPartup(template.data.partupId) || activity.isUpperInvited(invitingUserId)) return;
 
         template.inviting.set(true);
-        Meteor.call('activities.invite_existing_upper', activityId, invitingUserId, function(err) {
+        Meteor.call('activities.invite_existing_upper', activityId, invitingUserId, searchQuery, function(err) {
             template.inviting.set(false);
 
             if (err) {
@@ -136,13 +137,14 @@ Template.InviteTile.events({
     },
 
     'click [data-network-invite]': function(event, template) {
-       var invitingUserId = template.data.userId;
+        var invitingUserId = template.data.userId;
         var network = Networks.findOne({slug: template.data.networkSlug});
+        var searchQuery = template.searchQuery.get() || undefined;
 
         if (network.hasMember(invitingUserId) || network.isUpperInvited(invitingUserId)) return;
 
         template.inviting.set(true);
-        Meteor.call('networks.invite_existing_upper', network._id, invitingUserId, function(err) {
+        Meteor.call('networks.invite_existing_upper', network._id, invitingUserId, searchQuery, function(err) {
             template.inviting.set(false);
 
             if (err) {
