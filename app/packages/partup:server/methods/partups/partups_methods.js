@@ -430,13 +430,17 @@ Meteor.methods({
      * @param {string} partupId
      * @param {Object} options
      * @param {string} options.query
+     * @param {Number} options.limit
+     * @param {Number} options.skip
      *
      * @return {[string]}
      */
     'partups.user_suggestions': function(partupId, options) {
         check(partupId, String);
         check(options, {
-            query: Match.Optional(String)
+            query: Match.Optional(String),
+            limit: Match.Optional(Number),
+            skip: Match.Optional(Number)
         });
 
         this.unblock();

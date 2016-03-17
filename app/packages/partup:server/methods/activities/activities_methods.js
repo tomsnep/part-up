@@ -233,13 +233,17 @@ Meteor.methods({
      * @param {string} activityId
      * @param {Object} options
      * @param {string} options.query
+     * @param {Number} options.limit
+     * @param {Number} options.skip
      *
      * @return {[string]}
      */
     'activities.user_suggestions': function(activityId, options) {
         check(activityId, String);
         check(options, {
-            query: Match.Optional(String)
+            query: Match.Optional(String),
+            limit: Match.Optional(Number),
+            skip: Match.Optional(Number)
         });
 
         this.unblock();

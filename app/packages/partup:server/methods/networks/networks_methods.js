@@ -499,13 +499,17 @@ Meteor.methods({
      * @param {String} networkSlug
      * @param {Object} options
      * @param {String} options.query
+     * @param {Number} options.limit
+     * @param {Number} options.skip
      *
      * @return {Array}
      */
     'networks.user_suggestions': function(networkSlug, options) {
         check(networkSlug, String);
         check(options, {
-            query: Match.Optional(String)
+            query: Match.Optional(String),
+            limit: Match.Optional(Number),
+            skip: Match.Optional(Number)
         });
 
         this.unblock();

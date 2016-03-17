@@ -10,6 +10,8 @@ Partup.server.services.matching = {
      * @param {String} activityId
      * @param {Object} searchOptions
      * @param {String} searchOptions.query
+     * @param {Number} searchOptions.limit
+     * @param {Number} searchOptions.skip
      *
      * @return {[String]}
      */
@@ -28,6 +30,8 @@ Partup.server.services.matching = {
      * @param {String} networkSlug
      * @param {Object} searchOptions
      * @param {String} searchOptions.query
+     * @param {Number} searchOptions.limit
+     * @param {Number} searchOptions.skip
      *
      * @return {[String]}
      */
@@ -45,6 +49,8 @@ Partup.server.services.matching = {
      * @param {String} partupId
      * @param {Object} searchOptions
      * @param {String} searchOptions.query
+     * @param {Number} searchOptions.limit
+     * @param {Number} searchOptions.skip
      *
      * @return {[String]}
      */
@@ -60,6 +66,9 @@ Partup.server.services.matching = {
      * Find uppers that match with the provided criteria
      *
      * @param {Object} searchOptions
+     * @param {String} searchOptions.query
+     * @param {Number} searchOptions.limit
+     * @param {Number} searchOptions.skip
      * @param {[String]} tags
      * @param {[String]} excludedUppers
 
