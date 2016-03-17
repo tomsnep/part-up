@@ -63,6 +63,7 @@
 @import "client/stylesheets/components/pu-contributionlist.sass";
 @import "client/stylesheets/components/pu-custom-select.sass";
 @import "client/stylesheets/components/pu-document-renderer.sass";
+@import "client/stylesheets/components/pu-dropbox-chooser.sass";
 @import "client/stylesheets/components/pu-dropdown.sass";
 @import "client/stylesheets/components/pu-dropdownie.sass";
 @import "client/stylesheets/components/pu-dropdownitem.sass";
@@ -176,9 +177,3 @@
 @import "client/stylesheets/components/pu-talltile.sass";
 @import "client/stylesheets/components/pu-floatingbutton.sass";
 @import "client/stylesheets/components/pu-state-message.sass";
-
-
-div#velocity-status-widget {
-  display: none;
-}
-@import "client/stylesheets/components/pu-dropbox-chooser.sass";
