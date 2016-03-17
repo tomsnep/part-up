@@ -2,17 +2,34 @@ Template.app_network_start_partups.onCreated(function() {
     var template = this;
     template.MAX_PARTUPS = 3; // 3
     template.activeImage = new ReactiveVar();
-    template.subscribe('partups.by_ids', template.data.partups.partups, {
-        onReady: function() {
-            var partup = Partups.find({_id: {$in: template.data.partups.partups}}).fetch().shift();
-            if (partup) template.activeImage.set(partup.image);
-        }
-    });
+    template.noPartups = new ReactiveVar(false);
+    var partups = template.data.partups.partups;
+    var networkId = template.data.partups.networkId;
+    if (partups.length) {
+        template.subscribe('partups.by_ids', partups, {
+            onReady: function() {
+                var partup = Partups.find({_id: {$in: partups}}).fetch().shift();
+                if (partup) template.activeImage.set(partup.image);
+            }
+        });
+    } else {
+        template.subscribe('partups.by_network_id', networkId, {limit: 3}, {
+            onReady: function() {
+                var partup = Partups.find({network_id: networkId}).fetch().shift();
+                if (partup) template.activeImage.set(partup.image);
+                else template.noPartups.set(true);
+            }
+        });
+    }
 });
 Template.app_network_start_partups.helpers({
     data: function() {
         var template = Template.instance();
-        var partups = Partups.find({_id: {$in: template.data.partups.partups}}).fetch();
+        var partupIds = template.data.partups.partups;
+        var networkId = template.data.partups.networkId;
+        var partups;
+        if (partupIds.length) partups = Partups.find({_id: {$in: template.data.partups.partups}}).fetch();
+        else partups = Partups.find({network_id: networkId}).fetch();
         var partupCount = template.data.partups.totalPartups;
         return {
             partups: function() {
@@ -41,6 +58,9 @@ Template.app_network_start_partups.helpers({
         return {
             activeImage: function() {
                 return template.activeImage.get();
+            },
+            noPartups: function() {
+                return template.noPartups.get();
             }
         };
     }

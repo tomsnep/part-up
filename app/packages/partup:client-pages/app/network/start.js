@@ -30,14 +30,16 @@ Template.app_network_start.helpers({
                 return {
                     uppers: network.most_active_uppers,
                     totalUppers: network.stats.upper_count,
-                    networkSlug: self.networkSlug
+                    networkSlug: self.networkSlug,
+                    networkId: network._id
                 };
             },
             activePartups: function() {
                 return {
                     partups: network.most_active_partups,
                     totalPartups: network.stats.partup_count,
-                    networkSlug: self.networkSlug
+                    networkSlug: self.networkSlug,
+                    networkId: network._id
                 };
             }
         };

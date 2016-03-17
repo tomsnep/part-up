@@ -1,6 +1,10 @@
 <template name="app_network_start_partups">
     {{#unless state.activeImage}}
-        {{> Spinner color='inverted' }}
+        {{#unless state.noPartups}}
+            {{> Spinner color='inverted' }}
+        {{else}}
+            <p class="pu-placeholdertext">{{_ 'pages-app-network-start-placeholder-nopartups'}}</p>
+        {{/unless}}
     {{else}}
         <ul class="pu-list pu-list-horizontal pu-accordion {{#if isIEorEdge}}pu-fallback-ie{{/if}}">
             {{#each data.partups}}

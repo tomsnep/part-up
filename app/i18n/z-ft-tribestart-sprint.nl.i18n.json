@@ -15,6 +15,8 @@
     "pages-app-network-start-label-activities": "activiteiten",
     "pages-app-network-start-label-supporters": "supporters",
     "pages-app-network-start-label-active": "dagen actief",
+    "pages-app-network-start-placeholder-nouppers": "nog geen actieve uppers",
+    "pages-app-network-start-placeholder-nopartups": "nog geen actieve partups",
 
     "pages-app-network-start-message-title": "Komt gauw",
     "pages-app-network-start-message-description": "De tribe chat komt binnenkort",

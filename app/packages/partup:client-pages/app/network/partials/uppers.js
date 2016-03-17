@@ -1,7 +1,10 @@
 Template.app_network_start_uppers.onCreated(function() {
     var template = this;
+    var upperIds = template.data.uppers.uppers || [];
+    template.noUppers = new ReactiveVar(false);
     template.MAX_UPPERS = 7; // 7
     template.subscribe('users.by_ids', template.data.uppers.uppers);
+    if (!template.data.uppers.uppers.length) template.noUppers.set(true);
 });
 Template.app_network_start_uppers.helpers({
     data: function() {
@@ -18,6 +21,14 @@ Template.app_network_start_uppers.helpers({
             },
             networkSlug: function() {
                 return template.data.uppers.networkSlug;
+            }
+        };
+    },
+    state: function() {
+        var template = Template.instance();
+        return {
+            noUppers: function() {
+                return template.noUppers.get();
             }
         };
     }
