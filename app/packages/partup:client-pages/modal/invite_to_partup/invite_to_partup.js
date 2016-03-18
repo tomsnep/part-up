@@ -2,9 +2,20 @@ Template.modal_invite_to_partup.onCreated(function() {
     var template = this;
     var partupId = template.data.partupId;
     template.userIds = new ReactiveVar([]);
-    template.searchQuery = new ReactiveVar('');
 
-    template.loading = new ReactiveVar();
+    template.states = {
+        loading_infinite_scroll: false,
+        paging_end_reached: new ReactiveVar(false)
+    };
+    var PAGING_INCREMENT = 10;
+    template.searchQuery = new ReactiveVar(undefined, function(prevQuery, query) {
+        if (prevQuery !== query) {
+            template.userIds.set([]);
+            template.states.paging_end_reached.set(false);
+            template.states.loading_infinite_scroll = false;
+            _.defer(function() { template.page.set(0); });
+        }
+    });
 
     template.subscribe('partups.one', template.data.partupId);
 
@@ -16,12 +27,12 @@ Template.modal_invite_to_partup.onCreated(function() {
         });
     };
 
-    template.autorun(function() {
-        template.loading.set(true);
-        var query = template.searchQuery.get();
-
+    template.page = new ReactiveVar(false, function(previousPage, page) {
+        var query = template.searchQuery.get() || '';
         var options = {
-            query: query
+            query: query,
+            limit: PAGING_INCREMENT,
+            skip: page * PAGING_INCREMENT
         };
 
         // this meteor call still needs to be created
@@ -29,11 +40,33 @@ Template.modal_invite_to_partup.onCreated(function() {
             if (error) {
                 return Partup.client.notify.error(TAPi18n.__('base-errors-' + error.reason));
             }
+            if (!userIds || userIds.length === 0) {
+                template.states.loading_infinite_scroll = false;
+                template.states.paging_end_reached.set(true);
+                return;
+            }
 
-            template.userIds.set(userIds);
+            template.states.paging_end_reached.set(userIds.length < PAGING_INCREMENT);
 
-            template.loading.set(false);
+            var existingUserIds = template.userIds.get();
+            var newUserIds = existingUserIds.concat(userIds);
+            template.userIds.set(newUserIds);
+
+            template.states.loading_infinite_scroll = false;
         });
+    });
+    template.page.set(0);
+});
+
+Template.modal_invite_to_partup.onRendered(function() {
+    var template = this;
+    Partup.client.scroll.infinite({
+        template: template,
+        element: template.find('[data-infinitescroll-container]'),
+        offset: 800
+    }, function() {
+        if (template.states.loading_infinite_scroll || template.states.paging_end_reached.curValue) { return; }
+        template.page.set(template.page.get() + 1);
     });
 });
 

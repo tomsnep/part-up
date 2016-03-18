@@ -2,16 +2,29 @@ Template.modal_network_invite.onCreated(function() {
     var template = this;
     var userId = Meteor.userId();
     var networkSlug = template.data.networkSlug;
+    template.userIds = new ReactiveVar([]);
+
+    template.states = {
+        loading_infinite_scroll: false,
+        paging_end_reached: new ReactiveVar(false)
+    };
+
+    var PAGING_INCREMENT = 10;
+    template.searchQuery = new ReactiveVar(undefined, function(prevQuery, query) {
+        if (prevQuery !== query) {
+            template.userIds.set([]);
+            template.states.paging_end_reached.set(false);
+            template.states.loading_infinite_scroll = false;
+            _.defer(function() { template.page.set(0); });
+        }
+    });
+
     template.subscribe('networks.one', networkSlug, function() {
         var network = Networks.findOne({slug: networkSlug});
         if (!network || network.isClosedForUpper(userId)) {
             Router.pageNotFound();
         }
     });
-    template.userIds = new ReactiveVar([]);
-    template.searchQuery = new ReactiveVar('');
-
-    template.loading = new ReactiveVar();
 
     // Submit filter form
     template.submitFilterForm = function() {
@@ -21,24 +34,47 @@ Template.modal_network_invite.onCreated(function() {
         });
     };
 
-    template.autorun(function() {
-        template.loading.set(true);
-        var query = template.searchQuery.get();
-
+    template.page = new ReactiveVar(false, function(previousPage, page) {
+        var query = template.searchQuery.get() || '';
         var options = {
-            query: query
+            query: query,
+            limit: PAGING_INCREMENT,
+            skip: page * PAGING_INCREMENT
         };
+        console.log(options);
 
-        Meteor.call('networks.user_suggestions', networkSlug, options, function(err, userIds) {
-            if (err) {
-                Partup.client.notify.error(err.reason);
+        // this meteor call still needs to be created
+        Meteor.call('networks.user_suggestions', networkSlug, options, function(error, userIds) {
+            if (error) {
+                return Partup.client.notify.error(TAPi18n.__('base-errors-' + error.reason));
+            }
+            if (!userIds || userIds.length === 0) {
+                template.states.loading_infinite_scroll = false;
+                template.states.paging_end_reached.set(true);
                 return;
             }
 
-            template.userIds.set(userIds);
+            template.states.paging_end_reached.set(userIds.length < PAGING_INCREMENT);
 
-            template.loading.set(false);
+            var existingUserIds = template.userIds.get();
+            var newUserIds = existingUserIds.concat(userIds);
+            template.userIds.set(newUserIds);
+
+            template.states.loading_infinite_scroll = false;
         });
+    });
+    template.page.set(0);
+});
+
+Template.modal_invite_to_partup.onRendered(function() {
+    var template = this;
+    Partup.client.scroll.infinite({
+        template: template,
+        element: template.find('[data-infinitescroll-container]'),
+        offset: 800
+    }, function() {
+        if (template.states.loading_infinite_scroll || template.states.paging_end_reached.curValue) { return; }
+        template.page.set(template.page.get() + 1);
     });
 });
 
@@ -88,11 +124,7 @@ Template.modal_network_invite.events({
 
     'submit form#suggestionsQuery': function(event, template) {
         event.preventDefault();
-
-        template.loading.set(true);
-
         var form = event.currentTarget;
-
         template.searchQuery.set(form.elements.search_query.value);
     },
     'click [data-reset-search-query-input]': function(event, template) {
@@ -101,18 +133,6 @@ Template.modal_network_invite.events({
         template.submitFilterForm();
     },
     'keyup [data-search-query-input]': function(e, template) {
-        template.submitFilterForm();
-    },
-
-    // Location selector events
-    'click [data-open-locationselector]': function(event, template) {
-        event.preventDefault();
-        var current = template.location.selectorState.get();
-        template.location.selectorState.set(!current);
-    },
-    'click [data-reset-selected-location]': function(event, template) {
-        event.preventDefault();
-        template.location.value.set('');
         template.submitFilterForm();
     }
 });

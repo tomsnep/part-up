@@ -6,7 +6,7 @@
         </a>
     </nav>
 
-    <article class="pu-page pu-composition-activity-invite">
+    <article class="pu-page pu-composition-activity-invite" data-infinitescroll-container>
         <div class="pu-sub-pagecontent">
             <div class="pu-wrap pu-wrap-modal">
                 <h2 class="pu-title pu-title-modal">{{_ 'pages-modal-invite_to_partup-title'}}</h2>
@@ -27,9 +27,9 @@
                     </div>
                 </form>
 
-                {{# if state.loading }}
+                <!-- {{# if state.loading }}
                     {{> Spinner }}
-                {{ else }}
+                {{ else }} -->
                     <div class="pu-invite-suggestions">
                         <p>{{_ 'pages-modal-partup_invite-suggestions-label' }}</p>
                         <ul>
@@ -40,7 +40,7 @@
                             {{/ each }}
                         </ul>
                     </div>
-                {{/ if }}
+                <!-- {{/ if }} -->
             </div>
         </div>
     </article>
