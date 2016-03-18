@@ -39,6 +39,7 @@ if [ "${service_name}" != "${service}" ] ; then
     -e ROOT_URL=http://${vhost} \
     -e VIRTUAL_HOST=${vhost} \
 		-e NODE_ENV=staging \
+		-e NEW_RELIC_APP_NAME=${service_name} \
     --tag staging \
     --autoredeploy \
     --autorestart ALWAYS \
