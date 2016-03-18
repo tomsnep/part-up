@@ -6,7 +6,8 @@
         {{> Header }}
 
         <!-- Page -->
-        {{> yield region='app' }}
+        <!-- refresh=currentUserId triggers a reload/rerender of the app template when the loggedin user changes -->
+        {{> yield region='app' refresh=currentUserId }}
 
         <!-- Footer -->
         {{> Footer }}

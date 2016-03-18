@@ -545,6 +545,53 @@ Router.route('/pricing', {
 /* Networks */
 /*************************************************************/
 Router.route('/tribes/:slug', {
+    name: 'network',
+    where: 'client',
+    yieldRegions: {
+        'app':                      {to: 'main'},
+        'app_network_start':        {to: 'app'}
+    },
+    data: function() {
+        return {
+            networkSlug: this.params.slug,
+            accessToken: this.params.query.token
+        };
+    },
+    onBeforeAction: function() {
+        var route = this;
+        var networkSlug = route.params.slug;
+        var accessToken = route.params.query.token;
+        var showStartpage = route.params.query.show;
+        var userId = Meteor.userId();
+        if (networkSlug && accessToken) {
+            Session.set('network_access_token', accessToken);
+            Session.set('network_access_token_for_network', networkSlug);
+        }
+        if (userId && networkSlug && accessToken) {
+            Meteor.call('networks.convert_access_token_to_invite', networkSlug, accessToken);
+        }
+        if (showStartpage === 'true') {
+            // console.log('showing startpage');
+            route.next();
+        } else if (showStartpage === 'false') {
+            // console.log('redirecting to network-detail');
+            route.renderRoute('network-detail');
+        } else {
+            // console.log('checking if user is a member');
+            Meteor.call('users.member_of_network', userId, networkSlug, function(error, response) {
+                var response = response || {};
+                if (response.has_member) {
+                    route.renderRoute('network-detail');
+                } else {
+                    route.render();
+                }
+            });
+            route.stop();
+        }
+    }
+});
+
+Router.route('/tribes/:slug/partups', {
     name: 'network-detail',
     where: 'client',
     yieldRegions: {
@@ -554,22 +601,8 @@ Router.route('/tribes/:slug', {
     },
     data: function() {
         return {
-            networkSlug: this.params.slug,
-            accessToken: this.params.query.token
+            networkSlug: this.params.slug
         };
-    },
-    onBeforeAction: function() {
-        var networkSlug = this.data().networkSlug;
-        var accessToken = this.data().accessToken;
-        if (networkSlug && accessToken) {
-            Session.set('network_access_token', accessToken);
-            Session.set('network_access_token_for_network', networkSlug);
-        }
-        if (Meteor.userId() && networkSlug && accessToken) {
-            Meteor.call('networks.convert_access_token_to_invite', networkSlug, accessToken);
-        }
-
-        this.next();
     }
 });
 
@@ -682,6 +715,10 @@ Router.route('/:slug', {
     },
     onBeforeAction: function() {
         var self = this;
+
+        //N.B. this param rewrite ensures case insensitive urls for swarms
+        this.params.slug = Partup.client.strings.slugify(self.params.slug);
+
         var slug = this.params.slug;
 
         // this checks if the slug is a swarm or network and handles it accordingly
@@ -697,7 +734,7 @@ Router.route('/:slug', {
 
             // redirect to the network detail if it isn't a swarm but is a network
             } else if (result.is_network) {
-                self.redirect('network-detail', {
+                self.redirect('network', {
                     slug: self.params.slug
                 }, {
                     query: self.params.query
@@ -878,6 +915,19 @@ if (Meteor.isClient) {
         if (data) currentRoute.state.set('data', data);
         currentRoute.render('app', {to: 'main'}); // this is so it also works for modals
         currentRoute.render('app_notfound', {to: 'app'});
+    };
+
+    // renders the yield regions of a different route
+    // basically a redirect without the redirect
+    // users can still use the browser "back" button
+    // WARNING: this should only be used to render child routes
+    // for example: /tribes/:slug > /tribes/:slug/partups not /tribes/:slug > /profile/:_id
+    RouteController.prototype.renderRoute = function(routeName) {
+        var self = this;
+        var regions = Router.routes[routeName].options.yieldRegions;
+        _.each(regions, function(item, key) {
+            self.render(key, item);
+        });
     };
 
     Router.replaceYieldTemplate = function(newTemplate, target) {

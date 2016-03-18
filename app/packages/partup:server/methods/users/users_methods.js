@@ -209,5 +209,16 @@ Meteor.methods({
 
         var ipAddress = this.connection.clientAddress;
         return Partup.server.services.locale.get_locale(ipAddress);
+    },
+
+    /**
+     * Returns the users membership of the provided network
+     */
+    'users.member_of_network': function(userId, networkSlug) {
+        var network = Networks.findOne({slug: networkSlug});
+        var response = network ? {
+            has_member: network.hasMember(userId)
+        } : false;
+        return response;
     }
 });

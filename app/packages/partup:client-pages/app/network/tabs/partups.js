@@ -108,7 +108,8 @@ Template.app_network_partups.onCreated(function() {
                 Partup.client.embed.partup(partup, result['cfs.images.filerecord'], result.networks, result.users);
 
                 return {
-                    partup: partup
+                    partup: partup,
+                    HIDE_NETWORKTILE: true
                 };
             });
 

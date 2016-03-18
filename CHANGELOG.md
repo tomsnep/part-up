@@ -1,5 +1,32 @@
 # CHANGELOG
 
+## 1.17
+
+- being able to run partup and the api with neo4j in one command. PR #290
+- fix(swarm): improved the explorer a bit more for mobile/tablet #263
+- fix(swarm): read more button shows on mobile #264
+- fix(quotes): align to bottom #266
+- feat(swarm): add compatibility for case insensitive swarm slugs, fix #282
+- fix(tribestart): created a partups publication by networkId for the fallback on 
+the tribestart page, also created a fallback for no partups and uppers fixing #291 and #292
+- fix(activepartups): fixed displaced parties in issue #201
+- fix(tribestart): hide partups+uppers footer from tribestart when trib…e is closed fixing #201
+- fix(tribestart): fallback for IE with fixes issue #201
+- fix(tribestart): tribe chat popup placeholder fixing #201
+- fix(activepartups): fixed displaced parties in issue #201
+- fix(tribestart): hide partups+uppers footer from tribestart when tribe is closed qfixing #201
+- Tribe page header #202
+- Background image uploader for tribe start page #203
+- Dynamic tags on tribe based on part-up tags #257
+- Redesign tribe 404 pages #260
+- Swarm page - tribe selecter has double scroll bars in Edge #278
+
+## 1.16.11
+- fix linkedin registration issue
+
+## 1.16.10
+- revert change to fix private tribe partups
+
 ## 1.16.9
 - Visualize archived part-ups #22
 - Add archived/active filter to profile/partner and profile/supporter #251

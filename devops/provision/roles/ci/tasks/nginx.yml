@@ -13,6 +13,16 @@
       ufw allow 443
   tags: nginx
 
+- name: nginx | ssl | ensure existence ssl directory
+  file: path=/etc/ssl state=directory
+  tags: nginx
+
+- name: nginx | ssl | add ssl certificates / keys
+  copy: src={{ item }} dest=/etc/ssl/{{ item | basename }} force=no
+  with_fileglob:
+    - '../../../ssl/*'
+  tags: nginx
+
 - name: nginx | remove default vhost
   file: path=/etc/nginx/sites-enabled/default state=absent
   tags: nginx

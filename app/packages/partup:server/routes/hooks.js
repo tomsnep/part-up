@@ -34,7 +34,6 @@ Router.onBeforeAction(function(request, response, next) {
     'ping',
     'partups.discover',
     'partups.discover.count',
-    'networks.:slug.partups',
     'networks.:slug.partups.count',
     'networks.:slug.uppers.count',
     'users.count',

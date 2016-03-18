@@ -9,6 +9,10 @@ var tagsConfiguration = {
  * @private
  */
 var networkBaseSchema = new SimpleSchema({
+    background_image: {
+        type: String,
+        optional: true
+    },
     description: {
         type: String,
         max: 350,
@@ -47,6 +51,10 @@ Partup.schemas.entities.network = new SimpleSchema([networkBaseSchema, {
     admin_id: {
         type: String,
         regEx: SimpleSchema.RegEx.Id
+    },
+    common_tags: {
+        type: Object,
+        optional: true
     },
     created_at: {
         type: Date,

@@ -5,7 +5,7 @@ Meteor.methods({
      * @param {mixed[]} fields
      */
     'tiles.insert': function(fields) {
-        //check(fields, Partup.schemas.forms.tile);
+        check(fields, Partup.schemas.forms.tile);
 
         var upper = Meteor.user();
         if (!upper) throw new Meteor.Error(401, 'unauthorized');

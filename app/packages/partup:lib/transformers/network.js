@@ -19,6 +19,7 @@ Partup.transformers.network = {
             name: network.name,
             tags_input: Partup.services.tags.tagArrayToInput(network.tags),
             website: network.website,
+            background_image: network.background_image,
             image: network.image,
             icon: network.icon
         };
@@ -37,6 +38,7 @@ Partup.transformers.network = {
             website: fields.website,
             tags: Partup.services.tags.tagInputToArray(fields.tags_input),
             language: Partup.server.services.google.detectLanguage(fields.description),
+            background_image: fields.background_image,
             image: fields.image,
             icon: fields.icon
         };

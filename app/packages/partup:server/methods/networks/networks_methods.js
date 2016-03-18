@@ -22,8 +22,21 @@ Meteor.methods({
             network.admin_id = user._id;
             network.created_at = new Date();
             network.updated_at = new Date();
+            network.stats = {
+                'activity_count' : 0,
+                'partner_count' : 0,
+                'partup_count' : 0,
+                'supporter_count' : 0,
+                'upper_count' : 1
+            },
+            network.most_active_uppers = [
+                user._id
+            ];
+            network.most_active_partups = [];
+            network.common_tags = [];
 
             network._id = Networks.insert(network);
+
             Meteor.users.update(user._id, {$addToSet: {networks: network._id}});
 
             return {
@@ -273,11 +286,16 @@ Meteor.methods({
                     Event.emit('networks.uppers.inserted', user, network);
                     return Log.debug('User added to invitational network.');
                 } else {
-                    if (network.addPendingUpper(user._id)) {
-                        return Log.debug('This network is for invited members only. Added user to pending list.');
-                    } else {
-                        return Log.debug('User is already added to pending list.');
+                    if (!network.isUpperPending(user._id)) {
+                        // It's an invitational network, so add user as pending at this point to let the admin decide
+                        network.addPendingUpper(user._id);
+
+                        // Send notification to admin
+                        Event.emit('networks.new_pending_upper', network, user);
+                        return Log.debug('User added to waiting list');
                     }
+
+                    return Log.debug('User already added to waiting list');
                 }
             }
 

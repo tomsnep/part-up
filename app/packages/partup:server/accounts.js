@@ -54,7 +54,7 @@ Accounts.onCreateUser(function(options, user) {
     var sanitizedName = options.profile.name;
     var profile = {
         name: sanitizedName,
-        normalized_name: Partup.helpers.normalize(sanitizedName),
+        normalized_name: sanitizedName ? Partup.helpers.normalize(sanitizedName) : '',
         settings: {
             locale: mout.object.get(options, 'profile.settings.locale') || 'en',
             optionalDetailsCompleted: false,
