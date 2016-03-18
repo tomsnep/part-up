@@ -35,7 +35,7 @@ if [ "${service_name}" != "${service}" ] ; then
   	-n ${service_name} \
     --memory 512 \
     --env-file ./.cloud-env \
-    -e MONGO_URL=mongodb://staging-mongo/${image_tag}-meteor?replicaSet=rs01 \
+    -e MONGO_URL=mongodb://staging-mongo-1,staging-mongo-2,staging-mongo-3/${image_tag}-meteor?replicaSet=rs01 \
     -e ROOT_URL=http://${vhost} \
     -e VIRTUAL_HOST=${vhost} \
 		-e NODE_ENV=staging \
