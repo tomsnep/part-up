@@ -20,7 +20,7 @@ if [ ! -f config/development/env-encrypted ] ; then
 	exit 0
 fi
 
-service_name="staging-${image_tag}-meteor"
+service_name="staging-${image_tag:0:17}-meteor"
 service=$(docker-cloud service ps | tail -n +2 | awk '{print $1}' | grep ${service_name} || echo 'NOTHING')
 
 if [ "${service_name}" != "${service}" ] ; then
