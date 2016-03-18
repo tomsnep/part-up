@@ -41,7 +41,6 @@ Template.modal_network_invite.onCreated(function() {
             limit: PAGING_INCREMENT,
             skip: page * PAGING_INCREMENT
         };
-        console.log(options);
 
         // this meteor call still needs to be created
         Meteor.call('networks.user_suggestions', networkSlug, options, function(error, userIds) {
