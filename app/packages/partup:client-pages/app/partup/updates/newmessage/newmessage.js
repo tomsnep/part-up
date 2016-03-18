@@ -44,17 +44,17 @@ Template.app_partup_updates_newmessage.onDestroyed(function() {
 Template.app_partup_updates_newmessage.helpers({
     formSchema: Partup.schemas.forms.newMessage,
     placeholders: placeholders,
-    uploadingPhotos: function() {
-        return Template.instance().uploadingPhotos.get();
-    },
-    uploadedPhotos: function() {
-        return Template.instance().uploadedPhotos.get();
-    },
-    photoLimitReached: function() {
-        return Template.instance().totalPhotos.get() >= 4 || Template.instance().uploadedPhotos.get().length >= 4;
-    },
-    submitting: function() {
-        return Template.instance().submitting.get();
+    data: function() {
+        var self = this;
+        var template = Template.instance();
+        return {
+            submitting: function() {
+                return template.submitting.get();
+            },
+            uploadedPhotos: function() {
+                return template.uploadedPhotos.get();
+            }
+        };
     },
     state: function() {
         var self = this;
@@ -65,6 +65,12 @@ Template.app_partup_updates_newmessage.helpers({
             },
             formId: function() {
                 return self._id ? 'editMessageForm' : 'newMessageForm';
+            },
+            uploadingPhotos: function() {
+                return template.uploadingPhotos.get();
+            },
+            photoLimitReached: function() {
+                return template.totalPhotos.get() >= 4 || template.uploadedPhotos.get().length >= 4;
             }
         };
     },
@@ -83,7 +89,7 @@ Template.app_partup_updates_newmessage.helpers({
             multiple: true,
             onFileChange: function(event) {
                 template.uploadingPhotos.set(true);
-                var total = template.totalPhotos.get();
+                var total = Math.max(template.totalPhotos.get(), template.uploadedPhotos.get().length);
                 Partup.client.uploader.eachFile(event, function(file) {
                     if (total === template.maxPhotos) return;
 
