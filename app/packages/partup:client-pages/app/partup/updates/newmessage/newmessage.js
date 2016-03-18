@@ -51,7 +51,7 @@ Template.app_partup_updates_newmessage.helpers({
         return Template.instance().uploadedPhotos.get();
     },
     photoLimitReached: function() {
-        return Template.instance().totalPhotos.get() === 4;
+        return Template.instance().totalPhotos.get() >= 4 || Template.instance().uploadedPhotos.get().length >= 4;
     },
     submitting: function() {
         return Template.instance().submitting.get();
