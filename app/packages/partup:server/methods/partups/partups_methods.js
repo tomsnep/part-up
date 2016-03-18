@@ -402,32 +402,38 @@ Meteor.methods({
             throw new Meteor.Error(401, 'unauthorized');
         }
 
-        var isAlreadyInvited = !!Invites.findOne({
-            partup_id: partupId,
-            invitee_email: fields.email,
-            type: Invites.INVITE_TYPE_PARTUP_EMAIL
+        var invitees = fields.invitees || [];
+
+        invitees.forEach(function(invitee) {
+            var isAlreadyInvited = !!Invites.findOne({
+                partup_id: partupId,
+                invitee_email: invitee.email,
+                type: Invites.INVITE_TYPE_PARTUP_EMAIL
+            });
+
+            if (isAlreadyInvited) {
+                //@TODO How to handle this scenario? Because now, we just skip to the next invitee
+                //throw new Meteor.Error(403, 'email_is_already_invited_to_network');
+                return;
+            }
+
+            var accessToken = Random.secret();
+
+            var invite = {
+                type: Invites.INVITE_TYPE_PARTUP_EMAIL,
+                partup_id: partup._id,
+                inviter_id: inviter._id,
+                invitee_name: invitee.name,
+                invitee_email: invitee.email,
+                message: fields.message,
+                access_token: accessToken,
+                created_at: new Date
+            };
+
+            Invites.insert(invite);
+
+            Event.emit('invites.inserted.partup.by_email', inviter, partup, invitee.email, invitee.name, fields.message, accessToken);
         });
-
-        if (isAlreadyInvited) {
-            throw new Meteor.Error(403, 'email_is_already_invited_to_partup');
-        }
-
-        var accessToken = Random.secret();
-
-        var invite = {
-            type: Invites.INVITE_TYPE_PARTUP_EMAIL,
-            partup_id: partup._id,
-            inviter_id: inviter._id,
-            invitee_name: fields.name,
-            invitee_email: fields.email,
-            message: fields.message,
-            access_token: accessToken,
-            created_at: new Date
-        };
-
-        Invites.insert(invite);
-
-        Event.emit('invites.inserted.partup.by_email', inviter, partup, fields.email, fields.name, fields.message, accessToken);
     },
 
     /**
