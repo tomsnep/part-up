@@ -89,6 +89,7 @@ Meteor.methods({
      * @param {String} fields.message
      */
     'networks.invite_by_email': function(networkId, fields) {
+        check(networkId, String);
         check(fields, Partup.schemas.forms.inviteUpper);
 
         var inviter = Meteor.user();

@@ -380,6 +380,7 @@ Meteor.methods({
      * @param {object} fields
      */
     'partups.invite_by_email': function(partupId, fields) {
+        check(partupId, String);
         check(fields, Partup.schemas.forms.inviteUpper);
 
         var inviter = Meteor.user();

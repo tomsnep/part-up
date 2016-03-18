@@ -270,6 +270,7 @@ Meteor.methods({
      * @param {string} name
      */
     'activities.invite_by_email': function(activityId, fields) {
+        check(activityId, String);
         check(fields, Partup.schemas.forms.inviteUpper);
 
         var inviter = Meteor.user();
