@@ -377,7 +377,11 @@ Meteor.methods({
      * Invite someone to an partup
      *
      * @param {string} partupId
-     * @param {object} fields
+     * @param {Object} fields
+     * @param {[Object]} fields.invitees
+     * @param {String} fields.invitees.name
+     * @param {String} fields.invitees.email
+     * @param {String} fields.message
      */
     'partups.invite_by_email': function(partupId, fields) {
         check(partupId, String);

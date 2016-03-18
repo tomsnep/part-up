@@ -84,8 +84,9 @@ Meteor.methods({
      *
      * @param {String} networkId
      * @param {Object} fields
-     * @param {String} fields.name
-     * @param {String} fields.email
+     * @param {[Object]} fields.invitees
+     * @param {String} fields.invitees.name
+     * @param {String} fields.invitees.email
      * @param {String} fields.message
      */
     'networks.invite_by_email': function(networkId, fields) {

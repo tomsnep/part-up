@@ -266,8 +266,11 @@ Meteor.methods({
      * Invite someone to an activity
      *
      * @param {string} activityId
-     * @param {string} email
-     * @param {string} name
+     * @param {Object} fields
+     * @param {[Object]} fields.invitees
+     * @param {String} fields.invitees.name
+     * @param {String} fields.invitees.email
+     * @param {String} fields.message
      */
     'activities.invite_by_email': function(activityId, fields) {
         check(activityId, String);
