@@ -38,6 +38,7 @@ if [ "${service_name}" != "${service}" ] ; then
     -e MONGO_URL=mongodb://staging-mongo/${image_tag}-meteor?replicaSet=rs01 \
     -e ROOT_URL=http://${vhost} \
     -e VIRTUAL_HOST=${vhost} \
+		-e NODE_ENV=staging \
     --tag staging \
     --autoredeploy \
     --autorestart ALWAYS \
