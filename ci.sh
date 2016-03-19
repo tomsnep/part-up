@@ -37,7 +37,8 @@ if [ "${service_name}" != "${service}" ] ; then
     --env-file ./.cloud-env \
     -e MONGO_URL=mongodb://staging-mongo-1,staging-mongo-2,staging-mongo-3/${image_tag}-meteor?replicaSet=rs01 \
     -e ROOT_URL=http://${vhost} \
-    -e VIRTUAL_HOST=${vhost} \
+		-e VIRTUAL_HOST=https://${vhost} \
+		-e FORCE_SSL=TRUE \
 		-e NODE_ENV=staging \
 		-e NEW_RELIC_APP_NAME=${service_name} \
     --tag staging \
@@ -47,6 +48,9 @@ if [ "${service_name}" != "${service}" ] ; then
     ${image_name}
 
   rm ./.cloud-env
+
+	certificator=$(docker-cloud container ps -s Running --service staging-certificator -q)
+	docker-cloud container exec $certificator /request-cert.sh $service_name $vhost
 
   echo "Starting service ${service_name}"
   docker-cloud service start --sync ${service_name}
