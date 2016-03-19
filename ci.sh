@@ -62,6 +62,7 @@ if [ "${service_name}" != "${service}" ] ; then
   	linkCmd="${linkCmd} --link-service ${l}:${l}"
   done
   docker-cloud service set ${linkCmd} staging-haproxy
+	docker-cloud service redeploy staging-haproxy
 else
   echo "Service ${service_name} already exists.. Not changing"
 fi
