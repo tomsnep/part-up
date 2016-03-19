@@ -83,6 +83,7 @@ Package.onUse(function(api) {
         'helpers/Autolinkjs.js',
         'helpers/autolink.js',
         'helpers/mobileHelpers.js',
+        'helpers/browserTest.js',
 
         'bootstrap.js',
         'analytics.js'

@@ -11,7 +11,7 @@
         </h2>
 
         <!-- buttons -->
-        {{# if isMine }}
+        {{# if profileIsCurrentUser }}
             <p class="pu-columnslayoutaction pu-paragraph pu-sub-right">
                 {{_ 'pages-app-profile-label-add'}}
                 <a class="pu-button" href="#" data-create-tile="photo">
@@ -31,7 +31,7 @@
     {{/ ColumnTilesLayout }}
 
     <!-- photo popup -->
-    {{# if isMine }}
+    {{# if profileIsCurrentUser }}
         {{# if partupIsPopupActive 'new-photo' }}
             {{# contentFor "PopupTitle" }}
                 {{_ 'pages-app-profile-photo-title' }}

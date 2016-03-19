@@ -94,6 +94,41 @@ Meteor.publishComposite('partups.by_ids', function(partupIds) {
 }, {url: 'partups/by_ids/:0'});
 
 /**
+ * Publish multiple partups by ids
+ *
+ * @param {[String]} networkSlug
+ */
+Meteor.publishComposite('partups.by_network_id', function(networkId, options) {
+    check(networkId, String);
+
+    var parameters = {};
+    parameters.limit = options.limit || 10;
+
+    if (this.unblock) this.unblock();
+
+    return {
+        find: function() {
+            return Partups.guardedFind(this.userId, {network_id: networkId}, parameters);
+        },
+        children: [
+            {find: Images.findForPartup},
+            {find: Meteor.users.findUppersForPartup, children: [
+                {find: Images.findForUser}
+            ]},
+            {find: function(partup) {
+                if (!get(partup, 'featured.active')) return;
+                return Meteor.users.findSinglePublicProfile(partup.featured.by_upper._id);
+            }, children: [
+                {find: Images.findForUser}
+            ]},
+            {find: function(partup) { return Networks.findForPartup(partup, this.userId); }, children: [
+                {find: Images.findForNetwork}
+            ]}
+        ]
+    };
+});
+
+/**
  * Publish a list of partups
  */
 Meteor.publish('partups.list', function() {

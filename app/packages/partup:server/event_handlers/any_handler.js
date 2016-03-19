@@ -25,8 +25,16 @@ Event.onAny(function() {
                 rejectUnauthorized: false
             }
         }, function(err, result) {
-            //silently ignore success or failure of posting to eventstore
+            if (err && process.env.LOG_EVENTS) {
+                Log.error('Could not push event to store.');
+                Log.error(err);
+                Log.error(result);
+            } else {
+                //silently ignore success of posting to eventstore
+            }
         });
+    } else {
+        Log.debug('Event store endpoint is not configured.');
     }
 });
 

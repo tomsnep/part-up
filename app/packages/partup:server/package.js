@@ -109,6 +109,7 @@ Package.onUse(function(api) {
         'services/profile_completeness_service.js',
         'services/partup_popularity_calculator_service.js',
         'services/swarms_service.js',
+        'services/networks_service.js',
         'seo/routes.js',
         'event_handlers/any_handler.js',
         'event_handlers/partups/partups_handler.js',
@@ -192,7 +193,9 @@ Package.onUse(function(api) {
         'cron/update_shared_count.js',
         'cron/calculate_partup_popularity_score_for_partups.js',
         'cron/update_swarm_shared_count.js',
-        'cron/update_swarm_stats.js',
+        'cron/update_swarm_network_stats.js',
+        'cron/calculate_active_network_uppers_partups.js',
+        'cron/get_common_network_tags.js',
         'migrations.js',
         'package-tap.i18n'
     ], ['server']);

@@ -7,45 +7,72 @@
 
  Template.NetworkSettingsBulkinvite.onCreated(function() {
      var template = this;
+     var userId = Meteor.userId();
+
+     template.subscribe('networks.one', template.data.networkSlug, {
+         onReady: function() {
+             var network = Networks.findOne({slug: template.data.networkSlug});
+             if (!network) Router.pageNotFound('network');
+             if (network.isClosedForUpper(userId)) Router.pageNotFound('network');
+         }
+     });
+
      template.submitting = new ReactiveVar(false);
      template.csv_invalid = new ReactiveVar(false);
      template.csv_too_many_addresses = new ReactiveVar(false);
      template.parsing = new ReactiveVar(false);
      template.invitees = new ReactiveVar([]);
+
  });
 
 Template.NetworkSettingsBulkinvite.helpers({
-    network: function() {
-        return Networks.findOne({slug: this.networkSlug});
-    },
-    formSchema: function() {
-        return Partup.schemas.forms.networkBulkinvite;
-    },
-    submitting: function() {
-        return Template.instance().submitting.get();
-    },
-    parsing: function() {
-        return Template.instance().parsing.get();
-    },
-    defaultDoc: function() {
-        var network = Networks.findOne({slug: this.networkSlug});
-
+    data: function() {
+        var template = Template.instance();
+        var network = Networks.findOne({slug: template.data.networkSlug});
         return {
-            message: TAPi18n.__('network-settings-bulkinvite-message_prefill', {
-                networkName: network.name,
-                networkDescription: network.description,
-                inviterName: Meteor.user().profile.name
-            })
+            network: function() {
+                return network;
+            },
+            currentCsvInvitees: function() {
+                return template.invitees.get();
+            }
         };
     },
-    currentCsvInvitees: function() {
-        return Template.instance().invitees.get();
+    form: function() {
+        var template = Template.instance();
+        var network = Networks.findOne({slug: template.data.networkSlug});
+        return {
+            schema: function() {
+                return Partup.schemas.forms.networkBulkinvite;
+            },
+            defaultDoc: function() {
+                if (!network) return false;
+                return {
+                    message: TAPi18n.__('network-settings-bulkinvite-message_prefill', {
+                        networkName: network.name,
+                        networkDescription: network.description,
+                        inviterName: Meteor.user().profile.name
+                    })
+                };
+            },
+        };
     },
-    csvInvalid: function() {
-        return Template.instance().csv_invalid.get();
-    },
-    csvTooManyAddresses: function() {
-        return Template.instance().csv_too_many_addresses.get();
+    state: function() {
+        var template = Template.instance();
+        return {
+            submitting: function() {
+                return template.submitting.get();
+            },
+            parsing: function() {
+                return template.parsing.get();
+            },
+            csvInvalid: function() {
+                return template.csv_invalid.get();
+            },
+            csvTooManyAddresses: function() {
+                return template.csv_too_many_addresses.get();
+            }
+        };
     }
 });
 

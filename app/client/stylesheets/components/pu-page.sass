@@ -2,6 +2,7 @@
     position: relative
     z-index: 2
     background: $color-background
+    min-height: 100%
 
     .pu-sub-pageheader
         width: 100%
@@ -28,10 +29,12 @@
             > section
                 border-bottom: 2px solid $color-border-light
                 max-height: 200px
+                transform: translateZ(0px)
 
                 .pu-navigation
                     margin-bottom: -2px
 
+                &.pu-coverheader,
                 &:first-child
                     overflow: hidden
                     transition: padding .2s, max-height .2s, border .2s
@@ -99,6 +102,10 @@
         .pu-sub-pagecontent
             padding-top: 90px
 
+    &-overlay
+        background-color: $color-primary
+        position: relative
+
     @media screen and (min-width: $breakpoint-desktop)
         .pu-sub-pageheader
             position: fixed
@@ -119,7 +126,8 @@
 
             &-layered
                 &-shrinked
-                    > section:first-child
+                    > section:first-child,
+                    > .pu-coverheader
                         max-height: 0
                         padding-top: 0
                         padding-bottom: 0
@@ -144,10 +152,13 @@
             padding-top: 128px
 
 
-        &-profile,
         &-network
+            padding-top: 130px
+        &-profile
             padding-top: 258px
 
+        &-profile,
+        &-network
             > .pu-spinner
                 margin-top: 200px - 258px
 

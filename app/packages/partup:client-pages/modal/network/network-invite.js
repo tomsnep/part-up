@@ -134,9 +134,9 @@ Template.modal_network_invite.events({
 
         var network = Networks.findOne({slug: template.data.networkSlug});
 
-        Intent.return('network-detail', {
+        Intent.return('network', {
             fallback_route: {
-                name: 'network-detail',
+                name: 'network',
                 params: {
                     slug: network.slug
                 }
