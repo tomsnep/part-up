@@ -13,6 +13,7 @@ Package.onUse(function(api) {
     api.use([
         'templating',
         'partup:lib',
+        'partup:client-dropdowns',
         'reactive-dict',
         'reactive-var',
         'aldeed:autoform',
