@@ -46,19 +46,21 @@ if (Meteor.isClient) {
 
                 var dropboxFile = files[i];
 
-                if (dropboxHelper.fileNameIsImage(dropboxFile.name)) {
-                    template.uploadingPhotos.set(true);
-                    template.totalPhotos.set(
-                        template.totalPhotos.get() + 1
-                    );
-                    dropboxHelper.partupUploadPhoto(template, dropboxFile.link);
-                }
-                else if (dropboxHelper.fileNameIsDoc(dropboxFile.name)) {
-                    template.uploadingDocuments.set(true);
-                    template.totalDocuments.set(
-                        template.totalDocuments.get() + 1
-                    );
-                    dropboxHelper.partupUploadDoc(template, dropboxFile);
+                if(dropboxFile) {
+                    if (dropboxHelper.fileNameIsImage(dropboxFile.name)) {
+                        template.uploadingPhotos.set(true);
+                        template.totalPhotos.set(
+                            template.totalPhotos.get() + 1
+                        );
+                        dropboxHelper.partupUploadPhoto(template, dropboxFile.link);
+                    }
+                    else if (dropboxHelper.fileNameIsDoc(dropboxFile.name)) {
+                        template.uploadingDocuments.set(true);
+                        template.totalDocuments.set(
+                            template.totalDocuments.get() + 1
+                        );
+                        dropboxHelper.partupUploadDoc(template, dropboxFile);
+                    }
                 }
             }
         }
