@@ -8,6 +8,29 @@
             margin-top: -15px
             margin-left: 15px
 
+            &:after, &:before
+                right: 96%
+                top: 50%
+                border: solid transparent
+                content: " "
+                height: 0
+                width: 0
+                position: absolute
+                pointer-events: none
+                z-index: 2
+
+            &:after
+                //border-color: rgba(136, 183, 213, 0)
+                border-right-color: #fff
+                border-width: 8px
+                margin-top: -8px
+
+            &:before
+                //border-color: rgba(194, 225, 245, 0)
+                border-right-color: #eee
+                border-width: 11px
+                margin-top: -11px
+
             input.pu-input.form-control
                 width: 52px
                 transition: width 200ms
@@ -22,3 +45,28 @@
                 left: 16px
                 font-size: 18px
                 color: $color-button-gray-background
+
+    // // left arrow
+    // .pu-sub-input:after,
+    // .pu-sub-input:before
+    //     right: 96%
+    //     top: 50%
+    //     border: solid transparent
+    //     content: " "
+    //     height: 0
+    //     width: 0
+    //     position: absolute
+    //     pointer-events: none
+    //     z-index: 2
+
+    // .pu-sub-input:after
+    //     //border-color: rgba(136, 183, 213, 0)
+    //     border-right-color: #fff
+    //     border-width: 8px
+    //     margin-top: -8px
+
+    // .pu-sub-input:before
+    //     //border-color: rgba(194, 225, 245, 0)
+    //     border-right-color: #eee
+    //     border-width: 11px
+    //     margin-top: -11px
