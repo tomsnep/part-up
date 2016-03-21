@@ -112,6 +112,9 @@ Template.app_partup_updates_newmessage.helpers({
             multiple: true,
             onFileChange: function(event) {
                 template.uploadingPhotos.set(true);
+                // toggle (close) the dropdown menu
+                $('[data-toggle-add-media-menu]').trigger('click');
+
                 var total = template.totalPhotos.get();
                 Partup.client.uploader.eachFile(event, function(file) {
                     if (total === template.maxPhotos) return;
@@ -154,8 +157,40 @@ function mediaLimitReached() {
     return mediaItems === Template.instance().maxMediaItems;
 }
 
+function toggleMenu($toggleContainer) {
+    var $button = $toggleContainer.find('.pu-sub-container button');
+    var $ul = $toggleContainer.find('ul.pu-dropdown');
+    var $icon = $button.find('i');
+
+    var openMenu = function() {
+        $toggleContainer.addClass('pu-formdropdown-active');
+        $ul.addClass('pu-dropdown-active');
+        $icon.removeClass('picon-caret-down');
+        $icon.addClass('picon-caret-up');
+    };
+
+    var closeMenu = function() {
+        $toggleContainer.removeClass('pu-formdropdown-active');
+        $ul.removeClass('pu-dropdown-active');
+        $icon.addClass('picon-caret-down');
+        $icon.removeClass('picon-caret-up');
+    };
+
+    if($icon.hasClass('picon-caret-down')) {
+        openMenu();
+        $(document).one('click', closeMenu);
+    } else {
+        closeMenu();
+    }
+}
+
 // events
 Template.app_partup_updates_newmessage.events({
+    'click [data-toggle-add-media-menu]': function(event, template) {
+        event.stopImmediatePropagation();
+        event.preventDefault();
+        toggleMenu($(event.currentTarget));
+    },
     'click [data-dismiss]': function clearForm(event, template) {
         template.uploadedPhotos.set([]);
         template.uploadedDocuments.set([]);

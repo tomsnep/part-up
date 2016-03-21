@@ -60,9 +60,6 @@ Package.onUse(function(api) {
         'partials/partup/activities-actions.html',
         'partials/partup/activities-actions.js',
 
-        'partials/add-media/add-media.html',
-        'partials/add-media/add-media.js',
-
         'partials/network/network-actions.html',
         'partials/network/network-actions.js',
 
