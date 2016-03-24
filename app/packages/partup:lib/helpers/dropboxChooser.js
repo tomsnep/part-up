@@ -1,17 +1,21 @@
+var pdfExtensions = ['.pdf'];
+var docExtensions = ['.doc', '.docx', '.rtf'];
+var presentationExtensions = ['.pps', '.ppsx', '.ppt'];
+var fallbackFileExtensions = ['.csv', '.xls', '.xlsx', '.ai', '.bmp', '.eps', '.psd', '.tiff', '.tif', '.svg'];
+
 DropboxChooser = function(options) {
     this.options = _.defaultsDeep({
         allowedExtensions: {
             images: ['.gif', '.jpg', '.jpeg', '.png'],
-            docs:
-                [
-                    '.doc', '.docx', '.csv', '.pps',
-                    '.ppsx', '.ppt', '.pptx', '.rtf', '.xls',
-                    '.xlsx', '.ai', '.bmp', '.eps', '.psd',
-                    '.tiff', '.tif', '.svg'
-                ]
+            docs: _.flatten([
+                pdfExtensions,
+                docExtensions,
+                presentationExtensions,
+                fallbackFileExtensions
+            ])
         }
     }, options);
-};
+} || {};
 
 DropboxChooser.prototype.getAllExtensions = function() {
     var self = this;
@@ -82,10 +86,12 @@ DropboxChooser.prototype.partupUploadDoc = function(template, dropboxFile) {
 Partup.helpers.DropboxChooser = DropboxChooser;
 
 var DropboxRenderer = function() {
+    var dropboxChooser = new DropboxChooser();
 
     return {
         getFileIdFromDirectLink: getFileIdFromDirectLink,
-        createPreviewLinkFromDirectLink: createPreviewLinkFromDirectLink
+        createPreviewLinkFromDirectLink: createPreviewLinkFromDirectLink,
+        getSvgIcon: getSvgIcon
     };
 
     function getFileIdFromDirectLink (fileUrl) {
@@ -97,6 +103,29 @@ var DropboxRenderer = function() {
         return 'https://www.dropbox.com/s/' + fileId + '/' + fileName + '?dl=0';
     }
 
+    /**
+     * @param fileName - file name of the dropbox object
+     * @returns {string}
+     */
+    function getSvgIcon(fileName) {
+        var extension = dropboxChooser.getExtensionFromFileName(fileName);
+        var svgFileName = 'icon_file.svg';
+
+        if(_.include(extension, fallbackFileExtensions)) {
+            svgFileName = 'icon_file.svg';
+        }
+        else if(_.include(extension, presentationExtensions)) {
+            svgFileName = 'icon_ppt.svg';
+        }
+        else if(_.include(extension, docExtensions)) {
+            svgFileName = 'icon_doc.svg';
+        }
+        else if(_.include(extension, pdfExtensions)) {
+            svgFileName = 'icon_pdf.svg';
+        }
+
+        return svgFileName;
+    }
 };
 
 Partup.helpers.DropboxRenderer = DropboxRenderer;

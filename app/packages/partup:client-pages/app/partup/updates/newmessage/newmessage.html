@@ -14,7 +14,7 @@
                                 {{/each}}
                                 {{#each uploadedDocuments}}
                                     <li>
-                                        <figure data-type="document" class="pu-thumbnail pu-thumbnail-removable" style="background-image:url('{{ icon }}'); background-color: transparent;" data-remove-upload="{{ _id }}"></figure>
+                                        <figure data-type="document" class="pu-doc-icon pu-thumbnail-removable" style="background-image:url('/images/add-media-icons/{{ DropboxRenderer.getSvgIcon name }}');" data-remove-upload="{{ _id }}"></figure>
                                     </li>
                                 {{/each}}
                             </ul>

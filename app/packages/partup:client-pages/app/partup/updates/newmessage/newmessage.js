@@ -134,7 +134,8 @@ Template.app_partup_updates_newmessage.helpers({
                 });
             }
         };
-    }
+    },
+    DropboxRenderer: Partup.helpers.DropboxRenderer
 });
 
 function uploadingMedia() {
