@@ -4,32 +4,42 @@
   background-color: transparent
   background-repeat: no-repeat
 
+
 .pu-document-renderer
   list-style-type: none
   padding: 0
 
+  .pu-doc-icon
+    display: inline-block
+    margin-top: 5px
+
   .pu-document-name
-    font-weight: bold
+    font-size: 0.8em
+    width: 100px
+    white-space: nowrap
+    overflow: hidden
+    text-overflow: ellipsis
+    color: #999
+
   .pu-document-bytes
     color: #999
     font-size: inherit
 
   a
+    text-align: center
     text-decoration: none
     font-size: inherit
     color: inherit
+    display: inline-block
+    border: 2px solid #eee
+    border-radius: 2px
+    padding: 6px
+    margin: 10px 5px 0 0
 
   li img
     float: left
     margin: 0 15px 0 0
     width: 50px
-
-  li
-    padding: 10px
-    overflow: auto
-    border: 2px solid #eee
-    border-radius: 5px
-    margin: 10px 0
 
   li:hover
     cursor: pointer

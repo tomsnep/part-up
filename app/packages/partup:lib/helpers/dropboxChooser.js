@@ -111,16 +111,16 @@ var DropboxRenderer = function() {
         var extension = dropboxChooser.getExtensionFromFileName(fileName);
         var svgFileName = 'icon_file.svg';
 
-        if(_.include(extension, fallbackFileExtensions)) {
+        if(_.include(fallbackFileExtensions, extension)) {
             svgFileName = 'icon_file.svg';
         }
-        else if(_.include(extension, presentationExtensions)) {
+        else if(_.include(presentationExtensions, extension)) {
             svgFileName = 'icon_ppt.svg';
         }
-        else if(_.include(extension, docExtensions)) {
+        else if(_.include(docExtensions, extension)) {
             svgFileName = 'icon_doc.svg';
         }
-        else if(_.include(extension, pdfExtensions)) {
+        else if(_.include(pdfExtensions, extension)) {
             svgFileName = 'icon_pdf.svg';
         }
 

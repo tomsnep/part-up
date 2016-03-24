@@ -3,9 +3,8 @@
         {{# each documents }}
             <a href="{{DropboxRenderer.createPreviewLinkFromDirectLink  link name}}" target="_blank">
                 <li data-document="{{ name }}">
-                   <img src="{{ icon }}" />
+                    <figure class="pu-doc-icon" style="background-image:url('/images/add-media-icons/{{ DropboxRenderer.getSvgIcon name }}');"></figure>
                     <p class="pu-document-name">{{name}}</p>
-                    <p class="pu-document-bytes">{{bytes}} bytes</p>
                 </li>
             </a>
         {{/ each }}
