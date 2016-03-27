@@ -17,7 +17,15 @@
                                         <figure data-type="document" class="pu-doc-icon pu-thumbnail-removable" style="background-image:url('/images/add-media-icons/{{ DropboxRenderer.getSvgIcon name }}');" data-remove-upload="{{ _id }}"></figure>
                                     </li>
                                 {{/each}}
+                            {{#if mediaLimitReached}}{{else}}
+                                <li class="pu-media-counter">
+                                    <div>
+                                        <strong>{{imagesLeft}} </strong>image(s) <strong>{{documentsLeft}} </strong>document(s) left
+                                    </div>
+                                </li>
+                            {{/if}}
                             </ul>
+
                         {{/if}}
                     </div>
                 </span>

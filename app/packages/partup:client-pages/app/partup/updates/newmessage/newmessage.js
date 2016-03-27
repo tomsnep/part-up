@@ -74,8 +74,11 @@ Template.app_partup_updates_newmessage.helpers({
             Template.instance().uploadedDocuments.get().length
         )
     },
-    uploadTriggerAllowed: function () {
-        return !uploadingMedia() && !mediaLimitReached();
+    imagesLeft: function() {
+      return  Template.instance().maxPhotos - Template.instance().uploadedPhotos.get().length;
+    },
+    documentsLeft: function() {
+        return  Template.instance().maxDocuments - Template.instance().uploadedDocuments.get().length;
     },
     submitting: function () {
         return Template.instance().submitting.get();

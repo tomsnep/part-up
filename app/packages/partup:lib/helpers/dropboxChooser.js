@@ -1,17 +1,18 @@
-var pdfExtensions = ['.pdf'];
-var docExtensions = ['.doc', '.docx', '.rtf'];
-var presentationExtensions = ['.pps', '.ppsx', '.ppt'];
-var fallbackFileExtensions = ['.csv', '.xls', '.xlsx', '.ai', '.bmp', '.eps', '.psd', '.tiff', '.tif', '.svg'];
+Partup.helpers.pdfExtensions = ['.pdf'];
+Partup.helpers.docExtensions = ['.doc', '.docx', '.rtf'];
+Partup.helpers.presentationExtensions = ['.pps', '.ppsx', '.ppt'];
+Partup.helpers.fallbackFileExtensions = ['.csv', '.xls', '.xlsx', '.ai', '.bmp', '.eps', '.psd', '.tiff', '.tif', '.svg'];
+Partup.helpers.imageExtensions = ['.gif', '.jpg', '.jpeg', '.png'];
 
 DropboxChooser = function (options) {
         this.options = _.extend({
             allowedExtensions: {
-                images: ['.gif', '.jpg', '.jpeg', '.png'],
+                images: Partup.helpers.imageExtensions,
                 docs: _.flatten([
-                    pdfExtensions,
-                    docExtensions,
-                    presentationExtensions,
-                    fallbackFileExtensions
+                    Partup.helpers.pdfExtensions,
+                    Partup.helpers.docExtensions,
+                    Partup.helpers.presentationExtensions,
+                    Partup.helpers.fallbackFileExtensions
                 ])
             }
         }, options);
@@ -95,16 +96,16 @@ var DropboxRenderer = function () {
         var extension = dropboxChooser.getExtensionFromFileName(fileName);
         var svgFileName = 'icon_file.svg';
 
-        if (_.include(fallbackFileExtensions, extension)) {
+        if (_.include(Partup.helpers.fallbackFileExtensions, extension)) {
             svgFileName = 'icon_file.svg';
         }
-        else if (_.include(presentationExtensions, extension)) {
+        else if (_.include(Partup.helpers.presentationExtensions, extension)) {
             svgFileName = 'icon_ppt.svg';
         }
-        else if (_.include(docExtensions, extension)) {
+        else if (_.include(Partup.helpers.docExtensions, extension)) {
             svgFileName = 'icon_doc.svg';
         }
-        else if (_.include(pdfExtensions, extension)) {
+        else if (_.include(Partup.helpers.pdfExtensions, extension)) {
             svgFileName = 'icon_pdf.svg';
         }
 
