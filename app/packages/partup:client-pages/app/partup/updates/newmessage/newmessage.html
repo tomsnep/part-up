@@ -51,7 +51,7 @@
                             </button>
                             <ul class="pu-dropdown pu-dropdown-form" data-clickoutside-close>
                                 <li class="pu-dropdownitem pu-dropdownitem-small">
-                                    <a data-browse-photos href="#" >
+                                    <a data-browse-photos href="#" class="{{#if photoLimitReached }}pu-state-disabled{{/if}}">
                                         <i class="picon-icon__upload"></i> {{_ 'dropdowns-updatesactions-computer' }}
                                         <span class="pu-media-types-description">{{_ 'dropdowns-updatesactions-computer-types' }}</span>
                                     </a>
@@ -62,7 +62,7 @@
                             </ul>
                         </div>
                     </div>
-                    <input {{ disabledAttr }} type="file" class="pu-fileinput" multiple data-photo-input style="visibility: hidden;">
+                    <input {{ disabledPhotoUploadFile }} type="file" class="pu-fileinput" multiple data-photo-input style="visibility: hidden;">
                 {{/FileInput}}
             </div>
         </footer>

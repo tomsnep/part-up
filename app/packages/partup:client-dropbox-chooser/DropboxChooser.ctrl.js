@@ -11,7 +11,6 @@ if (Meteor.isClient) {
 
         var template = Template.instance().parent();
 
-
         var $dropboxChooser = jQuery('[data-dropbox-chooser]');
 
         $dropboxChooser.click(dropboxChooserTrigger);
@@ -22,8 +21,20 @@ if (Meteor.isClient) {
                 success: onDropboxSuccess,
                 linkType: "direct", // or "preview"
                 multiselect: true, // or true
-                extensions: dropboxHelper.getAllExtensions()
+                extensions: getExtensions()
             });
+        }
+
+        function getExtensions() {
+            if(template.uploadedPhotos.get().length >= template.maxPhotos) {
+                return dropboxHelper.options.allowedExtensions.docs
+            }
+            else if(template.uploadedDocuments.get().length >= template.maxDocuments) {
+                return dropboxHelper.options.allowedExtensions.images
+            }
+            else {
+                return dropboxHelper.getAllExtensions();
+            }
         }
 
         function allowImageUpload(template, dropboxFile) {
