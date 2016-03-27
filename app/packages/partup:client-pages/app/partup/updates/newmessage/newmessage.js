@@ -19,9 +19,9 @@ Template.app_partup_updates_newmessage.onCreated(function() {
     var documents = this.data._id && this.data.type_data.documents ? this.data.type_data.documents : [];
     template.uploadedDocuments = new ReactiveVar(documents);
     template.totalDocuments = new ReactiveVar(0);
-    template.maxDocuments = 4;
+    template.maxDocuments = 2;
 
-    template.maxMediaItems = 4;
+    template.maxMediaItems =  template.maxPhotos + template.maxDocuments;
 });
 
 Template.afFieldInput.onRendered(function() {
@@ -111,8 +111,10 @@ Template.app_partup_updates_newmessage.helpers({
             input: 'data-photo-input',
             multiple: true,
             onFileChange: function(event) {
+
                 template.uploadingPhotos.set(true);
-                // toggle (close) the dropdown menu
+
+                // toggle (close) the add media dropdown menu
                 $('[data-toggle-add-media-menu]').trigger('click');
 
                 var total = Math.max(template.totalPhotos.get(), template.uploadedPhotos.get().length);
@@ -135,7 +137,10 @@ Template.app_partup_updates_newmessage.helpers({
             }
         };
     },
-    DropboxRenderer: Partup.helpers.DropboxRenderer
+    DropboxRenderer: Partup.helpers.DropboxRenderer,
+    disabledAttr: function() {
+        return (mediaLimitReached()) ? 'disabled' : '';
+    }
 });
 
 function uploadingMedia() {

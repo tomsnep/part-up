@@ -7,13 +7,10 @@ if (Meteor.isClient) {
 
     Template.DropboxChooser.onRendered(function () {
 
-        /*
-         newmessage.html template
-         */
+        Dropbox.init({appKey: 'vn3c8yxjactncjs'});
+
         var template = Template.instance().parent();
 
-
-        Dropbox.init({appKey: 'vn3c8yxjactncjs'});
 
         var $dropboxChooser = jQuery('[data-dropbox-chooser]');
 
@@ -22,47 +19,59 @@ if (Meteor.isClient) {
         function dropboxChooserTrigger() {
 
             Dropbox.choose({
-                success: onFileChange,
+                success: onDropboxSuccess,
                 linkType: "direct", // or "preview"
                 multiselect: true, // or true
                 extensions: dropboxHelper.getAllExtensions()
             });
         }
 
-        function totalMediaItems() {
-            return template.uploadedDocuments.get().length +
-                template.uploadedPhotos.get().length;
+        function allowImageUpload(template, dropboxFile) {
+            return (dropboxHelper.fileNameIsImage(dropboxFile.name)
+            && template.uploadedPhotos.get().length < template.maxPhotos)
         }
 
-        function onFileChange(files) {
+        function allowDocumentUpload(template, dropboxFile) {
+            return (dropboxHelper.fileNameIsDoc(dropboxFile.name)
+            && template.uploadedDocuments.get().length < template.maxDocuments);
+        }
 
-            var leftOver = template.maxMediaItems - totalMediaItems();
+        function onDropboxSuccess(files) {
+            var uploadPromises = [];
 
-            if (leftOver <= 0) {
-                return false;
-            }
-
-            for (var i = 0; i < leftOver; i++) {
-
-                var dropboxFile = files[i];
-
-                if(dropboxFile) {
-                    if (dropboxHelper.fileNameIsImage(dropboxFile.name)) {
-                        template.uploadingPhotos.set(true);
-                        template.totalPhotos.set(
-                            template.totalPhotos.get() + 1
-                        );
-                        dropboxHelper.partupUploadPhoto(template, dropboxFile.link);
-                    }
-                    else if (dropboxHelper.fileNameIsDoc(dropboxFile.name)) {
-                        template.uploadingDocuments.set(true);
-                        template.totalDocuments.set(
-                            template.totalDocuments.get() + 1
-                        );
-                        dropboxHelper.partupUploadDoc(template, dropboxFile);
-                    }
+            files.forEach(function (dropboxFile, index) {
+                if (allowImageUpload(template, dropboxFile)) {
+                    uploadPromises.push(
+                        dropboxHelper.partupUploadPhoto(template, dropboxFile)
+                    );
                 }
-            }
+                else if (allowDocumentUpload(template, dropboxFile)) {
+                    uploadPromises.push(
+                        dropboxHelper.partupUploadDoc(template, dropboxFile)
+                    );
+                }
+            });
+
+            Promise.all(uploadPromises).then(function (files) {
+
+                files.forEach(function (dropboxFile) {
+
+                    if (allowImageUpload(template, dropboxFile)) {
+                        var uploaded = template.uploadedPhotos.get();
+                        uploaded.push(dropboxFile._id);
+                        template.uploadedPhotos.set(uploaded);
+                        template.uploadingPhotos.set(false);
+                    }
+                    else if (allowDocumentUpload(template, dropboxFile)) {
+                        uploaded = template.uploadedDocuments.get();
+                        uploaded.push(dropboxFile);
+                        template.uploadedDocuments.set(uploaded);
+                        template.uploadingDocuments.set(false);
+                    }
+                });
+
+            });
+
         }
 
     });
