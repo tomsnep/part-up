@@ -117,3 +117,5 @@ check
 meteorhacks:kadira-profiler
 partup:client-network-tile
 partup:client-dropbox-chooser
+mike:mocha
+velocity:console-reporter

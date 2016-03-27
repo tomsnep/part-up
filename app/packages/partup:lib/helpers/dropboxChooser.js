@@ -4,7 +4,7 @@ var presentationExtensions = ['.pps', '.ppsx', '.ppt'];
 var fallbackFileExtensions = ['.csv', '.xls', '.xlsx', '.ai', '.bmp', '.eps', '.psd', '.tiff', '.tif', '.svg'];
 
 DropboxChooser = function(options) {
-    this.options = _.defaultsDeep({
+    this.options = _.extend({
         allowedExtensions: {
             images: ['.gif', '.jpg', '.jpeg', '.png'],
             docs: _.flatten([
