@@ -115,7 +115,7 @@ Template.app_partup_updates_newmessage.helpers({
                 // toggle (close) the dropdown menu
                 $('[data-toggle-add-media-menu]').trigger('click');
 
-                var total = template.totalPhotos.get();
+                var total = Math.max(template.totalPhotos.get(), template.uploadedPhotos.get().length);
                 Partup.client.uploader.eachFile(event, function(file) {
                     if (total === template.maxPhotos) return;
 
@@ -190,7 +190,9 @@ Template.app_partup_updates_newmessage.events({
     'click [data-toggle-add-media-menu]': function(event, template) {
         event.stopImmediatePropagation();
         event.preventDefault();
-        toggleMenu($(event.currentTarget));
+        if(!mediaLimitReached()) {
+            toggleMenu($(event.currentTarget));
+        }
     },
     'click [data-dismiss]': function clearForm(event, template) {
         template.uploadedPhotos.set([]);
