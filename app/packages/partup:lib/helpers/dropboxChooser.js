@@ -62,7 +62,7 @@ DropboxChooser.prototype.partupUploadDoc = function (template, dropboxFile) {
         dropboxFile._id = new Meteor.Collection.ObjectID()._str;
 
         if (!dropboxFile._id) {
-            return reject(new Error('meteor _id does not created!'));
+            return reject(new Error('meteor _id is not created!'));
         }
         resolve(dropboxFile);
     });

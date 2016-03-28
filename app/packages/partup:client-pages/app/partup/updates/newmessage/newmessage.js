@@ -1,8 +1,65 @@
+/** re-usable functions for this newmesage.js template */
 var placeholders = {
     'text': function () {
         return TAPi18n.__('pages-app-partup-updates-newmessage-placeholder');
     }
 };
+
+function uploadingMedia() {
+    var uploading = [
+        Template.instance().uploadingPhotos.get(),
+        Template.instance().uploadingDocuments.get()
+    ];
+
+    uploading = _.countBy(uploading, function (value) {
+        return (value) ? 'isActive' : 'notActive';
+    });
+
+    return uploading.isActive > 0;
+}
+
+function mediaLimitReached() {
+    var mediaItems = Template.instance().uploadedPhotos.get().length +
+        Template.instance().uploadedDocuments.get().length;
+
+    return mediaItems === Template.instance().maxMediaItems;
+}
+
+function photoLimitReached() {
+    return Template.instance().uploadedPhotos.get().length === Template.instance().maxPhotos;
+}
+
+function documentLimitReached() {
+    return Template.instance().uplodedDocuments.get().length === Template.instance().maxDocuments;
+}
+
+function toggleMenu($toggleContainer) {
+    var $button = $toggleContainer.find('.pu-sub-container button');
+    var $ul = $toggleContainer.find('ul.pu-dropdown');
+    var $icon = $button.find('i');
+
+    var openMenu = function () {
+        $toggleContainer.addClass('pu-formdropdown-active');
+        $ul.addClass('pu-dropdown-active');
+        $icon.removeClass('picon-caret-down');
+        $icon.addClass('picon-caret-up');
+    };
+
+    var closeMenu = function () {
+        $toggleContainer.removeClass('pu-formdropdown-active');
+        $ul.removeClass('pu-dropdown-active');
+        $icon.addClass('picon-caret-down');
+        $icon.removeClass('picon-caret-up');
+    };
+
+    if ($icon.hasClass('picon-caret-down')) {
+        openMenu();
+        $(document).one('click', closeMenu);
+    } else {
+        closeMenu();
+    }
+}
+/** end re-usable functions for this newmesage.js template */
 
 Template.app_partup_updates_newmessage.onCreated(function () {
     var template = this;
@@ -137,65 +194,13 @@ Template.app_partup_updates_newmessage.helpers({
         };
     },
     DropboxRenderer: Partup.helpers.DropboxRenderer,
-    disabledPhotoUploadFile: function () {
+    disabledImageUploadFile: function () {
         return (photoLimitReached()) ? 'disabled' : '';
+    },
+    imageExtensions: function() {
+        return Partup.helpers.imageExtensions.join(', ');
     }
 });
-
-function uploadingMedia() {
-    var uploading = [
-        Template.instance().uploadingPhotos.get(),
-        Template.instance().uploadingDocuments.get()
-    ];
-
-    uploading = _.countBy(uploading, function (value) {
-        return (value) ? 'isActive' : 'notActive';
-    });
-
-    return uploading.isActive > 0;
-}
-
-function mediaLimitReached() {
-    var mediaItems = Template.instance().uploadedPhotos.get().length +
-        Template.instance().uploadedDocuments.get().length;
-
-    return mediaItems === Template.instance().maxMediaItems;
-}
-
-function photoLimitReached() {
-    return Template.instance().uploadedPhotos.get().length === Template.instance().maxPhotos;
-}
-
-function documentLimitReached() {
-    return Template.instance().uplodedDocuments.get().length === Template.instance().maxDocuments;
-}
-
-function toggleMenu($toggleContainer) {
-    var $button = $toggleContainer.find('.pu-sub-container button');
-    var $ul = $toggleContainer.find('ul.pu-dropdown');
-    var $icon = $button.find('i');
-
-    var openMenu = function () {
-        $toggleContainer.addClass('pu-formdropdown-active');
-        $ul.addClass('pu-dropdown-active');
-        $icon.removeClass('picon-caret-down');
-        $icon.addClass('picon-caret-up');
-    };
-
-    var closeMenu = function () {
-        $toggleContainer.removeClass('pu-formdropdown-active');
-        $ul.removeClass('pu-dropdown-active');
-        $icon.addClass('picon-caret-down');
-        $icon.removeClass('picon-caret-up');
-    };
-
-    if ($icon.hasClass('picon-caret-down')) {
-        openMenu();
-        $(document).one('click', closeMenu);
-    } else {
-        closeMenu();
-    }
-}
 
 // events
 Template.app_partup_updates_newmessage.events({
