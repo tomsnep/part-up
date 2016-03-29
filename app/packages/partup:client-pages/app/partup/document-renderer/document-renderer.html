@@ -1,10 +1,17 @@
 <template name="DocumentRenderer">
-    <ul class="pu-document-renderer">
+    <ul class="document-icons icons-{{documents.length}}-layout">
         {{# each documents }}
             <a href="{{DropboxRenderer.createPreviewLinkFromDirectLink  link name}}" target="_blank">
-                <li data-document="{{ name }}">
-                    <figure class="pu-doc-icon" style="background-image:url('/images/add-media-icons/{{ DropboxRenderer.getSvgIcon name }}');"></figure>
-                    <p class="pu-document-name">{{name}}</p>
+                <li>
+                    <div class="file-download">
+                        <figure class="pu-download-icon" style="background-image:url('/images/add-media-icons/icon__download.svg');"></figure>
+                    </div>
+                    <div class="file-icon">
+                        <figure class="pu-doc-icon"
+                                style="background-image:url('/images/add-media-icons/{{ DropboxRenderer.getSvgIcon name }}');"></figure>
+                    </div>
+                    <p class="file-name">{{name}}</p>
+                    <p class="file-bytes">{{bytes}} bytes</p>
                 </li>
             </a>
         {{/ each }}

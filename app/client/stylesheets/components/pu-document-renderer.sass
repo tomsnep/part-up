@@ -1,45 +1,67 @@
-.pu-doc-icon
-  width: 36px
-  height: 48px
-  background-color: transparent
-  background-repeat: no-repeat
+$outerMargin: 10px
+$iconWidth: 36px
+$iconHeight: 48px
 
 
-.pu-document-renderer
-  list-style-type: none
-  padding: 0
-
-  .pu-doc-icon
-    display: inline-block
-    margin-top: 5px
-
-  .pu-document-name
-    font-size: 0.8em
-    width: 100px
-    white-space: nowrap
-    overflow: hidden
-    text-overflow: ellipsis
-    color: #999
-
-  .pu-document-bytes
-    color: #999
-    font-size: inherit
-
+.icons-2-layout
   a
-    text-align: center
-    text-decoration: none
-    font-size: inherit
-    color: inherit
+    width: 49.609%
+.icons-1-layout
+  a
+    width: 100%
+
+ul.document-icons
+  padding: 0
+  margin: 10px 0
+  list-style-type: none
+  a
+    border-radius: 4px
+    background: #eeeeee
     display: inline-block
-    border: 2px solid #eee
-    border-radius: 2px
-    padding: 6px
-    margin: 10px 5px 0 0
+    text-decoration: none
+    padding: $outerMargin
+    color: black
+  li
+    display:  inline
+    margin: 0
+    padding: 0
 
-  li img
-    float: left
-    margin: 0 15px 0 0
-    width: 50px
+    figure
+      background-color: transparent
+      background-repeat: no-repeat
+      margin: 0
+      padding: 0
 
-  li:hover
-    cursor: pointer
+    p
+      line-height: 1.5em
+      font-size: 0.8em
+      padding: 0
+      margin: 0
+      &.file-name
+        font-weight: bold
+      &.file-bytes
+        color: gray
+
+.file-download
+  float: right
+
+.file-icon
+  float: left
+  margin-right: $outerMargin
+
+
+.pu-doc-icon
+  width: $iconWidth
+  height: $iconHeight
+
+.pu-download-icon
+  width: 14px
+  height: 20px
+  margin-top: 15px !important
+
+
+
+
+
+
+
