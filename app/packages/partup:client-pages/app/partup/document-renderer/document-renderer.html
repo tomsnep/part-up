@@ -10,8 +10,10 @@
                         <figure class="pu-doc-icon"
                                 style="background-image:url('/images/add-media-icons/{{ DropboxRenderer.getSvgIcon name }}');"></figure>
                     </div>
-                    <p class="file-name">{{name}}</p>
-                    <p class="file-bytes">{{bytes}} bytes</p>
+                    <div class="file-information">
+                        <p class="file-name">{{name}}</p>
+                        <p class="file-bytes">{{bytes}} bytes</p>
+                    </div>
                 </li>
             </a>
         {{/ each }}
