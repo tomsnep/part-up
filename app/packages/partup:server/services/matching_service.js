@@ -92,6 +92,12 @@ Partup.server.services.matching = {
                 {'profile.location.city': new RegExp('.*' + searchQuery + '.*', 'i')}
             ];
 
+            // search for separate tags if multiple words are detected in searchQuery
+            var multipleWordsQuery = searchQuery.split(' ');
+            if (multipleWordsQuery.length > 1) {
+                searchCriteria.push({'profile.tags': {$in: multipleWordsQuery}});
+            }
+
             // Combine it in an $or selector
             selector = {$and: [selector, {$or: searchCriteria}]};
         } else {
