@@ -31,10 +31,10 @@
                 <p class="pu-highlighttext">{{{ data.highlightText }}}</p>
             </article>
             <article>
-                <ul class="pu-list pu-list-horizontal pu-list-tags {{#if data.highlightTag}}pu-highlighttags{{/if}}">
+                <ul class="pu-list pu-list-horizontal pu-list-tags {{#if data.highlightText}}pu-highlighttags{{/if}}">
                     {{#each data.user.profile.tags}}
                         <li>
-                            <a href="#" class="pu-tag {{#unless partupEquals data.highlightTag . }}
+                            <a href="#" class="pu-tag {{#unless partupContainsOneInArray . data.highlightTags }}
                                 pu-tag-dim
                             {{/unless}}">{{ . }}</a>
                         </li>

@@ -41,10 +41,16 @@ Template.InviteTile.helpers({
                 var text = description.length ? description.split(highlight).join('<span>' + highlight + '</span>') : '';
                 return text;
             },
-            highlightTag: function() {
+            highlightTags: function() {
                 var text = template.searchQuery.get();
-                var highlightTag = tags.indexOf(text);
-                return tags[highlightTag];
+                var highlightTags = [];
+                var searchtags = text.split(' ');
+                _.each(searchtags, function(searchtag) {
+                    _.each(tags, function(item) {
+                        if (item.indexOf(searchtag) > -1) highlightTags.push(item);
+                    });
+                });
+                return highlightTags;
             },
             relevance: function() {
                 var userPartups = user.upperOf || [];
